@@ -12,6 +12,7 @@ public static class Enums
         HEX_INDUSTRY,
         HEX_MILITARY,
         HEX_RESEARCH,
-        HEX_ISOLIUM
+        HEX_ISOLIUM,
+        HEX_GHOST
     }
 }
