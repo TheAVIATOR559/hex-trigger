@@ -10,6 +10,8 @@ public class City_Manager : Singleton<City_Manager>
     private int hexRange = 6;
     private List<Ghost_Hex> ghostHexes = new List<Ghost_Hex>();
 
+    public Hex_Blueprint hexBlueprint;
+
     private void Awake()
     {
         CreateHexGrid();
@@ -42,15 +44,15 @@ public class City_Manager : Singleton<City_Manager>
         }
     }
 
-    private void SetupNeighbors(Hex centerHex)
+    public static void SetupNeighbors(Hex centerHex)
     {
         if(Hex.IsOnOddRow(centerHex.Position.y)) //odd row offset
         {
             foreach(Vector2Int offset in Constants.ODD_ROW_OFFSETS)
             {
-                if(Hexes.ContainsKey(offset + centerHex.Position))
+                if(Instance.Hexes.ContainsKey(offset + centerHex.Position))
                 {
-                    centerHex.AddNeighbor(Hexes[offset + centerHex.Position]);
+                    centerHex.AddNeighbor(Instance.Hexes[offset + centerHex.Position]);
                 }
             }
         }
@@ -58,9 +60,9 @@ public class City_Manager : Singleton<City_Manager>
         {
             foreach (Vector2Int offset in Constants.EVEN_ROW_OFFSETS)
             {
-                if (Hexes.ContainsKey(offset + centerHex.Position))
+                if (Instance.Hexes.ContainsKey(offset + centerHex.Position))
                 {
-                    centerHex.AddNeighbor(Hexes[offset + centerHex.Position]);
+                    centerHex.AddNeighbor(Instance.Hexes[offset + centerHex.Position]);
                 }
             }
         }
@@ -136,7 +138,9 @@ public class City_Manager : Singleton<City_Manager>
     {
         foreach(Vector2Int position in Instance.availbleHexPositions)
         {
-            Instance.ghostHexes.Add(Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_GHOST), Hex.GetWorldCoordFromHexCoord(position), Quaternion.Euler(-90, 0, 0)).GetComponent<Ghost_Hex>());
+            Ghost_Hex newGhost = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_GHOST), Hex.GetWorldCoordFromHexCoord(position), Quaternion.Euler(-90, 0, 0)).GetComponent<Ghost_Hex>();
+            newGhost.hexCoord = position;
+            Instance.ghostHexes.Add(newGhost);
         }
     }
 

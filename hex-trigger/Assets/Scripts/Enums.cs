@@ -15,4 +15,38 @@ public static class Enums
         HEX_ISOLIUM,
         HEX_GHOST
     }
+
+    public enum Hex_Types
+    {
+        BASIC,
+        FOOD,
+        HOUSING,
+        INDUSTRY,
+        MILITARY,
+        RESEARCH,
+        ISOLIUM
+    }
+
+    public static Prefabs HexTypeToPrefab(Hex_Types type)
+    {
+        switch(type)
+        {
+            case Hex_Types.BASIC:
+                return Prefabs.HEX_BASIC;
+            case Hex_Types.FOOD:
+                return Prefabs.HEX_FOOD;
+            case Hex_Types.HOUSING:
+                return Prefabs.HEX_HOUSING;
+            case Hex_Types.INDUSTRY:
+                return Prefabs.HEX_INDUSTRY;
+            case Hex_Types.ISOLIUM:
+                return Prefabs.HEX_ISOLIUM;
+            case Hex_Types.MILITARY:
+                return Prefabs.HEX_MILITARY;
+            case Hex_Types.RESEARCH:
+                return Prefabs.HEX_RESEARCH;
+            default:
+                return Prefabs.HEX_BASIC;
+        }
+    }
 }
