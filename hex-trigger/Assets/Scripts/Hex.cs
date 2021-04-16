@@ -6,15 +6,33 @@ public class Hex : MonoBehaviour
 {
     public Vector2Int Position;
     public List<Hex> Neighbors = new List<Hex>();
+    public Building ConnectedBuilding;
+
+    [SerializeField] Material standardMaterial;
+
+    private Renderer renderer;
+
+    private void Awake()
+    {
+        renderer = GetComponent<Renderer>();
+        ConnectedBuilding = GetComponent<Building>();
+    }
 
     public void Initialize(int x, int y)
     {
         Position = new Vector2Int(x, y);
+        ConnectedBuilding.enabled = true;
     }
 
     public void AddNeighbor(Hex neighbor)
     {
         Neighbors.Add(neighbor);
+        ConnectedBuilding.DetermineBuildingTier();
+    }
+
+    public void SetStandardMaterial()
+    {
+        renderer.material = standardMaterial;
     }
 
     public static Vector3 GetWorldCoordFromHexCoord(Vector2Int vector)

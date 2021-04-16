@@ -13,7 +13,8 @@ public static class Enums
         HEX_MILITARY,
         HEX_RESEARCH,
         HEX_ISOLIUM,
-        HEX_GHOST
+        HEX_GHOST,
+        HEX_GOD_SEAT
     }
 
     public enum Hex_Types
@@ -24,7 +25,17 @@ public static class Enums
         INDUSTRY,
         MILITARY,
         RESEARCH,
-        ISOLIUM
+        ISOLIUM,
+        GOD_SEAT
+    }
+
+    public enum Building_Tier
+    {
+        I,
+        II,
+        III,
+        IV,
+        V
     }
 
     public static Prefabs HexTypeToPrefab(Hex_Types type)
@@ -45,6 +56,8 @@ public static class Enums
                 return Prefabs.HEX_MILITARY;
             case Hex_Types.RESEARCH:
                 return Prefabs.HEX_RESEARCH;
+            case Hex_Types.GOD_SEAT:
+                return Prefabs.HEX_GOD_SEAT;
             default:
                 return Prefabs.HEX_BASIC;
         }

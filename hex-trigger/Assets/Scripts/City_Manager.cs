@@ -7,7 +7,7 @@ public class City_Manager : Singleton<City_Manager>
     public Dictionary<Vector2Int, Hex> Hexes = new Dictionary<Vector2Int, Hex>();
     public List<Vector2Int> availbleHexPositions = new List<Vector2Int>();
 
-    private int hexRange = 6;
+    private int hexRange = 1;
     private List<Ghost_Hex> ghostHexes = new List<Ghost_Hex>();
 
     public Hex_Blueprint hexBlueprint;
@@ -26,20 +26,31 @@ public class City_Manager : Singleton<City_Manager>
 
     private void CreateHexGrid()
     {
-        for (int i = 0; i < hexRange; i++)
+        for (int i = -hexRange; i <= hexRange; i++)
         {
-            for (int j = 0; j < hexRange; j++)
+            for (int j = -hexRange; j <= hexRange; j++)
             {
                 float xPos = i * Constants.HEX_X_OFFSET;
 
-                if (j % 2 == 1)
+                if (Mathf.Abs(j) % 2 == 1)
                 {
                     xPos += (Constants.HEX_X_OFFSET / 2f);
                 }
 
-                Hex newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_BASIC), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                Hex newHex;
+
+                if (i == 0 && j == 0)
+                {
+                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                }
+                else
+                {
+                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_BASIC), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                }
+
                 Hexes.Add(new Vector2Int(i, j), newHex.GetComponent<Hex>());
                 newHex.Initialize(i, j);
+                newHex.SetStandardMaterial();
             }
         }
     }

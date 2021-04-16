@@ -17,6 +17,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_RESEARCH, Resources.Load<GameObject>("Prefabs/Hex - RESEARCH"));
         prefabs.Add(Enums.Prefabs.HEX_ISOLIUM, Resources.Load<GameObject>("Prefabs/Hex - ISOLIUM PROD & STORAGE"));
         prefabs.Add(Enums.Prefabs.HEX_GHOST, Resources.Load<GameObject>("Prefabs/Ghost Hex"));
+        prefabs.Add(Enums.Prefabs.HEX_GOD_SEAT, Resources.Load<GameObject>("Prefabs/Hex - God Seat"));
     }
 
     public static GameObject GetPrefab(Enums.Prefabs prefab)

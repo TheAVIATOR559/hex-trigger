@@ -6,12 +6,10 @@ public class Hex_Blueprint : MonoBehaviour
 {
     private Ghost_Hex occupiedHex;
     private Hex connectedHex;
-    private Renderer renderer;
 
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
-        renderer = GetComponent<Renderer>();
     }
 
     public void MoveToHex(Ghost_Hex hex)
@@ -36,16 +34,13 @@ public class Hex_Blueprint : MonoBehaviour
         City_Manager.DisableAvailableHexHighlights();
 
         //change mat to regular mat
-
+        connectedHex.SetStandardMaterial();
 
         //init connected hex
         connectedHex.Initialize(occupiedHex.hexCoord.x, occupiedHex.hexCoord.y);
 
         //update connected hex neighbors
         City_Manager.SetupNeighbors(connectedHex);
-
-        //add building specific script
-
 
         //update available placement position
         City_Manager.Instance.UpdateAvialableHexPositions();
