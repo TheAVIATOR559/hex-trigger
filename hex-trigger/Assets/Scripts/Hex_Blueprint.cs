@@ -23,12 +23,35 @@ public class Hex_Blueprint : MonoBehaviour
         occupiedHex = null;
     }
 
+    private void Update()
+    {
+        if(Input.GetMouseButtonUp(0))
+        {
+            PlaceHex();
+        }
+
+        if(Input.GetMouseButtonUp(1))
+        {
+            CancelPlacement();
+        }
+    }
+
     private void PlaceHex()
     {
         if(occupiedHex == null)
         {
+            Debug.Log("CLICKED OFF A HEX");
             return;
         }
+
+        if(!Resource_Manager.HaveRequiredBuildingCosts(Resource_Manager.GetBuildingCost(connectedHex.ConnectedBuilding.BuildingType)))
+        {
+            //indicate lack of resources
+            Debug.Log("NOT ENOUGH RESOURCES");
+            return;
+        }
+
+        Debug.Log("PLACING HEX");
 
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();
@@ -41,6 +64,7 @@ public class Hex_Blueprint : MonoBehaviour
 
         //update connected hex neighbors
         City_Manager.SetupNeighbors(connectedHex);
+        connectedHex.AddToNeighbors();
 
         //update available placement position
         City_Manager.Instance.UpdateAvialableHexPositions();
@@ -58,11 +82,15 @@ public class Hex_Blueprint : MonoBehaviour
     private void CancelPlacement()
     {
         //reenable the place hex panel
+        UI_Manager.EnablePlaceHexPanel();
 
         //disable the ghost hexes
+        City_Manager.DisableAvailableHexHighlights();
 
         //set city manager's hex_blueprint to null
+        City_Manager.Instance.hexBlueprint = null;
 
         //destroy this gameobject
+        Destroy(this.gameObject);
     }
 }

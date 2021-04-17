@@ -12,5 +12,6 @@ public class Manager_Loader : MonoBehaviour
         Prefab_Manager prefabs = Prefab_Manager.Instance;
         City_Manager city = City_Manager.Instance;
         UI_Manager.Instance.SetupReferences(mainCanvas);
+        Resource_Manager.DEV_AddResources();
     }
 }

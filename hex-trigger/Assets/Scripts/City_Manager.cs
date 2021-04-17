@@ -48,7 +48,6 @@ public class City_Manager : Singleton<City_Manager>
                     newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_BASIC), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
                 }
 
-                Hexes.Add(new Vector2Int(i, j), newHex.GetComponent<Hex>());
                 newHex.Initialize(i, j);
                 newHex.SetStandardMaterial();
             }
@@ -111,6 +110,8 @@ public class City_Manager : Singleton<City_Manager>
 
     public void UpdateAvialableHexPositions()
     {
+        availbleHexPositions.Clear();
+
         foreach(KeyValuePair<Vector2Int, Hex> kvp in Hexes)
         {
             if(kvp.Value.Neighbors.Count >= 6)
@@ -123,7 +124,7 @@ public class City_Manager : Singleton<City_Manager>
                 {
                     foreach(Vector2Int vector in Constants.ODD_ROW_OFFSETS)
                     {
-                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))
+                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
                             availbleHexPositions.Add(vector + kvp.Value.Position);
@@ -134,7 +135,7 @@ public class City_Manager : Singleton<City_Manager>
                 {
                     foreach (Vector2Int vector in Constants.EVEN_ROW_OFFSETS)
                     {
-                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))
+                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
                             availbleHexPositions.Add(vector + kvp.Value.Position);
@@ -161,5 +162,7 @@ public class City_Manager : Singleton<City_Manager>
         {
             hex.Destroy();
         }
+
+        Instance.ghostHexes.Clear();
     }
 }

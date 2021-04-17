@@ -21,6 +21,7 @@ public class Hex : MonoBehaviour
     public void Initialize(int x, int y)
     {
         Position = new Vector2Int(x, y);
+        City_Manager.Instance.Hexes.Add(Position, this);
         ConnectedBuilding.enabled = true;
     }
 
@@ -28,6 +29,14 @@ public class Hex : MonoBehaviour
     {
         Neighbors.Add(neighbor);
         ConnectedBuilding.DetermineBuildingTier();
+    }
+
+    public void AddToNeighbors()
+    {
+        foreach(Hex neighbor in Neighbors)
+        {
+            neighbor.AddNeighbor(this);
+        }
     }
 
     public void SetStandardMaterial()

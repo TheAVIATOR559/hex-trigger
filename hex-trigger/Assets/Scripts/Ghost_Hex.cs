@@ -10,15 +10,15 @@ public class Ghost_Hex : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnMouseEnter()
+    private void OnMouseEnter()//THIS GETS CALLED BEFORE ONMOUSEEXIT, SHOULD BE CALLED AFTER
     {
-        //set hollow version of hex type
+        Debug.Log("Entered a hex");
         City_Manager.Instance.hexBlueprint.MoveToHex(this);
     }
 
-    private void OnMouseExit()
+    private void OnMouseExit()//THIS GETS CALLED AFTER ONMOUSEENTER, SHOULD BE CALLED BEFORE
     {
-        //clear hollow version of hex type
+        Debug.Log("Moved off a hex");
         City_Manager.Instance.hexBlueprint.RemoveFromHex();
     }
 }

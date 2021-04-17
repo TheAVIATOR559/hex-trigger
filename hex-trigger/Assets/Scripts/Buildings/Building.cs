@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    public Enums.Hex_Types Type;
-    public Enums.Building_Tier Tier;
+    public Enums.Hex_Types HexType;
+    public Enums.Building_Tier BuildingTier;
+    public Enums.Building_Type BuildingType;
 
     private Hex connectedHex;
 
@@ -20,7 +21,7 @@ public class Building : MonoBehaviour
 
         foreach(Hex hex in connectedHex.Neighbors)
         {
-            if(hex.ConnectedBuilding.Type == Type)
+            if(hex.ConnectedBuilding.HexType == HexType)
             {
                 similarHexes++;
             }
@@ -28,23 +29,23 @@ public class Building : MonoBehaviour
 
         if(similarHexes < 2)
         {
-            Tier = Enums.Building_Tier.I;
+            BuildingTier = Enums.Building_Tier.I;
         }
         else if(similarHexes == 2)
         {
-            Tier = Enums.Building_Tier.II;
+            BuildingTier = Enums.Building_Tier.II;
         }
         else if(similarHexes == 3)
         {
-            Tier = Enums.Building_Tier.III;
+            BuildingTier = Enums.Building_Tier.III;
         }
         else if(similarHexes > 3 && similarHexes < 6)
         {
-            Tier = Enums.Building_Tier.IV;
+            BuildingTier = Enums.Building_Tier.IV;
         }
         else if(similarHexes == 6)
         {
-            Tier = Enums.Building_Tier.V;
+            BuildingTier = Enums.Building_Tier.V;
         }
         else
         {

@@ -38,6 +38,18 @@ public static class Enums
         V
     }
 
+    public enum Building_Type
+    {
+        GOD_SEAT,
+        FOOD_I,
+        HOUSING_I,
+        INDUSTRY_I,
+        MILITARY_I,
+        DEFENSE_I,
+        RESEARCH_I,
+        ISOLIUM_I
+    }
+
     public static Prefabs HexTypeToPrefab(Hex_Types type)
     {
         switch(type)
