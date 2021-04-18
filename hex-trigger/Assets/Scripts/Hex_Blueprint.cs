@@ -6,10 +6,13 @@ public class Hex_Blueprint : MonoBehaviour
 {
     private Ghost_Hex occupiedHex;
     private Hex connectedHex;
+    private MeshCollider collider;
 
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
+        collider = GetComponent<MeshCollider>();
+        collider.enabled = false;
     }
 
     public void MoveToHex(Ghost_Hex hex)
@@ -74,6 +77,9 @@ public class Hex_Blueprint : MonoBehaviour
 
         //reenable place hex panel
         UI_Manager.EnablePlaceHexPanel();
+
+        //reenable the collider
+        collider.enabled = true;
 
         //destroy this script
         Destroy(this);

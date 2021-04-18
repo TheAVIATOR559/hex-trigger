@@ -10,13 +10,13 @@ public class Ghost_Hex : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnMouseEnter()//THIS GETS CALLED BEFORE ONMOUSEEXIT, SHOULD BE CALLED AFTER
+    private void OnMouseEnter()
     {
         Debug.Log("Entered a hex");
         City_Manager.Instance.hexBlueprint.MoveToHex(this);
     }
 
-    private void OnMouseExit()//THIS GETS CALLED AFTER ONMOUSEENTER, SHOULD BE CALLED BEFORE
+    private void OnMouseExit()
     {
         Debug.Log("Moved off a hex");
         City_Manager.Instance.hexBlueprint.RemoveFromHex();

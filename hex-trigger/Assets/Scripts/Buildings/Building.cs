@@ -55,7 +55,7 @@ public class Building : MonoBehaviour
         UpdateModel();
     }
 
-    protected virtual void UpdateModel()
+    protected virtual void UpdateModel() //TODO IMPLEMENT ME
     {
         // should be fleshed out in children
 
