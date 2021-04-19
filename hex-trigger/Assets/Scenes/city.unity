@@ -1786,10 +1786,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanSpeed: 5
   BoostModifier: 2
-  RotateSpeed: 0
-  ZoomSpeed: 0
-  MinimumAngle: 0
-  MaximumAngle: 0
+  MiddleClickPanSpeed: 10
+  ZoomMax: 5
+  RotateSpeed: 50
+  RightClickRotateSpeed: 5
+  MinVerticalAngle: -15
+  MaxVerticalAngle: 60
 --- !u!1 &1254078633
 GameObject:
   m_ObjectHideFlags: 0
