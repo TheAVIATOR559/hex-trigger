@@ -29,30 +29,52 @@ public static class Constants
 
     #region Buidling Costs
     #region Food
-    public static BuildingCost FarmCost = new BuildingCost(1, 1, 1, 1, 1);
+    public static BuildingCost GardenCost =  new BuildingCost(1, 1, 0, 0, 0, 0);
+    public static BuildingCost FarmCost =    new BuildingCost(1, 2, 0, 1, 2, 0);
+    public static BuildingCost OrchardCost = new BuildingCost(1, 3, 0, 2, 3, 0);
+    public static BuildingCost RanchCost =   new BuildingCost(1, 4, 0, 3, 4, 0);
     #endregion
     #region Housing
-    public static BuildingCost HovelCost = new BuildingCost(1, 1, 1, 1, 1);
+    public static BuildingCost HovelCost =     new BuildingCost(1, 0, 1, 0, 0, 0);
+    public static BuildingCost CottageCost =   new BuildingCost(1, 0, 2, 1, 1, 0);
+    public static BuildingCost ApartmentCost = new BuildingCost(1, 0, 3, 2, 2, 0);
+    public static BuildingCost CondoCost =     new BuildingCost(1, 0, 4, 3, 3, 0);
     #endregion
     #region Industry
-    public static BuildingCost WorkshopCost = new BuildingCost(1, 1, 1, 1, 1);
-    #endregion
-    #region Isolium
-    public static BuildingCost WarehouseCost = new BuildingCost(1, 1, 1, 1, 1);
-    #endregion
-    #region Research
-    public static BuildingCost LabCost = new BuildingCost(1, 1, 1, 1, 1);
+    public static BuildingCost WorkshopCost = new BuildingCost(1, 1, 0, 0, 0, 0);
+    public static BuildingCost ForgeCost =    new BuildingCost(1, 2, 0, 1, 0, 0);
+    public static BuildingCost MillCost =     new BuildingCost(1, 3, 0, 2, 0, 0);
+    public static BuildingCost FoundryCost =  new BuildingCost(1, 4, 0, 3, 0, 0);
     #endregion
     #region Military
-    public static BuildingCost BarracksCost = new BuildingCost(1, 1, 1, 1, 1);
+    public static BuildingCost BarracksCost =  new BuildingCost(1, 2, 1, 1, 1, 0);
+    public static BuildingCost DormitoryCost = new BuildingCost(1, 3, 2, 2, 2, 0);
+    public static BuildingCost GarrisonCost =  new BuildingCost(1, 4, 3, 3, 3, 0);
+    public static BuildingCost QuartersCost =  new BuildingCost(1, 5, 4, 4, 4, 0);
     #endregion
     #region Defense
-    public static BuildingCost WatchTowerCost = new BuildingCost(1, 1, 1, 1, 1);
+    public static BuildingCost WatchTowerCost = new BuildingCost(1, 1, 0, 1, 1, 1);
+    public static BuildingCost MissileComplexCost = new BuildingCost(1, 2, 0, 2, 2, 2);
+    public static BuildingCost LaserTowerCost = new BuildingCost(1, 3, 0, 3, 3, 3);
+    public static BuildingCost AutoMissileComplexCost = new BuildingCost(1, 0, 0, 4, 4, 4);
+    public static BuildingCost AutoLaserTowerCost = new BuildingCost(1, 0, 0, 6, 6, 6);
+    #endregion
+    #region Research
+    public static BuildingCost ResearchLabCost = new BuildingCost(1, 2, 0, 2, 2, 0);
+    public static BuildingCost ResearchCollegeCost = new BuildingCost(1, 3, 0, 3, 3, 0);
+    public static BuildingCost ResearchInstituteCost = new BuildingCost(1, 4, 0, 4, 4, 0);
+    public static BuildingCost MultiBrainCost = new BuildingCost(1, 5, 0, 5, 5, 0);
+    #endregion
+    #region Isolium
+    public static BuildingCost StockpileCost = new BuildingCost(1, 1, 0, 0, 1, 0);
+    public static BuildingCost StorehouseCost = new BuildingCost(1, 2, 0, 0, 2, 1);
+    public static BuildingCost WarehouseCost = new BuildingCost(1, 3, 0, 0, 3, 2);
+    public static BuildingCost DepotCost = new BuildingCost(1, 4, 0, 0, 4, 3);
     #endregion
     #endregion
 
 }
-
+//new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost
 {
     public int RequiredHexes
@@ -80,12 +102,18 @@ public struct BuildingCost
         get;
     }
 
-    public BuildingCost(int hexes, int food, int population, int industry, int isolium)
+    public int RequiredMilitary
+    {
+        get;
+    }
+
+    public BuildingCost(int hexes, int population, int food, int isolium, int industry, int military)
     {
         RequiredHexes = hexes;
         RequiredFood = food;
         RequiredPopulation = population;
         RequiredIndustry = industry;
         RequiredIsolium = isolium;
+        RequiredMilitary = military;
     }
 }

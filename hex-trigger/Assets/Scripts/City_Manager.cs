@@ -45,7 +45,7 @@ public class City_Manager : Singleton<City_Manager>
                 }
                 else
                 {
-                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_BASIC), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_EMPTY), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
                 }
 
                 newHex.Initialize(i, j);

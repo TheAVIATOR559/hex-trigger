@@ -9,7 +9,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     private void Awake()
     {
         /* LOAD PREFABS HERE */
-        prefabs.Add(Enums.Prefabs.HEX_BASIC, Resources.Load<GameObject>("Prefabs/Hex - DEFAULT"));
+        prefabs.Add(Enums.Prefabs.HEX_EMPTY, Resources.Load<GameObject>("Prefabs/Hex - DEFAULT"));
         prefabs.Add(Enums.Prefabs.HEX_FOOD, Resources.Load<GameObject>("Prefabs/Hex - FOOD PROD"));
         prefabs.Add(Enums.Prefabs.HEX_HOUSING, Resources.Load<GameObject>("Prefabs/Hex - HOUSING"));
         prefabs.Add(Enums.Prefabs.HEX_INDUSTRY, Resources.Load<GameObject>("Prefabs/Hex - INDUSTRY"));

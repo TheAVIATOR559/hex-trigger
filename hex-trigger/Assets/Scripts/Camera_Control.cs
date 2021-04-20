@@ -50,7 +50,7 @@ public class Camera_Control : MonoBehaviour
     {
         if (Input.GetMouseButton(2))
         {
-            transform.Translate(MiddleClickPanSpeed * Time.deltaTime * new Vector3(-transform.right.x * Input.GetAxisRaw("Mouse X"), -transform.up.y * Input.GetAxisRaw("Mouse Y"), 0), Space.World);
+            transform.Translate(MiddleClickPanSpeed * Time.deltaTime * new Vector3(-transform.right.x * Input.GetAxis("Mouse X"), -transform.up.y * Input.GetAxis("Mouse Y"), 0), Space.World);
         }
     }
 
