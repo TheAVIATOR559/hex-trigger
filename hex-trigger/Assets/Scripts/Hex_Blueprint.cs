@@ -43,18 +43,17 @@ public class Hex_Blueprint : MonoBehaviour
     {
         if(occupiedHex == null)
         {
+            //TODO indicate invalid click
             Debug.Log("CLICKED OFF A HEX");
             return;
         }
 
         if(!Resource_Manager.HaveRequiredBuildingCosts(Resource_Manager.GetBuildingCost(connectedHex.ConnectedBuilding.BuildingType)))
         {
-            //indicate lack of resources
+            //TODO indicate lack of resources
             Debug.Log("NOT ENOUGH RESOURCES");
             return;
         }
-
-        Debug.Log("PLACING HEX");
 
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();
@@ -75,8 +74,7 @@ public class Hex_Blueprint : MonoBehaviour
         //set city manager's hex_blueprint to null
         City_Manager.Instance.hexBlueprint = null;
 
-        //reenable place hex panel
-        UI_Manager.EnablePlaceHexPanel();
+        UI_Manager.DisableHexTierPanel();
 
         //reenable the collider
         collider.enabled = true;
@@ -88,7 +86,7 @@ public class Hex_Blueprint : MonoBehaviour
     private void CancelPlacement()
     {
         //reenable the place hex panel
-        UI_Manager.EnablePlaceHexPanel();
+        UI_Manager.ResetCityUIState();
 
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();

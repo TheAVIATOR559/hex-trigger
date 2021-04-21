@@ -4,17 +4,46 @@ using System.Collections.Generic;
 
 public static class Enums
 {
-    public enum Prefabs//TODO NEED TO REWORK THIS ENTIRE THING
+    public enum Prefabs
     {
         HEX_EMPTY,
-        HEX_FOOD,
-        HEX_HOUSING,
-        HEX_INDUSTRY,
-        HEX_MILITARY,
-        HEX_RESEARCH,
-        HEX_ISOLIUM,
         HEX_GHOST,
-        HEX_GOD_SEAT
+        HEX_GOD_SEAT,
+        HEX_GARDEN,
+        HEX_FARM,
+        HEX_ORCHARD,
+        HEX_RANCH,
+        HEX_HYDROPONICS_TOWER,
+        HEX_HOVEL,
+        HEX_COTTAGE,
+        HEX_APARTMENT,
+        HEX_CONDOMINIUM,
+        HEX_VILLA,
+        HEX_WORKSHOP,
+        HEX_FORGE,
+        HEX_MILL,
+        HEX_FOUNDRY,
+        HEX_FACTORY,
+        HEX_BARRACKS,
+        HEX_DORMITORY,
+        HEX_GARRISON,
+        HEX_QUARTERS,
+        HEX_HEADQUARTERS,
+        HEX_WATCHTOWER,
+        HEX_MISSILE_COMPLEX,
+        HEX_LASER_TOWER,
+        HEX_AUTO_MISSILE_COMPLEX,
+        HEX_AUTO_LASER_TOWER,
+        HEX_RESEARCH_LAB,
+        HEX_RESEARCH_COLLEGE,
+        HEX_RESEARCH_INSTITUTE,
+        HEX_MULTIBRAIN_COMPLEX,
+        HEX_QUANTUM_BRAIN,
+        HEX_STOCKPILE,
+        HEX_STOREHOUSE,
+        HEX_WAREHOUSE,
+        HEX_DEPOT,
+        HEX_DISTRIBUTION_CENTER
     }
 
     public enum Hex_Types
@@ -153,82 +182,82 @@ public static class Enums
         };
     }
 
-    public static Prefabs BuildingTypeToPrefab(Building_Type type) //TODO FILL ME IN
+    public static Prefabs BuildingTypeToPrefab(Building_Type type)
     {
         switch (type)
         {
             case Building_Type.GOD_SEAT:
-                break;
+                return Prefabs.HEX_GOD_SEAT;
             case Building_Type.GARDEN:
-                break;
+                return Prefabs.HEX_GARDEN;
             case Building_Type.FARM:
-                break;
+                return Prefabs.HEX_FARM;
             case Building_Type.ORCHARD:
-                break;
+                return Prefabs.HEX_ORCHARD;
             case Building_Type.RANCH:
-                break;
+                return Prefabs.HEX_RANCH;
             case Building_Type.HYDROPONICS_TOWER:
-                break;
+                return Prefabs.HEX_HYDROPONICS_TOWER;
             case Building_Type.HOVEL:
-                break;
+                return Prefabs.HEX_HOVEL;
             case Building_Type.COTTAGE:
-                break;
+                return Prefabs.HEX_COTTAGE;
             case Building_Type.APARTMENT:
-                break;
+                return Prefabs.HEX_APARTMENT;
             case Building_Type.CONDOMINIUM:
-                break;
+                return Prefabs.HEX_CONDOMINIUM;
             case Building_Type.VILLA:
-                break;
+                return Prefabs.HEX_VILLA;
             case Building_Type.WORKSHOP:
-                break;
+                return Prefabs.HEX_WORKSHOP;
             case Building_Type.FORGE:
-                break;
+                return Prefabs.HEX_FORGE;
             case Building_Type.MILL:
-                break;
+                return Prefabs.HEX_MILL;
             case Building_Type.FOUNDRY:
-                break;
+                return Prefabs.HEX_FOUNDRY;
             case Building_Type.FACTORY:
-                break;
+                return Prefabs.HEX_FACTORY;
             case Building_Type.BARRACKS:
-                break;
+                return Prefabs.HEX_BARRACKS;
             case Building_Type.DORMITORY:
-                break;
+                return Prefabs.HEX_DORMITORY;
             case Building_Type.GARRISON:
-                break;
+                return Prefabs.HEX_GARRISON;
             case Building_Type.QUARTERS:
-                break;
+                return Prefabs.HEX_QUARTERS;
             case Building_Type.HEADQUARTERS:
-                break;
+                return Prefabs.HEX_HEADQUARTERS;
             case Building_Type.WATCHTOWER:
-                break;
+                return Prefabs.HEX_WATCHTOWER;
             case Building_Type.MISSILE_COMPLEX:
-                break;
+                return Prefabs.HEX_MISSILE_COMPLEX;
             case Building_Type.LASER_TOWER:
-                break;
+                return Prefabs.HEX_LASER_TOWER;
             case Building_Type.AUTO_MISSILE_COMPLEX:
-                break;
+                return Prefabs.HEX_AUTO_MISSILE_COMPLEX;
             case Building_Type.AUTO_LASER_TOWER:
-                break;
+                return Prefabs.HEX_AUTO_LASER_TOWER;
             case Building_Type.RESEARCH_LAB:
-                break;
+                return Prefabs.HEX_RESEARCH_LAB;
             case Building_Type.RESEARCH_COLLEGE:
-                break;
+                return Prefabs.HEX_RESEARCH_COLLEGE;
             case Building_Type.RESEARCH_INSTITUTE:
-                break;
+                return Prefabs.HEX_RESEARCH_INSTITUTE;
             case Building_Type.MULTIBRAIN_COMPLEX:
-                break;
+                return Prefabs.HEX_MULTIBRAIN_COMPLEX;
             case Building_Type.QUANTUM_BRAIN:
-                break;
+                return Prefabs.HEX_QUANTUM_BRAIN;
             case Building_Type.STOCKPILE:
-                break;
+                return Prefabs.HEX_STOCKPILE;
             case Building_Type.STOREHOUSE:
-                break;
+                return Prefabs.HEX_STOREHOUSE;
             case Building_Type.WAREHOUSE:
-                break;
+                return Prefabs.HEX_WAREHOUSE;
             case Building_Type.DEPOT:
-                break;
+                return Prefabs.HEX_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
-                break;
+                return Prefabs.HEX_DISTRIBUTION_CENTER;
             case Building_Type.EMPTY:
             default:
                 return Prefabs.HEX_EMPTY;

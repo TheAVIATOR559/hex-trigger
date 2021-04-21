@@ -52,8 +52,11 @@ public class Building : MonoBehaviour
             Debug.LogError("similarHexes is greater than 6 :: " + connectedHex.Position);
         }
 
+        BuildingType = Enums.HexTypeAndTierToBuildingType(HexType, BuildingTier);
+
         UpdateModel();
     }
+
 
     protected virtual void UpdateModel() //TODO IMPLEMENT ME
     {
