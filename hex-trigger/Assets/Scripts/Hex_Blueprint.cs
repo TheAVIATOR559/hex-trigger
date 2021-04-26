@@ -55,6 +55,8 @@ public class Hex_Blueprint : MonoBehaviour
             return;
         }
 
+        //TODO deduct required Resources
+
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();
 

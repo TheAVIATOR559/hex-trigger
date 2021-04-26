@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Building_Defense : Building
 {
-    
+
 }

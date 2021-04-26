@@ -124,7 +124,6 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.HEADQUARTERS:
             case Enums.Building_Type.QUANTUM_BRAIN:
             case Enums.Building_Type.DISTRIBUTION_CENTER:
-            case Enums.Building_Type.EMPTY:
             case Enums.Building_Type.GOD_SEAT:
             default:
                 return new BuildingCost(0, 0, 0, 0, 0, 0);

@@ -6,7 +6,6 @@ public static class Enums
 {
     public enum Prefabs
     {
-        HEX_EMPTY,
         HEX_GHOST,
         HEX_GOD_SEAT,
         HEX_GARDEN,
@@ -43,12 +42,46 @@ public static class Enums
         HEX_STOREHOUSE,
         HEX_WAREHOUSE,
         HEX_DEPOT,
-        HEX_DISTRIBUTION_CENTER
+        HEX_DISTRIBUTION_CENTER,
+        MODEL_GARDEN,
+        MODEL_FARM,
+        MODEL_ORCHARD,
+        MODEL_RANCH,
+        MODEL_HYDROPONICS_TOWER,
+        MODEL_HOVEL,
+        MODEL_COTTAGE,
+        MODEL_APARTMENT,
+        MODEL_CONDOMINIUM,
+        MODEL_VILLA,
+        MODEL_WORKSHOP,
+        MODEL_FORGE,
+        MODEL_MILL,
+        MODEL_FOUNDRY,
+        MODEL_FACTORY,
+        MODEL_BARRACKS,
+        MODEL_DORMITORY,
+        MODEL_GARRISON,
+        MODEL_QUARTERS,
+        MODEL_HEADQUARTERS,
+        MODEL_WATCHTOWER,
+        MODEL_MISSILE_COMPLEX,
+        MODEL_LASER_TOWER,
+        MODEL_AUTO_MISSILE_COMPLEX,
+        MODEL_AUTO_LASER_TOWER,
+        MODEL_RESEARCH_LAB,
+        MODEL_RESEARCH_COLLEGE,
+        MODEL_RESEARCH_INSTITUTE,
+        MODEL_MULTIBRAIN_COMPLEX,
+        MODEL_QUANTUM_BRAIN,
+        MODEL_STOCKPILE,
+        MODEL_STOREHOUSE,
+        MODEL_WAREHOUSE,
+        MODEL_DEPOT,
+        MODEL_DISTRIBUTION_CENTER
     }
 
     public enum Hex_Types
     {
-        EMPTY,
         FOOD,
         HOUSING,
         INDUSTRY,
@@ -70,7 +103,6 @@ public static class Enums
 
     public enum Building_Type
     {
-        EMPTY,
         GOD_SEAT,
         GARDEN,
         FARM,
@@ -113,7 +145,6 @@ public static class Enums
     {
         return hex switch
         {
-            Hex_Types.EMPTY => Building_Type.EMPTY,
             Hex_Types.GOD_SEAT => Building_Type.GOD_SEAT,
             Hex_Types.FOOD => tier switch
             {
@@ -178,11 +209,11 @@ public static class Enums
                 Building_Tier.V => Building_Type.DISTRIBUTION_CENTER,
                 _ => Building_Type.STOCKPILE,
             },
-            _ => Building_Type.EMPTY,
+            _ => Building_Type.HOVEL,
         };
     }
 
-    public static Prefabs BuildingTypeToPrefab(Building_Type type)
+    public static Prefabs BuildingTypeToHexPrefab(Building_Type type)
     {
         switch (type)
         {
@@ -258,10 +289,89 @@ public static class Enums
                 return Prefabs.HEX_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.HEX_DISTRIBUTION_CENTER;
-            case Building_Type.EMPTY:
             default:
-                return Prefabs.HEX_EMPTY;
+                return Prefabs.HEX_HOVEL;
         }
 
+    }
+
+    public static Prefabs BuildingTypeToModelPrefab(Building_Type type)
+    {
+        switch (type)
+        {
+            case Building_Type.GARDEN:
+                return Prefabs.MODEL_GARDEN;
+            case Building_Type.FARM:
+                return Prefabs.MODEL_FARM;
+            case Building_Type.ORCHARD:
+                return Prefabs.MODEL_ORCHARD;
+            case Building_Type.RANCH:
+                return Prefabs.MODEL_RANCH;
+            case Building_Type.HYDROPONICS_TOWER:
+                return Prefabs.MODEL_HYDROPONICS_TOWER;
+            case Building_Type.HOVEL:
+                return Prefabs.MODEL_HOVEL;
+            case Building_Type.COTTAGE:
+                return Prefabs.MODEL_COTTAGE;
+            case Building_Type.APARTMENT:
+                return Prefabs.MODEL_APARTMENT;
+            case Building_Type.CONDOMINIUM:
+                return Prefabs.MODEL_CONDOMINIUM;
+            case Building_Type.VILLA:
+                return Prefabs.MODEL_VILLA;
+            case Building_Type.WORKSHOP:
+                return Prefabs.MODEL_WORKSHOP;
+            case Building_Type.FORGE:
+                return Prefabs.MODEL_FORGE;
+            case Building_Type.MILL:
+                return Prefabs.MODEL_MILL;
+            case Building_Type.FOUNDRY:
+                return Prefabs.MODEL_FOUNDRY;
+            case Building_Type.FACTORY:
+                return Prefabs.MODEL_FACTORY;
+            case Building_Type.BARRACKS:
+                return Prefabs.MODEL_BARRACKS;
+            case Building_Type.DORMITORY:
+                return Prefabs.MODEL_DORMITORY;
+            case Building_Type.GARRISON:
+                return Prefabs.MODEL_GARRISON;
+            case Building_Type.QUARTERS:
+                return Prefabs.MODEL_QUARTERS;
+            case Building_Type.HEADQUARTERS:
+                return Prefabs.MODEL_HEADQUARTERS;
+            case Building_Type.WATCHTOWER:
+                return Prefabs.MODEL_WATCHTOWER;
+            case Building_Type.MISSILE_COMPLEX:
+                return Prefabs.MODEL_MISSILE_COMPLEX;
+            case Building_Type.LASER_TOWER:
+                return Prefabs.MODEL_LASER_TOWER;
+            case Building_Type.AUTO_MISSILE_COMPLEX:
+                return Prefabs.MODEL_AUTO_MISSILE_COMPLEX;
+            case Building_Type.AUTO_LASER_TOWER:
+                return Prefabs.MODEL_AUTO_LASER_TOWER;
+            case Building_Type.RESEARCH_LAB:
+                return Prefabs.MODEL_RESEARCH_LAB;
+            case Building_Type.RESEARCH_COLLEGE:
+                return Prefabs.MODEL_RESEARCH_COLLEGE;
+            case Building_Type.RESEARCH_INSTITUTE:
+                return Prefabs.MODEL_RESEARCH_INSTITUTE;
+            case Building_Type.MULTIBRAIN_COMPLEX:
+                return Prefabs.MODEL_MULTIBRAIN_COMPLEX;
+            case Building_Type.QUANTUM_BRAIN:
+                return Prefabs.MODEL_QUANTUM_BRAIN;
+            case Building_Type.STOCKPILE:
+                return Prefabs.MODEL_STOCKPILE;
+            case Building_Type.STOREHOUSE:
+                return Prefabs.MODEL_STOREHOUSE;
+            case Building_Type.WAREHOUSE:
+                return Prefabs.MODEL_WAREHOUSE;
+            case Building_Type.DEPOT:
+                return Prefabs.MODEL_DEPOT;
+            case Building_Type.DISTRIBUTION_CENTER:
+                return Prefabs.MODEL_DISTRIBUTION_CENTER;
+            case Building_Type.GOD_SEAT:
+            default:
+                return Prefabs.MODEL_GARDEN;
+        }
     }
 }

@@ -10,6 +10,10 @@ public class Building : MonoBehaviour
 
     private Hex connectedHex;
 
+    [SerializeField] GameObject model;
+
+    private Enums.Building_Tier prevTier;
+
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
@@ -19,6 +23,8 @@ public class Building : MonoBehaviour
     {
         int similarHexes = 0;
 
+        prevTier = BuildingTier;
+
         foreach(Hex hex in connectedHex.Neighbors)
         {
             if(hex.ConnectedBuilding.HexType == HexType)
@@ -27,43 +33,48 @@ public class Building : MonoBehaviour
             }
         }
 
-        if(similarHexes < 2)
+        if(similarHexes < 2 && prevTier < Enums.Building_Tier.I)
         {
             BuildingTier = Enums.Building_Tier.I;
         }
-        else if(similarHexes == 2)
+        else if(similarHexes == 2 && prevTier < Enums.Building_Tier.II)
         {
             BuildingTier = Enums.Building_Tier.II;
         }
-        else if(similarHexes == 3)
+        else if(similarHexes == 3 && prevTier < Enums.Building_Tier.III)
         {
             BuildingTier = Enums.Building_Tier.III;
         }
-        else if(similarHexes > 3 && similarHexes < 6)
+        else if(similarHexes > 3 && similarHexes < 6 && prevTier < Enums.Building_Tier.IV)
         {
             BuildingTier = Enums.Building_Tier.IV;
         }
-        else if(similarHexes == 6)
+        else if(similarHexes == 6 && prevTier < Enums.Building_Tier.V)
         {
             BuildingTier = Enums.Building_Tier.V;
         }
-        else
-        {
-            Debug.LogError("similarHexes is greater than 6 :: " + connectedHex.Position);
-        }
+        //else
+        //{
+        //    Debug.LogError("similarHexes is greater than 6 :: " + connectedHex.Position);
+        //}
 
         BuildingType = Enums.HexTypeAndTierToBuildingType(HexType, BuildingTier);
 
-        UpdateModel();
+        if(BuildingTier != prevTier)
+        {
+            UpdateModel();
+        }
     }
 
 
-    protected virtual void UpdateModel() //TODO IMPLEMENT ME
+    protected virtual void UpdateModel()
     {
-        // should be fleshed out in children
-
         //replace building model with tier accurate one
         //destroy this hex/building
-    }
+        GameObject prevModel = model;
 
+        model = Instantiate(Prefab_Manager.GetPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.identity, transform);
+
+        Destroy(prevModel);
+    }
 }
