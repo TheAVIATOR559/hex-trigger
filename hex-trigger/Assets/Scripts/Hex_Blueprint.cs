@@ -55,7 +55,8 @@ public class Hex_Blueprint : MonoBehaviour
             return;
         }
 
-        //TODO deduct required Resources
+        //deduct required Resources
+        Resource_Manager.DeductResources(Resource_Manager.GetBuildingCost(connectedHex.ConnectedBuilding.BuildingType));
 
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();

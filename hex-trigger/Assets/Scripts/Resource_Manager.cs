@@ -4,17 +4,138 @@ using UnityEngine;
 
 public class Resource_Manager : Singleton<Resource_Manager>
 {
-    public int AvailableHexes;
+    public int AvailableHexes//TODO this will need its own formula for 'buying' new hexes
+    {
+        get
+        {
+            return AvailableHexes;
+        }
+        set
+        {
+            if(AvailableHexes - value <= 0)
+            {
+                AvailableHexes = 0;
+            }
+            else
+            {
+                AvailableHexes -= value;
+            }
+        }
+    }
 
-    public int AvailableFood;
+    public int AvailableFood
+    {
+        get
+        {
+            return AvailableFood;
+        }
+        set
+        {
+            if(AvailableFood - value <= 0)
+            {
+                AvailableFood = 0;
+            }
+            else
+            {
+                AvailableFood -= value;
+            }
+        }
+    }
 
-    public int AvailableHousing;
+    public int AvailableHousing
+    {
+        get
+        {
+            return AvailableHousing;
+        }
+        set
+        {
+            if (AvailableHousing - value <= 0)
+            {
+                AvailableHousing = 0;
+            }
+            else
+            {
+                AvailableHousing -= value;
+            }
+        }
+    }
 
-    public int AvailablePopulation;
+    public int AvailablePopulation
+    {
+        get
+        {
+            return AvailablePopulation;
+        }
+        set
+        {
+            if (AvailablePopulation - value <= 0)
+            {
+                AvailablePopulation = 0;
+            }
+            else
+            {
+                AvailablePopulation -= value;
+            }
+        }
+    }
 
-    public int AvailableIndustry;
+    public int AvailableIndustry
+    {
+        get
+        {
+            return AvailableIndustry;
+        }
+        set
+        {
+            if (AvailableIndustry - value <= 0)
+            {
+                AvailableIndustry = 0;
+            }
+            else
+            {
+                AvailableIndustry -= value;
+            }
+        }
+    }
 
-    public int AvailableIsolium;
+    public int AvailableIsolium
+    {
+        get
+        {
+            return AvailableIsolium;
+        }
+        set
+        {
+            if (AvailableIsolium - value <= 0)
+            {
+                AvailableIsolium = 0;
+            }
+            else
+            {
+                AvailableIsolium -= value;
+            }
+        }
+    }
+
+    public int AvailableMilitary
+    {
+        get
+        {
+            return AvailableMilitary;
+        }
+        set
+        {
+            if (AvailableMilitary - value <= 0)
+            {
+                AvailableMilitary = 0;
+            }
+            else
+            {
+                AvailableMilitary -= value;
+            }
+        }
+    }
 
     public static void DEV_AddResources()
     {
@@ -24,6 +145,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailablePopulation = 1000;
         Instance.AvailableIndustry = 1000;
         Instance.AvailableIsolium = 1000;
+        Instance.AvailableMilitary = 1000;
     }
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
@@ -128,5 +250,15 @@ public class Resource_Manager : Singleton<Resource_Manager>
             default:
                 return new BuildingCost(0, 0, 0, 0, 0, 0);
         }
+    }
+
+    public static void DeductResources(BuildingCost cost)
+    {
+        Instance.AvailableHexes -= cost.RequiredHexes;
+        Instance.AvailablePopulation -= cost.RequiredPopulation;
+        Instance.AvailableFood -= cost.RequiredFood;
+        Instance.AvailableIndustry -= cost.RequiredIndustry;
+        Instance.AvailableIsolium -= cost.RequiredIsolium;
+        Instance.AvailableMilitary -= cost.RequiredMilitary;
     }
 }
