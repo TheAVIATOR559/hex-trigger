@@ -8,15 +8,18 @@ public class Building : MonoBehaviour
     public Enums.Building_Tier BuildingTier;
     public Enums.Building_Type BuildingType;
 
-    private Hex connectedHex;
+    protected Hex connectedHex;
 
-    [SerializeField] GameObject model;
+    [SerializeField] protected GameObject model;
+
+    [SerializeField] protected float ProductionValue;
 
     private Enums.Building_Tier prevTier;
 
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
+        UpdateProductionValue();
     }
 
     public virtual void DetermineBuildingTier()
@@ -63,9 +66,9 @@ public class Building : MonoBehaviour
         if(BuildingTier != prevTier)
         {
             UpdateModel();
+            UpdateProductionValue();
         }
     }
-
 
     protected virtual void UpdateModel()
     {
@@ -76,5 +79,100 @@ public class Building : MonoBehaviour
         model = Instantiate(Prefab_Manager.GetPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.identity, transform);
 
         Destroy(prevModel);
+    }
+
+    protected virtual void UpdateProductionValue()
+    {
+
+    }
+
+    public static float GetProductionBonus(Enums.Building_Tier tier)
+    {
+        switch (tier)
+        {
+            case Enums.Building_Tier.I:
+                return Constants.TIER_I_BONUS;
+            case Enums.Building_Tier.II:
+                return Constants.TIER_II_BONUS;
+            case Enums.Building_Tier.III:
+                return Constants.TIER_III_BONUS;
+            case Enums.Building_Tier.IV:
+                return Constants.TIER_IV_BONUS;
+            case Enums.Building_Tier.V:
+                return Constants.TIER_V_BONUS;
+            default:
+                return Constants.TIER_I_BONUS;
+        }
+    }
+
+    public static int GetProductionValue(Enums.Building_Tier tier, Enums.Hex_Types type)
+    {
+        switch (type)
+        {
+            case Enums.Hex_Types.FOOD:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.FOOD_I_PROD,
+                    Enums.Building_Tier.II => Constants.FOOD_II_PROD,
+                    Enums.Building_Tier.III => Constants.FOOD_III_PROD,
+                    Enums.Building_Tier.IV => Constants.FOOD_IV_PROD,
+                    Enums.Building_Tier.V => Constants.FOOD_V_PROD,
+                    _ => Constants.FOOD_I_PROD,
+                };
+            case Enums.Hex_Types.HOUSING:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.HOUSING_I_PROD,
+                    Enums.Building_Tier.II => Constants.HOUSING_II_PROD,
+                    Enums.Building_Tier.III => Constants.HOUSING_III_PROD,
+                    Enums.Building_Tier.IV => Constants.HOUSING_IV_PROD,
+                    Enums.Building_Tier.V => Constants.HOUSING_V_PROD,
+                    _ => Constants.HOUSING_I_PROD,
+                };
+            case Enums.Hex_Types.INDUSTRY:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.INDUSTRY_I_PROD,
+                    Enums.Building_Tier.II => Constants.INDUSTRY_II_PROD,
+                    Enums.Building_Tier.III => Constants.INDUSTRY_III_PROD,
+                    Enums.Building_Tier.IV => Constants.INDUSTRY_IV_PROD,
+                    Enums.Building_Tier.V => Constants.INDUSTRY_V_PROD,
+                    _ => Constants.INDUSTRY_I_PROD,
+                };
+            case Enums.Hex_Types.MILITARY:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.MILITARY_I_PROD,
+                    Enums.Building_Tier.II => Constants.MILITARY_II_PROD,
+                    Enums.Building_Tier.III => Constants.MILITARY_III_PROD,
+                    Enums.Building_Tier.IV => Constants.MILITARY_IV_PROD,
+                    Enums.Building_Tier.V => Constants.MILITARY_V_PROD,
+                    _ => Constants.MILITARY_I_PROD,
+                };
+            case Enums.Hex_Types.RESEARCH:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.RESEARCH_I_PROD,
+                    Enums.Building_Tier.II => Constants.RESEARCH_II_PROD,
+                    Enums.Building_Tier.III => Constants.RESEARCH_III_PROD,
+                    Enums.Building_Tier.IV => Constants.RESEARCH_IV_PROD,
+                    Enums.Building_Tier.V => Constants.RESEARCH_V_PROD,
+                    _ => Constants.RESEARCH_I_PROD,
+                };
+            case Enums.Hex_Types.ISOLIUM:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.ISOLIUM_I_PROD,
+                    Enums.Building_Tier.II => Constants.ISOLIUM_II_PROD,
+                    Enums.Building_Tier.III => Constants.ISOLIUM_III_PROD,
+                    Enums.Building_Tier.IV => Constants.ISOLIUM_IV_PROD,
+                    Enums.Building_Tier.V => Constants.ISOLIUM_V_PROD,
+                    _ => Constants.ISOLIUM_I_PROD,
+                };
+            case Enums.Hex_Types.DEFENSE:
+            case Enums.Hex_Types.GOD_SEAT:
+            default:
+                return 1;
+        }
     }
 }

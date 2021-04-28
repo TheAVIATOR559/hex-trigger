@@ -12,13 +12,13 @@ public class Ghost_Hex : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("Entered a hex");
+        //Debug.Log("Entered a hex");
         City_Manager.Instance.hexBlueprint.MoveToHex(this);
     }
 
     private void OnMouseExit()
     {
-        Debug.Log("Moved off a hex");
+        //Debug.Log("Moved off a hex");
         City_Manager.Instance.hexBlueprint.RemoveFromHex();
     }
 }

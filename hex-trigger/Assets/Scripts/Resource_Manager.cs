@@ -4,140 +4,23 @@ using UnityEngine;
 
 public class Resource_Manager : Singleton<Resource_Manager>
 {
-    public int AvailableHexes//TODO this will need its own formula for 'buying' new hexes
-    {
-        get
-        {
-            return AvailableHexes;
-        }
-        set
-        {
-            if(AvailableHexes - value <= 0)
-            {
-                AvailableHexes = 0;
-            }
-            else
-            {
-                AvailableHexes -= value;
-            }
-        }
-    }
+    public int AvailableHexes;//TODO this will need its own formula for 'buying' new hexes
 
-    public int AvailableFood
-    {
-        get
-        {
-            return AvailableFood;
-        }
-        set
-        {
-            if(AvailableFood - value <= 0)
-            {
-                AvailableFood = 0;
-            }
-            else
-            {
-                AvailableFood -= value;
-            }
-        }
-    }
+    public int AvailableFood;//currently available food, increases based on food production
 
-    public int AvailableHousing
-    {
-        get
-        {
-            return AvailableHousing;
-        }
-        set
-        {
-            if (AvailableHousing - value <= 0)
-            {
-                AvailableHousing = 0;
-            }
-            else
-            {
-                AvailableHousing -= value;
-            }
-        }
-    }
+    public int AvailableHousing;//maximum population, increases as new building hexes are built
 
-    public int AvailablePopulation
-    {
-        get
-        {
-            return AvailablePopulation;
-        }
-        set
-        {
-            if (AvailablePopulation - value <= 0)
-            {
-                AvailablePopulation = 0;
-            }
-            else
-            {
-                AvailablePopulation -= value;
-            }
-        }
-    }
+    public int AvailablePopulation;//population should increase over time and deduct based on building costs
 
-    public int AvailableIndustry
-    {
-        get
-        {
-            return AvailableIndustry;
-        }
-        set
-        {
-            if (AvailableIndustry - value <= 0)
-            {
-                AvailableIndustry = 0;
-            }
-            else
-            {
-                AvailableIndustry -= value;
-            }
-        }
-    }
+    public int AvailableIndustry;//currently available industry, increase based on industry production
 
-    public int AvailableIsolium
-    {
-        get
-        {
-            return AvailableIsolium;
-        }
-        set
-        {
-            if (AvailableIsolium - value <= 0)
-            {
-                AvailableIsolium = 0;
-            }
-            else
-            {
-                AvailableIsolium -= value;
-            }
-        }
-    }
+    public int AvailableIsolium;//currently available isolium, increases based on isolium production
 
-    public int AvailableMilitary
-    {
-        get
-        {
-            return AvailableMilitary;
-        }
-        set
-        {
-            if (AvailableMilitary - value <= 0)
-            {
-                AvailableMilitary = 0;
-            }
-            else
-            {
-                AvailableMilitary -= value;
-            }
-        }
-    }
+    public int AvailableMilitary;//should only increase when the player allocates more
 
-    public static void DEV_AddResources()
+    public int MaximumMilitary;//maximum military population, shoud increase as new military hexes are built
+
+    public static void DEV_MaxOutResources()
     {
         Instance.AvailableHexes = 1000;
         Instance.AvailableFood = 1000;
@@ -146,6 +29,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailableIndustry = 1000;
         Instance.AvailableIsolium = 1000;
         Instance.AvailableMilitary = 1000;
+        Instance.MaximumMilitary = 1000;
     }
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
@@ -166,6 +50,11 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
 
         if(cost.RequiredIndustry > Instance.AvailableIndustry)
+        {
+            return false;
+        }
+
+        if(cost.RequiredMilitary > Instance.AvailableMilitary)
         {
             return false;
         }
@@ -260,5 +149,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailableIndustry -= cost.RequiredIndustry;
         Instance.AvailableIsolium -= cost.RequiredIsolium;
         Instance.AvailableMilitary -= cost.RequiredMilitary;
+
+        UI_Manager.SetResourcesText();
     }
 }

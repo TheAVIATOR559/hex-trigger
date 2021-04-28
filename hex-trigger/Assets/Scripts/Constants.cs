@@ -73,6 +73,61 @@ public static class Constants
     #endregion
     #endregion
 
+    #region Production Values
+    #region Tier Bonuses
+    public static float TIER_I_BONUS = 1.0f;
+    public static float TIER_II_BONUS = 1.25f;
+    public static float TIER_III_BONUS = 1.5f;
+    public static float TIER_IV_BONUS = 2.0f;
+    public static float TIER_V_BONUS = 3.0f;
+    #endregion
+    #region Food Production
+    public static int FOOD_I_PROD = 1;
+    public static int FOOD_II_PROD = 2;
+    public static int FOOD_III_PROD = 3;
+    public static int FOOD_IV_PROD = 4;
+    public static int FOOD_V_PROD = 5;
+    #endregion
+    //these values will need to be rebalanced
+    #region Housing Production
+    public static int HOUSING_I_PROD = 1;
+    public static int HOUSING_II_PROD = 2;
+    public static int HOUSING_III_PROD = 3;
+    public static int HOUSING_IV_PROD = 4;
+    public static int HOUSING_V_PROD = 5;
+    #endregion
+    #region Industry Production
+    public static int INDUSTRY_I_PROD = 1;
+    public static int INDUSTRY_II_PROD = 2;
+    public static int INDUSTRY_III_PROD = 3;
+    public static int INDUSTRY_IV_PROD = 4;
+    public static int INDUSTRY_V_PROD = 5;
+    #endregion
+    //these values will need to be rebalanced
+    #region Military Production
+    public static int MILITARY_I_PROD = 1;
+    public static int MILITARY_II_PROD = 2;
+    public static int MILITARY_III_PROD = 3;
+    public static int MILITARY_IV_PROD = 4;
+    public static int MILITARY_V_PROD = 5;
+    #endregion
+    //these values will need to be rebalanced
+    #region Research Production
+    public static int RESEARCH_I_PROD = 1;
+    public static int RESEARCH_II_PROD = 2;
+    public static int RESEARCH_III_PROD = 3;
+    public static int RESEARCH_IV_PROD = 4;
+    public static int RESEARCH_V_PROD = 5;
+    #endregion
+    #region Isolium Production
+    public static int ISOLIUM_I_PROD = 1;
+    public static int ISOLIUM_II_PROD = 2;
+    public static int ISOLIUM_III_PROD = 3;
+    public static int ISOLIUM_IV_PROD = 4;
+    public static int ISOLIUM_V_PROD = 5;
+    #endregion
+    #endregion
+
 }
 //new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost
