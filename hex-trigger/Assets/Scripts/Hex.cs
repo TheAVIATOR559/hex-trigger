@@ -22,7 +22,7 @@ public class Hex : MonoBehaviour
     {
         Position = new Vector2Int(x, y);
         City_Manager.Instance.Hexes.Add(Position, this);
-        ConnectedBuilding.enabled = true;
+        ConnectedBuilding.Initalize();
     }
 
     public void AddNeighbor(Hex neighbor)

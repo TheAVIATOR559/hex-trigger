@@ -64,7 +64,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.IsoliumTierPanel.SetActive(false);
         Instance.ResourcePanel.SetActive(true);
 
-        SetResourcesText();
+        UpdateResourcesText();
     }
 
     public static void SetTierPanel(GameObject panel)
@@ -82,7 +82,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.currTierPanel.SetActive(false);
     }
 
-    public static void SetResourcesText()
+    public static void UpdateResourcesText()
     {
         SetAvailableHexesText(Resource_Manager.Instance.AvailableHexes);
         SetAvailablePopulationText(Resource_Manager.Instance.AvailablePopulation, Resource_Manager.Instance.AvailableHousing);

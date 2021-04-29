@@ -27,6 +27,8 @@ public static class Constants
     public static float HEX_X_OFFSET = 0.866f;
     public static float HEX_Y_OFFSET = 0.75f;
 
+    public static float TICK_SPEED = 1f;
+
     #region Buidling Costs
     #region Food
     public static BuildingCost GardenCost =  new BuildingCost(1, 1, 0, 0, 0, 0);
@@ -90,6 +92,7 @@ public static class Constants
     #endregion
     //these values will need to be rebalanced
     #region Housing Production
+    public static int POP_GROWTH_RATE = 2;
     public static int HOUSING_I_PROD = 1;
     public static int HOUSING_II_PROD = 2;
     public static int HOUSING_III_PROD = 3;

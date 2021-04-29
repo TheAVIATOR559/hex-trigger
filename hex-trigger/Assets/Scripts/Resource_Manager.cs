@@ -20,6 +20,14 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public int MaximumMilitary;//maximum military population, shoud increase as new military hexes are built
 
+    [SerializeField] private int FoodProduction;
+    [SerializeField] private int IndustryProduction;
+    [SerializeField] private int IsoliumProduction;
+    [SerializeField] private int ResearchProduction;
+    [SerializeField] private int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
+
+    public bool ResourcesTickPaused = false;
+
     public static void DEV_MaxOutResources()
     {
         Instance.AvailableHexes = 1000;
@@ -150,6 +158,163 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailableIsolium -= cost.RequiredIsolium;
         Instance.AvailableMilitary -= cost.RequiredMilitary;
 
-        UI_Manager.SetResourcesText();
+        UI_Manager.UpdateResourcesText();
+    }
+
+    public static void AddProduction(Enums.Hex_Types type, int value)
+    {
+        switch (type)
+        {
+            case Enums.Hex_Types.FOOD:
+                Instance.FoodProduction += value;
+                break;
+            case Enums.Hex_Types.HOUSING:
+                Instance.AvailableHousing += value;
+                break;
+            case Enums.Hex_Types.INDUSTRY:
+                Instance.IndustryProduction += value;
+                break;
+            case Enums.Hex_Types.MILITARY:
+                Instance.MaximumMilitary += value;
+                break;
+            case Enums.Hex_Types.RESEARCH:
+                Instance.ResearchProduction += value;
+                break;
+            case Enums.Hex_Types.ISOLIUM:
+                Instance.IsoliumProduction += value;
+                break;
+            case Enums.Hex_Types.DEFENSE:
+            case Enums.Hex_Types.GOD_SEAT:
+            default:
+                break;
+        }
+    }
+
+    public static void RemoveProduction(Enums.Hex_Types type, int value)
+    {
+        switch (type)
+        {
+            case Enums.Hex_Types.FOOD:
+                if(Instance.FoodProduction - value <= 0)
+                {
+                    Instance.FoodProduction = 0;
+                }
+                else
+                {
+                    Instance.FoodProduction -= value;
+                }
+                break;
+            case Enums.Hex_Types.HOUSING:
+                if (Instance.AvailableHousing - value <= 0)
+                {
+                    Instance.AvailableHousing = 0;
+                }
+                else
+                {
+                    Instance.AvailableHousing -= value;
+                }
+                break;
+            case Enums.Hex_Types.INDUSTRY:
+                if (Instance.IndustryProduction - value <= 0)
+                {
+                    Instance.IndustryProduction = 0;
+                }
+                else
+                {
+                    Instance.IndustryProduction -= value;
+                }
+                break;
+            case Enums.Hex_Types.MILITARY:
+                if (Instance.MaximumMilitary - value <= 0)
+                {
+                    Instance.MaximumMilitary = 0;
+                }
+                else
+                {
+                    Instance.MaximumMilitary -= value;
+                }
+                break;
+            case Enums.Hex_Types.RESEARCH:
+                if (Instance.ResearchProduction - value <= 0)
+                {
+                    Instance.ResearchProduction = 0;
+                }
+                else
+                {
+                    Instance.ResearchProduction -= value;
+                }
+                break;
+            case Enums.Hex_Types.ISOLIUM:
+                if (Instance.IsoliumProduction - value <= 0)
+                {
+                    Instance.IsoliumProduction = 0;
+                }
+                else
+                {
+                    Instance.IsoliumProduction -= value;
+                }
+                break;
+            case Enums.Hex_Types.DEFENSE:
+            case Enums.Hex_Types.GOD_SEAT:
+            default:
+                break;
+        }
+    }
+
+    private void AddProductionResources()
+    {
+        AvailableFood += FoodProduction;
+        AvailableIndustry += IndustryProduction;
+        AvailableIsolium += IsoliumProduction;
+    }
+
+    private void AddResearchProgress()
+    {
+        //TODO tick research progress based on ResearchProduction
+    }
+
+    private void AddPopulation()
+    {
+        if(AvailablePopulation < AvailableHousing)
+        {
+            AvailablePopulation += PopulationGrowthRate;
+        }
+    }
+
+    private IEnumerator TickResources()
+    {
+        while(true)
+        {
+            if (!ResourcesTickPaused)
+            {
+                Debug.Log("Ticking Resources");
+                AddProductionResources();
+                AddPopulation();
+                AddResearchProgress();
+                UI_Manager.UpdateResourcesText();
+            }
+
+            yield return new WaitForSeconds(Constants.TICK_SPEED);
+        }
+    }
+
+    public static void StartResourcesTick()
+    {
+        Instance.StartCoroutine(Instance.TickResources());
+    }
+
+    public static void PauseResourcesTick()
+    {
+        Instance.ResourcesTickPaused = true;
+    }
+
+    public static void UnpauseResourcesTick()
+    {
+        Instance.ResourcesTickPaused = false;
+    }
+
+    public static void StopResourcesTick()
+    {
+        Instance.StopCoroutine(Instance.TickResources());
     }
 }

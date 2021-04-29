@@ -19,6 +19,10 @@ public class Building : MonoBehaviour
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
+    }
+
+    public void Initalize()
+    {
         UpdateProductionValue();
     }
 
@@ -83,7 +87,19 @@ public class Building : MonoBehaviour
 
     protected virtual void UpdateProductionValue()
     {
+        RemoveFromResourceProduction();
+        ProductionValue = GetProductionBonus(BuildingTier) * GetProductionValue(BuildingTier, HexType);
+        AddToResourceProduction();
+    }
 
+    protected virtual void AddToResourceProduction()
+    {
+        Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(ProductionValue));
+    }
+
+    protected virtual void RemoveFromResourceProduction()
+    {
+        Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(ProductionValue));
     }
 
     public static float GetProductionBonus(Enums.Building_Tier tier)

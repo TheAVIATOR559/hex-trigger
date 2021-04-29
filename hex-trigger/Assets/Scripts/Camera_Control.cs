@@ -26,7 +26,7 @@ public class Camera_Control : MonoBehaviour
 
         Zoom();
 
-        RotateAroundSelf();
+        //RotateAroundSelf();
     }
 
     private void PanHorizontal()
