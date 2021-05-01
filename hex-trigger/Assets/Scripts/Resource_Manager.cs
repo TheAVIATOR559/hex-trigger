@@ -287,7 +287,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         {
             if (!ResourcesTickPaused)
             {
-                Debug.Log("Ticking Resources");
+                //Debug.Log("Ticking Resources");
                 AddProductionResources();
                 AddPopulation();
                 AddResearchProgress();

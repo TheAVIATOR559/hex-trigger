@@ -16,6 +16,8 @@ public class Camera_Control : MonoBehaviour
     private float currZoomLevel;
     private float pitch, yaw;
 
+    [SerializeField] Transform child;
+
     private void LateUpdate()
     {
         PanHorizontal();
@@ -42,7 +44,10 @@ public class Camera_Control : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            transform.Translate(moveSpeed * Time.deltaTime * new Vector3(transform.right.x * Input.GetAxisRaw("Horizontal"), 0, transform.forward.z * Input.GetAxisRaw("Vertical")), Space.World);
+            Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            dir.Normalize();
+
+            transform.Translate(moveSpeed * Time.deltaTime * dir, Space.Self);
         }
     }
 
@@ -85,7 +90,7 @@ public class Camera_Control : MonoBehaviour
             currZoomLevel = Mathf.Clamp(currZoomLevel, -ZoomMax, ZoomMax);
         }
 
-        transform.position += transform.forward * scrollChange;
+        transform.position += child.transform.forward * scrollChange;
     }
 
     private void RotateAroundSelf()
