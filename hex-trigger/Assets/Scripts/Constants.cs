@@ -131,6 +131,10 @@ public static class Constants
     #endregion
     #endregion
 
+    #region Combat Unit Values
+    public static float MAXIMUM_TRAINING_COST_REDUCTION = 0.25f;
+    #endregion
+
 }
 //new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost

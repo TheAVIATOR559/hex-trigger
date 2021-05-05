@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building_God_Seat : Building
 {
-    protected override void UpdateModel()
+    public override void DetermineBuildingTier()
     {
         ///intentionally left blank 
         ///to short circuit the parent method

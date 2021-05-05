@@ -20,11 +20,22 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public int MaximumMilitary;//maximum military population, shoud increase as new military hexes are built
 
+    public int MaximumAces;//maximum number of aces, should increase as new Ace's Arena hexes are built
+
+    public int MaximumCannoneers;//maximum number of cannoneers, should increase as new Cannoneer's Tower hexes are built
+
+    public int MaximumGuardians;//maximum number of aces, should increase as new Guardian's Last Stand hexes are built
+
     [SerializeField] private int FoodProduction;
     [SerializeField] private int IndustryProduction;
     [SerializeField] private int IsoliumProduction;
     [SerializeField] private int ResearchProduction;
     [SerializeField] private int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
+    [SerializeField] private float ShooterTrainingCostReduction;
+    [SerializeField] private float DefenderTrainingCostReduction;
+    [SerializeField] private float GunnerTrainingCostReduction;
+    [SerializeField] private float SniperTrainingCostReduction;
+    [SerializeField] private float ScoutTrainingCostReduction;
 
     public bool ResourcesTickPaused = false;
 
@@ -42,32 +53,32 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
     {
-        if(cost.RequiredHexes > Instance.AvailableHexes)
+        if (cost.RequiredHexes > Instance.AvailableHexes)
         {
             return false;
         }
 
-        if(cost.RequiredFood > Instance.AvailableFood)
+        if (cost.RequiredFood > Instance.AvailableFood)
         {
             return false;
         }
 
-        if(cost.RequiredPopulation > Instance.AvailablePopulation)
+        if (cost.RequiredPopulation > Instance.AvailablePopulation)
         {
             return false;
         }
 
-        if(cost.RequiredIndustry > Instance.AvailableIndustry)
+        if (cost.RequiredIndustry > Instance.AvailableIndustry)
         {
             return false;
         }
 
-        if(cost.RequiredMilitary > Instance.AvailableMilitary)
+        if (cost.RequiredMilitary > Instance.AvailableMilitary)
         {
             return false;
         }
 
-        if(cost.RequiredIsolium > Instance.AvailableIsolium)
+        if (cost.RequiredIsolium > Instance.AvailableIsolium)
         {
             return false;
         }
@@ -94,7 +105,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.APARTMENT:
                 return Constants.ApartmentCost;
             case Enums.Building_Type.CONDOMINIUM:
-                return Constants.CondoCost;            
+                return Constants.CondoCost;
             case Enums.Building_Type.WORKSHOP:
                 return Constants.WorkshopCost;
             case Enums.Building_Type.FORGE:
@@ -195,7 +206,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         switch (type)
         {
             case Enums.Hex_Types.FOOD:
-                if(Instance.FoodProduction - value <= 0)
+                if (Instance.FoodProduction - value <= 0)
                 {
                     Instance.FoodProduction = 0;
                 }
@@ -261,6 +272,180 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
+    public static void IncreaseHeroUnitCap(Enums.Unit_Type type, int amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.ACE:
+                Instance.MaximumAces += amount;
+                break;
+            case Enums.Unit_Type.CANNONEER:
+                Instance.MaximumCannoneers += amount;
+                break;
+            case Enums.Unit_Type.GUARDIAN:
+                Instance.MaximumGuardians += amount;
+                break;
+            case Enums.Unit_Type.GRUNT:
+            case Enums.Unit_Type.SHOOTER:
+            case Enums.Unit_Type.DEFENDER:
+            case Enums.Unit_Type.GUNNER:
+            case Enums.Unit_Type.SNIPER:
+            case Enums.Unit_Type.SCOUT:
+            default:
+                break;
+        }
+    }
+
+    public static void DecreaseHeroUnitCap(Enums.Unit_Type type, int amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.ACE:
+                Instance.MaximumAces -= amount;
+                break;
+            case Enums.Unit_Type.CANNONEER:
+                Instance.MaximumCannoneers -= amount;
+                break;
+            case Enums.Unit_Type.GUARDIAN:
+                Instance.MaximumGuardians -= amount;
+                break;
+            case Enums.Unit_Type.GRUNT:
+            case Enums.Unit_Type.SHOOTER:
+            case Enums.Unit_Type.DEFENDER:
+            case Enums.Unit_Type.GUNNER:
+            case Enums.Unit_Type.SNIPER:
+            case Enums.Unit_Type.SCOUT:
+            default:
+                break;
+        }
+    }
+
+    public static void AddUnitCostReduction(Enums.Unit_Type type, float amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.SHOOTER:
+                if (Instance.ShooterTrainingCostReduction - amount <= Constants.MAXIMUM_TRAINING_COST_REDUCTION)
+                {
+                    Instance.ShooterTrainingCostReduction = Constants.MAXIMUM_TRAINING_COST_REDUCTION;
+                }
+                else
+                {
+                    Instance.ShooterTrainingCostReduction -= amount;
+                }
+                break;
+            case Enums.Unit_Type.DEFENDER:
+                if (Instance.DefenderTrainingCostReduction - amount <= Constants.MAXIMUM_TRAINING_COST_REDUCTION)
+                {
+                    Instance.DefenderTrainingCostReduction = Constants.MAXIMUM_TRAINING_COST_REDUCTION;
+                }
+                else
+                {
+                    Instance.DefenderTrainingCostReduction -= amount;
+                }
+                break;
+            case Enums.Unit_Type.GUNNER:
+                if (Instance.GunnerTrainingCostReduction - amount <= Constants.MAXIMUM_TRAINING_COST_REDUCTION)
+                {
+                    Instance.GunnerTrainingCostReduction = Constants.MAXIMUM_TRAINING_COST_REDUCTION;
+                }
+                else
+                {
+                    Instance.GunnerTrainingCostReduction -= amount;
+                }
+                break;
+            case Enums.Unit_Type.SNIPER:
+                if (Instance.SniperTrainingCostReduction - amount <= Constants.MAXIMUM_TRAINING_COST_REDUCTION)
+                {
+                    Instance.SniperTrainingCostReduction = Constants.MAXIMUM_TRAINING_COST_REDUCTION;
+                }
+                else
+                {
+                    Instance.SniperTrainingCostReduction -= amount;
+                }
+                break;
+            case Enums.Unit_Type.SCOUT:
+                if (Instance.ScoutTrainingCostReduction - amount <= Constants.MAXIMUM_TRAINING_COST_REDUCTION)
+                {
+                    Instance.ScoutTrainingCostReduction = Constants.MAXIMUM_TRAINING_COST_REDUCTION;
+                }
+                else
+                {
+                    Instance.ScoutTrainingCostReduction -= amount;
+                }
+                break;
+            case Enums.Unit_Type.GRUNT:
+            case Enums.Unit_Type.ACE:
+            case Enums.Unit_Type.CANNONEER:
+            case Enums.Unit_Type.GUARDIAN:
+            default:
+                break;
+        }
+    }
+
+    public static void RemoveUnitCostReduction(Enums.Unit_Type type, float amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.SHOOTER:
+                if(Instance.ShooterTrainingCostReduction + amount >= 1f)
+                {
+                    Instance.ShooterTrainingCostReduction = 1f;
+                }
+                else
+                {
+                    Instance.ShooterTrainingCostReduction += amount;
+                }
+                break;
+            case Enums.Unit_Type.DEFENDER:
+                if (Instance.DefenderTrainingCostReduction + amount >= 1f)
+                {
+                    Instance.DefenderTrainingCostReduction = 1f;
+                }
+                else
+                {
+                    Instance.DefenderTrainingCostReduction += amount;
+                }
+                break;
+            case Enums.Unit_Type.GUNNER:
+                if (Instance.GunnerTrainingCostReduction + amount >= 1f)
+                {
+                    Instance.GunnerTrainingCostReduction = 1f;
+                }
+                else
+                {
+                    Instance.GunnerTrainingCostReduction += amount;
+                }
+                break;
+            case Enums.Unit_Type.SNIPER:
+                if (Instance.SniperTrainingCostReduction + amount >= 1f)
+                {
+                    Instance.SniperTrainingCostReduction = 1f;
+                }
+                else
+                {
+                    Instance.SniperTrainingCostReduction += amount;
+                }
+                break;
+            case Enums.Unit_Type.SCOUT:
+                if (Instance.ScoutTrainingCostReduction + amount >= 1f)
+                {
+                    Instance.ScoutTrainingCostReduction = 1f;
+                }
+                else
+                {
+                    Instance.ScoutTrainingCostReduction += amount;
+                }
+                break;
+            case Enums.Unit_Type.GRUNT:
+            case Enums.Unit_Type.ACE:
+            case Enums.Unit_Type.CANNONEER:
+            case Enums.Unit_Type.GUARDIAN:
+            default:
+                break;
+        }
+    }
+
     private void AddProductionResources()
     {
         AvailableFood += FoodProduction;
@@ -275,7 +460,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void AddPopulation()
     {
-        if(AvailablePopulation < AvailableHousing)
+        if (AvailablePopulation < AvailableHousing)
         {
             AvailablePopulation += PopulationGrowthRate;
         }
@@ -283,7 +468,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private IEnumerator TickResources()
     {
-        while(true)
+        while (true)
         {
             if (!ResourcesTickPaused)
             {
@@ -317,4 +502,5 @@ public class Resource_Manager : Singleton<Resource_Manager>
     {
         Instance.StopCoroutine(Instance.TickResources());
     }
+
 }

@@ -141,6 +141,19 @@ public static class Enums
         DISTRIBUTION_CENTER
     }
 
+    public enum Unit_Type
+    {
+        GRUNT,
+        SHOOTER,
+        DEFENDER,
+        GUNNER,
+        SNIPER,
+        SCOUT,
+        ACE,
+        CANNONEER,
+        GUARDIAN
+    }
+
     public static Building_Type HexTypeAndTierToBuildingType(Hex_Types hex, Building_Tier tier)
     {
         return hex switch
