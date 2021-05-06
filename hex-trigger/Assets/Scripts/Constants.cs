@@ -133,6 +133,75 @@ public static class Constants
 
     #region Combat Unit Values
     public static float MAXIMUM_TRAINING_COST_REDUCTION = 0.25f;
+    public static float TRAINING_COST_REDUCTION_PER_HEX = 0.05f;
+    #region Unit Training Costs
+    public static UnitTrainingCost GRUNT_TRAINING_COST = new UnitTrainingCost(1, 1, 1, 1);
+    public static UnitTrainingCost SHOOTER_TRAINING_COST = new UnitTrainingCost(1, 1, 2, 2);
+    public static UnitTrainingCost DEFENDER_TRAINING_COST = new UnitTrainingCost(1, 2, 3, 3);
+    public static UnitTrainingCost GUNNER_TRAINING_COST = new UnitTrainingCost(1, 2, 3, 3);
+    public static UnitTrainingCost SNIPER_TRAINING_COST = new UnitTrainingCost(1, 3, 4, 4);
+    public static UnitTrainingCost SCOUT_TRAINING_COST = new UnitTrainingCost(1, 3, 4, 4);
+    public static UnitTrainingCost ACE_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
+    public static UnitTrainingCost CANNONEER_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
+    public static UnitTrainingCost GUARDIAN_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
+    #endregion
+    #region Grunt Values
+    public static int GRUNT_ATTACK = 1;
+    public static int GRUNT_DEFENSE = 1;
+    public static int GRUNT_SPEED = 1;
+    public static int GRUNT_RANGE = 1;
+    #endregion
+    #region Shooter Values
+    public static int SHOOTER_ATTACK = 1;
+    public static int SHOOTER_DEFENSE = 1;
+    public static int SHOOTER_SPEED = 1;
+    public static int SHOOTER_RANGE = 1;
+    #endregion
+    #region Defender Values
+    public static int DEFENEDER_ATTACK = 1;
+    public static int DEFENDER_DEFENSE = 1;
+    public static int DEFENDER_SPEED = 1;
+    public static int DEFENDER_RANGE = 1;
+    #endregion
+    #region Gunner Values
+    public static int GUNNER_ATTACK = 1;
+    public static int GUNNER_DEFENSE = 1;
+    public static int GUNNER_SPEED = 1;
+    public static int GUNNER_RANGE = 1;
+    #endregion
+    #region Sniper Values
+    public static int SNIPER_ATTACK = 1;
+    public static int SNIPER_DEFENSE = 1;
+    public static int SNIPER_SPEED = 1;
+    public static int SNIPER_RANGE = 1;
+    #endregion
+    #region Scout Values
+    public static int SCOUT_ATTACK = 1;
+    public static int SCOUT_DEFENSE = 1;
+    public static int SCOUT_SPEED = 1;
+    public static int SCOUT_RANGE = 1;
+    #endregion
+    #region Ace Values
+    public static int ACES_PER_HEX = 1;
+    public static int ACE_ATTACK = 1;
+    public static int ACE_DEFENSE = 1;
+    public static int ACE_SPEED = 1;
+    public static int ACE_RANGE = 1;
+    #endregion
+    #region Cannoneer Values
+    public static int CANNONEERS_PER_HEX = 1;
+    public static int CANNONEER_ATTACK = 1;
+    public static int CANNONEER_DEFENSE = 1;
+    public static int CANNONEER_SPEED = 1;
+    public static int CANNONEER_RANGE = 1;
+    #endregion
+    #region Guardian Values
+    public static int GUARDIANS_PER_HEX = 1;
+    public static int GUARDIAN_ATTACK = 1;
+    public static int GUARDIAN_DEFENSE = 1;
+    public static int GUARDIAN_SPEED = 1;
+    public static int GUARDIAN_RANGE = 1;
+    #endregion
     #endregion
 
 }
@@ -177,5 +246,37 @@ public struct BuildingCost
         RequiredIndustry = industry;
         RequiredIsolium = isolium;
         RequiredMilitary = military;
+    }
+}
+
+//new UnitTrainingCost(MIL, FOOD, IND, ISO)
+public struct UnitTrainingCost
+{
+    public int RequiredMilitary
+    {
+        get;
+    }
+
+    public int RequiredFood
+    {
+        get;
+    }
+
+    public int RequiredIndustry
+    {
+        get;
+    }
+
+    public int RequiredIsolium
+    {
+        get;
+    }
+
+    public UnitTrainingCost(int military, int food, int industry, int isolium)
+    {
+        RequiredMilitary = military;
+        RequiredFood = food;
+        RequiredIndustry = industry;
+        RequiredIsolium = isolium;
     }
 }

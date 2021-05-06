@@ -11,11 +11,11 @@ public class Aces_Arena : Building_Military
 
     protected override void AddToResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.ACE, Constants.ACES_PER_HEX);
     }
 
     protected override void RemoveFromResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.DecreaseHeroUnitCap(Enums.Unit_Type.ACE, Constants.ACES_PER_HEX);
     }
 }

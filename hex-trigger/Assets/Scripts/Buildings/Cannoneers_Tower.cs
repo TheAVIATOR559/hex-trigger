@@ -9,13 +9,18 @@ public class Cannoneers_Tower : Building_Military
         //short circuting parent method
     }
 
+    protected override void UpdateProductionValue()
+    {
+        AddToResourceProduction();//TODO do this for the other unit hexes
+    }
+
     protected override void AddToResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.CANNONEER, Constants.CANNONEERS_PER_HEX);
     }
 
     protected override void RemoveFromResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.DecreaseHeroUnitCap(Enums.Unit_Type.CANNONEER, Constants.CANNONEERS_PER_HEX);
     }
 }

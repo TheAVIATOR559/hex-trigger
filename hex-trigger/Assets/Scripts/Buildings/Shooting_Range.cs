@@ -11,11 +11,11 @@ public class Shooting_Range : Building_Military
 
     protected override void AddToResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.AddUnitCostReduction(Enums.Unit_Type.SHOOTER, Constants.TRAINING_COST_REDUCTION_PER_HEX);
     }
 
     protected override void RemoveFromResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.RemoveUnitCostReduction(Enums.Unit_Type.SHOOTER, Constants.TRAINING_COST_REDUCTION_PER_HEX);
     }
 }

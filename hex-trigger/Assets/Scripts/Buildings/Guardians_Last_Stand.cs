@@ -11,11 +11,11 @@ public class Guardians_Last_Stand : Building_Military
 
     protected override void AddToResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.GUARDIAN, Constants.GUARDIANS_PER_HEX);
     }
 
     protected override void RemoveFromResourceProduction()
     {
-        //TODO fill me in
+        Resource_Manager.DecreaseHeroUnitCap(Enums.Unit_Type.GUARDIAN, Constants.GUARDIANS_PER_HEX);
     }
 }
