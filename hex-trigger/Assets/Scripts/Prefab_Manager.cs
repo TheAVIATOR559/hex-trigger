@@ -36,6 +36,15 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_QUARTERS, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Quarters"));
         prefabs.Add(Enums.Prefabs.HEX_HEADQUARTERS, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Headquarters"));
 
+        prefabs.Add(Enums.Prefabs.HEX_SHOOTING_RANGE, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Shooting Range"));
+        prefabs.Add(Enums.Prefabs.HEX_DEFENDERS_WALL, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Defender's Wall"));
+        prefabs.Add(Enums.Prefabs.HEX_GUNNERS_ALLEY, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Gunner's Alley"));
+        prefabs.Add(Enums.Prefabs.HEX_SNIPER_NEST, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Sniper's Nest"));
+        prefabs.Add(Enums.Prefabs.HEX_SCOUT_CAMP, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Scout Camp"));
+        prefabs.Add(Enums.Prefabs.HEX_ACES_ARENA, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Ace's Arena"));
+        prefabs.Add(Enums.Prefabs.HEX_CANNONEERS_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Cannoneer's Tower"));
+        prefabs.Add(Enums.Prefabs.HEX_GUARDIANS_LAST_STAND, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Guardian's Last Stand"));
+
         prefabs.Add(Enums.Prefabs.HEX_WATCHTOWER, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Watchtower"));
         prefabs.Add(Enums.Prefabs.HEX_MISSILE_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Missile Complex"));
         prefabs.Add(Enums.Prefabs.HEX_LASER_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Laser Tower"));

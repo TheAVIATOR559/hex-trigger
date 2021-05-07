@@ -43,6 +43,14 @@ public static class Enums
         HEX_WAREHOUSE,
         HEX_DEPOT,
         HEX_DISTRIBUTION_CENTER,
+        HEX_SHOOTING_RANGE,
+        HEX_DEFENDERS_WALL,
+        HEX_GUNNERS_ALLEY,
+        HEX_SNIPER_NEST,
+        HEX_SCOUT_CAMP,
+        HEX_ACES_ARENA,
+        HEX_CANNONEERS_TOWER,
+        HEX_GUARDIANS_LAST_STAND,
         MODEL_GARDEN,
         MODEL_FARM,
         MODEL_ORCHARD,
@@ -138,7 +146,15 @@ public static class Enums
         STOREHOUSE,
         WAREHOUSE,
         DEPOT,
-        DISTRIBUTION_CENTER
+        DISTRIBUTION_CENTER,
+        SHOOTING_RANGE,
+        DEFENDERS_WALL,
+        GUNNERS_ALLEY,
+        SNIPERS_NEST,
+        SCOUT_CAMP,
+        ACES_ARENA,
+        CANNONEERS_TOWER,
+        GUARDIANS_LAST_STAND
     }
 
     public enum Unit_Type
@@ -302,6 +318,22 @@ public static class Enums
                 return Prefabs.HEX_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.HEX_DISTRIBUTION_CENTER;
+            case Building_Type.SHOOTING_RANGE:
+                return Prefabs.HEX_SHOOTING_RANGE;
+            case Building_Type.DEFENDERS_WALL:
+                return Prefabs.HEX_DEFENDERS_WALL;
+            case Building_Type.GUNNERS_ALLEY:
+                return Prefabs.HEX_GUNNERS_ALLEY;
+            case Building_Type.SNIPERS_NEST:
+                return Prefabs.HEX_SNIPER_NEST;
+            case Building_Type.SCOUT_CAMP:
+                return Prefabs.HEX_SCOUT_CAMP;
+            case Building_Type.ACES_ARENA:
+                return Prefabs.HEX_ACES_ARENA;
+            case Building_Type.CANNONEERS_TOWER:
+                return Prefabs.HEX_CANNONEERS_TOWER;
+            case Building_Type.GUARDIANS_LAST_STAND:
+                return Prefabs.HEX_GUARDIANS_LAST_STAND;
             default:
                 return Prefabs.HEX_HOVEL;
         }

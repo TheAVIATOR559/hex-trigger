@@ -11,7 +11,7 @@ public class Cannoneers_Tower : Building_Military
 
     protected override void UpdateProductionValue()
     {
-        AddToResourceProduction();//TODO do this for the other unit hexes
+        AddToResourceProduction();
     }
 
     protected override void AddToResourceProduction()

@@ -31,11 +31,11 @@ public class Resource_Manager : Singleton<Resource_Manager>
     [SerializeField] private int IsoliumProduction;
     [SerializeField] private int ResearchProduction;
     [SerializeField] private int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
-    [SerializeField] private float ShooterTrainingCostReduction;
-    [SerializeField] private float DefenderTrainingCostReduction;
-    [SerializeField] private float GunnerTrainingCostReduction;
-    [SerializeField] private float SniperTrainingCostReduction;
-    [SerializeField] private float ScoutTrainingCostReduction;
+    [SerializeField] private float ShooterTrainingCostReduction = 1;
+    [SerializeField] private float DefenderTrainingCostReduction = 1;
+    [SerializeField] private float GunnerTrainingCostReduction = 1;
+    [SerializeField] private float SniperTrainingCostReduction = 1;
+    [SerializeField] private float ScoutTrainingCostReduction = 1;
 
     public bool ResourcesTickPaused = false;
 
@@ -86,7 +86,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         return true;
     }
 
-    public static BuildingCost GetBuildingCost(Enums.Building_Type type)
+    public static BuildingCost GetBuildingCost(Enums.Building_Type type)//TODO update this to include combat unit hexes
     {
         switch (type)
         {

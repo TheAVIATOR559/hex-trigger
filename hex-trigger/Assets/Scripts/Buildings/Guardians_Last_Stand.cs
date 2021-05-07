@@ -9,6 +9,11 @@ public class Guardians_Last_Stand : Building_Military
         //short circuting parent method
     }
 
+    protected override void UpdateProductionValue()
+    {
+        AddToResourceProduction();
+    }
+
     protected override void AddToResourceProduction()
     {
         Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.GUARDIAN, Constants.GUARDIANS_PER_HEX);
