@@ -9,4 +9,5 @@ public class Building_God_Seat : Building
         ///intentionally left blank 
         ///to short circuit the parent method
     }
+
 }

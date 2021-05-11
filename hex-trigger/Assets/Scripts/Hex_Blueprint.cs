@@ -8,11 +8,14 @@ public class Hex_Blueprint : MonoBehaviour
     private Hex connectedHex;
     private MeshCollider collider;
 
+    private Renderer rend;
+
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
         collider = GetComponent<MeshCollider>();
         collider.enabled = false;
+        rend = GetComponent<Renderer>();
     }
 
     public void MoveToHex(Ghost_Hex hex)
@@ -43,15 +46,15 @@ public class Hex_Blueprint : MonoBehaviour
     {
         if(occupiedHex == null)
         {
-            //TODO indicate invalid click
-            Debug.Log("CLICKED OFF A HEX");
+            //Debug.Log("CLICKED OFF A HEX");
+            StartCoroutine(Blink(0.5f));
             return;
         }
 
         if(!Resource_Manager.HaveRequiredBuildingCosts(Resource_Manager.GetBuildingCost(connectedHex.ConnectedBuilding.BuildingType)))
         {
-            //TODO indicate lack of resources
-            Debug.Log("NOT ENOUGH RESOURCES");
+            UI_Manager.FlashMissingResources(Resource_Manager.GetBuildingCost(connectedHex.ConnectedBuilding.BuildingType));
+            //Debug.Log("NOT ENOUGH RESOURCES");
             return;
         }
 
@@ -99,5 +102,20 @@ public class Hex_Blueprint : MonoBehaviour
 
         //destroy this gameobject
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator Blink(float time)
+    {
+        float endTime = Time.time + time;
+
+        while(Time.time < endTime)
+        {
+            rend.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            rend.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        rend.enabled = true;
     }
 }

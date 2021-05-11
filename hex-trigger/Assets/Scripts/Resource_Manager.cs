@@ -86,7 +86,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         return true;
     }
 
-    public static BuildingCost GetBuildingCost(Enums.Building_Type type)//TODO update this to include combat unit hexes
+    public static BuildingCost GetBuildingCost(Enums.Building_Type type)
     {
         switch (type)
         {
@@ -148,6 +148,22 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 return Constants.WarehouseCost;
             case Enums.Building_Type.DEPOT:
                 return Constants.DepotCost;
+            case Enums.Building_Type.SHOOTING_RANGE:
+                return Constants.ShootingRangeCost;
+            case Enums.Building_Type.DEFENDERS_WALL:
+                return Constants.DefendersWallCost;
+            case Enums.Building_Type.GUNNERS_ALLEY:
+                return Constants.GunnersAlleyCost;
+            case Enums.Building_Type.SNIPERS_NEST:
+                return Constants.SnipersNestCost;
+            case Enums.Building_Type.SCOUT_CAMP:
+                return Constants.ScoutCampCost;
+            case Enums.Building_Type.ACES_ARENA:
+                return Constants.AcesArenaCost;
+            case Enums.Building_Type.CANNONEERS_TOWER:
+                return Constants.CannoneersTowerCost;
+            case Enums.Building_Type.GUARDIANS_LAST_STAND:
+                return Constants.GuardiansLastStandCost;
             case Enums.Building_Type.HYDROPONICS_TOWER:
             case Enums.Building_Type.VILLA:
             case Enums.Building_Type.FACTORY:

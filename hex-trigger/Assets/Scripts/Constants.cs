@@ -53,6 +53,15 @@ public static class Constants
     public static BuildingCost DormitoryCost = new BuildingCost(1, 3, 2, 2, 2, 0);
     public static BuildingCost GarrisonCost =  new BuildingCost(1, 4, 3, 3, 3, 0);
     public static BuildingCost QuartersCost =  new BuildingCost(1, 5, 4, 4, 4, 0);
+
+    public static BuildingCost ShootingRangeCost =      new BuildingCost(1, 0, 3, 3, 3, 3);
+    public static BuildingCost DefendersWallCost =      new BuildingCost(1, 0, 4, 4, 4, 4);
+    public static BuildingCost GunnersAlleyCost =       new BuildingCost(1, 0, 4, 4, 4, 4);
+    public static BuildingCost SnipersNestCost =        new BuildingCost(1, 0, 5, 5, 5, 5);
+    public static BuildingCost ScoutCampCost =          new BuildingCost(1, 0, 5, 5, 5, 5);
+    public static BuildingCost AcesArenaCost =          new BuildingCost(1, 0, 6, 6, 6, 6);
+    public static BuildingCost CannoneersTowerCost =    new BuildingCost(1, 0, 6, 6, 6, 6);
+    public static BuildingCost GuardiansLastStandCost = new BuildingCost(1, 0, 6, 6, 6, 6);
     #endregion
     #region Defense
     public static BuildingCost WatchTowerCost = new BuildingCost(1, 1, 0, 1, 1, 1);
