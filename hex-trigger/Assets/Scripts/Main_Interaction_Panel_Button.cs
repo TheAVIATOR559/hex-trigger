@@ -8,7 +8,15 @@ public class Main_Interaction_Panel_Button : MonoBehaviour
 
     public void OnClick()
     {
-        UI_Manager.ResetCityUIState();
-        panelToEnable.SetActive(true);
+        if (panelToEnable.activeSelf)
+        {
+            UI_Manager.ResetCityUIState();
+        }
+        else
+        {
+            panelToEnable.SetActive(true);
+        }
+        //UI_Manager.ResetCityUIState();
+        
     }
 }
