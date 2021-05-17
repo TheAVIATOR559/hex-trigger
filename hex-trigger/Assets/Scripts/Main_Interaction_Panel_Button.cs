@@ -14,6 +14,7 @@ public class Main_Interaction_Panel_Button : MonoBehaviour
         }
         else
         {
+            UI_Manager.ResetCityUIState();
             panelToEnable.SetActive(true);
         }
         //UI_Manager.ResetCityUIState();

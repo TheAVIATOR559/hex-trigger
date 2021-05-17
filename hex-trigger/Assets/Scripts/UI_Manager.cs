@@ -27,9 +27,14 @@ public class UI_Manager : Singleton<UI_Manager>
     private TMP_Text AvailableMilitaryText;
     private TMP_Text AvailableIsoliumText;
 
-    private GameObject currTierPanel;
+    private Image AvailableHexImage;
+    private Image AvailablePopImage;
+    private Image AvailableFoodImage;
+    private Image AvailableIndustryImage;
+    private Image AvailableMilitaryImage;
+    private Image AvailableIsoliumImage;
 
-    private Color defaultTextColor;
+    private GameObject currTierPanel;
 
     private bool HexTextFlashing = false;
     private bool PopTextFlashing = false;
@@ -60,7 +65,12 @@ public class UI_Manager : Singleton<UI_Manager>
         AvailableMilitaryText = ResourcePanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
         AvailableIsoliumText = ResourcePanel.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>();
 
-        defaultTextColor = AvailableHexText.color;
+        AvailableHexImage = ResourcePanel.transform.GetChild(0).GetComponent<Image>();
+        AvailablePopImage = ResourcePanel.transform.GetChild(1).GetComponent<Image>();
+        AvailableFoodImage = ResourcePanel.transform.GetChild(2).GetComponent<Image>();
+        AvailableIndustryImage = ResourcePanel.transform.GetChild(3).GetComponent<Image>();
+        AvailableMilitaryImage = ResourcePanel.transform.GetChild(4).GetComponent<Image>();
+        AvailableIsoliumImage = ResourcePanel.transform.GetChild(5).GetComponent<Image>();
 
         ResetCityUIState();
     }
@@ -142,53 +152,53 @@ public class UI_Manager : Singleton<UI_Manager>
         if(!Instance.HexTextFlashing && Resource_Manager.Instance.AvailableHexes < cost.RequiredHexes)
         {
             Instance.HexTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexText, Instance.EndHexFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexImage, Instance.EndHexFlashing));
         }
 
         if (!Instance.FoodTextFlashing && Resource_Manager.Instance.AvailableFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodText, Instance.EndFoodFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));
         }
 
         if (!Instance.PopTextFlashing && Resource_Manager.Instance.AvailablePopulation < cost.RequiredPopulation)
         {
             Instance.PopTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopText, Instance.EndPopFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopImage, Instance.EndPopFlashing));
         }
 
         if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.AvailableIndustry < cost.RequiredIndustry)
         {
             Instance.IndustryTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryText, Instance.EndIndustryFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryImage, Instance.EndIndustryFlashing));
         }
 
         if (!Instance.MilitaryTextFlashing && Resource_Manager.Instance.AvailableMilitary < cost.RequiredMilitary)
         {
             Instance.MilitaryTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryText, Instance.EndMilitaryFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryImage, Instance.EndMilitaryFlashing));
         }
 
         if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.AvailableIsolium < cost.RequiredIsolium)
         {
             Instance.IsoliumTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIsoliumText, Instance.EndIsoliumFlashing));
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIsoliumImage, Instance.EndIsoliumFlashing));
         }
     }
 
-    private IEnumerator FlashRed(TMP_Text text, System.Action method)
+    private IEnumerator FlashRed(Image image, System.Action method)
     {
         float endTime = Time.time + 1f;
 
         while (Time.time < endTime)
         {
-            text.color = Color.red;
+            image.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            text.color = defaultTextColor;
+            image.color = Color.white;
             yield return new WaitForSeconds(0.1f);
         }
 
-        text.color = defaultTextColor;
+        image.color = Color.white;
         method();
     }
 
