@@ -16,7 +16,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public int AvailableIsolium;//currently available isolium, increases based on isolium production
 
-    public int AvailableMilitary;//should only increase when the player allocates more
+    public int CurrentMilitary;//should only increase when the player allocates more
 
     public int MaximumMilitary;//maximum military population, shoud increase as new military hexes are built
 
@@ -25,6 +25,16 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public int MaximumCannoneers;//maximum number of cannoneers, should increase as new Cannoneer's Tower hexes are built
 
     public int MaximumGuardians;//maximum number of aces, should increase as new Guardian's Last Stand hexes are built
+
+    public int GruntCount;
+    public int ShooterCount;
+    public int DefenderCount;
+    public int GunnerCount;
+    public int SniperCount;
+    public int ScoutCount;
+    public int AceCount;
+    public int CannoneerCount;
+    public int GuardianCount;
 
     [SerializeField] private int FoodProduction;
     [SerializeField] private int IndustryProduction;
@@ -39,6 +49,14 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public bool ResourcesTickPaused = false;
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            DEV_MaxOutResources();
+        }
+    }
+
     public static void DEV_MaxOutResources()
     {
         Instance.AvailableHexes = 1000;
@@ -47,7 +65,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailablePopulation = 1000;
         Instance.AvailableIndustry = 1000;
         Instance.AvailableIsolium = 1000;
-        Instance.AvailableMilitary = 1000;
+        //Instance.CurrentMilitary = 1000;
         Instance.MaximumMilitary = 1000;
     }
 
@@ -73,7 +91,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             return false;
         }
 
-        if (cost.RequiredMilitary > Instance.AvailableMilitary)
+        if (cost.RequiredMilitary > Instance.CurrentMilitary)
         {
             return false;
         }
@@ -183,7 +201,17 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailableFood -= cost.RequiredFood;
         Instance.AvailableIndustry -= cost.RequiredIndustry;
         Instance.AvailableIsolium -= cost.RequiredIsolium;
-        Instance.AvailableMilitary -= cost.RequiredMilitary;
+        Instance.CurrentMilitary -= cost.RequiredMilitary;//todo redesign this so it takes grunts not total military
+
+        UI_Manager.UpdateResourcesText();
+    }
+
+    public static void DeductResources(UnitTrainingCost cost)
+    {
+        Instance.AvailableFood -= cost.RequiredFood;
+        Instance.AvailableIndustry -= cost.RequiredIndustry;
+        Instance.AvailableIsolium -= cost.RequiredIsolium;
+        Instance.CurrentMilitary += cost.RequiredMilitary;
 
         UI_Manager.UpdateResourcesText();
     }
@@ -288,6 +316,73 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
+    public static UnitTrainingCost GetUnitCost(Enums.Unit_Type type)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.GRUNT:
+                return Constants.GRUNT_TRAINING_COST;
+            case Enums.Unit_Type.SHOOTER:
+                return Constants.SHOOTER_TRAINING_COST;
+            case Enums.Unit_Type.DEFENDER:
+                return Constants.DEFENDER_TRAINING_COST;
+            case Enums.Unit_Type.GUNNER:
+                return Constants.GUNNER_TRAINING_COST;
+            case Enums.Unit_Type.SNIPER:
+                return Constants.SNIPER_TRAINING_COST;
+            case Enums.Unit_Type.SCOUT:
+                return Constants.SCOUT_TRAINING_COST;
+            case Enums.Unit_Type.ACE:
+                return Constants.ACE_TRAINING_COST;
+            case Enums.Unit_Type.CANNONEER:
+                return Constants.CANNONEER_TRAINING_COST;
+            case Enums.Unit_Type.GUARDIAN:
+                return Constants.GUNNER_TRAINING_COST;
+            default:
+                return new UnitTrainingCost(0, 0, 0, 0);
+        }
+    }
+
+    public static bool HaveRequiredUnitTrainingCosts(Enums.Unit_Type type, UnitTrainingCost cost)
+    {
+        if(type == Enums.Unit_Type.ACE && Instance.AceCount >= Instance.MaximumAces)
+        {
+            return false;
+        }
+
+        if (type == Enums.Unit_Type.CANNONEER && Instance.CannoneerCount >= Instance.MaximumCannoneers)
+        {
+            return false;
+        }
+
+        if (type == Enums.Unit_Type.GUARDIAN && Instance.GuardianCount >= Instance.MaximumGuardians)
+        {
+            return false;
+        }
+
+        if (cost.RequiredMilitary + Instance.CurrentMilitary > Instance.MaximumMilitary)
+        {
+            return false;
+        }
+
+        if (cost.RequiredFood > Instance.AvailableFood)
+        {
+            return false;
+        }
+
+        if (cost.RequiredIndustry > Instance.AvailableIndustry)
+        {
+            return false;
+        }
+
+        if (cost.RequiredIsolium > Instance.AvailableIsolium)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public static void IncreaseHeroUnitCap(Enums.Unit_Type type, int amount)
     {
         switch (type)
@@ -331,6 +426,167 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Unit_Type.GUNNER:
             case Enums.Unit_Type.SNIPER:
             case Enums.Unit_Type.SCOUT:
+            default:
+                break;
+        }
+    }
+
+    public static void IncreaseUnitCount(Enums.Unit_Type type, int amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.GRUNT:
+                Instance.GruntCount += amount;
+                UI_Manager.SetGruntCountText(Instance.GruntCount);
+
+                break;
+            case Enums.Unit_Type.SHOOTER:
+                Instance.ShooterCount += amount;
+                UI_Manager.SetShooterCountText(Instance.ShooterCount);
+
+                break;
+            case Enums.Unit_Type.DEFENDER:
+                Instance.DefenderCount += amount;
+                UI_Manager.SetDefenderCountText(Instance.DefenderCount);
+
+                break;
+            case Enums.Unit_Type.GUNNER:
+                Instance.GunnerCount += amount;
+                UI_Manager.SetGunnerCountText(Instance.GunnerCount);
+
+                break;
+            case Enums.Unit_Type.SNIPER:
+                Instance.SniperCount += amount;
+                UI_Manager.SetSniperCountText(Instance.SniperCount);
+
+                break;
+            case Enums.Unit_Type.SCOUT:
+                Instance.ScoutCount += amount;
+                UI_Manager.SetScoutCountText(Instance.ScoutCount);
+
+                break;
+            case Enums.Unit_Type.ACE:
+                Instance.AceCount += amount;
+                UI_Manager.SetAceCountText(Instance.AceCount);
+
+                break;
+            case Enums.Unit_Type.CANNONEER:
+                Instance.CannoneerCount += amount;
+                UI_Manager.SetCannoneerText(Instance.CannoneerCount);
+
+                break;
+            case Enums.Unit_Type.GUARDIAN:
+                Instance.GuardianCount += amount;
+                UI_Manager.SetGuardianText(Instance.GuardianCount);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    public static void DecreaseUnitCount(Enums.Unit_Type type, int amount)
+    {
+        switch (type)
+        {
+            case Enums.Unit_Type.GRUNT:
+                if(Instance.GruntCount - amount <= 0)
+                {
+                    Instance.GruntCount = 0;
+                }
+                else
+                {
+                    Instance.GruntCount -= amount;
+                }
+                UI_Manager.SetGruntCountText(Instance.GruntCount);
+                break;
+            case Enums.Unit_Type.SHOOTER:
+                if(Instance.ShooterCount - amount <= 0)
+                {
+                    Instance.ShooterCount = 0;
+                }
+                else
+                {
+                    Instance.ShooterCount -= amount;
+                }
+                UI_Manager.SetShooterCountText(Instance.ShooterCount);
+                break;
+            case Enums.Unit_Type.DEFENDER:
+                if(Instance.DefenderCount - amount <= 0)
+                {
+                    Instance.DefenderCount = 0;
+                }
+                else
+                {
+                    Instance.DefenderCount -= amount;
+                }
+                UI_Manager.SetDefenderCountText(Instance.DefenderCount);
+                break;
+            case Enums.Unit_Type.GUNNER:
+                if (Instance.GunnerCount - amount <= 0)
+                {
+                    Instance.GunnerCount = 0;
+                }
+                else
+                {
+                    Instance.GunnerCount -= amount;
+                }
+                UI_Manager.SetGunnerCountText(Instance.GunnerCount);
+                break;
+            case Enums.Unit_Type.SNIPER:
+                if (Instance.SniperCount - amount <= 0)
+                {
+                    Instance.SniperCount = 0;
+                }
+                else
+                {
+                    Instance.SniperCount -= amount;
+                }
+                UI_Manager.SetSniperCountText(Instance.SniperCount);
+                break;
+            case Enums.Unit_Type.SCOUT:
+                if (Instance.ScoutCount - amount <= 0)
+                {
+                    Instance.ScoutCount = 0;
+                }
+                else
+                {
+                    Instance.ScoutCount -= amount;
+                }
+                UI_Manager.SetScoutCountText(Instance.ScoutCount);
+                break;
+            case Enums.Unit_Type.ACE:
+                if (Instance.AceCount - amount <= 0)
+                {
+                    Instance.AceCount = 0;
+                }
+                else
+                {
+                    Instance.AceCount -= amount;
+                }
+                UI_Manager.SetAceCountText(Instance.AceCount);
+                break;
+            case Enums.Unit_Type.CANNONEER:
+                if (Instance.CannoneerCount - amount <= 0)
+                {
+                    Instance.CannoneerCount = 0;
+                }
+                else
+                {
+                    Instance.CannoneerCount -= amount;
+                }
+                UI_Manager.SetCannoneerText(Instance.CannoneerCount);
+                break;
+            case Enums.Unit_Type.GUARDIAN:
+                if (Instance.GuardianCount - amount <= 0)
+                {
+                    Instance.GuardianCount = 0;
+                }
+                else
+                {
+                    Instance.GuardianCount -= amount;
+                }
+                UI_Manager.SetGuardianText(Instance.GuardianCount);
+                break;
             default:
                 break;
         }

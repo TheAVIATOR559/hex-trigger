@@ -34,6 +34,16 @@ public class UI_Manager : Singleton<UI_Manager>
     private Image AvailableMilitaryImage;
     private Image AvailableIsoliumImage;
 
+    private TMP_Text GruntCountText;
+    private TMP_Text ShooterCountText;
+    private TMP_Text DefenderCountText;
+    private TMP_Text GunnerCountText;
+    private TMP_Text SniperCountText;
+    private TMP_Text ScoutCountText;
+    private TMP_Text AceCountText;
+    private TMP_Text CannoneerCountText;
+    private TMP_Text GuardianCountText;
+
     private GameObject currTierPanel;
 
     private bool HexTextFlashing = false;
@@ -71,6 +81,16 @@ public class UI_Manager : Singleton<UI_Manager>
         AvailableIndustryImage = ResourcePanel.transform.GetChild(3).GetComponent<Image>();
         AvailableMilitaryImage = ResourcePanel.transform.GetChild(4).GetComponent<Image>();
         AvailableIsoliumImage = ResourcePanel.transform.GetChild(5).GetComponent<Image>();
+
+        GruntCountText = MilitaryPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        ShooterCountText = MilitaryPanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        DefenderCountText = MilitaryPanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
+        GunnerCountText = MilitaryPanel.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+        SniperCountText = MilitaryPanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
+        ScoutCountText = MilitaryPanel.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>();
+        AceCountText = MilitaryPanel.transform.GetChild(6).GetChild(1).GetComponent<TMP_Text>();
+        CannoneerCountText = MilitaryPanel.transform.GetChild(7).GetChild(1).GetComponent<TMP_Text>();
+        GuardianCountText = MilitaryPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
 
         ResetCityUIState();
     }
@@ -113,7 +133,7 @@ public class UI_Manager : Singleton<UI_Manager>
         SetAvailablePopulationText(Resource_Manager.Instance.AvailablePopulation, Resource_Manager.Instance.AvailableHousing);
         SetAvailableFoodText(Resource_Manager.Instance.AvailableFood);
         SetAvailableIndustryText(Resource_Manager.Instance.AvailableIndustry);
-        SetAvailableMilitaryText(Resource_Manager.Instance.AvailableMilitary, Resource_Manager.Instance.MaximumMilitary);
+        SetAvailableMilitaryText(Resource_Manager.Instance.CurrentMilitary, Resource_Manager.Instance.MaximumMilitary);
         SetAvailableIsoliumText(Resource_Manager.Instance.AvailableIsolium);
     }
 
@@ -147,6 +167,65 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.AvailableIsoliumText.text = isolium.ToString();
     }
 
+    public static void UpdateUnitCountText()
+    {
+        Instance.GruntCountText.text = Resource_Manager.Instance.GruntCount.ToString();
+        Instance.ShooterCountText.text = Resource_Manager.Instance.ShooterCount.ToString();
+        Instance.DefenderCountText.text = Resource_Manager.Instance.DefenderCount.ToString();
+        Instance.GunnerCountText.text = Resource_Manager.Instance.GunnerCount.ToString();
+        Instance.SniperCountText.text = Resource_Manager.Instance.SniperCount.ToString();
+        Instance.ScoutCountText.text = Resource_Manager.Instance.ScoutCount.ToString();
+
+        Instance.AceCountText.text = Resource_Manager.Instance.AceCount + " / " + Resource_Manager.Instance.MaximumAces;
+        Instance.CannoneerCountText.text = Resource_Manager.Instance.CannoneerCount + " / " + Resource_Manager.Instance.MaximumCannoneers;
+        Instance.GuardianCountText.text = Resource_Manager.Instance.GuardianCount + " / " + Resource_Manager.Instance.MaximumGuardians;
+    }
+
+    public static void SetGruntCountText(int count)
+    {
+        Instance.GruntCountText.text = count.ToString();
+    }
+
+    public static void SetShooterCountText(int count)
+    {
+        Instance.ShooterCountText.text = count.ToString();
+    }
+
+    public static void SetDefenderCountText(int count)
+    {
+        Instance.DefenderCountText.text = count.ToString();
+    }
+
+    public static void SetGunnerCountText(int count)
+    {
+        Instance.GunnerCountText.text = count.ToString();
+    }
+
+    public static void SetSniperCountText(int count)
+    {
+        Instance.SniperCountText.text = count.ToString();
+    }
+
+    public static void SetScoutCountText(int count)
+    {
+        Instance.ScoutCountText.text = count.ToString();
+    }
+
+    public static void SetAceCountText(int count)
+    {
+        Instance.AceCountText.text = count + " / " + Resource_Manager.Instance.MaximumAces;
+    }
+
+    public static void SetCannoneerText(int count)
+    {
+        Instance.CannoneerCountText.text = count + " / " + Resource_Manager.Instance.MaximumCannoneers;
+    }
+
+    public static void SetGuardianText(int count)
+    {
+        Instance.GuardianCountText.text = count + " / " + Resource_Manager.Instance.MaximumGuardians;
+    }
+
     public static void FlashMissingResources(BuildingCost cost)
     {
         if(!Instance.HexTextFlashing && Resource_Manager.Instance.AvailableHexes < cost.RequiredHexes)
@@ -173,7 +252,34 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryImage, Instance.EndIndustryFlashing));
         }
 
-        if (!Instance.MilitaryTextFlashing && Resource_Manager.Instance.AvailableMilitary < cost.RequiredMilitary)
+        if (!Instance.MilitaryTextFlashing && Resource_Manager.Instance.CurrentMilitary < cost.RequiredMilitary)
+        {
+            Instance.MilitaryTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryImage, Instance.EndMilitaryFlashing));
+        }
+
+        if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.AvailableIsolium < cost.RequiredIsolium)
+        {
+            Instance.IsoliumTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIsoliumImage, Instance.EndIsoliumFlashing));
+        }
+    }
+
+    public static void FlashMissingResources(UnitTrainingCost cost)
+    {
+        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.AvailableFood < cost.RequiredFood)
+        {
+            Instance.FoodTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));
+        }
+
+        if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.AvailableIndustry < cost.RequiredIndustry)
+        {
+            Instance.IndustryTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryImage, Instance.EndIndustryFlashing));
+        }
+
+        if (!Instance.MilitaryTextFlashing && Resource_Manager.Instance.CurrentMilitary + cost.RequiredMilitary > Resource_Manager.Instance.MaximumMilitary)
         {
             Instance.MilitaryTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryImage, Instance.EndMilitaryFlashing));
