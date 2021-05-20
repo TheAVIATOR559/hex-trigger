@@ -16,7 +16,7 @@ public class Unit_Training_Button : MonoBehaviour
     {
         if(Resource_Manager.HaveRequiredUnitTrainingCosts(UnitType, cost))
         {
-            Resource_Manager.DeductResources(cost);
+            Resource_Manager.DeductResources(cost, UnitType);
 
             //increase unit count
             Resource_Manager.IncreaseUnitCount(UnitType, 1);

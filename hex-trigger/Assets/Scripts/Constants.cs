@@ -123,6 +123,33 @@ public static class Constants
     public static int MILITARY_IV_PROD = 4;
     public static int MILITARY_V_PROD = 5;
     #endregion
+    #region Defense Tower Values
+    #region Watch Tower Values
+    public static int WATCH_TOWER_DEFENSE_RADIUS = 1;
+    public static int WATCH_TOWER_DAMAGE = 1;
+    public static int WATCH_TOWER_RELOAD_TIME = 3;
+    #endregion
+    #region Missile Complex Values
+    public static int MISSILE_COMPLEX_DEFENSE_RADIUS = 3;
+    public static int MISSILE_COMPLEX_DAMAGE = 5;
+    public static int MISSILE_COMPLEX_RELOAD_TIME = 5;
+    #endregion
+    #region Laser Tower Values
+    public static int LASER_TOWER_DEFENSE_RADIUS = 5;
+    public static int LASER_TOWER_DAMAGE = 3;
+    public static int LASER_TOWER_RELOAD_TIME = 3;
+    #endregion
+    #region Auto Missile Complex Values
+    public static int AUTO_MISSILE_COMPLEX_DEFENSE_RADIUS = 3;
+    public static int AUTO_MISSILE_COMPLEX_DAMAGE = 5;
+    public static int AUTO_MISSILE_COMPLEX_RELOAD_TIME = 3;
+    #endregion
+    #region Auto Laser Tower Values
+    public static int AUTO_LASER_TOWER_DEFENSE_RADIUS = 5;
+    public static int AUTO_LASER_TOWER_DAMAGE = 3;
+    public static int AUTO_LASER_TOWER_RELOAD_TIME = 1;
+    #endregion
+    #endregion
     //these values will need to be rebalanced
     #region Research Production
     public static int RESEARCH_I_PROD = 1;
@@ -150,9 +177,9 @@ public static class Constants
     public static UnitTrainingCost GUNNER_TRAINING_COST = new UnitTrainingCost(1, 2, 3, 3);
     public static UnitTrainingCost SNIPER_TRAINING_COST = new UnitTrainingCost(1, 3, 4, 4);
     public static UnitTrainingCost SCOUT_TRAINING_COST = new UnitTrainingCost(1, 3, 4, 4);
-    public static UnitTrainingCost ACE_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
-    public static UnitTrainingCost CANNONEER_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
-    public static UnitTrainingCost GUARDIAN_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10);
+    public static UnitTrainingCost ACE_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10, 1);
+    public static UnitTrainingCost CANNONEER_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10, 2);
+    public static UnitTrainingCost GUARDIAN_TRAINING_COST = new UnitTrainingCost(1, 10, 10, 10, 3);
     #endregion
     #region Grunt Values
     public static int GRUNT_ATTACK = 1;
@@ -258,7 +285,8 @@ public struct BuildingCost
     }
 }
 
-//new UnitTrainingCost(MIL, FOOD, IND, ISO)
+//new UnitTrainingCost(MIL, FOOD, IND, ISO, SpecialCount)
+//special count :: 0 = not, 1 = ace, 2 = cannoneer, 3 = guardian
 public struct UnitTrainingCost
 {
     public int RequiredMilitary
@@ -281,11 +309,17 @@ public struct UnitTrainingCost
         get;
     }
 
-    public UnitTrainingCost(int military, int food, int industry, int isolium)
+    public int SpecialUnitType
+    {
+        get;
+    }
+
+    public UnitTrainingCost(int military, int food, int industry, int isolium, int specialType = 0)
     {
         RequiredMilitary = military;
         RequiredFood = food;
         RequiredIndustry = industry;
         RequiredIsolium = isolium;
+        SpecialUnitType = specialType;
     }
 }

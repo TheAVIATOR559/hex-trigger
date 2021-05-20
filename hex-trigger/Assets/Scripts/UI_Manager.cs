@@ -33,6 +33,9 @@ public class UI_Manager : Singleton<UI_Manager>
     private Image AvailableIndustryImage;
     private Image AvailableMilitaryImage;
     private Image AvailableIsoliumImage;
+    private Image AceButtonImage;
+    private Image CannoneerButtonImage;
+    private Image GuardianButtonImage;
 
     private TMP_Text GruntCountText;
     private TMP_Text ShooterCountText;
@@ -52,6 +55,9 @@ public class UI_Manager : Singleton<UI_Manager>
     private bool IndustryTextFlashing = false;
     private bool MilitaryTextFlashing = false;
     private bool IsoliumTextFlashing = false;
+    private bool AceTextFlashing = false;
+    private bool CannoneerTextFlashing = false;
+    private bool GuardianTextFlashing = false;
 
     public void SetupReferences(Canvas cityCanvas)
     {
@@ -89,8 +95,11 @@ public class UI_Manager : Singleton<UI_Manager>
         SniperCountText = MilitaryPanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
         ScoutCountText = MilitaryPanel.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>();
         AceCountText = MilitaryPanel.transform.GetChild(6).GetChild(1).GetComponent<TMP_Text>();
+        AceButtonImage = MilitaryPanel.transform.GetChild(6).GetComponent<Image>();
         CannoneerCountText = MilitaryPanel.transform.GetChild(7).GetChild(1).GetComponent<TMP_Text>();
+        CannoneerButtonImage = MilitaryPanel.transform.GetChild(7).GetComponent<Image>();
         GuardianCountText = MilitaryPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
+        GuardianButtonImage = MilitaryPanel.transform.GetChild(8).GetComponent<Image>();
 
         ResetCityUIState();
     }
@@ -267,6 +276,34 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void FlashMissingResources(UnitTrainingCost cost)
     {
+        //if is Ace/Cannoneer/Guardian and does not have corresponding space
+        if(!Instance.AceTextFlashing && cost.SpecialUnitType == 1 && Resource_Manager.Instance.AceCount + cost.RequiredMilitary > Resource_Manager.Instance.MaximumAces)
+        {
+            Instance.AceTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AceButtonImage, Instance.EndAceFlashing));
+        }
+
+        if (!Instance.CannoneerTextFlashing && cost.SpecialUnitType == 2 && Resource_Manager.Instance.CannoneerCount + cost.RequiredMilitary > Resource_Manager.Instance.MaximumCannoneers)
+        {
+            Instance.CannoneerTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.CannoneerButtonImage, Instance.EndCannoneerFlashing));
+        }
+
+        //Debug.Log(Instance.GuardianTextFlashing + " :: " + cost.SpecialUnitType + " :: " + Resource_Manager.Instance.GuardianCount + " :: " + cost.RequiredMilitary + " :: " + Resource_Manager.Instance.MaximumGuardians);
+
+        if (!Instance.GuardianTextFlashing && cost.SpecialUnitType == 3 && Resource_Manager.Instance.GuardianCount + cost.RequiredMilitary > Resource_Manager.Instance.MaximumGuardians)
+        {
+            //Debug.Log("derp");
+            Instance.GuardianTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.GuardianButtonImage, Instance.EndGuardianFlashing));
+        }
+
+        if (!Instance.PopTextFlashing && Resource_Manager.Instance.AvailablePopulation < cost.RequiredMilitary)
+        {
+            Instance.PopTextFlashing = true;
+            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopImage, Instance.EndPopFlashing));
+        }
+
         if (!Instance.FoodTextFlashing && Resource_Manager.Instance.AvailableFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
@@ -336,5 +373,20 @@ public class UI_Manager : Singleton<UI_Manager>
     private void EndIsoliumFlashing()
     {
         Instance.IsoliumTextFlashing = false;
+    }
+
+    private void EndAceFlashing()
+    {
+        AceTextFlashing = false;
+    }
+
+    private void EndCannoneerFlashing()
+    {
+        CannoneerTextFlashing = false;
+    }
+
+    private void EndGuardianFlashing()
+    {
+        GuardianTextFlashing = false;
     }
 }

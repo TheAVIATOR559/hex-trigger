@@ -13146,7 +13146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.100384615}
   m_AnchorMax: {x: 1, y: 0.48469234}
-  m_AnchoredPosition: {x: 0, y: 0.17751694}
+  m_AnchoredPosition: {x: 0, y: 0.1776886}
   m_SizeDelta: {x: 0, y: -0.32310486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178322180
@@ -21763,6 +21763,7 @@ GameObject:
   - component: {fileID: 2054530075}
   - component: {fileID: 2054530078}
   - component: {fileID: 2054530077}
+  - component: {fileID: 2054530076}
   m_Layer: 5
   m_Name: Military Unit Panel
   m_TagString: Untagged
@@ -21798,6 +21799,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.86657715, y: 2.342987}
   m_SizeDelta: {x: -2.543579, y: 2.7299957}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2054530076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054530074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911dcfa0243631e4383708bb4cdee294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2054530077
 MonoBehaviour:
   m_ObjectHideFlags: 0

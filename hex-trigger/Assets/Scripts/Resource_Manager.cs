@@ -16,7 +16,17 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public int AvailableIsolium;//currently available isolium, increases based on isolium production
 
-    public int CurrentMilitary;//should only increase when the player allocates more
+    public int CurrentMilitary//should only increase when the player allocates more
+    {
+        get
+        {
+            return GruntCount + ShooterCount + DefenderCount + GunnerCount + SniperCount + ScoutCount + AceCount + CannoneerCount + GuardianCount;
+        }
+        set
+        {
+            GruntCount = value;
+        }
+    }
 
     public int MaximumMilitary;//maximum military population, shoud increase as new military hexes are built
 
@@ -51,7 +61,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             DEV_MaxOutResources();
         }
@@ -201,19 +211,21 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.AvailableFood -= cost.RequiredFood;
         Instance.AvailableIndustry -= cost.RequiredIndustry;
         Instance.AvailableIsolium -= cost.RequiredIsolium;
-        Instance.CurrentMilitary -= cost.RequiredMilitary;//todo redesign this so it takes grunts not total military
+        Instance.CurrentMilitary -= cost.RequiredMilitary;
 
         UI_Manager.UpdateResourcesText();
     }
 
-    public static void DeductResources(UnitTrainingCost cost)
+    public static void DeductResources(UnitTrainingCost cost, Enums.Unit_Type type)
     {
         Instance.AvailableFood -= cost.RequiredFood;
         Instance.AvailableIndustry -= cost.RequiredIndustry;
         Instance.AvailableIsolium -= cost.RequiredIsolium;
-        Instance.CurrentMilitary += cost.RequiredMilitary;
+
+        Instance.AvailablePopulation -= cost.RequiredMilitary;
 
         UI_Manager.UpdateResourcesText();
+        UI_Manager.UpdateUnitCountText();
     }
 
     public static void AddProduction(Enums.Hex_Types type, int value)
@@ -337,7 +349,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Unit_Type.CANNONEER:
                 return Constants.CANNONEER_TRAINING_COST;
             case Enums.Unit_Type.GUARDIAN:
-                return Constants.GUNNER_TRAINING_COST;
+                return Constants.GUARDIAN_TRAINING_COST;
             default:
                 return new UnitTrainingCost(0, 0, 0, 0);
         }
@@ -345,7 +357,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static bool HaveRequiredUnitTrainingCosts(Enums.Unit_Type type, UnitTrainingCost cost)
     {
-        if(type == Enums.Unit_Type.ACE && Instance.AceCount >= Instance.MaximumAces)
+        if (type == Enums.Unit_Type.ACE && Instance.AceCount >= Instance.MaximumAces)
         {
             return false;
         }
@@ -360,6 +372,10 @@ public class Resource_Manager : Singleton<Resource_Manager>
             return false;
         }
 
+        if (cost.RequiredMilitary > Instance.AvailablePopulation)
+        {
+            return false;
+        }
         if (cost.RequiredMilitary + Instance.CurrentMilitary > Instance.MaximumMilitary)
         {
             return false;
@@ -483,13 +499,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 break;
         }
     }
-    
+
     public static void DecreaseUnitCount(Enums.Unit_Type type, int amount)
     {
         switch (type)
         {
             case Enums.Unit_Type.GRUNT:
-                if(Instance.GruntCount - amount <= 0)
+                if (Instance.GruntCount - amount <= 0)
                 {
                     Instance.GruntCount = 0;
                 }
@@ -500,7 +516,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 UI_Manager.SetGruntCountText(Instance.GruntCount);
                 break;
             case Enums.Unit_Type.SHOOTER:
-                if(Instance.ShooterCount - amount <= 0)
+                if (Instance.ShooterCount - amount <= 0)
                 {
                     Instance.ShooterCount = 0;
                 }
@@ -511,7 +527,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 UI_Manager.SetShooterCountText(Instance.ShooterCount);
                 break;
             case Enums.Unit_Type.DEFENDER:
-                if(Instance.DefenderCount - amount <= 0)
+                if (Instance.DefenderCount - amount <= 0)
                 {
                     Instance.DefenderCount = 0;
                 }
@@ -660,7 +676,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         switch (type)
         {
             case Enums.Unit_Type.SHOOTER:
-                if(Instance.ShooterTrainingCostReduction + amount >= 1f)
+                if (Instance.ShooterTrainingCostReduction + amount >= 1f)
                 {
                     Instance.ShooterTrainingCostReduction = 1f;
                 }
