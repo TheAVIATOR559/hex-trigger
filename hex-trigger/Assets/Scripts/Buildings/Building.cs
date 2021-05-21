@@ -21,7 +21,7 @@ public class Building : MonoBehaviour
         connectedHex = GetComponent<Hex>();
     }
 
-    public void Initalize()
+    public virtual void Initalize()
     {
         UpdateProductionValue();
     }
