@@ -240,6 +240,58 @@ public static class Constants
     #endregion
     #endregion
 
+    #region Building Names
+    public static string GARDEN_NAME = "Garden";
+    public static string FARM_NAME = "Farm";
+    public static string ORCHARD_NAME = "Orchard";
+    public static string RANCH_NAME = "Ranch";
+    public static string HOVEL_NAME = "Hovel";
+    public static string COTTAGE_NAME = "Cottage";
+    public static string APARTMENT_NAME = "Apartment";
+    public static string CONDO_NAME = "Condominium";
+    public static string WORKSHOP_NAME = "Workshop";
+    public static string FORGE_NAME = "Forge";
+    public static string MILL_NAME = "Mill";
+    public static string FOUNDRY_NAME = "Foundry";
+    public static string BARRACKS_NAME = "Barracks";
+    public static string DORMITORY_NAME = "Dormitory";
+    public static string GARRISON_NAME = "Garrison";
+    public static string QUARTERS_NAME = "Quarters";
+    public static string WATCHTOWER_NAME = "Watch Tower";
+    public static string MISSILE_COMPLEX_NAME = "Missile Complex";
+    public static string LASER_TOWER_NAME = "Laser Tower";
+    public static string AUTO_MISSILE_COMPLEX_NAME = "Auto Missile Complex";
+    public static string AUTO_LASER_TOWER_NAME = "Auto Laser Tower";
+    public static string RESEARCH_LAB_NAME = "Research Lab";
+    public static string RESEARCH_COLLEGE_NAME = "Research College";
+    public static string RESEARCH_INSTITUTE_NAME = "Research Institute";
+    public static string MULTIBRAIN_COMPLEX_NAME = "Multi Brain Complex";
+    public static string STOCKPILE_NAME = "Stockpile";
+    public static string STOREHOUSE_NAME = "Storehouse";
+    public static string WAREHOUSE_NAME = "Warehouse";
+    public static string DEPOT_NAME = "Depot";
+    public static string SHOOTING_RANGE_NAME = "Shooting Range";
+    public static string DEFENDERS_WALL_NAME = "Defender's Wall";
+    public static string GUNNERS_ALLEY_NAME = "Gunner's Alley";
+    public static string SNIPERS_NEST_NAME = "Sniper's Nest";
+    public static string SCOUT_CAMP_NAME = "Scout Camp";
+    public static string ACES_ARENA_NAME = "Ace's Arena";
+    public static string CANNONEERS_TOWER_NAME = "Cannoneer's Tower";
+    public static string GUARDIANS_LAST_STAND_NAME = "Guardian's Last Stand";
+    #endregion
+
+    #region Unit Names
+    public static string GRUNT_NAME = "Grunt";
+    public static string SHOOTER_NAME = "Shooter";
+    public static string DEFENDER_NAME = "Defender";
+    public static string GUNNER_NAME = "Gunner";
+    public static string SNIPER_NAME = "Sniper";
+    public static string SCOUT_NAME = "Scout";
+    public static string ACE_NAME = "Ace";
+    public static string CANNONEER_NAME = "Cannoneer";
+    public static string GUARDIAN_NAME = "Guardian";
+    #endregion
+
 }
 //new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost

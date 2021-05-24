@@ -24,6 +24,18 @@ public class Hex_Type_Button : MonoBehaviour
         myButton = GetComponent<Button>();
     }
 
+    public void OnClick()
+    {
+        if(panelToEnable.activeSelf)
+        {
+            DisableTierPanel();
+        }
+        else
+        {
+            EnableTierPanel();
+        }
+    }
+
     public void EnableTierPanel()
     {
         panelToEnable.SetActive(true);

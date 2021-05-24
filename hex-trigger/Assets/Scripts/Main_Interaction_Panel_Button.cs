@@ -15,6 +15,7 @@ public class Main_Interaction_Panel_Button : MonoBehaviour
         else
         {
             UI_Manager.ResetCityUIState();
+            UI_Manager.EnableInfoPanel();
             panelToEnable.SetActive(true);
         }
         //UI_Manager.ResetCityUIState();
