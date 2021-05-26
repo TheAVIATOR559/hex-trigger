@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Unit_Training_Button : MonoBehaviour
+public class Unit_Training_Button : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] Enums.Unit_Type UnitType;
     private UnitTrainingCost cost;
@@ -25,5 +26,10 @@ public class Unit_Training_Button : MonoBehaviour
         {
             UI_Manager.FlashMissingResources(cost);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UI_Manager.UpdateInfoPanel(UnitType);
     }
 }

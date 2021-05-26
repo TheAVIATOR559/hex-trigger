@@ -191,4 +191,14 @@ public class Building : MonoBehaviour
                 return 1;
         }
     }
+
+    ///TODO on click on
+    ///zoom in on hex
+    ///enable and populate hex info panel
+    ///highlight hex
+    
+    ///TODO on click off
+    ///zoom out to previous camera position
+    ///disable hex info panel
+    ///unhighlight hex
 }

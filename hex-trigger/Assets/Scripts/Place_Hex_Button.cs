@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Place_Hex_Button : MonoBehaviour
+public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] Enums.Building_Type buildingType;
 
@@ -24,5 +25,10 @@ public class Place_Hex_Button : MonoBehaviour
         //disable place hex panel
         UI_Manager.SetTierPanel(parentPanel);
         UI_Manager.DisableHexTierPanel();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UI_Manager.UpdateInfoPanel(buildingType);
     }
 }

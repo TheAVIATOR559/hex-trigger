@@ -66,7 +66,7 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void SetupReferences(Canvas cityCanvas)
     {
-        CityCanvas = cityCanvas; 
+        CityCanvas = cityCanvas;
         MainPanel = CityCanvas.transform.GetChild(0).gameObject;
         HexTypePanel = CityCanvas.transform.GetChild(1).gameObject;
         FoodTierPanel = CityCanvas.transform.GetChild(2).gameObject;
@@ -367,12 +367,16 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void UpdateInfoPanel(Enums.Unit_Type type)
     {
+        Instance.InfoPanelImage.gameObject.SetActive(true);
+        Instance.InfoPanelName.gameObject.SetActive(true);
+        Instance.InfoPanelCost.SetActive(true);
+
         switch (type)
         {
             case Enums.Unit_Type.GRUNT:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GRUNT_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GRUNT_TRAINING_COST);
+                Instance.UpdateInfoCostsPanel(Constants.GRUNT_TRAINING_COST, true);
                 break;
             case Enums.Unit_Type.SHOOTER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
@@ -421,12 +425,40 @@ public class UI_Manager : Singleton<UI_Manager>
 
     private void UpdateInfoCostsPanel(BuildingCost cost)
     {
-        //TODO pick up here
+        InfoPanelCost.transform.GetChild(0).gameObject.SetActive(true);
+        InfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
+        InfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
+        InfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredHexes.ToString();
+        InfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredPopulation.ToString();
+        InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+        InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+        InfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+        InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
     }
 
-    private void UpdateInfoCostsPanel(UnitTrainingCost cost)
+    private void UpdateInfoCostsPanel(UnitTrainingCost cost, bool isGrunt = false)
     {
-        //todo pick up here
+        if (isGrunt)
+        {
+            InfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
+            InfoPanelCost.transform.GetChild(4).gameObject.SetActive(false);
+            InfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
+            InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            InfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+        }
+        else
+        {
+            InfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
+            InfoPanelCost.transform.GetChild(1).gameObject.SetActive(false);
+            InfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
+            InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            InfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+        }
+
     }
 
     public static void UpdateResourcesText()
@@ -530,7 +562,7 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void FlashMissingResources(BuildingCost cost)
     {
-        if(!Instance.HexTextFlashing && Resource_Manager.Instance.AvailableHexes < cost.RequiredHexes)
+        if (!Instance.HexTextFlashing && Resource_Manager.Instance.AvailableHexes < cost.RequiredHexes)
         {
             Instance.HexTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexImage, Instance.EndHexFlashing));
@@ -570,7 +602,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public static void FlashMissingResources(UnitTrainingCost cost)
     {
         //if is Ace/Cannoneer/Guardian and does not have corresponding space
-        if(!Instance.AceTextFlashing && cost.SpecialUnitType == 1 && Resource_Manager.Instance.AceCount + cost.RequiredMilitary > Resource_Manager.Instance.MaximumAces)
+        if (!Instance.AceTextFlashing && cost.SpecialUnitType == 1 && Resource_Manager.Instance.AceCount + cost.RequiredMilitary > Resource_Manager.Instance.MaximumAces)
         {
             Instance.AceTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AceButtonImage, Instance.EndAceFlashing));
