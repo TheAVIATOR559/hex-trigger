@@ -44,6 +44,33 @@ public class Hex : MonoBehaviour
         renderer.material = standardMaterial;
     }
 
+    public void OnMouseOver()
+    {
+        if(Input.GetMouseButtonUp(0))
+        {
+            ///TODO on left click
+            ///zoom in on hex
+        
+            ///enable and populate hex info panel
+        
+            ///highlight hex
+            City_Manager.Instance.MoveHighlighterToHex(this);
+        }
+
+        if(Input.GetMouseButtonUp(1))
+        {
+            ///TODO on right click
+            ///zoom out to previous camera position
+
+            ///disable hex info panel
+
+            ///unhighlight hex
+            City_Manager.Instance.UnhighlightHex();
+        }
+    }
+
+    
+
     public static Vector3 GetWorldCoordFromHexCoord(Vector2Int vector)
     {
         float xPos = vector.x * Constants.HEX_X_OFFSET;
@@ -78,4 +105,5 @@ public class Hex : MonoBehaviour
     {
         return (Mathf.Abs(y) % 2 == 1);
     }
+
 }

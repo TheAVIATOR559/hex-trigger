@@ -11,6 +11,7 @@ public class City_Manager : Singleton<City_Manager>
     private List<Ghost_Hex> ghostHexes = new List<Ghost_Hex>();
 
     public Hex_Blueprint hexBlueprint;
+    public Hex_Highlighter hexHighlight;
 
     private void Awake()
     {
@@ -164,5 +165,16 @@ public class City_Manager : Singleton<City_Manager>
         }
 
         Instance.ghostHexes.Clear();
+    }
+
+    public void MoveHighlighterToHex(Hex hex)
+    {
+        hexHighlight.gameObject.SetActive(true);
+        hexHighlight.MoveToHex(hex);
+    }
+
+    public void UnhighlightHex()
+    {
+        hexHighlight.gameObject.SetActive(false);
     }
 }
