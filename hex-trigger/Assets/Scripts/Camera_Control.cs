@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Camera_Control : MonoBehaviour
 {
+    public static Camera_Control Instance;
+
     [SerializeField] float PanSpeed = 5;
     [SerializeField] float BoostModifier = 2;
     [SerializeField] float MiddleClickPanSpeed = 10;
@@ -17,6 +19,14 @@ public class Camera_Control : MonoBehaviour
     private float pitch, yaw;
 
     [SerializeField] Transform child;
+
+    private Vector3 prevPosition;
+    private Quaternion prevRotation;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void LateUpdate()
     {
@@ -95,6 +105,7 @@ public class Camera_Control : MonoBehaviour
 
     private void RotateAroundSelf()
     {
+        //TODO fix me
         //if user holds down right mouse button, allow them to rotate the camera vertically(within the min and max bounds) and horizontally
         if(Input.GetMouseButtonDown(1))
         {
@@ -111,5 +122,18 @@ public class Camera_Control : MonoBehaviour
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
+    }
+
+    public static void FocusOnHex(Hex hex)
+    {
+        Instance.prevPosition = Instance.transform.position;
+        Instance.prevRotation = Instance.transform.rotation;
+
+        Instance.transform.LookAt(hex.transform);
+    }
+
+    public static void UnFocusOnHex()
+    {
+
     }
 }

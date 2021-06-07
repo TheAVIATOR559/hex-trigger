@@ -80,9 +80,9 @@ public class UI_Manager : Singleton<UI_Manager>
         MilitaryPanel = CityCanvas.transform.GetChild(10).gameObject;
 
         InfoPanel = CityCanvas.transform.GetChild(11).gameObject;
-        InfoPanelImage = InfoPanel.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        InfoPanelName = InfoPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-        InfoPanelCost = InfoPanel.transform.GetChild(0).GetChild(2).gameObject;
+        InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
+        InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelCost = InfoPanel.transform.GetChild(2).gameObject;
 
         AvailableHexText = ResourcePanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         AvailablePopText = ResourcePanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
@@ -158,6 +158,13 @@ public class UI_Manager : Singleton<UI_Manager>
     public static void DisableInfoPanel()
     {
         Instance.InfoPanel.SetActive(false);
+    }
+
+    public static void ClearInfoPanel()
+    {
+        Instance.InfoPanelImage.gameObject.SetActive(false);
+        Instance.InfoPanelName.gameObject.SetActive(false);
+        Instance.InfoPanelCost.SetActive(false);
     }
 
     public static void UpdateInfoPanel(Enums.Building_Type type)

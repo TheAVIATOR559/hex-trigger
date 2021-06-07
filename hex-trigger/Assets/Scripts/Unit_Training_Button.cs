@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Unit_Training_Button : MonoBehaviour, IPointerEnterHandler
+public class Unit_Training_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Enums.Unit_Type UnitType;
     private UnitTrainingCost cost;
@@ -31,5 +31,10 @@ public class Unit_Training_Button : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         UI_Manager.UpdateInfoPanel(UnitType);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_Manager.ClearInfoPanel();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler
+public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Enums.Building_Type buildingType;
 
@@ -30,5 +30,10 @@ public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         UI_Manager.UpdateInfoPanel(buildingType);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_Manager.ClearInfoPanel();
     }
 }
