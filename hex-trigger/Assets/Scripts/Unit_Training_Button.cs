@@ -30,11 +30,11 @@ public class Unit_Training_Button : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UI_Manager.UpdateInfoPanel(UnitType);
+        UI_Manager.UpdateBuildInfoPanel(UnitType);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UI_Manager.ClearInfoPanel();
+        UI_Manager.ClearBuildInfoPanel();
     }
 }

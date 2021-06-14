@@ -17,10 +17,16 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject ResearchTierPanel;
     private GameObject IsoliumTierPanel;
 
+    private GameObject BuildInfoPanel;
+    private Image BuildInfoPanelImage;
+    private TMP_Text BuildInfoPanelName;
+    private GameObject BuilldInfoPanelCost;
+
     private GameObject InfoPanel;
     private Image InfoPanelImage;
     private TMP_Text InfoPanelName;
-    private GameObject InfoPanelCost;
+    private TMP_Text InfoPanelDesc;
+    private GameObject ProductionsPanel;
 
     private GameObject ResourcePanel;
     private GameObject MilitaryPanel;
@@ -79,10 +85,10 @@ public class UI_Manager : Singleton<UI_Manager>
         ResourcePanel = CityCanvas.transform.GetChild(9).gameObject;
         MilitaryPanel = CityCanvas.transform.GetChild(10).gameObject;
 
-        InfoPanel = CityCanvas.transform.GetChild(11).gameObject;
-        InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
-        InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
-        InfoPanelCost = InfoPanel.transform.GetChild(2).gameObject;
+        BuildInfoPanel = CityCanvas.transform.GetChild(11).gameObject;
+        BuildInfoPanelImage = BuildInfoPanel.transform.GetChild(0).GetComponent<Image>();
+        BuildInfoPanelName = BuildInfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+        BuilldInfoPanelCost = BuildInfoPanel.transform.GetChild(2).gameObject;
 
         AvailableHexText = ResourcePanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         AvailablePopText = ResourcePanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
@@ -111,6 +117,12 @@ public class UI_Manager : Singleton<UI_Manager>
         GuardianCountText = MilitaryPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
         GuardianButtonImage = MilitaryPanel.transform.GetChild(8).GetComponent<Image>();
 
+        InfoPanel = CityCanvas.transform.GetChild(12).gameObject;
+        InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
+        InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelDesc = InfoPanel.transform.GetChild(2).GetComponent<TMP_Text>();
+        ProductionsPanel = InfoPanel.transform.GetChild(3).gameObject;
+
         ResetCityUIState();
     }
 
@@ -127,6 +139,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.IsoliumTierPanel.SetActive(false);
         Instance.ResourcePanel.SetActive(true);
         Instance.MilitaryPanel.SetActive(false);
+        Instance.BuildInfoPanel.SetActive(false);
         Instance.InfoPanel.SetActive(false);
 
         UpdateResourcesText();
@@ -147,218 +160,218 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.currTierPanel.SetActive(false);
     }
 
-    public static void EnableInfoPanel()
+    public static void EnableBuildInfoPanel()
     {
-        Instance.InfoPanel.SetActive(true);
-        Instance.InfoPanelImage.gameObject.SetActive(false);
-        Instance.InfoPanelName.gameObject.SetActive(false);
-        Instance.InfoPanelCost.SetActive(false);
+        Instance.BuildInfoPanel.SetActive(true);
+        Instance.BuildInfoPanelImage.gameObject.SetActive(false);
+        Instance.BuildInfoPanelName.gameObject.SetActive(false);
+        Instance.BuilldInfoPanelCost.SetActive(false);
     }
 
-    public static void DisableInfoPanel()
+    public static void DisableBuildInfoPanel()
     {
-        Instance.InfoPanel.SetActive(false);
+        Instance.BuildInfoPanel.SetActive(false);
     }
 
-    public static void ClearInfoPanel()
+    public static void ClearBuildInfoPanel()
     {
-        Instance.InfoPanelImage.gameObject.SetActive(false);
-        Instance.InfoPanelName.gameObject.SetActive(false);
-        Instance.InfoPanelCost.SetActive(false);
+        Instance.BuildInfoPanelImage.gameObject.SetActive(false);
+        Instance.BuildInfoPanelName.gameObject.SetActive(false);
+        Instance.BuilldInfoPanelCost.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type)
+    public static void UpdateBuildInfoPanel(Enums.Building_Type type)
     {
-        Instance.InfoPanelImage.gameObject.SetActive(true);
-        Instance.InfoPanelName.gameObject.SetActive(true);
-        Instance.InfoPanelCost.SetActive(true);
+        Instance.BuildInfoPanelImage.gameObject.SetActive(true);
+        Instance.BuildInfoPanelName.gameObject.SetActive(true);
+        Instance.BuilldInfoPanelCost.SetActive(true);
 
         switch (type)
         {
             case Enums.Building_Type.GARDEN:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GARDEN_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GardenCost);
+                Instance.BuildInfoPanelName.text = Constants.GARDEN_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GardenCost);
                 break;
             case Enums.Building_Type.FARM:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.FARM_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.FarmCost);
+                Instance.BuildInfoPanelName.text = Constants.FARM_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.FarmCost);
                 break;
             case Enums.Building_Type.ORCHARD:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.ORCHARD_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.OrchardCost);
+                Instance.BuildInfoPanelName.text = Constants.ORCHARD_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.OrchardCost);
                 break;
             case Enums.Building_Type.RANCH:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.RANCH_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.RanchCost);
+                Instance.BuildInfoPanelName.text = Constants.RANCH_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.RanchCost);
                 break;
             case Enums.Building_Type.HOVEL:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.HOVEL_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.HovelCost);
+                Instance.BuildInfoPanelName.text = Constants.HOVEL_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.HovelCost);
                 break;
             case Enums.Building_Type.COTTAGE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.COTTAGE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.CottageCost);
+                Instance.BuildInfoPanelName.text = Constants.COTTAGE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.CottageCost);
                 break;
             case Enums.Building_Type.APARTMENT:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.APARTMENT_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ApartmentCost);
+                Instance.BuildInfoPanelName.text = Constants.APARTMENT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ApartmentCost);
                 break;
             case Enums.Building_Type.CONDOMINIUM:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.CONDO_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.CondoCost);
+                Instance.BuildInfoPanelName.text = Constants.CONDO_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.CondoCost);
                 break;
             case Enums.Building_Type.WORKSHOP:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.WORKSHOP_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.WorkshopCost);
+                Instance.BuildInfoPanelName.text = Constants.WORKSHOP_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.WorkshopCost);
                 break;
             case Enums.Building_Type.FORGE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.FORGE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ForgeCost);
+                Instance.BuildInfoPanelName.text = Constants.FORGE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ForgeCost);
                 break;
             case Enums.Building_Type.MILL:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.MILL_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.MillCost);
+                Instance.BuildInfoPanelName.text = Constants.MILL_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.MillCost);
                 break;
             case Enums.Building_Type.FOUNDRY:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.FOUNDRY_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.FoundryCost);
+                Instance.BuildInfoPanelName.text = Constants.FOUNDRY_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.FoundryCost);
                 break;
             case Enums.Building_Type.BARRACKS:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.BARRACKS_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.BarracksCost);
+                Instance.BuildInfoPanelName.text = Constants.BARRACKS_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.BarracksCost);
                 break;
             case Enums.Building_Type.DORMITORY:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.DORMITORY_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.DormitoryCost);
+                Instance.BuildInfoPanelName.text = Constants.DORMITORY_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.DormitoryCost);
                 break;
             case Enums.Building_Type.GARRISON:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GARRISON_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GarrisonCost);
+                Instance.BuildInfoPanelName.text = Constants.GARRISON_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GarrisonCost);
                 break;
             case Enums.Building_Type.QUARTERS:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.QUARTERS_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.QuartersCost);
+                Instance.BuildInfoPanelName.text = Constants.QUARTERS_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.QuartersCost);
                 break;
             case Enums.Building_Type.WATCHTOWER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.WATCHTOWER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.WatchTowerCost);
+                Instance.BuildInfoPanelName.text = Constants.WATCHTOWER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.WatchTowerCost);
                 break;
             case Enums.Building_Type.MISSILE_COMPLEX:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.MissileComplexCost);
+                Instance.BuildInfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.MissileComplexCost);
                 break;
             case Enums.Building_Type.LASER_TOWER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.LASER_TOWER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.LaserTowerCost);
+                Instance.BuildInfoPanelName.text = Constants.LASER_TOWER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.LaserTowerCost);
                 break;
             case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.AutoMissileComplexCost);
+                Instance.BuildInfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.AutoMissileComplexCost);
                 break;
             case Enums.Building_Type.AUTO_LASER_TOWER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.AutoLaserTowerCost);
+                Instance.BuildInfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.AutoLaserTowerCost);
                 break;
             case Enums.Building_Type.RESEARCH_LAB:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.RESEARCH_LAB_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ResearchLabCost);
+                Instance.BuildInfoPanelName.text = Constants.RESEARCH_LAB_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ResearchLabCost);
                 break;
             case Enums.Building_Type.RESEARCH_COLLEGE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ResearchCollegeCost);
+                Instance.BuildInfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ResearchCollegeCost);
                 break;
             case Enums.Building_Type.RESEARCH_INSTITUTE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ResearchInstituteCost);
+                Instance.BuildInfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ResearchInstituteCost);
                 break;
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.MultiBrainCost);
+                Instance.BuildInfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.MultiBrainCost);
                 break;
             case Enums.Building_Type.STOCKPILE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.STOCKPILE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.StockpileCost);
+                Instance.BuildInfoPanelName.text = Constants.STOCKPILE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.StockpileCost);
                 break;
             case Enums.Building_Type.STOREHOUSE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.STOREHOUSE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.StorehouseCost);
+                Instance.BuildInfoPanelName.text = Constants.STOREHOUSE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.StorehouseCost);
                 break;
             case Enums.Building_Type.WAREHOUSE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.WAREHOUSE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.WarehouseCost);
+                Instance.BuildInfoPanelName.text = Constants.WAREHOUSE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.WarehouseCost);
                 break;
             case Enums.Building_Type.DEPOT:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.DEPOT_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.DepotCost);
+                Instance.BuildInfoPanelName.text = Constants.DEPOT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.DepotCost);
                 break;
             case Enums.Building_Type.SHOOTING_RANGE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ShootingRangeCost);
+                Instance.BuildInfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ShootingRangeCost);
                 break;
             case Enums.Building_Type.DEFENDERS_WALL:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.DefendersWallCost);
+                Instance.BuildInfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.DefendersWallCost);
                 break;
             case Enums.Building_Type.GUNNERS_ALLEY:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GunnersAlleyCost);
+                Instance.BuildInfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GunnersAlleyCost);
                 break;
             case Enums.Building_Type.SNIPERS_NEST:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SNIPERS_NEST_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.SnipersNestCost);
+                Instance.BuildInfoPanelName.text = Constants.SNIPERS_NEST_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.SnipersNestCost);
                 break;
             case Enums.Building_Type.SCOUT_CAMP:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SCOUT_CAMP_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ScoutCampCost);
+                Instance.BuildInfoPanelName.text = Constants.SCOUT_CAMP_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ScoutCampCost);
                 break;
             case Enums.Building_Type.ACES_ARENA:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.ACES_ARENA_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.AcesArenaCost);
+                Instance.BuildInfoPanelName.text = Constants.ACES_ARENA_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.AcesArenaCost);
                 break;
             case Enums.Building_Type.CANNONEERS_TOWER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.CannoneersTowerCost);
+                Instance.BuildInfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.CannoneersTowerCost);
                 break;
             case Enums.Building_Type.GUARDIANS_LAST_STAND:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GuardiansLastStandCost);
+                Instance.BuildInfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GuardiansLastStandCost);
                 break;
             case Enums.Building_Type.GOD_SEAT:
             case Enums.Building_Type.HYDROPONICS_TOWER:
@@ -372,100 +385,340 @@ public class UI_Manager : Singleton<UI_Manager>
         }
     }
 
-    public static void UpdateInfoPanel(Enums.Unit_Type type)
+    public static void UpdateBuildInfoPanel(Enums.Unit_Type type)
     {
-        Instance.InfoPanelImage.gameObject.SetActive(true);
-        Instance.InfoPanelName.gameObject.SetActive(true);
-        Instance.InfoPanelCost.SetActive(true);
+        Instance.BuildInfoPanelImage.gameObject.SetActive(true);
+        Instance.BuildInfoPanelName.gameObject.SetActive(true);
+        Instance.BuilldInfoPanelCost.SetActive(true);
 
         switch (type)
         {
             case Enums.Unit_Type.GRUNT:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GRUNT_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GRUNT_TRAINING_COST, true);
+                Instance.BuildInfoPanelName.text = Constants.GRUNT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GRUNT_TRAINING_COST, true);
                 break;
             case Enums.Unit_Type.SHOOTER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SHOOTER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.SHOOTER_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.SHOOTER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.SHOOTER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.DEFENDER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.DEFENDER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.DEFENDER_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.DEFENDER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.DEFENDER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.GUNNER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GUNNER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GUNNER_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.GUNNER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GUNNER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.SNIPER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SNIPER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.SNIPER_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.SNIPER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.SNIPER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.SCOUT:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.SCOUT_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.SCOUT_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.SCOUT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.SCOUT_TRAINING_COST);
                 break;
             case Enums.Unit_Type.ACE:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.ACE_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.ACE_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.ACE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.ACE_TRAINING_COST);
                 break;
             case Enums.Unit_Type.CANNONEER:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.CANNONEER_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.CANNONEER_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.CANNONEER_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.CANNONEER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.GUARDIAN:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
-                Instance.InfoPanelName.text = Constants.GUARDIAN_NAME;
-                Instance.UpdateInfoCostsPanel(Constants.GUARDIAN_TRAINING_COST);
+                Instance.BuildInfoPanelName.text = Constants.GUARDIAN_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.GUARDIAN_TRAINING_COST);
                 break;
             default:
                 break;
         }
     }
 
-    private void UpdateInfoCostsPanel(BuildingCost cost)
+    private void UpdateBuildInfoCostsPanel(BuildingCost cost)
     {
-        InfoPanelCost.transform.GetChild(0).gameObject.SetActive(true);
-        InfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
-        InfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
-        InfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredHexes.ToString();
-        InfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredPopulation.ToString();
-        InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-        InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-        InfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-        InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+        BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(true);
+        BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
+        BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
+        BuilldInfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredHexes.ToString();
+        BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredPopulation.ToString();
+        BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+        BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+        BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+        BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
     }
 
-    private void UpdateInfoCostsPanel(UnitTrainingCost cost, bool isGrunt = false)
+    private void UpdateBuildInfoCostsPanel(UnitTrainingCost cost, bool isGrunt = false)
     {
         if (isGrunt)
         {
-            InfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
-            InfoPanelCost.transform.GetChild(4).gameObject.SetActive(false);
-            InfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
-            InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-            InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-            InfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-            InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+            BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
+            BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(false);
+            BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
+            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
         }
         else
         {
-            InfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
-            InfoPanelCost.transform.GetChild(1).gameObject.SetActive(false);
-            InfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
-            InfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-            InfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-            InfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-            InfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+            BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
+            BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(false);
+            BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
+            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
         }
 
+    }
+
+    public static void EnableInfoPanel()
+    {
+        Instance.InfoPanel.SetActive(true);
+    }
+
+    public static void DisableInfoPanel()
+    {
+        Instance.InfoPanel.SetActive(false);
+    }
+
+    public static void UpdateInfoPanel(Enums.Building_Type type)
+    {
+        switch (type)
+        {
+            case Enums.Building_Type.GOD_SEAT:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.GOD_SEAT_NAME;
+                Instance.InfoPanelDesc.text = Constants.GOD_SEAT_DESC;
+                break;
+            case Enums.Building_Type.GARDEN:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.GARDEN_NAME;
+                Instance.InfoPanelDesc.text = Constants.GARDEN_DESC;
+                break;
+            case Enums.Building_Type.FARM:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.FARM_NAME;
+                Instance.InfoPanelDesc.text = Constants.FARM_DESC;
+                break;
+            case Enums.Building_Type.ORCHARD:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.ORCHARD_NAME;
+                Instance.InfoPanelDesc.text = Constants.ORCHARD_DESC;
+                break;
+            case Enums.Building_Type.RANCH:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.RANCH_NAME;
+                Instance.InfoPanelDesc.text = Constants.RANCH_DESC;
+                break;
+            case Enums.Building_Type.HYDROPONICS_TOWER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.HYDROPONICS_TOWER_NAME;
+                Instance.InfoPanelDesc.text = Constants.HYDROPONICS_TOWER_DESC;
+                break;
+            case Enums.Building_Type.HOVEL:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.HOVEL_NAME;
+                Instance.InfoPanelDesc.text = Constants.HOVEL_DESC;
+                break;
+            case Enums.Building_Type.COTTAGE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.COTTAGE_NAME;
+                Instance.InfoPanelDesc.text = Constants.COTTAGE_DESC;
+                break;
+            case Enums.Building_Type.APARTMENT:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.APARTMENT_NAME;
+                Instance.InfoPanelDesc.text = Constants.APARTMENT_DESC;
+                break;
+            case Enums.Building_Type.CONDOMINIUM:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.CONDO_NAME;
+                Instance.InfoPanelDesc.text = Constants.CONDO_DESC;
+                break;
+            case Enums.Building_Type.VILLA:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.VILLA_NAME;
+                Instance.InfoPanelDesc.text = Constants.VILLA_DESC;
+                break;
+            case Enums.Building_Type.WORKSHOP:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.WORKSHOP_NAME;
+                Instance.InfoPanelDesc.text = Constants.WORKSHOP_DESC;
+                break;
+            case Enums.Building_Type.FORGE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.FORGE_NAME;
+                Instance.InfoPanelDesc.text = Constants.FORGE_DESC;
+                break;
+            case Enums.Building_Type.MILL:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.MILL_NAME;
+                Instance.InfoPanelDesc.text = Constants.MILL_DESC;
+                break;
+            case Enums.Building_Type.FOUNDRY:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.FOUNDRY_NAME;
+                Instance.InfoPanelDesc.text = Constants.FOUNDRY_DESC;
+                break;
+            case Enums.Building_Type.FACTORY:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.FACTORY_NAME;
+                Instance.InfoPanelDesc.text = Constants.FACTORY_DESC;
+                break;
+            case Enums.Building_Type.BARRACKS:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.BARRACKS_NAME;
+                Instance.InfoPanelDesc.text = Constants.BARRACKS_DESC;
+                break;
+            case Enums.Building_Type.DORMITORY:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.DORMITORY_NAME;
+                Instance.InfoPanelDesc.text = Constants.DORMITORY_DESC;
+                break;
+            case Enums.Building_Type.GARRISON:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.GARRISON_NAME;
+                Instance.InfoPanelDesc.text = Constants.GARRISON_DESC;
+                break;
+            case Enums.Building_Type.QUARTERS:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.QUARTERS_NAME;
+                Instance.InfoPanelDesc.text = Constants.QUARTERS_DESC;
+                break;
+            case Enums.Building_Type.HEADQUARTERS:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.HEADQUARTERS_NAME;
+                Instance.InfoPanelDesc.text = Constants.HEADQUARTERS_DESC;
+                break;
+            case Enums.Building_Type.WATCHTOWER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.WATCHTOWER_NAME;
+                Instance.InfoPanelDesc.text = Constants.WATCHTOWER_DESC;
+                break;
+            case Enums.Building_Type.MISSILE_COMPLEX:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
+                Instance.InfoPanelDesc.text = Constants.MISSILE_COMPLEX_DESC;
+                break;
+            case Enums.Building_Type.LASER_TOWER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.LASER_TOWER_NAME;
+                Instance.InfoPanelDesc.text = Constants.LASER_TOWER_DESC;
+                break;
+            case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
+                Instance.InfoPanelDesc.text = Constants.AUTO_MISSILE_COMPLEX_DESC;
+                break;
+            case Enums.Building_Type.AUTO_LASER_TOWER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
+                Instance.InfoPanelDesc.text = Constants.AUTO_LASER_TOWER_DESC;
+                break;
+            case Enums.Building_Type.RESEARCH_LAB:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.RESEARCH_LAB_NAME;
+                Instance.InfoPanelDesc.text = Constants.RESEARCH_LAB_DESC;
+                break;
+            case Enums.Building_Type.RESEARCH_COLLEGE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
+                Instance.InfoPanelDesc.text = Constants.RESEARCH_COLLEGE_DESC;
+                break;
+            case Enums.Building_Type.RESEARCH_INSTITUTE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
+                Instance.InfoPanelDesc.text = Constants.RESEARCH_INSTITUTE_DESC;
+                break;
+            case Enums.Building_Type.MULTIBRAIN_COMPLEX:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
+                Instance.InfoPanelDesc.text = Constants.MULTIBRAIN_COMPLEX_DESC;
+                break;
+            case Enums.Building_Type.QUANTUM_BRAIN:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.QUANTUM_BRAIN_NAME;
+                Instance.InfoPanelDesc.text = Constants.QUANTUM_BRAIN_DESC;
+                break;
+            case Enums.Building_Type.STOCKPILE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.STOCKPILE_NAME;
+                Instance.InfoPanelDesc.text = Constants.STOCKPILE_DESC;
+                break;
+            case Enums.Building_Type.STOREHOUSE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.STOREHOUSE_NAME;
+                Instance.InfoPanelDesc.text = Constants.STOREHOUSE_DESC;
+                break;
+            case Enums.Building_Type.WAREHOUSE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.WAREHOUSE_NAME;
+                Instance.InfoPanelDesc.text = Constants.WAREHOUSE_DESC;
+                break;
+            case Enums.Building_Type.DEPOT:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.DEPOT_NAME;
+                Instance.InfoPanelDesc.text = Constants.DEPOT_DESC;
+                break;
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.DISTRIBUTION_CENTER_NAME;
+                Instance.InfoPanelDesc.text = Constants.DISTRIBUTION_CENTER_DESC;
+                break;
+            case Enums.Building_Type.SHOOTING_RANGE:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
+                Instance.InfoPanelDesc.text = Constants.SHOOTING_RANGE_DESC;
+                break;
+            case Enums.Building_Type.DEFENDERS_WALL:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
+                Instance.InfoPanelDesc.text = Constants.DEFENDERS_WALL_DESC;
+                break;
+            case Enums.Building_Type.GUNNERS_ALLEY:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
+                Instance.InfoPanelDesc.text = Constants.GUNNERS_ALLEY_DESC;
+                break;
+            case Enums.Building_Type.SNIPERS_NEST:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.SNIPERS_NEST_NAME;
+                Instance.InfoPanelDesc.text = Constants.SNIPERS_NEST_DESC;
+                break;
+            case Enums.Building_Type.SCOUT_CAMP:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.SCOUT_CAMP_NAME;
+                Instance.InfoPanelDesc.text = Constants.SCOUT_CAMP_DESC;
+                break;
+            case Enums.Building_Type.ACES_ARENA:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.ACES_ARENA_NAME;
+                Instance.InfoPanelDesc.text = Constants.ACES_ARENA_DESC;
+                break;
+            case Enums.Building_Type.CANNONEERS_TOWER:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
+                Instance.InfoPanelDesc.text = Constants.CANNONEERS_TOWER_DESC;
+                break;
+            case Enums.Building_Type.GUARDIANS_LAST_STAND:
+                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
+                Instance.InfoPanelDesc.text = Constants.GUARDIANS_LAST_STAND_DESC;
+                break;
+            default:
+
+                break;
+        }
     }
 
     public static void UpdateResourcesText()

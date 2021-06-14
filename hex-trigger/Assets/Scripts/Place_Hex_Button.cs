@@ -29,11 +29,11 @@ public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UI_Manager.UpdateInfoPanel(buildingType);
+        UI_Manager.UpdateBuildInfoPanel(buildingType);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UI_Manager.ClearInfoPanel();
+        UI_Manager.ClearBuildInfoPanel();
     }
 }
