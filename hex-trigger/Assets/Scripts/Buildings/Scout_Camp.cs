@@ -9,7 +9,7 @@ public class Scout_Camp : Building_Military
         //short circuting parent method
     }
 
-    protected override void UpdateProductionValue()
+    public override void UpdateProductionValue()
     {
         AddToResourceProduction();
     }

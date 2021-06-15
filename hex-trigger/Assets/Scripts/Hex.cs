@@ -29,6 +29,7 @@ public class Hex : MonoBehaviour
     {
         Neighbors.Add(neighbor);
         ConnectedBuilding.DetermineBuildingTier();
+        ConnectedBuilding.UpdateProductionValue();
     }
 
     public void AddToNeighbors()
@@ -50,8 +51,9 @@ public class Hex : MonoBehaviour
         {
             ///TODO on left click
             ///zoom in on hex
-        
+
             ///enable and populate hex info panel
+            UI_Manager.UpdateInfoPanel(ConnectedBuilding.BuildingType, ConnectedBuilding.AdjustedProduction, ConnectedBuilding.BonusFromNeighbors);
         
             ///highlight hex
             City_Manager.Instance.MoveHighlighterToHex(this);

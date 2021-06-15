@@ -9,7 +9,7 @@ public class Gunners_Alley : Building_Military
         //short circuting parent method
     }
 
-    protected override void UpdateProductionValue()
+    public override void UpdateProductionValue()
     {
         AddToResourceProduction();
     }

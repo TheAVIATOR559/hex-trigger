@@ -9,7 +9,7 @@ public class Guardians_Last_Stand : Building_Military
         //short circuting parent method
     }
 
-    protected override void UpdateProductionValue()
+    public override void UpdateProductionValue()
     {
         AddToResourceProduction();
     }

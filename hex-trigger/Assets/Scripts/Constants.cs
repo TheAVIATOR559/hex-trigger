@@ -86,11 +86,11 @@ public static class Constants
 
     #region Production Values
     #region Tier Bonuses
-    public static float TIER_I_BONUS = 1.0f;
-    public static float TIER_II_BONUS = 1.25f;
-    public static float TIER_III_BONUS = 1.5f;
-    public static float TIER_IV_BONUS = 2.0f;
-    public static float TIER_V_BONUS = 3.0f;
+    public static float TIER_I_BONUS = 0.0f;
+    public static float TIER_II_BONUS = 0.25f;
+    public static float TIER_III_BONUS = 0.5f;
+    public static float TIER_IV_BONUS = 1.0f;
+    public static float TIER_V_BONUS = 2.0f;
     #endregion
     #region Food Production
     public static int FOOD_I_PROD = 1;

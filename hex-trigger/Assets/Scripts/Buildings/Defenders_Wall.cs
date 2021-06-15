@@ -9,7 +9,7 @@ public class Defenders_Wall : Building_Military
         //short circuting parent method
     }
 
-    protected override void UpdateProductionValue()
+    public override void UpdateProductionValue()
     {
         AddToResourceProduction();
     }

@@ -26,7 +26,10 @@ public class UI_Manager : Singleton<UI_Manager>
     private Image InfoPanelImage;
     private TMP_Text InfoPanelName;
     private TMP_Text InfoPanelDesc;
-    private GameObject ProductionsPanel;
+    private TMP_Text InfoPanelBaseProd;
+    private TMP_Text InfoPanelAdjProd;
+    private TMP_Text InfoPanelBonusToOthers;
+    private TMP_Text InfoPanelBonusFromOthers;
 
     private GameObject ResourcePanel;
     private GameObject MilitaryPanel;
@@ -121,7 +124,10 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
         InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         InfoPanelDesc = InfoPanel.transform.GetChild(2).GetComponent<TMP_Text>();
-        ProductionsPanel = InfoPanel.transform.GetChild(3).gameObject;
+        InfoPanelBaseProd = InfoPanel.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelAdjProd = InfoPanel.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelBonusToOthers = InfoPanel.transform.GetChild(3).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelBonusFromOthers = InfoPanel.transform.GetChild(3).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
 
         ResetCityUIState();
     }
@@ -491,233 +497,319 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.InfoPanel.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type)
+    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)
     {
+        EnableInfoPanel();
+
         switch (type)
         {
             case Enums.Building_Type.GOD_SEAT:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GOD_SEAT_NAME;
                 Instance.InfoPanelDesc.text = Constants.GOD_SEAT_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GARDEN:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GARDEN_NAME;
                 Instance.InfoPanelDesc.text = Constants.GARDEN_DESC;
+                Instance.UpdateProductionPanels(Constants.FOOD_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FARM:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.FARM_NAME;
                 Instance.InfoPanelDesc.text = Constants.FARM_DESC;
+                Instance.UpdateProductionPanels(Constants.FOOD_II_PROD, adjustedProduction, Constants.TIER_II_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.ORCHARD:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.ORCHARD_NAME;
                 Instance.InfoPanelDesc.text = Constants.ORCHARD_DESC;
+                Instance.UpdateProductionPanels(Constants.FOOD_III_PROD, adjustedProduction, Constants.TIER_III_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RANCH:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.RANCH_NAME;
                 Instance.InfoPanelDesc.text = Constants.RANCH_DESC;
+                Instance.UpdateProductionPanels(Constants.FOOD_IV_PROD, adjustedProduction, Constants.TIER_IV_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HYDROPONICS_TOWER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.HYDROPONICS_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.HYDROPONICS_TOWER_DESC;
+                Instance.UpdateProductionPanels(Constants.FOOD_V_PROD, adjustedProduction, Constants.TIER_V_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HOVEL:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.HOVEL_NAME;
                 Instance.InfoPanelDesc.text = Constants.HOVEL_DESC;
+                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.COTTAGE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.COTTAGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.COTTAGE_DESC;
+                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.APARTMENT:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.APARTMENT_NAME;
                 Instance.InfoPanelDesc.text = Constants.APARTMENT_DESC;
+                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.CONDOMINIUM:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.CONDO_NAME;
                 Instance.InfoPanelDesc.text = Constants.CONDO_DESC;
+                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.VILLA:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.VILLA_NAME;
                 Instance.InfoPanelDesc.text = Constants.VILLA_DESC;
+                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WORKSHOP:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.WORKSHOP_NAME;
                 Instance.InfoPanelDesc.text = Constants.WORKSHOP_DESC;
+                Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FORGE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.FORGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.FORGE_DESC;
+                Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.MILL:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.MILL_NAME;
                 Instance.InfoPanelDesc.text = Constants.MILL_DESC;
+                Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FOUNDRY:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.FOUNDRY_NAME;
                 Instance.InfoPanelDesc.text = Constants.FOUNDRY_DESC;
+                Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FACTORY:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.FACTORY_NAME;
                 Instance.InfoPanelDesc.text = Constants.FACTORY_DESC;
+                Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.BARRACKS:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.BARRACKS_NAME;
                 Instance.InfoPanelDesc.text = Constants.BARRACKS_DESC;
+                Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DORMITORY:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DORMITORY_NAME;
                 Instance.InfoPanelDesc.text = Constants.DORMITORY_DESC;
+                Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.GARRISON:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GARRISON_NAME;
                 Instance.InfoPanelDesc.text = Constants.GARRISON_DESC;
+                Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.QUARTERS:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.QUARTERS_NAME;
                 Instance.InfoPanelDesc.text = Constants.QUARTERS_DESC;
+                Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HEADQUARTERS:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.HEADQUARTERS_NAME;
                 Instance.InfoPanelDesc.text = Constants.HEADQUARTERS_DESC;
+                Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WATCHTOWER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.WATCHTOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.WATCHTOWER_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.MISSILE_COMPLEX:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.MISSILE_COMPLEX_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.LASER_TOWER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.LASER_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.LASER_TOWER_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.AUTO_MISSILE_COMPLEX_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.AUTO_LASER_TOWER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.AUTO_LASER_TOWER_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.RESEARCH_LAB:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.RESEARCH_LAB_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_LAB_DESC;
+                Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RESEARCH_COLLEGE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_COLLEGE_DESC;
+                Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RESEARCH_INSTITUTE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_INSTITUTE_DESC;
+                Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.MULTIBRAIN_COMPLEX_DESC;
+                Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.QUANTUM_BRAIN:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.QUANTUM_BRAIN_NAME;
                 Instance.InfoPanelDesc.text = Constants.QUANTUM_BRAIN_DESC;
+                Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.STOCKPILE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.STOCKPILE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOCKPILE_DESC;
+                Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.STOREHOUSE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.STOREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOREHOUSE_DESC;
+                Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WAREHOUSE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.WAREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.WAREHOUSE_DESC;
+                Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DEPOT:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.InfoPanelDesc.text = Constants.DEPOT_DESC;
+                Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DISTRIBUTION_CENTER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DISTRIBUTION_CENTER_NAME;
                 Instance.InfoPanelDesc.text = Constants.DISTRIBUTION_CENTER_DESC;
+                Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.SHOOTING_RANGE:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.SHOOTING_RANGE_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.DEFENDERS_WALL:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
                 Instance.InfoPanelDesc.text = Constants.DEFENDERS_WALL_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GUNNERS_ALLEY:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
                 Instance.InfoPanelDesc.text = Constants.GUNNERS_ALLEY_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.SNIPERS_NEST:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.SNIPERS_NEST_NAME;
                 Instance.InfoPanelDesc.text = Constants.SNIPERS_NEST_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.SCOUT_CAMP:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.SCOUT_CAMP_NAME;
                 Instance.InfoPanelDesc.text = Constants.SCOUT_CAMP_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.ACES_ARENA:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.ACES_ARENA_NAME;
                 Instance.InfoPanelDesc.text = Constants.ACES_ARENA_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.CANNONEERS_TOWER:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.CANNONEERS_TOWER_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GUARDIANS_LAST_STAND:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
                 Instance.InfoPanelDesc.text = Constants.GUARDIANS_LAST_STAND_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             default:
 
                 break;
+        }
+    }
+
+    private void UpdateProductionPanels(float baseProd, float adjProd, float bonusToNeighbors, float bonusFromNeighbors)
+    {
+        ///may need own override for defense hexes
+        if(baseProd == -1)
+        {
+            InfoPanelBaseProd.text = "N/A";
+        }
+        else
+        {
+            InfoPanelBaseProd.text = baseProd.ToString();
+        }
+        
+        if(adjProd == -1)
+        {
+            InfoPanelAdjProd.text = "N/A";
+        }
+        else
+        {
+            InfoPanelAdjProd.text = adjProd.ToString();
+        }
+
+        if(bonusToNeighbors == -1)
+        {
+            InfoPanelBonusToOthers.text = "N/A";
+        }
+        else
+        {
+            InfoPanelBonusToOthers.text = (bonusToNeighbors * 100) + "%";
+        }
+
+        if(bonusFromNeighbors == -1)
+        {
+            InfoPanelBonusFromOthers.text = "N/A";
+        }
+        else
+        {
+            InfoPanelBonusFromOthers.text = (bonusFromNeighbors * 100) + "%";
         }
     }
 

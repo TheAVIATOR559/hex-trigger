@@ -12,7 +12,8 @@ public class Building : MonoBehaviour
 
     [SerializeField] protected GameObject model;
 
-    [SerializeField] protected float ProductionValue;
+    public float AdjustedProduction = 0;
+    public float BonusFromNeighbors = 1;
 
     private Enums.Building_Tier prevTier;
 
@@ -70,7 +71,6 @@ public class Building : MonoBehaviour
         if(BuildingTier != prevTier)
         {
             UpdateModel();
-            UpdateProductionValue();
         }
     }
 
@@ -85,21 +85,37 @@ public class Building : MonoBehaviour
         Destroy(prevModel);
     }
 
-    protected virtual void UpdateProductionValue()
+    public virtual void UpdateProductionValue()
     {
+        //TODO THE MATH DONT ADD UP SOMEHWERE
+        BonusFromNeighbors = 1;
+
         RemoveFromResourceProduction();
-        ProductionValue = GetProductionBonus(BuildingTier) * GetProductionValue(BuildingTier, HexType);
+        AdjustedProduction = GetProductionValue(BuildingTier, HexType);
+
+        foreach(Hex neighbor in connectedHex.Neighbors)
+        {
+            if(neighbor.ConnectedBuilding.BuildingType == this.BuildingType)
+            {
+                BonusFromNeighbors += GetProductionBonus(neighbor.ConnectedBuilding.BuildingTier);
+            }   
+        }
+
+        Debug.Log("new prod bonus :: " + BonusFromNeighbors);
+
+        AdjustedProduction *= BonusFromNeighbors;
+
         AddToResourceProduction();
     }
 
     protected virtual void AddToResourceProduction()
     {
-        Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(ProductionValue));
+        Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
     }
 
     protected virtual void RemoveFromResourceProduction()
     {
-        Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(ProductionValue));
+        Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
     }
 
     public static float GetProductionBonus(Enums.Building_Tier tier)
