@@ -27,9 +27,14 @@ public class Hex : MonoBehaviour
 
     public void AddNeighbor(Hex neighbor)
     {
+        if(neighbor == this)
+        {
+            return;
+        }
+
         Neighbors.Add(neighbor);
         ConnectedBuilding.DetermineBuildingTier();
-        ConnectedBuilding.UpdateProductionValue();
+        //ConnectedBuilding.UpdateProductionValue();
     }
 
     public void AddToNeighbors()

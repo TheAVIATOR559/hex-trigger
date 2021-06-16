@@ -800,7 +800,7 @@ public class UI_Manager : Singleton<UI_Manager>
         }
         else
         {
-            InfoPanelBonusToOthers.text = (bonusToNeighbors * 100) + "%";
+            InfoPanelBonusToOthers.text = "+" + (bonusToNeighbors * 100) + "%";
         }
 
         if(bonusFromNeighbors == -1)
@@ -809,7 +809,7 @@ public class UI_Manager : Singleton<UI_Manager>
         }
         else
         {
-            InfoPanelBonusFromOthers.text = (bonusFromNeighbors * 100) + "%";
+            InfoPanelBonusFromOthers.text = "+" + (bonusFromNeighbors * 100) + "%";
         }
     }
 

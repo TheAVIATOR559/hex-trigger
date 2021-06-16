@@ -12,7 +12,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public int AvailablePopulation;//population should increase over time and deduct based on building costs
 
-    public int AvailableIndustry;//currently available industry, increase based on industry production
+    //TODO rejig to a capacity system like military???
+    public int AvailableIndustry;//currently available industry, increase based on industry production 
 
     public int AvailableIsolium;//currently available isolium, increases based on isolium production
 

@@ -24,7 +24,7 @@ public class Building : MonoBehaviour
 
     public virtual void Initalize()
     {
-        UpdateProductionValue();
+        //UpdateProductionValue();
     }
 
     public virtual void DetermineBuildingTier()
@@ -88,24 +88,32 @@ public class Building : MonoBehaviour
     public virtual void UpdateProductionValue()
     {
         //TODO THE MATH DONT ADD UP SOMEHWERE
-        BonusFromNeighbors = 1;
+        BonusFromNeighbors = 0;
 
         RemoveFromResourceProduction();
         AdjustedProduction = GetProductionValue(BuildingTier, HexType);
 
         foreach(Hex neighbor in connectedHex.Neighbors)
         {
-            if(neighbor.ConnectedBuilding.BuildingType == this.BuildingType)
+            if(neighbor.ConnectedBuilding.HexType == this.HexType)
             {
                 BonusFromNeighbors += GetProductionBonus(neighbor.ConnectedBuilding.BuildingTier);
             }   
         }
 
-        Debug.Log("new prod bonus :: " + BonusFromNeighbors);
+        //Debug.Log("new prod bonus :: " + BonusFromNeighbors);
 
-        AdjustedProduction *= BonusFromNeighbors;
+        AdjustedProduction += (AdjustedProduction * BonusFromNeighbors);
 
         AddToResourceProduction();
+    }
+
+    public virtual void UpdateNeighborProductionValues()
+    {
+        foreach(Hex neighbor in connectedHex.Neighbors)
+        {
+            neighbor.ConnectedBuilding.UpdateProductionValue();
+        }
     }
 
     protected virtual void AddToResourceProduction()

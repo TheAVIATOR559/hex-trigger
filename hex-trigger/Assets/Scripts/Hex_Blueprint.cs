@@ -74,6 +74,10 @@ public class Hex_Blueprint : MonoBehaviour
         City_Manager.SetupNeighbors(connectedHex);
         connectedHex.AddToNeighbors();
 
+        connectedHex.ConnectedBuilding.UpdateProductionValue();
+        connectedHex.ConnectedBuilding.UpdateNeighborProductionValues();
+        
+
         //update available placement position
         City_Manager.Instance.UpdateAvialableHexPositions();
 
