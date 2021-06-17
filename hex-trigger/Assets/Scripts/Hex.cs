@@ -54,9 +54,6 @@ public class Hex : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            ///TODO on left click
-            ///zoom in on hex
-
             ///enable and populate hex info panel
             UI_Manager.UpdateInfoPanel(ConnectedBuilding.BuildingType, ConnectedBuilding.AdjustedProduction, ConnectedBuilding.BonusFromNeighbors);
         
@@ -66,17 +63,13 @@ public class Hex : MonoBehaviour
 
         if(Input.GetMouseButtonUp(1))
         {
-            ///TODO on right click
-            ///zoom out to previous camera position
-
             ///disable hex info panel
+            UI_Manager.DisableInfoPanel();
 
             ///unhighlight hex
             City_Manager.Instance.UnhighlightHex();
         }
     }
-
-    
 
     public static Vector3 GetWorldCoordFromHexCoord(Vector2Int vector)
     {

@@ -20,9 +20,6 @@ public class Camera_Control : MonoBehaviour
 
     [SerializeField] Transform child;
 
-    private Vector3 prevPosition;
-    private Quaternion prevRotation;
-
     private void Awake()
     {
         Instance = this;
@@ -122,18 +119,5 @@ public class Camera_Control : MonoBehaviour
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
-    }
-
-    public static void FocusOnHex(Hex hex)
-    {
-        Instance.prevPosition = Instance.transform.position;
-        Instance.prevRotation = Instance.transform.rotation;
-
-        Instance.transform.LookAt(hex.transform);
-    }
-
-    public static void UnFocusOnHex()
-    {
-
     }
 }

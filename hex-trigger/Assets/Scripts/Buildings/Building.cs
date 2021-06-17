@@ -24,7 +24,7 @@ public class Building : MonoBehaviour
 
     public virtual void Initalize()
     {
-        //UpdateProductionValue();
+
     }
 
     public virtual void DetermineBuildingTier()
@@ -71,6 +71,8 @@ public class Building : MonoBehaviour
         if(BuildingTier != prevTier)
         {
             UpdateModel();
+            UpdateProductionValue();
+            UpdateNeighborProductionValues();
         }
     }
 
@@ -87,7 +89,6 @@ public class Building : MonoBehaviour
 
     public virtual void UpdateProductionValue()
     {
-        //TODO THE MATH DONT ADD UP SOMEHWERE
         BonusFromNeighbors = 0;
 
         RemoveFromResourceProduction();
