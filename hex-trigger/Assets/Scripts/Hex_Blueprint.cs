@@ -97,6 +97,7 @@ public class Hex_Blueprint : MonoBehaviour
     {
         //reenable the place hex panel
         UI_Manager.ResetCityUIState();
+        City_Manager.Instance.UnhighlightHex();
 
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();

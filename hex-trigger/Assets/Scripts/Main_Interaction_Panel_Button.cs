@@ -11,10 +11,12 @@ public class Main_Interaction_Panel_Button : MonoBehaviour
         if (panelToEnable.activeSelf)
         {
             UI_Manager.ResetCityUIState();
+            City_Manager.Instance.UnhighlightHex();
         }
         else
         {
             UI_Manager.ResetCityUIState();
+            City_Manager.Instance.UnhighlightHex();
             UI_Manager.EnableBuildInfoPanel();
             panelToEnable.SetActive(true);
         }

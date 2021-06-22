@@ -9,4 +9,10 @@ public class Close_Menu_Button : MonoBehaviour
     {
         PanelToClose.SetActive(false);
     }
+
+    public void CloseInfoPanel()
+    {
+        PanelToClose.SetActive(false);
+        City_Manager.Instance.UnhighlightHex();
+    }
 }

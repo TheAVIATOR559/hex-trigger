@@ -24,7 +24,7 @@ public class Building : MonoBehaviour
 
     public virtual void Initalize()
     {
-
+        //instantiate overivew canvas object
     }
 
     public virtual void DetermineBuildingTier()
@@ -70,10 +70,16 @@ public class Building : MonoBehaviour
 
         if(BuildingTier != prevTier)
         {
+            UpdateOverviewPanel();
             UpdateModel();
             UpdateProductionValue();
             UpdateNeighborProductionValues();
         }
+    }
+
+    protected virtual void UpdateOverviewPanel()
+    {
+        //todo fill me in
     }
 
     protected virtual void UpdateModel()

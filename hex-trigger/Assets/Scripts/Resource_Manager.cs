@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Resource_Manager : Singleton<Resource_Manager>
 {
+    //TODO rejig to be distance from god seat and player must invest in god seat to expand hex range
     public int AvailableHexes;//TODO this will need its own formula for 'buying' new hexes
 
     public int AvailableFood;//currently available food, increases based on food production
