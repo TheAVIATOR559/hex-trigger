@@ -70,16 +70,11 @@ public class Building : MonoBehaviour
 
         if(BuildingTier != prevTier)
         {
-            UpdateOverviewPanel();
+            connectedHex.UpdateOverviewTier(BuildingTier);
             UpdateModel();
             UpdateProductionValue();
             UpdateNeighborProductionValues();
         }
-    }
-
-    protected virtual void UpdateOverviewPanel()
-    {
-        //todo fill me in
     }
 
     protected virtual void UpdateModel()

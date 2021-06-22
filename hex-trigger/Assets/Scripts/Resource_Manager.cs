@@ -5,7 +5,7 @@ using UnityEngine;
 public class Resource_Manager : Singleton<Resource_Manager>
 {
     //TODO rejig to be distance from god seat and player must invest in god seat to expand hex range
-    public int AvailableHexes;//TODO this will need its own formula for 'buying' new hexes
+    public int AvailableHexes;
 
     public int AvailableFood;//currently available food, increases based on food production
 
@@ -48,16 +48,16 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public int CannoneerCount;
     public int GuardianCount;
 
-    [SerializeField] private int FoodProduction;
-    [SerializeField] private int IndustryProduction;
-    [SerializeField] private int IsoliumProduction;
-    [SerializeField] private int ResearchProduction;
-    [SerializeField] private int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
-    [SerializeField] private float ShooterTrainingCostReduction = 1;
-    [SerializeField] private float DefenderTrainingCostReduction = 1;
-    [SerializeField] private float GunnerTrainingCostReduction = 1;
-    [SerializeField] private float SniperTrainingCostReduction = 1;
-    [SerializeField] private float ScoutTrainingCostReduction = 1;
+    public int FoodProduction = 0;
+    public int IndustryProduction = 0;
+    public int IsoliumProduction = 0;
+    public int ResearchProduction = 0;
+    public int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
+    public float ShooterTrainingCostReduction = 1;
+    public float DefenderTrainingCostReduction = 1;
+    public float GunnerTrainingCostReduction = 1;
+    public float SniperTrainingCostReduction = 1;
+    public float ScoutTrainingCostReduction = 1;
 
     public bool ResourcesTickPaused = false;
 

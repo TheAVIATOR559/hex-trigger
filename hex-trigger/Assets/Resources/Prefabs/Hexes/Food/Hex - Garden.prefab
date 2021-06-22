@@ -126,17 +126,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880881026118205399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000023841858}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1842268536665105548}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.53, y: -0.0134887695}
-  m_SizeDelta: {x: -2.53, y: -0.01}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.25241286}
+  m_AnchorMax: {x: 0.96120465, y: 0.73951364}
+  m_AnchoredPosition: {x: 0.12116432, y: 0.36157608}
+  m_SizeDelta: {x: 0.24240923, y: -0.38974166}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6476243329032302226
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -532,6 +532,7 @@ MonoBehaviour:
   Position: {x: 0, y: 0}
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
+  OverviewTierText: {fileID: 1312530500691049859}
   standardMaterial: {fileID: 2100000, guid: 442ddf6691d6f41469a5af618249820c, type: 2}
 --- !u!114 &7760737136462757891
 MonoBehaviour:

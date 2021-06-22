@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Hex : MonoBehaviour
 {
     public Vector2Int Position;
     public List<Hex> Neighbors = new List<Hex>();
     public Building ConnectedBuilding;
+
+    [SerializeField] TMP_Text OverviewTierText;
 
     [SerializeField] Material standardMaterial;
 
@@ -68,6 +71,30 @@ public class Hex : MonoBehaviour
 
             ///unhighlight hex
             City_Manager.Instance.UnhighlightHex();
+        }
+    }
+
+    public void UpdateOverviewTier(Enums.Building_Tier newTier)
+    {
+        switch (newTier)
+        {
+            case Enums.Building_Tier.I:
+                OverviewTierText.text = "I";
+                break;
+            case Enums.Building_Tier.II:
+                OverviewTierText.text = "II";
+                break;
+            case Enums.Building_Tier.III:
+                OverviewTierText.text = "III";
+                break;
+            case Enums.Building_Tier.IV:
+                OverviewTierText.text = "IV";
+                break;
+            case Enums.Building_Tier.V:
+                OverviewTierText.text = "V";
+                break;
+            default:
+                break;
         }
     }
 

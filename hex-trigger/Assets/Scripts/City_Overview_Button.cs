@@ -23,6 +23,16 @@ public class City_Overview_Button : MonoBehaviour
 
         //enable overview canvas
         UI_Manager.ResetCityUIState();
+        
+        if(CityOverviewCamera.activeSelf)
+        {
+            UI_Manager.EnableCityOverviewPanel();
+        }
+        else
+        {
+            UI_Manager.DisableCityOverviewPanel();
+        }
+
         City_Manager.Instance.UnhighlightHex();
     }
 }

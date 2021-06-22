@@ -61,6 +61,21 @@ public class UI_Manager : Singleton<UI_Manager>
     private TMP_Text CannoneerCountText;
     private TMP_Text GuardianCountText;
 
+    private GameObject CityOverviewPanel;
+    private TMP_Text FoodProdText;
+    private TMP_Text PopGrowthText;
+    private TMP_Text IndustryProdText;
+    private TMP_Text IsoliumProdText;
+    private TMP_Text ResearchSpeedText;
+    private TMP_Text ShooterCostReducText;
+    private TMP_Text DefenderCostReducText;
+    private TMP_Text GunnerCostReducText;
+    private TMP_Text SniperCostReducText;
+    private TMP_Text ScoutCostReducText;
+    private TMP_Text MaxAceCountText;
+    private TMP_Text MaxCannoneerCountText;
+    private TMP_Text MaxGuardianCountText;
+
     private GameObject currTierPanel;
 
     private bool HexTextFlashing = false;
@@ -129,6 +144,21 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoPanelBonusToOthers = InfoPanel.transform.GetChild(3).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusFromOthers = InfoPanel.transform.GetChild(3).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
 
+        CityOverviewPanel = CityCanvas.transform.GetChild(13).gameObject;
+        FoodProdText = CityOverviewPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        PopGrowthText = CityOverviewPanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        IndustryProdText = CityOverviewPanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
+        IsoliumProdText = CityOverviewPanel.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+        ResearchSpeedText = CityOverviewPanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
+        ShooterCostReducText = CityOverviewPanel.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>();
+        DefenderCostReducText = CityOverviewPanel.transform.GetChild(6).GetChild(1).GetComponent<TMP_Text>();
+        GunnerCostReducText = CityOverviewPanel.transform.GetChild(7).GetChild(1).GetComponent<TMP_Text>();
+        SniperCostReducText = CityOverviewPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
+        ScoutCostReducText = CityOverviewPanel.transform.GetChild(9).GetChild(1).GetComponent<TMP_Text>();
+        MaxAceCountText = CityOverviewPanel.transform.GetChild(10).GetChild(1).GetComponent<TMP_Text>();
+        MaxCannoneerCountText = CityOverviewPanel.transform.GetChild(11).GetChild(1).GetComponent<TMP_Text>();
+        MaxGuardianCountText = CityOverviewPanel.transform.GetChild(12).GetChild(1).GetComponent<TMP_Text>();
+
         ResetCityUIState();
     }
 
@@ -147,6 +177,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.MilitaryPanel.SetActive(false);
         Instance.BuildInfoPanel.SetActive(false);
         Instance.InfoPanel.SetActive(false);
+        Instance.CityOverviewPanel.SetActive(false);
 
         UpdateResourcesText();
     }
@@ -811,6 +842,34 @@ public class UI_Manager : Singleton<UI_Manager>
         {
             InfoPanelBonusFromOthers.text = "+" + (bonusFromNeighbors * 100) + "%";
         }
+    }
+
+    public static void EnableCityOverviewPanel()
+    {
+        Instance.CityOverviewPanel.SetActive(true);
+        Instance.UpdateCityOverviewPanel();
+    }
+
+    public static void DisableCityOverviewPanel()
+    {
+        Instance.CityOverviewPanel.SetActive(false);
+    }
+
+    private void UpdateCityOverviewPanel()
+    {
+        FoodProdText.text = Resource_Manager.Instance.FoodProduction.ToString();
+        PopGrowthText.text = Resource_Manager.Instance.PopulationGrowthRate.ToString();
+        IndustryProdText.text = Resource_Manager.Instance.IndustryProduction.ToString();
+        IsoliumProdText.text = Resource_Manager.Instance.IsoliumProduction.ToString();
+        ResearchSpeedText.text = Resource_Manager.Instance.ResearchProduction.ToString();
+        ShooterCostReducText.text = ((1 - Resource_Manager.Instance.ShooterTrainingCostReduction) * 100) + "%";
+        DefenderCostReducText.text = ((1 - Resource_Manager.Instance.DefenderTrainingCostReduction) * 100) + "%";
+        GunnerCostReducText.text = ((1 - Resource_Manager.Instance.GunnerTrainingCostReduction) * 100) + "%";
+        SniperCostReducText.text = ((1 - Resource_Manager.Instance.SniperTrainingCostReduction) * 100) + "%";
+        ScoutCostReducText.text = ((1 - Resource_Manager.Instance.ScoutTrainingCostReduction) * 100) + "%";
+        MaxAceCountText.text = Resource_Manager.Instance.MaximumAces.ToString();
+        MaxCannoneerCountText.text = Resource_Manager.Instance.MaximumCannoneers.ToString();
+        MaxGuardianCountText.text = Resource_Manager.Instance.MaximumGuardians.ToString();
     }
 
     public static void UpdateResourcesText()
