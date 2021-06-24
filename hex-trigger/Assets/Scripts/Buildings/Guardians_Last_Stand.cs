@@ -11,6 +11,11 @@ public class Guardians_Last_Stand : Building_Military
 
     public override void UpdateProductionValue()
     {
+        //short circuting parent method
+    }
+
+    public override void Initalize()
+    {
         AddToResourceProduction();
     }
 

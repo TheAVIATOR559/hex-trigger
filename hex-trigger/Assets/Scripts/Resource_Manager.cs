@@ -5,18 +5,19 @@ using UnityEngine;
 public class Resource_Manager : Singleton<Resource_Manager>
 {
     //TODO rejig to be distance from god seat and player must invest in god seat to expand hex range
-    public int AvailableHexes;
+    public int MaximumHexRange;
 
-    public int AvailableFood;//currently available food, increases based on food production
+    public int CurrentFood;//currently available food, increases based on food production
+    public int MaximumFood;//Maximum storable food
 
-    public int AvailableHousing;//maximum population, increases as new building hexes are built
+    public int CurrentPopulation;//population should increase over time and deduct based on building costs
+    public int MaximumPopulation;//maximum population, increases as new building hexes are built
 
-    public int AvailablePopulation;//population should increase over time and deduct based on building costs
+    public int CurrentIndustry;//currently available industry, increase based on industry production 
+    public int MaximumIndustry;
 
-    //TODO rejig to a capacity system like military???
-    public int AvailableIndustry;//currently available industry, increase based on industry production 
-
-    public int AvailableIsolium;//currently available isolium, increases based on isolium production
+    public int CurrentIsolium;//currently available isolium, increases based on isolium production
+    public int MaximumIsolium;
 
     public int CurrentMilitary//should only increase when the player allocates more
     {
@@ -71,34 +72,34 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DEV_MaxOutResources()
     {
-        Instance.AvailableHexes = 1000;
-        Instance.AvailableFood = 1000;
-        Instance.AvailableHousing = 1000;
-        Instance.AvailablePopulation = 1000;
-        Instance.AvailableIndustry = 1000;
-        Instance.AvailableIsolium = 1000;
+        Instance.MaximumHexRange = 1000;
+        Instance.MaximumFood = 1000;
+        Instance.MaximumPopulation = 1000;
+        Instance.CurrentPopulation = 1000;
+        Instance.CurrentIndustry = 1000;
+        Instance.CurrentIsolium = 1000;
         //Instance.CurrentMilitary = 1000;
         Instance.MaximumMilitary = 1000;
     }
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
     {
-        if (cost.RequiredHexes > Instance.AvailableHexes)
+        if (cost.RequiredHexes > Instance.MaximumHexRange)
         {
             return false;
         }
 
-        if (cost.RequiredFood > Instance.AvailableFood)
+        if (cost.RequiredFood > Instance.CurrentFood)
         {
             return false;
         }
 
-        if (cost.RequiredPopulation > Instance.AvailablePopulation)
+        if (cost.RequiredPopulation > Instance.CurrentPopulation)
         {
             return false;
         }
 
-        if (cost.RequiredIndustry > Instance.AvailableIndustry)
+        if (cost.RequiredIndustry > Instance.CurrentIndustry)
         {
             return false;
         }
@@ -108,7 +109,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             return false;
         }
 
-        if (cost.RequiredIsolium > Instance.AvailableIsolium)
+        if (cost.RequiredIsolium > Instance.CurrentIsolium)
         {
             return false;
         }
@@ -170,13 +171,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 return Constants.ResearchInstituteCost;
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
                 return Constants.MultiBrainCost;
-            case Enums.Building_Type.STOCKPILE:
+            case Enums.Building_Type.EXTRACTOR_MK_I:
                 return Constants.StockpileCost;
-            case Enums.Building_Type.STOREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_II:
                 return Constants.StorehouseCost;
-            case Enums.Building_Type.WAREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_III:
                 return Constants.WarehouseCost;
-            case Enums.Building_Type.DEPOT:
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
                 return Constants.DepotCost;
             case Enums.Building_Type.SHOOTING_RANGE:
                 return Constants.ShootingRangeCost;
@@ -199,7 +200,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.FACTORY:
             case Enums.Building_Type.HEADQUARTERS:
             case Enums.Building_Type.QUANTUM_BRAIN:
-            case Enums.Building_Type.DISTRIBUTION_CENTER:
+            case Enums.Building_Type.EXTRACTOR_MK_V:
             case Enums.Building_Type.GOD_SEAT:
             default:
                 return new BuildingCost(0, 0, 0, 0, 0, 0);
@@ -208,11 +209,11 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DeductResources(BuildingCost cost)
     {
-        Instance.AvailableHexes -= cost.RequiredHexes;
-        Instance.AvailablePopulation -= cost.RequiredPopulation;
-        Instance.AvailableFood -= cost.RequiredFood;
-        Instance.AvailableIndustry -= cost.RequiredIndustry;
-        Instance.AvailableIsolium -= cost.RequiredIsolium;
+        Instance.MaximumHexRange -= cost.RequiredHexes;
+        Instance.CurrentPopulation -= cost.RequiredPopulation;
+        Instance.CurrentFood -= cost.RequiredFood;
+        Instance.CurrentIndustry -= cost.RequiredIndustry;
+        Instance.CurrentIsolium -= cost.RequiredIsolium;
         Instance.CurrentMilitary -= cost.RequiredMilitary;
 
         UI_Manager.UpdateResourcesText();
@@ -220,11 +221,11 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DeductResources(UnitTrainingCost cost, Enums.Unit_Type type)
     {
-        Instance.AvailableFood -= cost.RequiredFood;
-        Instance.AvailableIndustry -= cost.RequiredIndustry;
-        Instance.AvailableIsolium -= cost.RequiredIsolium;
+        Instance.CurrentFood -= cost.RequiredFood;
+        Instance.CurrentIndustry -= cost.RequiredIndustry;
+        Instance.CurrentIsolium -= cost.RequiredIsolium;
 
-        Instance.AvailablePopulation -= cost.RequiredMilitary;
+        Instance.CurrentPopulation -= cost.RequiredMilitary;
 
         UI_Manager.UpdateResourcesText();
         UI_Manager.UpdateUnitCountText();
@@ -238,7 +239,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.FoodProduction += value;
                 break;
             case Enums.Hex_Types.HOUSING:
-                Instance.AvailableHousing += value;
+                Instance.MaximumPopulation += value;
                 break;
             case Enums.Hex_Types.INDUSTRY:
                 Instance.IndustryProduction += value;
@@ -274,13 +275,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 break;
             case Enums.Hex_Types.HOUSING:
-                if (Instance.AvailableHousing - value <= 0)
+                if (Instance.MaximumPopulation - value <= 0)
                 {
-                    Instance.AvailableHousing = 0;
+                    Instance.MaximumPopulation = 0;
                 }
                 else
                 {
-                    Instance.AvailableHousing -= value;
+                    Instance.MaximumPopulation -= value;
                 }
                 break;
             case Enums.Hex_Types.INDUSTRY:
@@ -374,7 +375,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             return false;
         }
 
-        if (cost.RequiredMilitary > Instance.AvailablePopulation)
+        if (cost.RequiredMilitary > Instance.CurrentPopulation)
         {
             return false;
         }
@@ -383,17 +384,17 @@ public class Resource_Manager : Singleton<Resource_Manager>
             return false;
         }
 
-        if (cost.RequiredFood > Instance.AvailableFood)
+        if (cost.RequiredFood > Instance.CurrentFood)
         {
             return false;
         }
 
-        if (cost.RequiredIndustry > Instance.AvailableIndustry)
+        if (cost.RequiredIndustry > Instance.CurrentIndustry)
         {
             return false;
         }
 
-        if (cost.RequiredIsolium > Instance.AvailableIsolium)
+        if (cost.RequiredIsolium > Instance.CurrentIsolium)
         {
             return false;
         }
@@ -738,9 +739,9 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void AddProductionResources()
     {
-        AvailableFood += FoodProduction;
-        AvailableIndustry += IndustryProduction;
-        AvailableIsolium += IsoliumProduction;
+        CurrentFood += FoodProduction;
+        CurrentIndustry += IndustryProduction;
+        CurrentIsolium += IsoliumProduction;
     }
 
     private void AddResearchProgress()
@@ -750,9 +751,9 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void AddPopulation()
     {
-        if (AvailablePopulation < AvailableHousing)
+        if (CurrentPopulation < MaximumPopulation)
         {
-            AvailablePopulation += PopulationGrowthRate;
+            CurrentPopulation += PopulationGrowthRate;
         }
     }
 

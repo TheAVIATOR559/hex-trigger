@@ -350,22 +350,22 @@ public class UI_Manager : Singleton<UI_Manager>
                 Instance.BuildInfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.MultiBrainCost);
                 break;
-            case Enums.Building_Type.STOCKPILE:
+            case Enums.Building_Type.EXTRACTOR_MK_I:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
                 Instance.BuildInfoPanelName.text = Constants.STOCKPILE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.StockpileCost);
                 break;
-            case Enums.Building_Type.STOREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_II:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
                 Instance.BuildInfoPanelName.text = Constants.STOREHOUSE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.StorehouseCost);
                 break;
-            case Enums.Building_Type.WAREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_III:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
                 Instance.BuildInfoPanelName.text = Constants.WAREHOUSE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.WarehouseCost);
                 break;
-            case Enums.Building_Type.DEPOT:
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
                 //Instance.InfoPanelImage = LOAD IMAGE HERE
                 Instance.BuildInfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.DepotCost);
@@ -416,7 +416,7 @@ public class UI_Manager : Singleton<UI_Manager>
             case Enums.Building_Type.FACTORY:
             case Enums.Building_Type.HEADQUARTERS:
             case Enums.Building_Type.QUANTUM_BRAIN:
-            case Enums.Building_Type.DISTRIBUTION_CENTER:
+            case Enums.Building_Type.EXTRACTOR_MK_V:
             default:
                 break;
         }
@@ -720,31 +720,31 @@ public class UI_Manager : Singleton<UI_Manager>
                 Instance.InfoPanelDesc.text = Constants.QUANTUM_BRAIN_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
-            case Enums.Building_Type.STOCKPILE:
+            case Enums.Building_Type.EXTRACTOR_MK_I:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.STOCKPILE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOCKPILE_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
-            case Enums.Building_Type.STOREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_II:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.STOREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOREHOUSE_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
-            case Enums.Building_Type.WAREHOUSE:
+            case Enums.Building_Type.EXTRACTOR_MK_III:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.WAREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.WAREHOUSE_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
-            case Enums.Building_Type.DEPOT:
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.InfoPanelDesc.text = Constants.DEPOT_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
-            case Enums.Building_Type.DISTRIBUTION_CENTER:
+            case Enums.Building_Type.EXTRACTOR_MK_V:
                 //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
                 Instance.InfoPanelName.text = Constants.DISTRIBUTION_CENTER_NAME;
                 Instance.InfoPanelDesc.text = Constants.DISTRIBUTION_CENTER_DESC;
@@ -874,12 +874,12 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void UpdateResourcesText()
     {
-        SetAvailableHexesText(Resource_Manager.Instance.AvailableHexes);
-        SetAvailablePopulationText(Resource_Manager.Instance.AvailablePopulation, Resource_Manager.Instance.AvailableHousing);
-        SetAvailableFoodText(Resource_Manager.Instance.AvailableFood);
-        SetAvailableIndustryText(Resource_Manager.Instance.AvailableIndustry);
+        SetAvailableHexesText(Resource_Manager.Instance.MaximumHexRange);
+        SetAvailablePopulationText(Resource_Manager.Instance.CurrentPopulation, Resource_Manager.Instance.MaximumPopulation);
+        SetAvailableFoodText(Resource_Manager.Instance.MaximumFood);
+        SetAvailableIndustryText(Resource_Manager.Instance.CurrentIndustry);
         SetAvailableMilitaryText(Resource_Manager.Instance.CurrentMilitary, Resource_Manager.Instance.MaximumMilitary);
-        SetAvailableIsoliumText(Resource_Manager.Instance.AvailableIsolium);
+        SetAvailableIsoliumText(Resource_Manager.Instance.CurrentIsolium);
     }
 
     public static void SetAvailableHexesText(int hexes)
@@ -973,25 +973,25 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void FlashMissingResources(BuildingCost cost)
     {
-        if (!Instance.HexTextFlashing && Resource_Manager.Instance.AvailableHexes < cost.RequiredHexes)
+        if (!Instance.HexTextFlashing && Resource_Manager.Instance.MaximumHexRange < cost.RequiredHexes)
         {
             Instance.HexTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexImage, Instance.EndHexFlashing));
         }
 
-        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.AvailableFood < cost.RequiredFood)
+        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.MaximumFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));
         }
 
-        if (!Instance.PopTextFlashing && Resource_Manager.Instance.AvailablePopulation < cost.RequiredPopulation)
+        if (!Instance.PopTextFlashing && Resource_Manager.Instance.CurrentPopulation < cost.RequiredPopulation)
         {
             Instance.PopTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopImage, Instance.EndPopFlashing));
         }
 
-        if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.AvailableIndustry < cost.RequiredIndustry)
+        if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.CurrentIndustry < cost.RequiredIndustry)
         {
             Instance.IndustryTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryImage, Instance.EndIndustryFlashing));
@@ -1003,7 +1003,7 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryImage, Instance.EndMilitaryFlashing));
         }
 
-        if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.AvailableIsolium < cost.RequiredIsolium)
+        if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.CurrentIsolium < cost.RequiredIsolium)
         {
             Instance.IsoliumTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIsoliumImage, Instance.EndIsoliumFlashing));
@@ -1034,19 +1034,19 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.GuardianButtonImage, Instance.EndGuardianFlashing));
         }
 
-        if (!Instance.PopTextFlashing && Resource_Manager.Instance.AvailablePopulation < cost.RequiredMilitary)
+        if (!Instance.PopTextFlashing && Resource_Manager.Instance.CurrentPopulation < cost.RequiredMilitary)
         {
             Instance.PopTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopImage, Instance.EndPopFlashing));
         }
 
-        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.AvailableFood < cost.RequiredFood)
+        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.MaximumFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));
         }
 
-        if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.AvailableIndustry < cost.RequiredIndustry)
+        if (!Instance.IndustryTextFlashing && Resource_Manager.Instance.CurrentIndustry < cost.RequiredIndustry)
         {
             Instance.IndustryTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIndustryImage, Instance.EndIndustryFlashing));
@@ -1058,7 +1058,7 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableMilitaryImage, Instance.EndMilitaryFlashing));
         }
 
-        if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.AvailableIsolium < cost.RequiredIsolium)
+        if (!Instance.IsoliumTextFlashing && Resource_Manager.Instance.CurrentIsolium < cost.RequiredIsolium)
         {
             Instance.IsoliumTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableIsoliumImage, Instance.EndIsoliumFlashing));

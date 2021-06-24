@@ -38,6 +38,11 @@ public static class Enums
         HEX_RESEARCH_INSTITUTE,
         HEX_MULTIBRAIN_COMPLEX,
         HEX_QUANTUM_BRAIN,
+        HEX_EXTRACTOR_MK_I,
+        HEX_EXTRACTOR_MK_II,
+        HEX_EXTRACTOR_MK_III,
+        HEX_EXTRACTOR_MK_IV,
+        HEX_EXTRACTOR_MK_V,
         HEX_STOCKPILE,
         HEX_STOREHOUSE,
         HEX_WAREHOUSE,
@@ -81,6 +86,11 @@ public static class Enums
         MODEL_RESEARCH_INSTITUTE,
         MODEL_MULTIBRAIN_COMPLEX,
         MODEL_QUANTUM_BRAIN,
+        MODEL_EXTRACTOR_MK_I,
+        MODEL_EXTRACTOR_MK_II,
+        MODEL_EXTRACTOR_MK_III,
+        MODEL_EXTRACTOR_MK_IV,
+        MODEL_EXTRACTOR_MK_V,
         MODEL_STOCKPILE,
         MODEL_STOREHOUSE,
         MODEL_WAREHOUSE,
@@ -97,6 +107,7 @@ public static class Enums
         RESEARCH,
         ISOLIUM,
         DEFENSE,
+        STORAGE,
         GOD_SEAT
     }
 
@@ -142,6 +153,11 @@ public static class Enums
         RESEARCH_INSTITUTE,
         MULTIBRAIN_COMPLEX,
         QUANTUM_BRAIN,
+        EXTRACTOR_MK_I,
+        EXTRACTOR_MK_II,
+        EXTRACTOR_MK_III,
+        EXTRACTOR_MK_IV,
+        EXTRACTOR_MK_V,
         STOCKPILE,
         STOREHOUSE,
         WAREHOUSE,
@@ -231,6 +247,15 @@ public static class Enums
             },
             Hex_Types.ISOLIUM => tier switch
             {
+                Building_Tier.I => Building_Type.EXTRACTOR_MK_I,
+                Building_Tier.II => Building_Type.EXTRACTOR_MK_II,
+                Building_Tier.III => Building_Type.EXTRACTOR_MK_III,
+                Building_Tier.IV => Building_Type.EXTRACTOR_MK_IV,
+                Building_Tier.V => Building_Type.EXTRACTOR_MK_V,
+                _ => Building_Type.EXTRACTOR_MK_I,
+            },
+            Hex_Types.STORAGE => tier switch
+            {
                 Building_Tier.I => Building_Type.STOCKPILE,
                 Building_Tier.II => Building_Type.STOREHOUSE,
                 Building_Tier.III => Building_Type.WAREHOUSE,
@@ -308,15 +333,15 @@ public static class Enums
                 return Prefabs.HEX_MULTIBRAIN_COMPLEX;
             case Building_Type.QUANTUM_BRAIN:
                 return Prefabs.HEX_QUANTUM_BRAIN;
-            case Building_Type.STOCKPILE:
+            case Building_Type.EXTRACTOR_MK_I:
                 return Prefabs.HEX_STOCKPILE;
-            case Building_Type.STOREHOUSE:
+            case Building_Type.EXTRACTOR_MK_II:
                 return Prefabs.HEX_STOREHOUSE;
-            case Building_Type.WAREHOUSE:
+            case Building_Type.EXTRACTOR_MK_III:
                 return Prefabs.HEX_WAREHOUSE;
-            case Building_Type.DEPOT:
+            case Building_Type.EXTRACTOR_MK_IV:
                 return Prefabs.HEX_DEPOT;
-            case Building_Type.DISTRIBUTION_CENTER:
+            case Building_Type.EXTRACTOR_MK_V:
                 return Prefabs.HEX_DISTRIBUTION_CENTER;
             case Building_Type.SHOOTING_RANGE:
                 return Prefabs.HEX_SHOOTING_RANGE;
@@ -334,6 +359,16 @@ public static class Enums
                 return Prefabs.HEX_CANNONEERS_TOWER;
             case Building_Type.GUARDIANS_LAST_STAND:
                 return Prefabs.HEX_GUARDIANS_LAST_STAND;
+            case Building_Type.STOCKPILE:
+                return Prefabs.HEX_STOCKPILE;
+            case Building_Type.STOREHOUSE:
+                return Prefabs.HEX_STOREHOUSE;
+            case Building_Type.WAREHOUSE:
+                return Prefabs.HEX_WAREHOUSE;
+            case Building_Type.DEPOT:
+                return Prefabs.HEX_DEPOT;
+            case Building_Type.DISTRIBUTION_CENTER:
+                return Prefabs.HEX_DISTRIBUTION_CENTER;
             default:
                 return Prefabs.HEX_HOVEL;
         }
@@ -404,6 +439,16 @@ public static class Enums
                 return Prefabs.MODEL_MULTIBRAIN_COMPLEX;
             case Building_Type.QUANTUM_BRAIN:
                 return Prefabs.MODEL_QUANTUM_BRAIN;
+            case Building_Type.EXTRACTOR_MK_I:
+                return Prefabs.MODEL_EXTRACTOR_MK_I;
+            case Building_Type.EXTRACTOR_MK_II:
+                return Prefabs.MODEL_EXTRACTOR_MK_II;
+            case Building_Type.EXTRACTOR_MK_III:
+                return Prefabs.MODEL_EXTRACTOR_MK_III;
+            case Building_Type.EXTRACTOR_MK_IV:
+                return Prefabs.MODEL_EXTRACTOR_MK_IV;
+            case Building_Type.EXTRACTOR_MK_V:
+                return Prefabs.MODEL_EXTRACTOR_MK_V;
             case Building_Type.STOCKPILE:
                 return Prefabs.MODEL_STOCKPILE;
             case Building_Type.STOREHOUSE:
@@ -414,6 +459,14 @@ public static class Enums
                 return Prefabs.MODEL_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.MODEL_DISTRIBUTION_CENTER;
+            case Building_Type.SHOOTING_RANGE:
+            case Building_Type.DEFENDERS_WALL:
+            case Building_Type.GUNNERS_ALLEY:
+            case Building_Type.SNIPERS_NEST:
+            case Building_Type.SCOUT_CAMP:
+            case Building_Type.ACES_ARENA:
+            case Building_Type.CANNONEERS_TOWER:
+            case Building_Type.GUARDIANS_LAST_STAND:
             case Building_Type.GOD_SEAT:
             default:
                 return Prefabs.MODEL_GARDEN;
