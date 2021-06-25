@@ -11,6 +11,11 @@ public class Scout_Camp : Building_Military
 
     public override void UpdateProductionValue()
     {
+        //short circuting parent method
+    }
+
+    public override void Initalize()
+    {
         AddToResourceProduction();
     }
 

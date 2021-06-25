@@ -211,6 +211,16 @@ public class Building : MonoBehaviour
                     Enums.Building_Tier.V => Constants.ISOLIUM_V_PROD,
                     _ => Constants.ISOLIUM_I_PROD,
                 };
+            case Enums.Hex_Types.STORAGE:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.STORAGE_I_PROD,
+                    Enums.Building_Tier.II => Constants.STORAGE_II_PROD,
+                    Enums.Building_Tier.III => Constants.STORAGE_III_PROD,
+                    Enums.Building_Tier.IV => Constants.STORAGE_IV_PROD,
+                    Enums.Building_Tier.V => Constants.STORAGE_V_PROD,
+                    _ => Constants.STORAGE_I_PROD,
+                };
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:

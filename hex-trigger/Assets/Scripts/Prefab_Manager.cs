@@ -57,11 +57,17 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_MULTIBRAIN_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - MultiBrain Complex"));
         prefabs.Add(Enums.Prefabs.HEX_QUANTUM_BRAIN, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - Quantum Brain"));
 
-        prefabs.Add(Enums.Prefabs.HEX_STOCKPILE, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Stockpile"));
-        prefabs.Add(Enums.Prefabs.HEX_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Storehouse"));
-        prefabs.Add(Enums.Prefabs.HEX_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Warehouse"));
-        prefabs.Add(Enums.Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Depot"));
-        prefabs.Add(Enums.Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Distribution Center"));
+        prefabs.Add(Enums.Prefabs.HEX_EXTRACTOR_MK_I, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK I"));
+        prefabs.Add(Enums.Prefabs.HEX_EXTRACTOR_MK_II, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK II"));
+        prefabs.Add(Enums.Prefabs.HEX_EXTRACTOR_MK_III, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK III"));
+        prefabs.Add(Enums.Prefabs.HEX_EXTRACTOR_MK_IV, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK IV"));
+        prefabs.Add(Enums.Prefabs.HEX_EXTRACTOR_MK_V, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK V"));
+
+        prefabs.Add(Enums.Prefabs.HEX_STOCKPILE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Stockpile"));
+        prefabs.Add(Enums.Prefabs.HEX_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Storehouse"));
+        prefabs.Add(Enums.Prefabs.HEX_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Warehouse"));
+        prefabs.Add(Enums.Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Depot"));
+        prefabs.Add(Enums.Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Distribution Center"));
 
         prefabs.Add(Enums.Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/I"));
         prefabs.Add(Enums.Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/II"));
@@ -99,11 +105,17 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.MODEL_MULTIBRAIN_COMPLEX, Resources.Load<GameObject>("Prefabs/Models/Research/IV"));
         prefabs.Add(Enums.Prefabs.MODEL_QUANTUM_BRAIN, Resources.Load<GameObject>("Prefabs/Models/Research/V"));
 
-        prefabs.Add(Enums.Prefabs.MODEL_STOCKPILE, Resources.Load<GameObject>("Prefabs/Models/Isolium/I"));
-        prefabs.Add(Enums.Prefabs.MODEL_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Isolium/II"));
-        prefabs.Add(Enums.Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Isolium/III"));
-        prefabs.Add(Enums.Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Isolium/IV"));
-        prefabs.Add(Enums.Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Isolium/V"));
+        prefabs.Add(Enums.Prefabs.MODEL_EXTRACTOR_MK_I, Resources.Load<GameObject>("Prefabs/Models/Isolium/I"));
+        prefabs.Add(Enums.Prefabs.MODEL_EXTRACTOR_MK_II, Resources.Load<GameObject>("Prefabs/Models/Isolium/II"));
+        prefabs.Add(Enums.Prefabs.MODEL_EXTRACTOR_MK_III, Resources.Load<GameObject>("Prefabs/Models/Isolium/III"));
+        prefabs.Add(Enums.Prefabs.MODEL_EXTRACTOR_MK_IV, Resources.Load<GameObject>("Prefabs/Models/Isolium/IV"));
+        prefabs.Add(Enums.Prefabs.MODEL_EXTRACTOR_MK_V, Resources.Load<GameObject>("Prefabs/Models/Isolium/V"));
+
+        prefabs.Add(Enums.Prefabs.MODEL_STOCKPILE, Resources.Load<GameObject>("Prefabs/Models/Storage/I"));
+        prefabs.Add(Enums.Prefabs.MODEL_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/II"));
+        prefabs.Add(Enums.Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/III"));
+        prefabs.Add(Enums.Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Storage/IV"));
+        prefabs.Add(Enums.Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Storage/V"));
     }
 
     public static GameObject GetPrefab(Enums.Prefabs prefab)

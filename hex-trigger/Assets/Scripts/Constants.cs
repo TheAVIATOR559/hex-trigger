@@ -77,10 +77,16 @@ public static class Constants
     public static BuildingCost MultiBrainCost = new BuildingCost(1, 5, 0, 5, 5, 0);
     #endregion
     #region Isolium
+    public static BuildingCost ExtractorMKICost = new BuildingCost(1, 1, 0, 0, 1, 0);
+    public static BuildingCost ExtractorMKIICost = new BuildingCost(1, 2, 0, 0, 2, 1);
+    public static BuildingCost ExtractorMKIIICost = new BuildingCost(1, 3, 0, 0, 3, 2);
+    public static BuildingCost ExtractorMKIVCost = new BuildingCost(1, 4, 0, 0, 4, 3);
+    #endregion
+    #region Storage
     public static BuildingCost StockpileCost = new BuildingCost(1, 1, 0, 0, 1, 0);
-    public static BuildingCost StorehouseCost = new BuildingCost(1, 2, 0, 0, 2, 1);
-    public static BuildingCost WarehouseCost = new BuildingCost(1, 3, 0, 0, 3, 2);
-    public static BuildingCost DepotCost = new BuildingCost(1, 4, 0, 0, 4, 3);
+    public static BuildingCost StorehouseCost = new BuildingCost(1, 2, 0, 1, 2, 0);
+    public static BuildingCost WarehouseCost = new BuildingCost(1, 3, 0, 2, 3, 0);
+    public static BuildingCost DepotCost = new BuildingCost(1, 0, 0, 3, 4, 0);
     #endregion
     #endregion
 
@@ -164,6 +170,13 @@ public static class Constants
     public static int ISOLIUM_III_PROD = 3;
     public static int ISOLIUM_IV_PROD = 4;
     public static int ISOLIUM_V_PROD = 5;
+    #endregion
+    #region Storage Values
+    public static int STORAGE_I_PROD = 10;
+    public static int STORAGE_II_PROD = 15;
+    public static int STORAGE_III_PROD = 25;
+    public static int STORAGE_IV_PROD = 50;
+    public static int STORAGE_V_PROD = 200;
     #endregion
     #endregion
 
@@ -272,6 +285,11 @@ public static class Constants
     public static string RESEARCH_INSTITUTE_NAME = "Research Institute";
     public static string MULTIBRAIN_COMPLEX_NAME = "Multi Brain Complex";
     public static string QUANTUM_BRAIN_NAME = "Quantum Brain";
+    public static string EXTRACTOR_MK_I_NAME = "Extractor MK I";
+    public static string EXTRACTOR_MK_II_NAME = "Extractor MK II";
+    public static string EXTRACTOR_MK_III_NAME = "Extractor MK III";
+    public static string EXTRACTOR_MK_IV_NAME = "Extractor MK IV";
+    public static string EXTRACTOR_MK_V_NAME = "Extractor MK V";
     public static string STOCKPILE_NAME = "Stockpile";
     public static string STOREHOUSE_NAME = "Storehouse";
     public static string WAREHOUSE_NAME = "Warehouse";
@@ -319,11 +337,11 @@ public static class Constants
     public static string RESEARCH_INSTITUTE_DESC = "An institute for intelligent citizens to persue new ideas and research without the distractions of the outside world.";
     public static string MULTIBRAIN_COMPLEX_DESC = "A borderline unethical creation made from an amalgamation of multiple brains capable of persuing research much more efficiently due to its lack of need for food or rest.";
     public static string QUANTUM_BRAIN_DESC = "The brain of a creature on the verge of transcending the material plain that was captured and coerced into researching new topics. ";
-    public static string STOCKPILE_DESC = "A place for basic production and storage of Isolium. Does not require much but in turn does not produce much Isolium.";
-    public static string STOREHOUSE_DESC = "A storehouse where Isolium is produced and stored more efficiently than at a stockpile.";
-    public static string WAREHOUSE_DESC = "A large warehouse for storing and producing Isolium. Due to its size, the warehouse requires more upkeep than a storehouse.";
-    public static string DEPOT_DESC = "A very large complex for producing and storing Isolium. It is also capable of sending the Isolium out more efficently.";
-    public static string DISTRIBUTION_CENTER_DESC = "A large, fully automated structure for producing and storing Isolium. Due to its wildly complex structure, it does not lend itself to manual oversight.";
+    public static string EXTRACTOR_MK_I_DESC = "A place for basic production of Isolium.Does not require much but in turn does not produce much Isolium.";
+    public static string EXTRACTOR_MK_II_DESC = "A facility where Isolium is produced more efficiently than a MK I.";
+    public static string EXTRACTOR_MK_III_DESC = "A large facility for producing Isolium.Due to its size, the MK III requires more upkeep than a MK II.";
+    public static string EXTRACTOR_MK_IV_DESC = "A very large complex for producing Isolium.It is also capable of sending the Isolium out more efficently.";
+    public static string EXTRACTOR_MK_V_DESC = "A large, fully automated structure for producing and storing Isolium.Due to its wildly complex structure, it does not lend itself to manual oversight.";
     public static string SHOOTING_RANGE_DESC = "A training area for shooters to learn and practice how to shoot fancily. Reduces training cost for shooters.";
     public static string DEFENDERS_WALL_DESC = "A training area for defenders to learn and practice how to defend like a solid wall. Reduces training cost for defenders.";
     public static string GUNNERS_ALLEY_DESC = "A training area for gunners to learn and practice how to suppress enemies with a hail of bullets. Reduces training cost for gunners.";
@@ -332,6 +350,11 @@ public static class Constants
     public static string ACES_ARENA_DESC = "A monument to a long lost hero. The Ace has long been considered the greatest melee fighter to ever engage in combat. Increases the maximum number of Aces that can be trained.";
     public static string CANNONEERS_TOWER_DESC = "A monument to a long lost hero. The Cannoneer was considered too destructive to be a sniper but that destructive power proved impossible to defend against. Increases the maximum number of Cannoneers that can be trained.";
     public static string GUARDIANS_LAST_STAND_DESC = "A monument to a long lost hero. The Guardian sacrificed themselves to buy time for their comrades again and again, gaining truly impressive strength and constitution. Increases the maximum number of Guardians that can be trained.";
+    public static string STOCKPILE_DESC = "A place where a small amount of items can be stored in a slightly organized pile.";
+    public static string STOREHOUSE_DESC = "A small structure for storing items out of the elements in an organized manner.";
+    public static string WAREHOUSE_DESC = "A large building for storing many items on tall shelves in a very organized manner.";
+    public static string DEPOT_DESC = "A large fully automated building capable of storing many items using complex storage algorithms.";
+    public static string DISTRIBUTION_CENTER_DESC = "An upgraded version of the depot capable of not only receiving items to store but also sending out items before the items were even requested.";
     #endregion
 
     #region Unit Names

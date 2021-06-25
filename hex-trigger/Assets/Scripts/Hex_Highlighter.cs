@@ -13,6 +13,7 @@ public class Hex_Highlighter : MonoBehaviour
     [SerializeField] Color ResearchColor;
     [SerializeField] Color MilitaryColor;
     [SerializeField] Color DefenseColor;
+    [SerializeField] Color StorageColor;
 
     private Renderer rend;
 
@@ -57,6 +58,9 @@ public class Hex_Highlighter : MonoBehaviour
                 break;
             case Enums.Hex_Types.GOD_SEAT:
                 rend.material.color = GodSeatColor;
+                break;
+            case Enums.Hex_Types.STORAGE:
+                rend.material.color = StorageColor;
                 break;
             default:
                 rend.material.color = Color.white;

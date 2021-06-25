@@ -11,6 +11,11 @@ public class Shooting_Range : Building_Military
 
     public override void UpdateProductionValue()
     {
+        //short circuting parent method
+    }
+
+    public override void Initalize()
+    {
         AddToResourceProduction();
     }
 

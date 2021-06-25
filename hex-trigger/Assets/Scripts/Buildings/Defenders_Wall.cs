@@ -11,6 +11,11 @@ public class Defenders_Wall : Building_Military
 
     public override void UpdateProductionValue()
     {
+        //short circuting parent method
+    }
+
+    public override void Initalize()
+    {
         AddToResourceProduction();
     }
 

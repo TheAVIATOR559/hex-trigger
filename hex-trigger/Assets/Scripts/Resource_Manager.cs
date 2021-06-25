@@ -172,13 +172,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
                 return Constants.MultiBrainCost;
             case Enums.Building_Type.EXTRACTOR_MK_I:
-                return Constants.StockpileCost;
+                return Constants.ExtractorMKICost;
             case Enums.Building_Type.EXTRACTOR_MK_II:
-                return Constants.StorehouseCost;
+                return Constants.ExtractorMKIICost;
             case Enums.Building_Type.EXTRACTOR_MK_III:
-                return Constants.WarehouseCost;
+                return Constants.ExtractorMKIIICost;
             case Enums.Building_Type.EXTRACTOR_MK_IV:
-                return Constants.DepotCost;
+                return Constants.ExtractorMKIVCost;
             case Enums.Building_Type.SHOOTING_RANGE:
                 return Constants.ShootingRangeCost;
             case Enums.Building_Type.DEFENDERS_WALL:
