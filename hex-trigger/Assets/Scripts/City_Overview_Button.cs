@@ -6,7 +6,7 @@ public class City_Overview_Button : MonoBehaviour
 {
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject CityOverviewCamera;
-
+    //todo make it so when another button is clicked disable the city overview
 
     private void Awake()
     {

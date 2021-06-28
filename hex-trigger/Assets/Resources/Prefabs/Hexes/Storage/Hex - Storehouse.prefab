@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 8718092351979544365}
   - component: {fileID: 7707023612659638437}
   - component: {fileID: 2707019581540297254}
-  - component: {fileID: 2272541953410967544}
+  - component: {fileID: 3162709451347947963}
   m_Layer: 6
   m_Name: Hex - Storehouse
   m_TagString: Untagged
@@ -460,16 +460,16 @@ MonoBehaviour:
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 5105221160739677338}
   standardMaterial: {fileID: 2100000, guid: 1c2b4c8669fdb564eb0be7404e93a153, type: 2}
---- !u!114 &2272541953410967544
+--- !u!114 &3162709451347947963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6893937354551569796}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d869b55b67d4d4349bce6425bfb7b3fc, type: 3}
+  m_Script: {fileID: 11500000, guid: b121817dd2822ae46b6eeb601646baf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HexType: 7
@@ -477,7 +477,7 @@ MonoBehaviour:
   BuildingType: 37
   model: {fileID: 5755260174813056348}
   AdjustedProduction: 0
-  BonusFromNeighbors: 0
+  BonusFromNeighbors: 1
 --- !u!1 &8248588198966892333
 GameObject:
   m_ObjectHideFlags: 0

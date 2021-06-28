@@ -98,6 +98,29 @@ public static class Enums
         MODEL_DISTRIBUTION_CENTER
     }
 
+    public enum Images
+    {
+        ICON_GOD_SEAT,
+        ICON_FOOD,
+        ICON_POP,
+        ICON_INDUSTRY,
+        ICON_MILITARY,
+        ICON_RESEARCH,
+        ICON_ISOLIUM,
+        ICON_STORAGE,
+        ICON_DEFENSE,
+        ICON_POWER,
+        ICON_GRUNT,
+        ICON_SHOOTER,
+        ICON_DEFENDER,
+        ICON_GUNNER,
+        ICON_SNIPER,
+        ICON_SCOUT,
+        ICON_ACE,
+        ICON_CANNONEER,
+        ICON_GUARDIAN
+    }
+
     public enum Hex_Types
     {
         FOOD,

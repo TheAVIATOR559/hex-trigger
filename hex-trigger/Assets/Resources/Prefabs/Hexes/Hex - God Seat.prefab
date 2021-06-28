@@ -114,6 +114,7 @@ MonoBehaviour:
   Position: {x: 0, y: 0}
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
+  OverviewTierText: {fileID: 0}
   standardMaterial: {fileID: 2100000, guid: 43cab6e924aad654286707372eb0b464, type: 2}
 --- !u!114 &-3998827675063654726
 MonoBehaviour:
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a7b44d237859442bd027abac930546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HexType: 7
+  HexType: 8
   BuildingTier: 4
   BuildingType: 0
   model: {fileID: 0}
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c0952f166cbd8444ae40dfb0f0d16c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1d794bf779f6744aa5c53ba84b18c0f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

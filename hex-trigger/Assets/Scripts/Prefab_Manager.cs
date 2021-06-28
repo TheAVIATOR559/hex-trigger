@@ -5,6 +5,7 @@ using UnityEngine;
 public class Prefab_Manager : Singleton<Prefab_Manager>
 {
     private Dictionary<Enums.Prefabs, GameObject> prefabs = new Dictionary<Enums.Prefabs, GameObject>();
+    private Dictionary<Enums.Images, Sprite> images = new Dictionary<Enums.Images, Sprite>();
 
     private void Awake()
     {
@@ -116,10 +117,35 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/III"));
         prefabs.Add(Enums.Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Storage/IV"));
         prefabs.Add(Enums.Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Storage/V"));
+
+        images.Add(Enums.Images.ICON_GOD_SEAT, Resources.Load<Sprite>("Sprites/God Seat"));
+        images.Add(Enums.Images.ICON_FOOD, Resources.Load<Sprite>("Sprites/Food"));
+        images.Add(Enums.Images.ICON_POP, Resources.Load<Sprite>("Sprites/Population"));
+        images.Add(Enums.Images.ICON_INDUSTRY, Resources.Load<Sprite>("Sprites/Industry"));
+        images.Add(Enums.Images.ICON_MILITARY, Resources.Load<Sprite>("Sprites/Military"));
+        images.Add(Enums.Images.ICON_RESEARCH, Resources.Load<Sprite>("Sprites/Research"));
+        images.Add(Enums.Images.ICON_STORAGE, Resources.Load<Sprite>("Sprites/Storage"));
+        images.Add(Enums.Images.ICON_DEFENSE, Resources.Load<Sprite>("Sprites/Defense"));
+        images.Add(Enums.Images.ICON_POWER, Resources.Load<Sprite>("Sprites/Power"));
+        images.Add(Enums.Images.ICON_GRUNT, Resources.Load<Sprite>("Sprites/Grunt"));
+        images.Add(Enums.Images.ICON_SHOOTER, Resources.Load<Sprite>("Sprites/Shooter"));
+        images.Add(Enums.Images.ICON_DEFENDER, Resources.Load<Sprite>("Sprites/Defender"));
+        images.Add(Enums.Images.ICON_GUNNER, Resources.Load<Sprite>("Sprites/Gunner"));
+        images.Add(Enums.Images.ICON_SNIPER, Resources.Load<Sprite>("Sprites/Sniper"));
+        images.Add(Enums.Images.ICON_SCOUT, Resources.Load<Sprite>("Sprites/Scout"));
+        images.Add(Enums.Images.ICON_ACE, Resources.Load<Sprite>("Sprites/Ace"));
+        images.Add(Enums.Images.ICON_CANNONEER, Resources.Load<Sprite>("Sprites/Cannoneer"));
+        images.Add(Enums.Images.ICON_GUARDIAN, Resources.Load<Sprite>("Sprites/Guardian"));
+        images.Add(Enums.Images.ICON_ISOLIUM, Resources.Load<Sprite>("Sprites/Isolium"));
     }
 
     public static GameObject GetPrefab(Enums.Prefabs prefab)
     {
         return Instance.prefabs[prefab];
+    }
+
+    public static Sprite GetImage(Enums.Images image)
+    {
+        return Instance.images[image];
     }
 }

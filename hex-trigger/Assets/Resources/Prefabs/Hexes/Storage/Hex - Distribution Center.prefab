@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8905719594273126017}
   - component: {fileID: 5342659147318614981}
   - component: {fileID: 8834429128609304494}
-  - component: {fileID: 1456451382051624414}
+  - component: {fileID: 1091480938611292649}
   m_Layer: 6
   m_Name: Hex - Distribution Center
   m_TagString: Untagged
@@ -117,16 +117,16 @@ MonoBehaviour:
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 5815052629146390440}
   standardMaterial: {fileID: 2100000, guid: 1c2b4c8669fdb564eb0be7404e93a153, type: 2}
---- !u!114 &1456451382051624414
+--- !u!114 &1091480938611292649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773813418253447074}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d869b55b67d4d4349bce6425bfb7b3fc, type: 3}
+  m_Script: {fileID: 11500000, guid: b121817dd2822ae46b6eeb601646baf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HexType: 7
@@ -134,7 +134,7 @@ MonoBehaviour:
   BuildingType: 40
   model: {fileID: 4436911736734270314}
   AdjustedProduction: 0
-  BonusFromNeighbors: 0
+  BonusFromNeighbors: 1
 --- !u!1 &2359807028940524683
 GameObject:
   m_ObjectHideFlags: 0

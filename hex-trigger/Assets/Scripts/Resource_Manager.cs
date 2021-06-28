@@ -8,16 +8,16 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public int MaximumHexRange;
 
     public int CurrentFood;//currently available food, increases based on food production
-    public int MaximumFood;//Maximum storable food
+    public int MaximumFood = 10;//Maximum storable food
 
     public int CurrentPopulation;//population should increase over time and deduct based on building costs
-    public int MaximumPopulation;//maximum population, increases as new building hexes are built
+    public int MaximumPopulation = 10;//maximum population, increases as new building hexes are built
 
     public int CurrentIndustry;//currently available industry, increase based on industry production 
-    public int MaximumIndustry;
+    public int MaximumIndustry = 10;
 
     public int CurrentIsolium;//currently available isolium, increases based on isolium production
-    public int MaximumIsolium;
+    public int MaximumIsolium = 10;
 
     public int CurrentMilitary//should only increase when the player allocates more
     {
@@ -739,9 +739,32 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void AddProductionResources()
     {
-        CurrentFood += FoodProduction;
-        CurrentIndustry += IndustryProduction;
-        CurrentIsolium += IsoliumProduction;
+        if(CurrentFood + FoodProduction < MaximumFood)
+        {
+            CurrentFood += FoodProduction;
+        }
+        else if(CurrentFood < MaximumFood)
+        {
+            CurrentFood = MaximumFood;
+        }
+
+        if(CurrentIndustry + IndustryProduction < MaximumIndustry)
+        {
+            CurrentIndustry += IndustryProduction;
+        }
+        else if(CurrentIndustry < MaximumIndustry)
+        {
+            CurrentIndustry = MaximumIndustry;
+        }
+
+        if(CurrentIsolium + IsoliumProduction < MaximumIsolium)
+        {
+            CurrentIsolium += IsoliumProduction;
+        }
+        else if(CurrentIsolium < MaximumIsolium)
+        {
+            CurrentIsolium = MaximumIsolium;
+        }
     }
 
     private void AddResearchProgress()

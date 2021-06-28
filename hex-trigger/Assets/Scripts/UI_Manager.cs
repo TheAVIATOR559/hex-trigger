@@ -226,189 +226,209 @@ public class UI_Manager : Singleton<UI_Manager>
         switch (type)
         {
             case Enums.Building_Type.GARDEN:
-                //TODO Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);//todo this needs to be buildinfoimage
                 Instance.BuildInfoPanelName.text = Constants.GARDEN_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GardenCost);
                 break;
             case Enums.Building_Type.FARM:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.BuildInfoPanelName.text = Constants.FARM_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.FarmCost);
                 break;
             case Enums.Building_Type.ORCHARD:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.BuildInfoPanelName.text = Constants.ORCHARD_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.OrchardCost);
                 break;
             case Enums.Building_Type.RANCH:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.BuildInfoPanelName.text = Constants.RANCH_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.RanchCost);
                 break;
             case Enums.Building_Type.HOVEL:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.BuildInfoPanelName.text = Constants.HOVEL_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.HovelCost);
                 break;
             case Enums.Building_Type.COTTAGE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.BuildInfoPanelName.text = Constants.COTTAGE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.CottageCost);
                 break;
             case Enums.Building_Type.APARTMENT:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.BuildInfoPanelName.text = Constants.APARTMENT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ApartmentCost);
                 break;
             case Enums.Building_Type.CONDOMINIUM:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.BuildInfoPanelName.text = Constants.CONDO_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.CondoCost);
                 break;
             case Enums.Building_Type.WORKSHOP:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.BuildInfoPanelName.text = Constants.WORKSHOP_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.WorkshopCost);
                 break;
             case Enums.Building_Type.FORGE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.BuildInfoPanelName.text = Constants.FORGE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ForgeCost);
                 break;
             case Enums.Building_Type.MILL:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.BuildInfoPanelName.text = Constants.MILL_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.MillCost);
                 break;
             case Enums.Building_Type.FOUNDRY:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.BuildInfoPanelName.text = Constants.FOUNDRY_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.FoundryCost);
                 break;
             case Enums.Building_Type.BARRACKS:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.BuildInfoPanelName.text = Constants.BARRACKS_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.BarracksCost);
                 break;
             case Enums.Building_Type.DORMITORY:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.BuildInfoPanelName.text = Constants.DORMITORY_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.DormitoryCost);
                 break;
             case Enums.Building_Type.GARRISON:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.BuildInfoPanelName.text = Constants.GARRISON_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GarrisonCost);
                 break;
             case Enums.Building_Type.QUARTERS:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.BuildInfoPanelName.text = Constants.QUARTERS_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.QuartersCost);
                 break;
             case Enums.Building_Type.WATCHTOWER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.BuildInfoPanelName.text = Constants.WATCHTOWER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.WatchTowerCost);
                 break;
             case Enums.Building_Type.MISSILE_COMPLEX:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.BuildInfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.MissileComplexCost);
                 break;
             case Enums.Building_Type.LASER_TOWER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.BuildInfoPanelName.text = Constants.LASER_TOWER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.LaserTowerCost);
                 break;
             case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.BuildInfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.AutoMissileComplexCost);
                 break;
             case Enums.Building_Type.AUTO_LASER_TOWER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.BuildInfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.AutoLaserTowerCost);
                 break;
             case Enums.Building_Type.RESEARCH_LAB:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.BuildInfoPanelName.text = Constants.RESEARCH_LAB_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ResearchLabCost);
                 break;
             case Enums.Building_Type.RESEARCH_COLLEGE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.BuildInfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ResearchCollegeCost);
                 break;
             case Enums.Building_Type.RESEARCH_INSTITUTE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.BuildInfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ResearchInstituteCost);
                 break;
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.BuildInfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.MultiBrainCost);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_I:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.BuildInfoPanelName.text = Constants.STOCKPILE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ExtractorMKICost);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_II:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.BuildInfoPanelName.text = Constants.STOREHOUSE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ExtractorMKIICost);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_III:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.BuildInfoPanelName.text = Constants.WAREHOUSE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ExtractorMKIIICost);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_IV:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.BuildInfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ExtractorMKIVCost);
                 break;
             case Enums.Building_Type.SHOOTING_RANGE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SHOOTER);
                 Instance.BuildInfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ShootingRangeCost);
                 break;
             case Enums.Building_Type.DEFENDERS_WALL:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENDER);
                 Instance.BuildInfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.DefendersWallCost);
                 break;
             case Enums.Building_Type.GUNNERS_ALLEY:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUNNER);
                 Instance.BuildInfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GunnersAlleyCost);
                 break;
             case Enums.Building_Type.SNIPERS_NEST:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SNIPER);
                 Instance.BuildInfoPanelName.text = Constants.SNIPERS_NEST_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.SnipersNestCost);
                 break;
             case Enums.Building_Type.SCOUT_CAMP:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SCOUT);
                 Instance.BuildInfoPanelName.text = Constants.SCOUT_CAMP_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ScoutCampCost);
                 break;
             case Enums.Building_Type.ACES_ARENA:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ACE);
                 Instance.BuildInfoPanelName.text = Constants.ACES_ARENA_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.AcesArenaCost);
                 break;
             case Enums.Building_Type.CANNONEERS_TOWER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_CANNONEER);
                 Instance.BuildInfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.CannoneersTowerCost);
                 break;
             case Enums.Building_Type.GUARDIANS_LAST_STAND:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUARDIAN);
                 Instance.BuildInfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GuardiansLastStandCost);
+                break;
+            case Enums.Building_Type.STOCKPILE:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
+                Instance.BuildInfoPanelName.text = Constants.STOCKPILE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.StockpileCost);
+                break;
+            case Enums.Building_Type.STOREHOUSE:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
+                Instance.BuildInfoPanelName.text = Constants.STOREHOUSE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.StorehouseCost);
+                break;
+            case Enums.Building_Type.WAREHOUSE:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
+                Instance.BuildInfoPanelName.text = Constants.WAREHOUSE_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.WarehouseCost);
+                break;
+            case Enums.Building_Type.DEPOT:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
+                Instance.BuildInfoPanelName.text = Constants.DEPOT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.DepotCost);
                 break;
             case Enums.Building_Type.GOD_SEAT:
             case Enums.Building_Type.HYDROPONICS_TOWER:
@@ -417,6 +437,7 @@ public class UI_Manager : Singleton<UI_Manager>
             case Enums.Building_Type.HEADQUARTERS:
             case Enums.Building_Type.QUANTUM_BRAIN:
             case Enums.Building_Type.EXTRACTOR_MK_V:
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
             default:
                 break;
         }
@@ -431,47 +452,47 @@ public class UI_Manager : Singleton<UI_Manager>
         switch (type)
         {
             case Enums.Unit_Type.GRUNT:
-                //TODO Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GRUNT);
                 Instance.BuildInfoPanelName.text = Constants.GRUNT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GRUNT_TRAINING_COST, true);
                 break;
             case Enums.Unit_Type.SHOOTER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SHOOTER);
                 Instance.BuildInfoPanelName.text = Constants.SHOOTER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.SHOOTER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.DEFENDER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENDER);
                 Instance.BuildInfoPanelName.text = Constants.DEFENDER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.DEFENDER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.GUNNER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUNNER);
                 Instance.BuildInfoPanelName.text = Constants.GUNNER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GUNNER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.SNIPER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SNIPER);
                 Instance.BuildInfoPanelName.text = Constants.SNIPER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.SNIPER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.SCOUT:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SCOUT);
                 Instance.BuildInfoPanelName.text = Constants.SCOUT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.SCOUT_TRAINING_COST);
                 break;
             case Enums.Unit_Type.ACE:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ACE);
                 Instance.BuildInfoPanelName.text = Constants.ACE_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.ACE_TRAINING_COST);
                 break;
             case Enums.Unit_Type.CANNONEER:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_CANNONEER);
                 Instance.BuildInfoPanelName.text = Constants.CANNONEER_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.CANNONEER_TRAINING_COST);
                 break;
             case Enums.Unit_Type.GUARDIAN:
-                //Instance.InfoPanelImage = LOAD IMAGE HERE
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUARDIAN);
                 Instance.BuildInfoPanelName.text = Constants.GUARDIAN_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GUARDIAN_TRAINING_COST);
                 break;
@@ -535,295 +556,295 @@ public class UI_Manager : Singleton<UI_Manager>
         switch (type)
         {
             case Enums.Building_Type.GOD_SEAT:
-                //TODO Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GOD_SEAT);
                 Instance.InfoPanelName.text = Constants.GOD_SEAT_NAME;
                 Instance.InfoPanelDesc.text = Constants.GOD_SEAT_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GARDEN:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.InfoPanelName.text = Constants.GARDEN_NAME;
                 Instance.InfoPanelDesc.text = Constants.GARDEN_DESC;
                 Instance.UpdateProductionPanels(Constants.FOOD_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FARM:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.InfoPanelName.text = Constants.FARM_NAME;
                 Instance.InfoPanelDesc.text = Constants.FARM_DESC;
                 Instance.UpdateProductionPanels(Constants.FOOD_II_PROD, adjustedProduction, Constants.TIER_II_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.ORCHARD:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.InfoPanelName.text = Constants.ORCHARD_NAME;
                 Instance.InfoPanelDesc.text = Constants.ORCHARD_DESC;
                 Instance.UpdateProductionPanels(Constants.FOOD_III_PROD, adjustedProduction, Constants.TIER_III_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RANCH:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.InfoPanelName.text = Constants.RANCH_NAME;
                 Instance.InfoPanelDesc.text = Constants.RANCH_DESC;
                 Instance.UpdateProductionPanels(Constants.FOOD_IV_PROD, adjustedProduction, Constants.TIER_IV_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HYDROPONICS_TOWER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.InfoPanelName.text = Constants.HYDROPONICS_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.HYDROPONICS_TOWER_DESC;
                 Instance.UpdateProductionPanels(Constants.FOOD_V_PROD, adjustedProduction, Constants.TIER_V_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HOVEL:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.HOVEL_NAME;
                 Instance.InfoPanelDesc.text = Constants.HOVEL_DESC;
                 Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.COTTAGE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.COTTAGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.COTTAGE_DESC;
                 Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.APARTMENT:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.APARTMENT_NAME;
                 Instance.InfoPanelDesc.text = Constants.APARTMENT_DESC;
                 Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.CONDOMINIUM:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.CONDO_NAME;
                 Instance.InfoPanelDesc.text = Constants.CONDO_DESC;
                 Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.VILLA:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.VILLA_NAME;
                 Instance.InfoPanelDesc.text = Constants.VILLA_DESC;
                 Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WORKSHOP:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.InfoPanelName.text = Constants.WORKSHOP_NAME;
                 Instance.InfoPanelDesc.text = Constants.WORKSHOP_DESC;
                 Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FORGE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.InfoPanelName.text = Constants.FORGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.FORGE_DESC;
                 Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.MILL:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.InfoPanelName.text = Constants.MILL_NAME;
                 Instance.InfoPanelDesc.text = Constants.MILL_DESC;
                 Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FOUNDRY:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.InfoPanelName.text = Constants.FOUNDRY_NAME;
                 Instance.InfoPanelDesc.text = Constants.FOUNDRY_DESC;
                 Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.FACTORY:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
                 Instance.InfoPanelName.text = Constants.FACTORY_NAME;
                 Instance.InfoPanelDesc.text = Constants.FACTORY_DESC;
                 Instance.UpdateProductionPanels(Constants.INDUSTRY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.BARRACKS:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.InfoPanelName.text = Constants.BARRACKS_NAME;
                 Instance.InfoPanelDesc.text = Constants.BARRACKS_DESC;
                 Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DORMITORY:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.InfoPanelName.text = Constants.DORMITORY_NAME;
                 Instance.InfoPanelDesc.text = Constants.DORMITORY_DESC;
                 Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.GARRISON:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.InfoPanelName.text = Constants.GARRISON_NAME;
                 Instance.InfoPanelDesc.text = Constants.GARRISON_DESC;
                 Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.QUARTERS:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.InfoPanelName.text = Constants.QUARTERS_NAME;
                 Instance.InfoPanelDesc.text = Constants.QUARTERS_DESC;
                 Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.HEADQUARTERS:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_MILITARY);
                 Instance.InfoPanelName.text = Constants.HEADQUARTERS_NAME;
                 Instance.InfoPanelDesc.text = Constants.HEADQUARTERS_DESC;
                 Instance.UpdateProductionPanels(Constants.MILITARY_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WATCHTOWER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.InfoPanelName.text = Constants.WATCHTOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.WATCHTOWER_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.MISSILE_COMPLEX:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.InfoPanelName.text = Constants.MISSILE_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.MISSILE_COMPLEX_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.LASER_TOWER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.InfoPanelName.text = Constants.LASER_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.LASER_TOWER_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.InfoPanelName.text = Constants.AUTO_MISSILE_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.AUTO_MISSILE_COMPLEX_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.AUTO_LASER_TOWER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENSE);
                 Instance.InfoPanelName.text = Constants.AUTO_LASER_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.AUTO_LASER_TOWER_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.RESEARCH_LAB:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.InfoPanelName.text = Constants.RESEARCH_LAB_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_LAB_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RESEARCH_COLLEGE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.InfoPanelName.text = Constants.RESEARCH_COLLEGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_COLLEGE_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.RESEARCH_INSTITUTE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.InfoPanelName.text = Constants.RESEARCH_INSTITUTE_NAME;
                 Instance.InfoPanelDesc.text = Constants.RESEARCH_INSTITUTE_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.MULTIBRAIN_COMPLEX:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.InfoPanelName.text = Constants.MULTIBRAIN_COMPLEX_NAME;
                 Instance.InfoPanelDesc.text = Constants.MULTIBRAIN_COMPLEX_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.QUANTUM_BRAIN:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_RESEARCH);
                 Instance.InfoPanelName.text = Constants.QUANTUM_BRAIN_NAME;
                 Instance.InfoPanelDesc.text = Constants.QUANTUM_BRAIN_DESC;
                 Instance.UpdateProductionPanels(Constants.RESEARCH_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_I:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.InfoPanelName.text = Constants.EXTRACTOR_MK_I_NAME;
                 Instance.InfoPanelDesc.text = Constants.EXTRACTOR_MK_I_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_II:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.InfoPanelName.text = Constants.EXTRACTOR_MK_II_NAME;
                 Instance.InfoPanelDesc.text = Constants.EXTRACTOR_MK_II_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_III:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.InfoPanelName.text = Constants.EXTRACTOR_MK_III_NAME;
                 Instance.InfoPanelDesc.text = Constants.EXTRACTOR_MK_III_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_IV:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.InfoPanelName.text = Constants.EXTRACTOR_MK_IV_NAME;
                 Instance.InfoPanelDesc.text = Constants.EXTRACTOR_MK_IV_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.EXTRACTOR_MK_V:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ISOLIUM);
                 Instance.InfoPanelName.text = Constants.EXTRACTOR_MK_V_NAME;
                 Instance.InfoPanelDesc.text = Constants.EXTRACTOR_MK_V_DESC;
                 Instance.UpdateProductionPanels(Constants.ISOLIUM_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.SHOOTING_RANGE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SHOOTER);
                 Instance.InfoPanelName.text = Constants.SHOOTING_RANGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.SHOOTING_RANGE_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.DEFENDERS_WALL:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_DEFENDER);
                 Instance.InfoPanelName.text = Constants.DEFENDERS_WALL_NAME;
                 Instance.InfoPanelDesc.text = Constants.DEFENDERS_WALL_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GUNNERS_ALLEY:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUNNER);
                 Instance.InfoPanelName.text = Constants.GUNNERS_ALLEY_NAME;
                 Instance.InfoPanelDesc.text = Constants.GUNNERS_ALLEY_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.SNIPERS_NEST:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SNIPER);
                 Instance.InfoPanelName.text = Constants.SNIPERS_NEST_NAME;
                 Instance.InfoPanelDesc.text = Constants.SNIPERS_NEST_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.SCOUT_CAMP:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_SCOUT);
                 Instance.InfoPanelName.text = Constants.SCOUT_CAMP_NAME;
                 Instance.InfoPanelDesc.text = Constants.SCOUT_CAMP_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.ACES_ARENA:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_ACE);
                 Instance.InfoPanelName.text = Constants.ACES_ARENA_NAME;
                 Instance.InfoPanelDesc.text = Constants.ACES_ARENA_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.CANNONEERS_TOWER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_CANNONEER);
                 Instance.InfoPanelName.text = Constants.CANNONEERS_TOWER_NAME;
                 Instance.InfoPanelDesc.text = Constants.CANNONEERS_TOWER_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.GUARDIANS_LAST_STAND:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GUARDIAN);
                 Instance.InfoPanelName.text = Constants.GUARDIANS_LAST_STAND_NAME;
                 Instance.InfoPanelDesc.text = Constants.GUARDIANS_LAST_STAND_DESC;
                 Instance.UpdateProductionPanels(-1, -1, -1, -1);
                 break;
             case Enums.Building_Type.STOCKPILE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
                 Instance.InfoPanelName.text = Constants.STOCKPILE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOCKPILE_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.STOREHOUSE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
                 Instance.InfoPanelName.text = Constants.STOREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.STOREHOUSE_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_II_PROD, adjustedProduction, Constants.TIER_II_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.WAREHOUSE:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
                 Instance.InfoPanelName.text = Constants.WAREHOUSE_NAME;
                 Instance.InfoPanelDesc.text = Constants.WAREHOUSE_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_III_PROD, adjustedProduction, Constants.TIER_III_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DEPOT:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
                 Instance.InfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.InfoPanelDesc.text = Constants.DEPOT_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_IV_PROD, adjustedProduction, Constants.TIER_IV_BONUS, bonusFromNeighbors);
                 break;
             case Enums.Building_Type.DISTRIBUTION_CENTER:
-                //Instance.InfoPanelImage.sprite = LOAD IMAGE HERE
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_STORAGE);
                 Instance.InfoPanelName.text = Constants.DISTRIBUTION_CENTER_NAME;
                 Instance.InfoPanelDesc.text = Constants.DISTRIBUTION_CENTER_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_V_PROD, adjustedProduction, Constants.TIER_V_BONUS, bonusFromNeighbors);
