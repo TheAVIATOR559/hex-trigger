@@ -88,6 +88,12 @@ public static class Constants
     public static BuildingCost WarehouseCost = new BuildingCost(1, 3, 0, 2, 3, 0);
     public static BuildingCost DepotCost = new BuildingCost(1, 0, 0, 3, 4, 0);
     #endregion
+    #region Power
+    public static BuildingCost WaterwheelCost = new BuildingCost(1, 1, 0, 0, 2, 0);
+    public static BuildingCost CoalfiredCost = new BuildingCost(1, 2, 0, 0, 3, 0);
+    public static BuildingCost HydroelectricCost = new BuildingCost(1, 3, 0, 0, 3, 0);
+    public static BuildingCost NuclearPlantCost = new BuildingCost(1, 4, 0, 0, 4, 0);
+    #endregion
     #endregion
 
     #region Production Values
@@ -177,6 +183,13 @@ public static class Constants
     public static int STORAGE_III_PROD = 25;
     public static int STORAGE_IV_PROD = 50;
     public static int STORAGE_V_PROD = 200;
+    #endregion
+    #region Power Values
+    public static int POWER_I_PROD = 1;
+    public static int POWER_II_PROD = 2;
+    public static int POWER_III_PROD = 3;
+    public static int POWER_IV_PROD = 4;
+    public static int POWER_V_PROD = 5;
     #endregion
     #endregion
 
@@ -303,6 +316,11 @@ public static class Constants
     public static string ACES_ARENA_NAME = "Ace's Arena";
     public static string CANNONEERS_TOWER_NAME = "Cannoneer's Tower";
     public static string GUARDIANS_LAST_STAND_NAME = "Guardian's Last Stand";
+    public static string WATERWHEEL_NAME = "Waterwheel Generator";
+    public static string COAL_FIRED_PLANT_NAME = "Coal-fired Power Plant";
+    public static string HYDROELECTRIC_DAM_NAME = "Hydroelectric Dam";
+    public static string NUCLEAR_POWER_PLANT_NAME = "Nuclear Power Plant";
+    public static string QUANTUM_POWER_PLANT_NAME = "Quantum Power Plant";
     #endregion
 
     #region Building Descs
@@ -355,6 +373,11 @@ public static class Constants
     public static string WAREHOUSE_DESC = "A large building for storing many items on tall shelves in a very organized manner.";
     public static string DEPOT_DESC = "A large fully automated building capable of storing many items using complex storage algorithms.";
     public static string DISTRIBUTION_CENTER_DESC = "An upgraded version of the depot capable of not only receiving items to store but also sending out items before the items were even requested.";
+    public static string WATERWHEEL_DESC = "A simple friction based energy generator using a local water source to turn a wheel. Does not produce a lot of energy but it does so almost perpetually and without supervision.";
+    public static string COAL_FIRED_PLANT_DESC = "A power plant that burns coal to create energy. Nicknamed the 'smog belcher', it generates a decent amount of power at the cost of local happiness.";
+    public static string HYDROELECTRIC_DAM_DESC = "A large dam at the mouth of an artificial lake using the same basic technologies as a waterwheel to generate energy. Significantly more efficient than a waterwheel while doubling as a decent tourist destination.";
+    public static string NUCLEAR_POWER_PLANT_DESC = "A large complex that uses the heat generated from the decay of radioactive material to heat and turn steam generators. While it is very efficient and safe during normal operation, a meltdown of a single reactor can spell doom.";
+    public static string QUANTUM_POWER_PLANT_DESC = "A power plant perfected by harvesting power from alternate dimensions where power flows freely or not. No one is really sure how or even why it works, though it is best not to question it.";
     #endregion
 
     #region Unit Names
@@ -370,6 +393,7 @@ public static class Constants
     #endregion
 
 }
+
 //new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost
 {

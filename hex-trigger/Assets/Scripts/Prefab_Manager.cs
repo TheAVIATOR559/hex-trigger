@@ -70,6 +70,8 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Depot"));
         prefabs.Add(Enums.Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Distribution Center"));
 
+        //todo add power
+
         prefabs.Add(Enums.Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/I"));
         prefabs.Add(Enums.Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/II"));
         prefabs.Add(Enums.Prefabs.MODEL_ORCHARD, Resources.Load<GameObject>("Prefabs/Models/Food/III"));
@@ -117,6 +119,8 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/III"));
         prefabs.Add(Enums.Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Storage/IV"));
         prefabs.Add(Enums.Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Storage/V"));
+
+        //todo add power
 
         images.Add(Enums.Images.ICON_GOD_SEAT, Resources.Load<Sprite>("Sprites/God Seat"));
         images.Add(Enums.Images.ICON_FOOD, Resources.Load<Sprite>("Sprites/Food"));

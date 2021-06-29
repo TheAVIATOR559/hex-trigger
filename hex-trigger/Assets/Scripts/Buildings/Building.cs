@@ -147,7 +147,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    public static int GetProductionValue(Enums.Building_Tier tier, Enums.Hex_Types type)
+    public static int GetProductionValue(Enums.Building_Tier tier, Enums.Hex_Types type)//todo add power
     {
         switch (type)
         {

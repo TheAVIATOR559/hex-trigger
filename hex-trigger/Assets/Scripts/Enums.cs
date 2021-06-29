@@ -56,6 +56,11 @@ public static class Enums
         HEX_ACES_ARENA,
         HEX_CANNONEERS_TOWER,
         HEX_GUARDIANS_LAST_STAND,
+        HEX_WATERWHEEL,
+        HEX_COAL_FIRED_POWER_PLANT,
+        HEX_HYDROELECTRIC_DAM,
+        HEX_NUCLEAR_POWER_PLANT,
+        HEX_QUANTUM_POWER_PLANT,
         MODEL_GARDEN,
         MODEL_FARM,
         MODEL_ORCHARD,
@@ -95,7 +100,12 @@ public static class Enums
         MODEL_STOREHOUSE,
         MODEL_WAREHOUSE,
         MODEL_DEPOT,
-        MODEL_DISTRIBUTION_CENTER
+        MODEL_DISTRIBUTION_CENTER,
+        MODEL_WATERWHEEL,
+        MODEL_COAL_FIRED_POWER_PLANT,
+        MODEL_HYDROELECTRIC_DAM,
+        MODEL_NUCLEAR_POWER_PLANT,
+        MODEL_QUANTUM_POWER_PLANT
     }
 
     public enum Images
@@ -131,7 +141,8 @@ public static class Enums
         ISOLIUM,
         DEFENSE,
         STORAGE,
-        GOD_SEAT
+        GOD_SEAT,
+        POWER
     }
 
     public enum Building_Tier
@@ -193,7 +204,12 @@ public static class Enums
         SCOUT_CAMP,
         ACES_ARENA,
         CANNONEERS_TOWER,
-        GUARDIANS_LAST_STAND
+        GUARDIANS_LAST_STAND,
+        WATERWHEEL_GENERATOR,
+        COAL_FIRED_POWER_PLANT,
+        HYDROELECTRIC_DAM,
+        NUCLEAR_POWER_PLANT,
+        QUANTUM_POWER_PLANT
     }
 
     public enum Unit_Type
@@ -285,6 +301,15 @@ public static class Enums
                 Building_Tier.IV => Building_Type.DEPOT,
                 Building_Tier.V => Building_Type.DISTRIBUTION_CENTER,
                 _ => Building_Type.STOCKPILE,
+            },
+            Hex_Types.POWER => tier switch
+            {
+                Building_Tier.I => Building_Type.WATERWHEEL_GENERATOR,
+                Building_Tier.II => Building_Type.COAL_FIRED_POWER_PLANT,
+                Building_Tier.III => Building_Type.HYDROELECTRIC_DAM,
+                Building_Tier.IV => Building_Type.NUCLEAR_POWER_PLANT,
+                Building_Tier.V => Building_Type.QUANTUM_POWER_PLANT,
+                _ => Building_Type.WATERWHEEL_GENERATOR,
             },
             _ => Building_Type.HOVEL,
         };
@@ -392,6 +417,16 @@ public static class Enums
                 return Prefabs.HEX_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.HEX_DISTRIBUTION_CENTER;
+            case Building_Type.WATERWHEEL_GENERATOR:
+                return Prefabs.HEX_WATERWHEEL;
+            case Building_Type.COAL_FIRED_POWER_PLANT:
+                return Prefabs.HEX_COAL_FIRED_POWER_PLANT;
+            case Building_Type.HYDROELECTRIC_DAM:
+                return Prefabs.HEX_HYDROELECTRIC_DAM;
+            case Building_Type.NUCLEAR_POWER_PLANT:
+                return Prefabs.HEX_NUCLEAR_POWER_PLANT;
+            case Building_Type.QUANTUM_POWER_PLANT:
+                return Prefabs.HEX_QUANTUM_POWER_PLANT;
             default:
                 return Prefabs.HEX_HOVEL;
         }
@@ -482,6 +517,16 @@ public static class Enums
                 return Prefabs.MODEL_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.MODEL_DISTRIBUTION_CENTER;
+            case Building_Type.WATERWHEEL_GENERATOR:
+                return Prefabs.MODEL_WATERWHEEL;
+            case Building_Type.COAL_FIRED_POWER_PLANT:
+                return Prefabs.MODEL_COAL_FIRED_POWER_PLANT;
+            case Building_Type.HYDROELECTRIC_DAM:
+                return Prefabs.MODEL_HYDROELECTRIC_DAM;
+            case Building_Type.NUCLEAR_POWER_PLANT:
+                return Prefabs.MODEL_NUCLEAR_POWER_PLANT;
+            case Building_Type.QUANTUM_POWER_PLANT:
+                return Prefabs.MODEL_QUANTUM_POWER_PLANT;
             case Building_Type.SHOOTING_RANGE:
             case Building_Type.DEFENDERS_WALL:
             case Building_Type.GUNNERS_ALLEY:

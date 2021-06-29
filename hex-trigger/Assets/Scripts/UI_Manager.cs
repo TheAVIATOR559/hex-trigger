@@ -16,6 +16,8 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject DefenseTierPanel;
     private GameObject ResearchTierPanel;
     private GameObject IsoliumTierPanel;
+    private GameObject StorageTierPanel;
+    private GameObject PowerTierPanel;
 
     private GameObject BuildInfoPanel;
     private Image BuildInfoPanelImage;
@@ -100,10 +102,12 @@ public class UI_Manager : Singleton<UI_Manager>
         DefenseTierPanel = CityCanvas.transform.GetChild(6).gameObject;
         ResearchTierPanel = CityCanvas.transform.GetChild(7).gameObject;
         IsoliumTierPanel = CityCanvas.transform.GetChild(8).gameObject;
-        ResourcePanel = CityCanvas.transform.GetChild(9).gameObject;
-        MilitaryPanel = CityCanvas.transform.GetChild(10).gameObject;
+        StorageTierPanel = CityCanvas.transform.GetChild(9).gameObject;
+        PowerTierPanel = CityCanvas.transform.GetChild(10).gameObject;
+        ResourcePanel = CityCanvas.transform.GetChild(11).gameObject;
+        MilitaryPanel = CityCanvas.transform.GetChild(12).gameObject;
 
-        BuildInfoPanel = CityCanvas.transform.GetChild(11).gameObject;
+        BuildInfoPanel = CityCanvas.transform.GetChild(13).gameObject;
         BuildInfoPanelImage = BuildInfoPanel.transform.GetChild(0).GetComponent<Image>();
         BuildInfoPanelName = BuildInfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         BuilldInfoPanelCost = BuildInfoPanel.transform.GetChild(2).gameObject;
@@ -135,7 +139,7 @@ public class UI_Manager : Singleton<UI_Manager>
         GuardianCountText = MilitaryPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
         GuardianButtonImage = MilitaryPanel.transform.GetChild(8).GetComponent<Image>();
 
-        InfoPanel = CityCanvas.transform.GetChild(12).gameObject;
+        InfoPanel = CityCanvas.transform.GetChild(14).gameObject;
         InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
         InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         InfoPanelDesc = InfoPanel.transform.GetChild(2).GetComponent<TMP_Text>();
@@ -144,7 +148,7 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoPanelBonusToOthers = InfoPanel.transform.GetChild(3).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusFromOthers = InfoPanel.transform.GetChild(3).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
 
-        CityOverviewPanel = CityCanvas.transform.GetChild(13).gameObject;
+        CityOverviewPanel = CityCanvas.transform.GetChild(15).gameObject;
         FoodProdText = CityOverviewPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         PopGrowthText = CityOverviewPanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
         IndustryProdText = CityOverviewPanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
@@ -173,6 +177,8 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.DefenseTierPanel.SetActive(false);
         Instance.ResearchTierPanel.SetActive(false);
         Instance.IsoliumTierPanel.SetActive(false);
+        Instance.StorageTierPanel.SetActive(false);
+        Instance.PowerTierPanel.SetActive(false);
         Instance.ResourcePanel.SetActive(true);
         Instance.MilitaryPanel.SetActive(false);
         Instance.BuildInfoPanel.SetActive(false);
@@ -217,7 +223,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.BuilldInfoPanelCost.SetActive(false);
     }
 
-    public static void UpdateBuildInfoPanel(Enums.Building_Type type)
+    public static void UpdateBuildInfoPanel(Enums.Building_Type type)//todo add power
     {
         Instance.BuildInfoPanelImage.gameObject.SetActive(true);
         Instance.BuildInfoPanelName.gameObject.SetActive(true);
@@ -226,7 +232,7 @@ public class UI_Manager : Singleton<UI_Manager>
         switch (type)
         {
             case Enums.Building_Type.GARDEN:
-                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);//todo this needs to be buildinfoimage
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
                 Instance.BuildInfoPanelName.text = Constants.GARDEN_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.GardenCost);
                 break;
@@ -549,7 +555,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.InfoPanel.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)
+    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)//todo add power
     {
         EnableInfoPanel();
 
@@ -927,10 +933,10 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         SetAvailableHexesText(Resource_Manager.Instance.MaximumHexRange);
         SetAvailablePopulationText(Resource_Manager.Instance.CurrentPopulation, Resource_Manager.Instance.MaximumPopulation);
-        SetAvailableFoodText(Resource_Manager.Instance.MaximumFood);
-        SetAvailableIndustryText(Resource_Manager.Instance.CurrentIndustry);
+        SetAvailableFoodText(Resource_Manager.Instance.MaximumFood, Resource_Manager.Instance.MaximumFood);
+        SetAvailableIndustryText(Resource_Manager.Instance.CurrentIndustry, Resource_Manager.Instance.MaximumIndustry);
         SetAvailableMilitaryText(Resource_Manager.Instance.CurrentMilitary, Resource_Manager.Instance.MaximumMilitary);
-        SetAvailableIsoliumText(Resource_Manager.Instance.CurrentIsolium);
+        SetAvailableIsoliumText(Resource_Manager.Instance.CurrentIsolium, Resource_Manager.Instance.MaximumIsolium);
     }
 
     public static void SetAvailableHexesText(int hexes)
@@ -943,14 +949,14 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.AvailablePopText.text = currPop + " / " + maxPop;
     }
 
-    public static void SetAvailableFoodText(int food)
+    public static void SetAvailableFoodText(int food, int maxFood)
     {
-        Instance.AvailableFoodText.text = food.ToString();
+        Instance.AvailableFoodText.text = food + " / " + maxFood;
     }
 
-    public static void SetAvailableIndustryText(int industry)
+    public static void SetAvailableIndustryText(int industry, int maxIndustry)
     {
-        Instance.AvailableIndustryText.text = industry.ToString();
+        Instance.AvailableIndustryText.text = industry + " / " + maxIndustry;
     }
 
     public static void SetAvailableMilitaryText(int currMilitary, int maxMilitary)
@@ -958,9 +964,9 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.AvailableMilitaryText.text = currMilitary + " / " + maxMilitary;
     }
 
-    public static void SetAvailableIsoliumText(int isolium)
+    public static void SetAvailableIsoliumText(int isolium, int maxIsolium)
     {
-        Instance.AvailableIsoliumText.text = isolium.ToString();
+        Instance.AvailableIsoliumText.text = isolium + " / " + maxIsolium;
     }
 
     public static void UpdateUnitCountText()
