@@ -70,7 +70,11 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Depot"));
         prefabs.Add(Enums.Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Distribution Center"));
 
-        //todo add power
+        prefabs.Add(Enums.Prefabs.HEX_WATERWHEEL, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Waterwheel"));
+        prefabs.Add(Enums.Prefabs.HEX_COAL_FIRED_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Coal-fired Power Plant"));
+        prefabs.Add(Enums.Prefabs.HEX_HYDROELECTRIC_DAM, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Hydroelectric Dam"));
+        prefabs.Add(Enums.Prefabs.HEX_NUCLEAR_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Nuclear Power Plant"));
+        prefabs.Add(Enums.Prefabs.HEX_QUANTUM_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Quantum Power Plant"));
 
         prefabs.Add(Enums.Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/I"));
         prefabs.Add(Enums.Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/II"));
@@ -89,12 +93,6 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.MODEL_MILL, Resources.Load<GameObject>("Prefabs/Models/Industry/III"));
         prefabs.Add(Enums.Prefabs.MODEL_FOUNDRY, Resources.Load<GameObject>("Prefabs/Models/Industry/IV"));
         prefabs.Add(Enums.Prefabs.MODEL_FACTORY, Resources.Load<GameObject>("Prefabs/Models/Industry/V"));
-
-        prefabs.Add(Enums.Prefabs.MODEL_WATCHTOWER, Resources.Load<GameObject>("Prefabs/Models/Defense/I"));
-        prefabs.Add(Enums.Prefabs.MODEL_MISSILE_COMPLEX, Resources.Load<GameObject>("Prefabs/Models/Defense/II"));
-        prefabs.Add(Enums.Prefabs.MODEL_LASER_TOWER, Resources.Load<GameObject>("Prefabs/Models/Defense/III"));
-        prefabs.Add(Enums.Prefabs.MODEL_AUTO_MISSILE_COMPLEX, Resources.Load<GameObject>("Prefabs/Models/Defense/IV"));
-        prefabs.Add(Enums.Prefabs.MODEL_AUTO_LASER_TOWER, Resources.Load<GameObject>("Prefabs/Models/Defense/V"));
 
         prefabs.Add(Enums.Prefabs.MODEL_BARRACKS, Resources.Load<GameObject>("Prefabs/Models/Miliary/I"));
         prefabs.Add(Enums.Prefabs.MODEL_DORMITORY, Resources.Load<GameObject>("Prefabs/Models/Military/II"));
@@ -119,8 +117,6 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/III"));
         prefabs.Add(Enums.Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Storage/IV"));
         prefabs.Add(Enums.Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Storage/V"));
-
-        //todo add power
 
         images.Add(Enums.Images.ICON_GOD_SEAT, Resources.Load<Sprite>("Sprites/God Seat"));
         images.Add(Enums.Images.ICON_FOOD, Resources.Load<Sprite>("Sprites/Food"));

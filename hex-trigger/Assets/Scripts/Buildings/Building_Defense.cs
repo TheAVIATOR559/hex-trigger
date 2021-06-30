@@ -12,5 +12,11 @@ public class Building_Defense : Building
 
         RangeHighlighter.SetActive(false);
     }
-    //TODO implement me
+
+    public override void DetermineBuildingTier()
+    {
+        //short circuiting parent method
+    }
+
+    //todo defense implementation
 }

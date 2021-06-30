@@ -93,6 +93,7 @@ public static class Constants
     public static BuildingCost CoalfiredCost = new BuildingCost(1, 2, 0, 0, 3, 0);
     public static BuildingCost HydroelectricCost = new BuildingCost(1, 3, 0, 0, 3, 0);
     public static BuildingCost NuclearPlantCost = new BuildingCost(1, 4, 0, 0, 4, 0);
+    public static BuildingCost QuantumPlantCost = new BuildingCost(1, 5, 0, 0, 5, 0);
     #endregion
     #endregion
 

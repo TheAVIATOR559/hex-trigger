@@ -253,6 +253,12 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Hex_Types.ISOLIUM:
                 Instance.IsoliumProduction += value;
                 break;
+            case Enums.Hex_Types.STORAGE:
+                Instance.MaximumFood += value;
+                Instance.MaximumIndustry += value;
+                Instance.MaximumIsolium += value;
+                break;
+            case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:
@@ -324,6 +330,35 @@ public class Resource_Manager : Singleton<Resource_Manager>
                     Instance.IsoliumProduction -= value;
                 }
                 break;
+            case Enums.Hex_Types.STORAGE:
+                if(Instance.MaximumFood - value <= 0)
+                {
+                    Instance.MaximumFood = 0;
+                }
+                else
+                {
+                    Instance.MaximumFood -= value;
+                }
+
+                if (Instance.MaximumIndustry - value <= 0)
+                {
+                    Instance.MaximumIndustry = 0;
+                }
+                else
+                {
+                    Instance.MaximumIndustry -= value;
+                }
+
+                if (Instance.MaximumIsolium - value <= 0)
+                {
+                    Instance.MaximumIsolium = 0;
+                }
+                else
+                {
+                    Instance.MaximumIsolium -= value;
+                }
+                break;
+            case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:

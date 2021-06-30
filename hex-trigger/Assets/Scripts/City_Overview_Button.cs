@@ -6,11 +6,13 @@ public class City_Overview_Button : MonoBehaviour
 {
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject CityOverviewCamera;
-    //todo make it so when another button is clicked disable the city overview
+
+    private static City_Overview_Button instance;
 
     private void Awake()
     {
         CityOverviewCamera.SetActive(false);
+        instance = this;
     }
 
     public void OnClick()
@@ -34,5 +36,12 @@ public class City_Overview_Button : MonoBehaviour
         }
 
         City_Manager.Instance.UnhighlightHex();
+    }
+
+    public static void DisableCityOverview()
+    {
+        instance.CityOverviewCamera.SetActive(false);
+        instance.MainCamera.SetActive(true);
+        UI_Manager.ResetCityUIState();
     }
 }

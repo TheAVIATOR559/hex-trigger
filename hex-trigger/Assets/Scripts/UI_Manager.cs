@@ -223,7 +223,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.BuilldInfoPanelCost.SetActive(false);
     }
 
-    public static void UpdateBuildInfoPanel(Enums.Building_Type type)//todo add power
+    public static void UpdateBuildInfoPanel(Enums.Building_Type type)
     {
         Instance.BuildInfoPanelImage.gameObject.SetActive(true);
         Instance.BuildInfoPanelName.gameObject.SetActive(true);
@@ -436,6 +436,31 @@ public class UI_Manager : Singleton<UI_Manager>
                 Instance.BuildInfoPanelName.text = Constants.DEPOT_NAME;
                 Instance.UpdateBuildInfoCostsPanel(Constants.DepotCost);
                 break;
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.BuildInfoPanelName.text = Constants.WATERWHEEL_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.WaterwheelCost);
+                break;
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.BuildInfoPanelName.text = Constants.COAL_FIRED_PLANT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.CoalfiredCost);
+                break;
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.BuildInfoPanelName.text = Constants.HYDROELECTRIC_DAM_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.HydroelectricCost);
+                break;
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.BuildInfoPanelName.text = Constants.NUCLEAR_POWER_PLANT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.NuclearPlantCost);
+                break;
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+                Instance.BuildInfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.BuildInfoPanelName.text = Constants.QUANTUM_POWER_PLANT_NAME;
+                Instance.UpdateBuildInfoCostsPanel(Constants.QuantumPlantCost);
+                break;
             case Enums.Building_Type.GOD_SEAT:
             case Enums.Building_Type.HYDROPONICS_TOWER:
             case Enums.Building_Type.VILLA:
@@ -555,7 +580,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.InfoPanel.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)//todo add power
+    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)
     {
         EnableInfoPanel();
 
@@ -855,8 +880,37 @@ public class UI_Manager : Singleton<UI_Manager>
                 Instance.InfoPanelDesc.text = Constants.DISTRIBUTION_CENTER_DESC;
                 Instance.UpdateProductionPanels(Constants.STORAGE_V_PROD, adjustedProduction, Constants.TIER_V_BONUS, bonusFromNeighbors);
                 break;
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.InfoPanelName.text = Constants.WATERWHEEL_NAME;
+                Instance.InfoPanelDesc.text = Constants.WATERWHEEL_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                break;
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.InfoPanelName.text = Constants.COAL_FIRED_PLANT_NAME;
+                Instance.InfoPanelDesc.text = Constants.COAL_FIRED_PLANT_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                break;
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.InfoPanelName.text = Constants.HYDROELECTRIC_DAM_NAME;
+                Instance.InfoPanelDesc.text = Constants.HYDROELECTRIC_DAM_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                break;
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.InfoPanelName.text = Constants.NUCLEAR_POWER_PLANT_NAME;
+                Instance.InfoPanelDesc.text = Constants.NUCLEAR_POWER_PLANT_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                break;
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+                Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POWER);
+                Instance.InfoPanelName.text = Constants.QUANTUM_POWER_PLANT_NAME;
+                Instance.InfoPanelDesc.text = Constants.QUANTUM_POWER_PLANT_DESC;
+                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                break;
             default:
-
                 break;
         }
     }
@@ -933,7 +987,7 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         SetAvailableHexesText(Resource_Manager.Instance.MaximumHexRange);
         SetAvailablePopulationText(Resource_Manager.Instance.CurrentPopulation, Resource_Manager.Instance.MaximumPopulation);
-        SetAvailableFoodText(Resource_Manager.Instance.MaximumFood, Resource_Manager.Instance.MaximumFood);
+        SetAvailableFoodText(Resource_Manager.Instance.CurrentFood, Resource_Manager.Instance.MaximumFood);
         SetAvailableIndustryText(Resource_Manager.Instance.CurrentIndustry, Resource_Manager.Instance.MaximumIndustry);
         SetAvailableMilitaryText(Resource_Manager.Instance.CurrentMilitary, Resource_Manager.Instance.MaximumMilitary);
         SetAvailableIsoliumText(Resource_Manager.Instance.CurrentIsolium, Resource_Manager.Instance.MaximumIsolium);

@@ -81,11 +81,6 @@ public static class Enums
         MODEL_GARRISON,
         MODEL_QUARTERS,
         MODEL_HEADQUARTERS,
-        MODEL_WATCHTOWER,
-        MODEL_MISSILE_COMPLEX,
-        MODEL_LASER_TOWER,
-        MODEL_AUTO_MISSILE_COMPLEX,
-        MODEL_AUTO_LASER_TOWER,
         MODEL_RESEARCH_LAB,
         MODEL_RESEARCH_COLLEGE,
         MODEL_RESEARCH_INSTITUTE,
@@ -100,12 +95,7 @@ public static class Enums
         MODEL_STOREHOUSE,
         MODEL_WAREHOUSE,
         MODEL_DEPOT,
-        MODEL_DISTRIBUTION_CENTER,
-        MODEL_WATERWHEEL,
-        MODEL_COAL_FIRED_POWER_PLANT,
-        MODEL_HYDROELECTRIC_DAM,
-        MODEL_NUCLEAR_POWER_PLANT,
-        MODEL_QUANTUM_POWER_PLANT
+        MODEL_DISTRIBUTION_CENTER
     }
 
     public enum Images
@@ -477,16 +467,6 @@ public static class Enums
                 return Prefabs.MODEL_QUARTERS;
             case Building_Type.HEADQUARTERS:
                 return Prefabs.MODEL_HEADQUARTERS;
-            case Building_Type.WATCHTOWER:
-                return Prefabs.MODEL_WATCHTOWER;
-            case Building_Type.MISSILE_COMPLEX:
-                return Prefabs.MODEL_MISSILE_COMPLEX;
-            case Building_Type.LASER_TOWER:
-                return Prefabs.MODEL_LASER_TOWER;
-            case Building_Type.AUTO_MISSILE_COMPLEX:
-                return Prefabs.MODEL_AUTO_MISSILE_COMPLEX;
-            case Building_Type.AUTO_LASER_TOWER:
-                return Prefabs.MODEL_AUTO_LASER_TOWER;
             case Building_Type.RESEARCH_LAB:
                 return Prefabs.MODEL_RESEARCH_LAB;
             case Building_Type.RESEARCH_COLLEGE:
@@ -517,16 +497,16 @@ public static class Enums
                 return Prefabs.MODEL_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
                 return Prefabs.MODEL_DISTRIBUTION_CENTER;
+            case Building_Type.WATCHTOWER:
+            case Building_Type.MISSILE_COMPLEX:
+            case Building_Type.LASER_TOWER:
+            case Building_Type.AUTO_MISSILE_COMPLEX:
+            case Building_Type.AUTO_LASER_TOWER:
             case Building_Type.WATERWHEEL_GENERATOR:
-                return Prefabs.MODEL_WATERWHEEL;
             case Building_Type.COAL_FIRED_POWER_PLANT:
-                return Prefabs.MODEL_COAL_FIRED_POWER_PLANT;
             case Building_Type.HYDROELECTRIC_DAM:
-                return Prefabs.MODEL_HYDROELECTRIC_DAM;
             case Building_Type.NUCLEAR_POWER_PLANT:
-                return Prefabs.MODEL_NUCLEAR_POWER_PLANT;
             case Building_Type.QUANTUM_POWER_PLANT:
-                return Prefabs.MODEL_QUANTUM_POWER_PLANT;
             case Building_Type.SHOOTING_RANGE:
             case Building_Type.DEFENDERS_WALL:
             case Building_Type.GUNNERS_ALLEY:

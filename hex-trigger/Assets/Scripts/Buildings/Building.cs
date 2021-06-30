@@ -147,7 +147,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    public static int GetProductionValue(Enums.Building_Tier tier, Enums.Hex_Types type)//todo add power
+    public static int GetProductionValue(Enums.Building_Tier tier, Enums.Hex_Types type)
     {
         switch (type)
         {
@@ -221,6 +221,7 @@ public class Building : MonoBehaviour
                     Enums.Building_Tier.V => Constants.STORAGE_V_PROD,
                     _ => Constants.STORAGE_I_PROD,
                 };
+            case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:
