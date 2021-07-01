@@ -70,7 +70,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         prefabs.Add(Enums.Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Depot"));
         prefabs.Add(Enums.Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Distribution Center"));
 
-        prefabs.Add(Enums.Prefabs.HEX_WATERWHEEL, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Waterwheel"));
+        prefabs.Add(Enums.Prefabs.HEX_WATERWHEEL, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Waterwheel Generator"));
         prefabs.Add(Enums.Prefabs.HEX_COAL_FIRED_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Coal-fired Power Plant"));
         prefabs.Add(Enums.Prefabs.HEX_HYDROELECTRIC_DAM, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Hydroelectric Dam"));
         prefabs.Add(Enums.Prefabs.HEX_NUCLEAR_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Nuclear Power Plant"));

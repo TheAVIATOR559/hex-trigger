@@ -6,11 +6,14 @@ public class Building_Power : Building
 {
     [SerializeField] private GameObject RangeHighlighter;
 
+    [SerializeField] List<Vector2Int> PoweredHexPositions = new List<Vector2Int>();
+
     public override void Initalize()
     {
         base.Initalize();
-
+        IsPowered = true;
         RangeHighlighter.SetActive(false);
+        GetPoweredHexPositions();
     }
 
     public override void DetermineBuildingTier()
@@ -18,12 +21,38 @@ public class Building_Power : Building
         //short circuit
     }
 
-    //todo power implementation
+    private void GetPoweredHexPositions()
+    {
+        foreach(Transform child in RangeHighlighter.transform)
+        {
+            //get the hex position of the child
+            PoweredHexPositions.Add(Hex.GetHexCoordFromWorldCoord(child.position));
+        }
 
-    ///<summary> Power Implementation Needs
-    /// Total range of power distribution :: provided as Constants.POWER_TIER_PROD
-    /// List of Hexes that are recieving power :: only used on creation and destruction ??better way to do it??
-    /// Building will need a bool for if they are receiving power :: will need to add integration of power bool to effects and resource prod
-    /// Will need a way of getting hexes within a circular radius :: ?? rejig hex offset into a cube coord system (https://www.redblobgames.com/grids/hexagons/)
-    /// </summary>
+        DistributePower();
+    }
+
+    public void DistributePower()
+    {
+        foreach(Vector2Int point in PoweredHexPositions)
+        {
+            Hex hex = City_Manager.GetHex(point);
+            if (hex != null)
+            {
+                hex.ConnectedBuilding.SetPowered(true);
+            }
+        }
+    }
+
+    public void RemovePower()
+    {
+        foreach (Vector2Int point in PoweredHexPositions)
+        {
+            Hex hex = City_Manager.GetHex(point);
+            if (hex != null)
+            {
+                hex.ConnectedBuilding.SetPowered(false);
+            }
+        }
+    }
 }

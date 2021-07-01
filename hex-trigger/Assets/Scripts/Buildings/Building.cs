@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    [SerializeField] protected bool IsPowered = false;
+
     public Enums.Hex_Types HexType;
     public Enums.Building_Tier BuildingTier;
     public Enums.Building_Type BuildingType;
@@ -120,13 +122,30 @@ public class Building : MonoBehaviour
 
     protected virtual void AddToResourceProduction()
     {
-        Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
+        if(IsPowered)
+        {
+            Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
+        }
     }
 
     protected virtual void RemoveFromResourceProduction()
     {
         Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
     }
+
+    public virtual void SetPowered(bool powerState)
+    {
+        IsPowered = powerState;
+
+        if(IsPowered)
+        {
+            AddToResourceProduction();
+        }
+        else
+        {
+            RemoveFromResourceProduction();
+        }
+    }    
 
     public static float GetProductionBonus(Enums.Building_Tier tier)
     {

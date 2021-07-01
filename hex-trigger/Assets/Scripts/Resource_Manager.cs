@@ -5,7 +5,7 @@ using UnityEngine;
 public class Resource_Manager : Singleton<Resource_Manager>
 {
     //TODO rejig to be distance from god seat and player must invest in god seat to expand hex range
-    public int MaximumHexRange;
+    public int MaximumHexRange = 3;
 
     public int CurrentFood;//currently available food, increases based on food production
     public int MaximumFood = 10;//Maximum storable food
@@ -195,12 +195,31 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 return Constants.CannoneersTowerCost;
             case Enums.Building_Type.GUARDIANS_LAST_STAND:
                 return Constants.GuardiansLastStandCost;
+            case Enums.Building_Type.STOCKPILE:
+                return Constants.StockpileCost;
+            case Enums.Building_Type.STOREHOUSE:
+                return Constants.StorehouseCost;
+            case Enums.Building_Type.WAREHOUSE:
+                return Constants.WarehouseCost;
+            case Enums.Building_Type.DEPOT:
+                return Constants.DepotCost;
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+                return Constants.WaterwheelCost;
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+                return Constants.CoalfiredCost;
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+                return Constants.HydroelectricCost;
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+                return Constants.NuclearPlantCost;
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+                return Constants.QuantumPlantCost;
             case Enums.Building_Type.HYDROPONICS_TOWER:
             case Enums.Building_Type.VILLA:
             case Enums.Building_Type.FACTORY:
             case Enums.Building_Type.HEADQUARTERS:
             case Enums.Building_Type.QUANTUM_BRAIN:
             case Enums.Building_Type.EXTRACTOR_MK_V:
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
             case Enums.Building_Type.GOD_SEAT:
             default:
                 return new BuildingCost(0, 0, 0, 0, 0, 0);
