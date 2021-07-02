@@ -32,7 +32,7 @@ public class Building_Power : Building
         DistributePower();
     }
 
-    public void DistributePower()
+    public void DistributePower()//TODO RUN WHENEVER A NEW HEX IS PLACED IN RADIUS
     {
         foreach(Vector2Int point in PoweredHexPositions)
         {

@@ -32,6 +32,12 @@ public class UI_Manager : Singleton<UI_Manager>
     private TMP_Text InfoPanelAdjProd;
     private TMP_Text InfoPanelBonusToOthers;
     private TMP_Text InfoPanelBonusFromOthers;
+    private TMP_Text InfoPanelGodSeatLevel;
+    private TMP_Text InfoPanelGodSeatHexRange;
+    private TMP_Text InfoPanelGodSeatIsoliumCost;
+    private TMP_Text InfoPanelGodSeatIndustryCost;
+    private TMP_Text InfoPanelGodSeatFoodCost;
+    private TMP_Text InfoPanelGodSeatPopCost;
 
     private GameObject ResourcePanel;
     private GameObject MilitaryPanel;
@@ -147,6 +153,12 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoPanelAdjProd = InfoPanel.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusToOthers = InfoPanel.transform.GetChild(3).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusFromOthers = InfoPanel.transform.GetChild(3).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelGodSeatLevel = InfoPanel.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelGodSeatHexRange = InfoPanel.transform.GetChild(4).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelGodSeatIsoliumCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+        InfoPanelGodSeatIndustryCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(1).GetChild(0).GetComponent<TMP_Text>();
+        InfoPanelGodSeatFoodCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(2).GetChild(0).GetComponent<TMP_Text>();
+        InfoPanelGodSeatPopCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(3).GetChild(0).GetComponent<TMP_Text>();
 
         CityOverviewPanel = CityCanvas.transform.GetChild(15).gameObject;
         FoodProdText = CityOverviewPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
@@ -573,6 +585,8 @@ public class UI_Manager : Singleton<UI_Manager>
     public static void EnableInfoPanel()
     {
         Instance.InfoPanel.SetActive(true);
+        Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(true);
+        Instance.InfoPanel.transform.GetChild(4).gameObject.SetActive(false);
     }
 
     public static void DisableInfoPanel()
@@ -580,7 +594,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.InfoPanel.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction, float bonusFromNeighbors)
+    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction = 0, float bonusFromNeighbors = 0)
     {
         EnableInfoPanel();
 
@@ -590,7 +604,9 @@ public class UI_Manager : Singleton<UI_Manager>
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_GOD_SEAT);
                 Instance.InfoPanelName.text = Constants.GOD_SEAT_NAME;
                 Instance.InfoPanelDesc.text = Constants.GOD_SEAT_DESC;
-                Instance.UpdateProductionPanels(-1, -1, -1, -1);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(4).gameObject.SetActive(true);
+                Instance.UpdateGodSeatCostPanels();
                 break;
             case Enums.Building_Type.GARDEN:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_FOOD);
@@ -915,6 +931,16 @@ public class UI_Manager : Singleton<UI_Manager>
         }
     }
 
+    private void UpdateGodSeatCostPanels()
+    {
+        InfoPanelGodSeatLevel.text = Resource_Manager.Instance.GodSeatLevel.ToString();
+        InfoPanelGodSeatHexRange.text = Resource_Manager.Instance.MaximumHexRange.ToString();
+        InfoPanelGodSeatIsoliumCost.text = Resource_Manager.Instance.GodSeatUpgradeIsoliumCost.ToString();
+        InfoPanelGodSeatIndustryCost.text = Resource_Manager.Instance.GodSeatUpgradeIndustryCost.ToString();
+        InfoPanelGodSeatFoodCost.text = Resource_Manager.Instance.GodSeatUpgradeFoodCost.ToString();
+        InfoPanelGodSeatPopCost.text = Resource_Manager.Instance.GodSeatUpgradePopCost.ToString();
+    }
+
     private void UpdateProductionPanels(float baseProd, float adjProd, float bonusToNeighbors, float bonusFromNeighbors)
     {
         ///may need own override for defense hexes
@@ -1090,7 +1116,7 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexImage, Instance.EndHexFlashing));
         }
 
-        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.MaximumFood < cost.RequiredFood)
+        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.CurrentFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));
@@ -1151,7 +1177,7 @@ public class UI_Manager : Singleton<UI_Manager>
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailablePopImage, Instance.EndPopFlashing));
         }
 
-        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.MaximumFood < cost.RequiredFood)
+        if (!Instance.FoodTextFlashing && Resource_Manager.Instance.CurrentFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
             Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableFoodImage, Instance.EndFoodFlashing));

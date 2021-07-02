@@ -5,19 +5,19 @@ using UnityEngine;
 public class Resource_Manager : Singleton<Resource_Manager>
 {
     //TODO rejig to be distance from god seat and player must invest in god seat to expand hex range
-    public int MaximumHexRange = 3;
+    public int MaximumHexRange = Constants.DEFAULT_HEX_RADIUS;
 
     public int CurrentFood;//currently available food, increases based on food production
-    public int MaximumFood = 10;//Maximum storable food
+    public int MaximumFood = Constants.DEFAULT_RESOURCE_STORAGE;//Maximum storable food
 
     public int CurrentPopulation;//population should increase over time and deduct based on building costs
-    public int MaximumPopulation = 10;//maximum population, increases as new building hexes are built
+    public int MaximumPopulation = Constants.DEFAULT_RESOURCE_STORAGE;//maximum population, increases as new building hexes are built
 
     public int CurrentIndustry;//currently available industry, increase based on industry production 
-    public int MaximumIndustry = 10;
+    public int MaximumIndustry = Constants.DEFAULT_RESOURCE_STORAGE;
 
     public int CurrentIsolium;//currently available isolium, increases based on isolium production
-    public int MaximumIsolium = 10;
+    public int MaximumIsolium = Constants.DEFAULT_RESOURCE_STORAGE;
 
     public int CurrentMilitary//should only increase when the player allocates more
     {
@@ -62,6 +62,25 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public bool ResourcesTickPaused = false;
 
+    public int GodSeatLevel = 1;
+    public int GodSeatUpgradeIsoliumCost = Constants.DEFAULT_GOD_SEAT_ISO_COST;
+    public int GodSeatUpgradeIndustryCost = Constants.DEFAULT_GOD_SEAT_IND_COST;
+    public int GodSeatUpgradeFoodCost = Constants.DEFAULT_GOD_SEAT_FOOD_COST;
+    public int GodSeatUpgradePopCost = Constants.DEFAULT_GOD_SEAT_POP_COST;
+
+    private int PrevGodSeatIsoliumCost;
+    private int PrevGodSeatIndustryCost;
+    private int PrevGodSeatFoodCost;
+    private int PrevGodSeatPopCost;
+
+    private void Awake()
+    {
+        PrevGodSeatIsoliumCost = Instance.GodSeatUpgradeIsoliumCost;
+        PrevGodSeatIndustryCost = Instance.GodSeatUpgradeIndustryCost;
+        PrevGodSeatFoodCost = Instance.GodSeatUpgradeFoodCost;
+        PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -72,7 +91,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DEV_MaxOutResources()
     {
-        Instance.MaximumHexRange = 1000;
+        //Instance.MaximumHexRange = 1000;
         Instance.MaximumFood = 1000;
         Instance.MaximumPopulation = 1000;
         Instance.CurrentPopulation = 1000;
@@ -228,7 +247,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DeductResources(BuildingCost cost)
     {
-        Instance.MaximumHexRange -= cost.RequiredHexes;
+        Instance.MaximumHexRange -= cost.RequiredHexes;//TODO REMOVE THIS FROM WELL EVERYWHERE
         Instance.CurrentPopulation -= cost.RequiredPopulation;
         Instance.CurrentFood -= cost.RequiredFood;
         Instance.CurrentIndustry -= cost.RequiredIndustry;
@@ -350,7 +369,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 break;
             case Enums.Hex_Types.STORAGE:
-                if(Instance.MaximumFood - value <= 0)
+                if (Instance.MaximumFood - value <= 0)
                 {
                     Instance.MaximumFood = 0;
                 }
@@ -793,29 +812,29 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     private void AddProductionResources()
     {
-        if(CurrentFood + FoodProduction < MaximumFood)
+        if (CurrentFood + FoodProduction < MaximumFood)
         {
             CurrentFood += FoodProduction;
         }
-        else if(CurrentFood < MaximumFood)
+        else if (CurrentFood < MaximumFood)
         {
             CurrentFood = MaximumFood;
         }
 
-        if(CurrentIndustry + IndustryProduction < MaximumIndustry)
+        if (CurrentIndustry + IndustryProduction < MaximumIndustry)
         {
             CurrentIndustry += IndustryProduction;
         }
-        else if(CurrentIndustry < MaximumIndustry)
+        else if (CurrentIndustry < MaximumIndustry)
         {
             CurrentIndustry = MaximumIndustry;
         }
 
-        if(CurrentIsolium + IsoliumProduction < MaximumIsolium)
+        if (CurrentIsolium + IsoliumProduction < MaximumIsolium)
         {
             CurrentIsolium += IsoliumProduction;
         }
-        else if(CurrentIsolium < MaximumIsolium)
+        else if (CurrentIsolium < MaximumIsolium)
         {
             CurrentIsolium = MaximumIsolium;
         }
@@ -871,4 +890,32 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.StopCoroutine(Instance.TickResources());
     }
 
+    public static void UpgradeGodSeat()
+    {
+        //deduct resources
+        if (Instance.GodSeatUpgradeIsoliumCost > Instance.CurrentIsolium
+            || Instance.GodSeatUpgradeIndustryCost > Instance.CurrentIndustry
+            || Instance.GodSeatUpgradeFoodCost > Instance.CurrentFood
+            || Instance.GodSeatUpgradePopCost > Instance.CurrentPopulation)
+        {
+            UI_Manager.FlashMissingResources(new BuildingCost(0, Instance.GodSeatUpgradePopCost, Instance.GodSeatUpgradeFoodCost, Instance.GodSeatUpgradeIsoliumCost, Instance.GodSeatUpgradeIndustryCost, 0));
+            return;
+        }
+
+        Instance.MaximumHexRange += Constants.HEX_RANGE_UPGRADE;
+        Instance.GodSeatLevel++;
+
+        Instance.PrevGodSeatIsoliumCost = Instance.GodSeatUpgradeIsoliumCost;
+        Instance.PrevGodSeatIndustryCost = Instance.GodSeatUpgradeIndustryCost;
+        Instance.PrevGodSeatFoodCost = Instance.GodSeatUpgradeFoodCost;
+        Instance.PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
+
+        //PrevCost + (Random(PrevCost, 5 * PrevCost) / Level)
+        Instance.GodSeatUpgradeIsoliumCost = Instance.PrevGodSeatIsoliumCost + (Random.Range(Instance.PrevGodSeatIsoliumCost, 5 * Instance.PrevGodSeatIsoliumCost) / Instance.GodSeatLevel);
+        Instance.GodSeatUpgradeIndustryCost = Instance.PrevGodSeatIndustryCost + (Random.Range(Instance.PrevGodSeatIndustryCost, 5 * Instance.PrevGodSeatIndustryCost) / Instance.GodSeatLevel);
+        Instance.GodSeatUpgradeFoodCost = Instance.PrevGodSeatFoodCost + (Random.Range(Instance.PrevGodSeatFoodCost, 5 * Instance.PrevGodSeatFoodCost) / Instance.GodSeatLevel);
+        Instance.GodSeatUpgradePopCost = Instance.PrevGodSeatPopCost + (Random.Range(Instance.PrevGodSeatPopCost, 5 * Instance.PrevGodSeatPopCost) / Instance.GodSeatLevel);
+
+        UI_Manager.UpdateInfoPanel(Enums.Building_Type.GOD_SEAT);
+    }
 }

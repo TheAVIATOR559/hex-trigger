@@ -29,6 +29,14 @@ public static class Constants
 
     public static float TICK_SPEED = 1f;
 
+    public static int HEX_RANGE_UPGRADE = 2;
+    public static int DEFAULT_HEX_RADIUS = 3;
+    public static int DEFAULT_RESOURCE_STORAGE = 10;
+    public static int DEFAULT_GOD_SEAT_ISO_COST = 10;
+    public static int DEFAULT_GOD_SEAT_IND_COST = 5;
+    public static int DEFAULT_GOD_SEAT_FOOD_COST = 3;
+    public static int DEFAULT_GOD_SEAT_POP_COST = 1;
+
     #region Buidling Costs
     #region Food
     public static BuildingCost GardenCost =  new BuildingCost(1, 1, 0, 0, 0, 0);
