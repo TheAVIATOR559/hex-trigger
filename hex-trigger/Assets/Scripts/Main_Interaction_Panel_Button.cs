@@ -15,10 +15,9 @@ public class Main_Interaction_Panel_Button : MonoBehaviour
         }
         else
         {
-            UI_Manager.ResetCityUIState();
             City_Manager.Instance.UnhighlightHex();
-            UI_Manager.EnableBuildInfoPanel();
             City_Overview_Button.DisableCityOverview();
+            UI_Manager.EnableBuildInfoPanel();
             panelToEnable.SetActive(true);
         }
         //UI_Manager.ResetCityUIState();

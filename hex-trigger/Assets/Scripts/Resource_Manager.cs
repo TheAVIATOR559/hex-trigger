@@ -103,11 +103,6 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
     {
-        if (cost.RequiredHexes > Instance.MaximumHexRange)
-        {
-            return false;
-        }
-
         if (cost.RequiredFood > Instance.CurrentFood)
         {
             return false;
@@ -241,13 +236,12 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.DISTRIBUTION_CENTER:
             case Enums.Building_Type.GOD_SEAT:
             default:
-                return new BuildingCost(0, 0, 0, 0, 0, 0);
+                return new BuildingCost(0, 0, 0, 0, 0);
         }
     }
 
     public static void DeductResources(BuildingCost cost)
     {
-        Instance.MaximumHexRange -= cost.RequiredHexes;//TODO REMOVE THIS FROM WELL EVERYWHERE
         Instance.CurrentPopulation -= cost.RequiredPopulation;
         Instance.CurrentFood -= cost.RequiredFood;
         Instance.CurrentIndustry -= cost.RequiredIndustry;
@@ -898,7 +892,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             || Instance.GodSeatUpgradeFoodCost > Instance.CurrentFood
             || Instance.GodSeatUpgradePopCost > Instance.CurrentPopulation)
         {
-            UI_Manager.FlashMissingResources(new BuildingCost(0, Instance.GodSeatUpgradePopCost, Instance.GodSeatUpgradeFoodCost, Instance.GodSeatUpgradeIsoliumCost, Instance.GodSeatUpgradeIndustryCost, 0));
+            UI_Manager.FlashMissingResources(new BuildingCost(Instance.GodSeatUpgradePopCost, Instance.GodSeatUpgradeFoodCost, Instance.GodSeatUpgradeIsoliumCost, Instance.GodSeatUpgradeIndustryCost, 0));
             return;
         }
 

@@ -19,7 +19,7 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject StorageTierPanel;
     private GameObject PowerTierPanel;
 
-    private GameObject BuildInfoPanel;
+    [SerializeField] private GameObject BuildInfoPanel;
     private Image BuildInfoPanelImage;
     private TMP_Text BuildInfoPanelName;
     private GameObject BuilldInfoPanelCost;
@@ -42,14 +42,12 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject ResourcePanel;
     private GameObject MilitaryPanel;
 
-    private TMP_Text AvailableHexText;
     private TMP_Text AvailablePopText;
     private TMP_Text AvailableFoodText;
     private TMP_Text AvailableIndustryText;
     private TMP_Text AvailableMilitaryText;
     private TMP_Text AvailableIsoliumText;
 
-    private Image AvailableHexImage;
     private Image AvailablePopImage;
     private Image AvailableFoodImage;
     private Image AvailableIndustryImage;
@@ -86,7 +84,6 @@ public class UI_Manager : Singleton<UI_Manager>
 
     private GameObject currTierPanel;
 
-    private bool HexTextFlashing = false;
     private bool PopTextFlashing = false;
     private bool FoodTextFlashing = false;
     private bool IndustryTextFlashing = false;
@@ -118,19 +115,17 @@ public class UI_Manager : Singleton<UI_Manager>
         BuildInfoPanelName = BuildInfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         BuilldInfoPanelCost = BuildInfoPanel.transform.GetChild(2).gameObject;
 
-        AvailableHexText = ResourcePanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-        AvailablePopText = ResourcePanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
-        AvailableFoodText = ResourcePanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
-        AvailableIndustryText = ResourcePanel.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>();
-        AvailableMilitaryText = ResourcePanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
-        AvailableIsoliumText = ResourcePanel.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>();
+        AvailablePopText = ResourcePanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        AvailableFoodText = ResourcePanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        AvailableIndustryText = ResourcePanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
+        AvailableMilitaryText = ResourcePanel.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+        AvailableIsoliumText = ResourcePanel.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>();
 
-        AvailableHexImage = ResourcePanel.transform.GetChild(0).GetComponent<Image>();
-        AvailablePopImage = ResourcePanel.transform.GetChild(1).GetComponent<Image>();
-        AvailableFoodImage = ResourcePanel.transform.GetChild(2).GetComponent<Image>();
-        AvailableIndustryImage = ResourcePanel.transform.GetChild(3).GetComponent<Image>();
-        AvailableMilitaryImage = ResourcePanel.transform.GetChild(4).GetComponent<Image>();
-        AvailableIsoliumImage = ResourcePanel.transform.GetChild(5).GetComponent<Image>();
+        AvailablePopImage = ResourcePanel.transform.GetChild(0).GetComponent<Image>();
+        AvailableFoodImage = ResourcePanel.transform.GetChild(1).GetComponent<Image>();
+        AvailableIndustryImage = ResourcePanel.transform.GetChild(2).GetComponent<Image>();
+        AvailableMilitaryImage = ResourcePanel.transform.GetChild(3).GetComponent<Image>();
+        AvailableIsoliumImage = ResourcePanel.transform.GetChild(4).GetComponent<Image>();
 
         GruntCountText = MilitaryPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         ShooterCountText = MilitaryPanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
@@ -549,35 +544,32 @@ public class UI_Manager : Singleton<UI_Manager>
         BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(true);
         BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
         BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
-        BuilldInfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredHexes.ToString();
-        BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredPopulation.ToString();
-        BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-        BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-        BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-        BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+        BuilldInfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredPopulation.ToString();
+        BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+        BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+        BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+        BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
     }
 
     private void UpdateBuildInfoCostsPanel(UnitTrainingCost cost, bool isGrunt = false)
     {
         if (isGrunt)
         {
-            BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
-            BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(false);
-            BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(true);
-            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-            BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-            BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-            BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+            BuilldInfoPanelCost.transform.GetChild(3).gameObject.SetActive(false);
+            BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(true);
+            BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            BuilldInfoPanelCost.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
         }
         else
         {
             BuilldInfoPanelCost.transform.GetChild(0).gameObject.SetActive(false);
-            BuilldInfoPanelCost.transform.GetChild(1).gameObject.SetActive(false);
-            BuilldInfoPanelCost.transform.GetChild(4).gameObject.SetActive(true);
-            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
-            BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
-            BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
-            BuilldInfoPanelCost.transform.GetChild(5).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
+            BuilldInfoPanelCost.transform.GetChild(3).gameObject.SetActive(true);
+            BuilldInfoPanelCost.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredFood.ToString();
+            BuilldInfoPanelCost.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIndustry.ToString();
+            BuilldInfoPanelCost.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredMilitary.ToString();
+            BuilldInfoPanelCost.transform.GetChild(4).GetChild(1).GetComponent<TMP_Text>().text = cost.RequiredIsolium.ToString();
         }
 
     }
@@ -1011,17 +1003,11 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void UpdateResourcesText()
     {
-        SetAvailableHexesText(Resource_Manager.Instance.MaximumHexRange);
         SetAvailablePopulationText(Resource_Manager.Instance.CurrentPopulation, Resource_Manager.Instance.MaximumPopulation);
         SetAvailableFoodText(Resource_Manager.Instance.CurrentFood, Resource_Manager.Instance.MaximumFood);
         SetAvailableIndustryText(Resource_Manager.Instance.CurrentIndustry, Resource_Manager.Instance.MaximumIndustry);
         SetAvailableMilitaryText(Resource_Manager.Instance.CurrentMilitary, Resource_Manager.Instance.MaximumMilitary);
         SetAvailableIsoliumText(Resource_Manager.Instance.CurrentIsolium, Resource_Manager.Instance.MaximumIsolium);
-    }
-
-    public static void SetAvailableHexesText(int hexes)
-    {
-        Instance.AvailableHexText.text = hexes.ToString();
     }
 
     public static void SetAvailablePopulationText(int currPop, int maxPop)
@@ -1110,12 +1096,6 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public static void FlashMissingResources(BuildingCost cost)
     {
-        if (!Instance.HexTextFlashing && Resource_Manager.Instance.MaximumHexRange < cost.RequiredHexes)
-        {
-            Instance.HexTextFlashing = true;
-            Instance.StartCoroutine(Instance.FlashRed(Instance.AvailableHexImage, Instance.EndHexFlashing));
-        }
-
         if (!Instance.FoodTextFlashing && Resource_Manager.Instance.CurrentFood < cost.RequiredFood)
         {
             Instance.FoodTextFlashing = true;
@@ -1216,11 +1196,6 @@ public class UI_Manager : Singleton<UI_Manager>
 
         image.color = Color.white;
         method();
-    }
-
-    private void EndHexFlashing()
-    {
-        Instance.HexTextFlashing = false;
     }
 
     private void EndPopFlashing()

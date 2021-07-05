@@ -39,69 +39,69 @@ public static class Constants
 
     #region Buidling Costs
     #region Food
-    public static BuildingCost GardenCost =  new BuildingCost(1, 1, 0, 0, 0, 0);
-    public static BuildingCost FarmCost =    new BuildingCost(1, 2, 0, 1, 2, 0);
-    public static BuildingCost OrchardCost = new BuildingCost(1, 3, 0, 2, 3, 0);
-    public static BuildingCost RanchCost =   new BuildingCost(1, 4, 0, 3, 4, 0);
+    public static BuildingCost GardenCost =  new BuildingCost(1, 0, 0, 0, 0);
+    public static BuildingCost FarmCost =    new BuildingCost(2, 0, 1, 2, 0);
+    public static BuildingCost OrchardCost = new BuildingCost(3, 0, 2, 3, 0);
+    public static BuildingCost RanchCost =   new BuildingCost(4, 0, 3, 4, 0);
     #endregion
     #region Housing
-    public static BuildingCost HovelCost =     new BuildingCost(1, 0, 1, 0, 0, 0);
-    public static BuildingCost CottageCost =   new BuildingCost(1, 0, 2, 1, 1, 0);
-    public static BuildingCost ApartmentCost = new BuildingCost(1, 0, 3, 2, 2, 0);
-    public static BuildingCost CondoCost =     new BuildingCost(1, 0, 4, 3, 3, 0);
+    public static BuildingCost HovelCost =     new BuildingCost(0, 1, 0, 0, 0);
+    public static BuildingCost CottageCost =   new BuildingCost(0, 2, 1, 1, 0);
+    public static BuildingCost ApartmentCost = new BuildingCost(0, 3, 2, 2, 0);
+    public static BuildingCost CondoCost =     new BuildingCost(0, 4, 3, 3, 0);
     #endregion
     #region Industry
-    public static BuildingCost WorkshopCost = new BuildingCost(1, 1, 0, 0, 0, 0);
-    public static BuildingCost ForgeCost =    new BuildingCost(1, 2, 0, 1, 0, 0);
-    public static BuildingCost MillCost =     new BuildingCost(1, 3, 0, 2, 0, 0);
-    public static BuildingCost FoundryCost =  new BuildingCost(1, 4, 0, 3, 0, 0);
+    public static BuildingCost WorkshopCost = new BuildingCost(1, 0, 0, 0, 0);
+    public static BuildingCost ForgeCost =    new BuildingCost(2, 0, 1, 0, 0);
+    public static BuildingCost MillCost =     new BuildingCost(3, 0, 2, 0, 0);
+    public static BuildingCost FoundryCost =  new BuildingCost(4, 0, 3, 0, 0);
     #endregion
     #region Military
-    public static BuildingCost BarracksCost =  new BuildingCost(1, 2, 1, 1, 1, 0);
-    public static BuildingCost DormitoryCost = new BuildingCost(1, 3, 2, 2, 2, 0);
-    public static BuildingCost GarrisonCost =  new BuildingCost(1, 4, 3, 3, 3, 0);
-    public static BuildingCost QuartersCost =  new BuildingCost(1, 5, 4, 4, 4, 0);
+    public static BuildingCost BarracksCost =  new BuildingCost(2, 1, 1, 1, 0);
+    public static BuildingCost DormitoryCost = new BuildingCost(3, 2, 2, 2, 0);
+    public static BuildingCost GarrisonCost =  new BuildingCost(4, 3, 3, 3, 0);
+    public static BuildingCost QuartersCost =  new BuildingCost(5, 4, 4, 4, 0);
 
-    public static BuildingCost ShootingRangeCost =      new BuildingCost(1, 0, 3, 3, 3, 3);
-    public static BuildingCost DefendersWallCost =      new BuildingCost(1, 0, 4, 4, 4, 4);
-    public static BuildingCost GunnersAlleyCost =       new BuildingCost(1, 0, 4, 4, 4, 4);
-    public static BuildingCost SnipersNestCost =        new BuildingCost(1, 0, 5, 5, 5, 5);
-    public static BuildingCost ScoutCampCost =          new BuildingCost(1, 0, 5, 5, 5, 5);
-    public static BuildingCost AcesArenaCost =          new BuildingCost(1, 0, 6, 6, 6, 6);
-    public static BuildingCost CannoneersTowerCost =    new BuildingCost(1, 0, 6, 6, 6, 6);
-    public static BuildingCost GuardiansLastStandCost = new BuildingCost(1, 0, 6, 6, 6, 6);
+    public static BuildingCost ShootingRangeCost =      new BuildingCost(0, 3, 3, 3, 3);
+    public static BuildingCost DefendersWallCost =      new BuildingCost(0, 4, 4, 4, 4);
+    public static BuildingCost GunnersAlleyCost =       new BuildingCost(0, 4, 4, 4, 4);
+    public static BuildingCost SnipersNestCost =        new BuildingCost(0, 5, 5, 5, 5);
+    public static BuildingCost ScoutCampCost =          new BuildingCost(0, 5, 5, 5, 5);
+    public static BuildingCost AcesArenaCost =          new BuildingCost(0, 6, 6, 6, 6);
+    public static BuildingCost CannoneersTowerCost =    new BuildingCost(0, 6, 6, 6, 6);
+    public static BuildingCost GuardiansLastStandCost = new BuildingCost(0, 6, 6, 6, 6);
     #endregion
     #region Defense
-    public static BuildingCost WatchTowerCost = new BuildingCost(1, 1, 0, 1, 1, 1);
-    public static BuildingCost MissileComplexCost = new BuildingCost(1, 2, 0, 2, 2, 2);
-    public static BuildingCost LaserTowerCost = new BuildingCost(1, 3, 0, 3, 3, 3);
-    public static BuildingCost AutoMissileComplexCost = new BuildingCost(1, 0, 0, 4, 4, 4);
-    public static BuildingCost AutoLaserTowerCost = new BuildingCost(1, 0, 0, 6, 6, 6);
+    public static BuildingCost WatchTowerCost = new BuildingCost(1, 0, 1, 1, 1);
+    public static BuildingCost MissileComplexCost = new BuildingCost(2, 0, 2, 2, 2);
+    public static BuildingCost LaserTowerCost = new BuildingCost(3, 0, 3, 3, 3);
+    public static BuildingCost AutoMissileComplexCost = new BuildingCost(0, 0, 4, 4, 4);
+    public static BuildingCost AutoLaserTowerCost = new BuildingCost(0, 0, 6, 6, 6);
     #endregion
     #region Research
-    public static BuildingCost ResearchLabCost = new BuildingCost(1, 2, 0, 2, 2, 0);
-    public static BuildingCost ResearchCollegeCost = new BuildingCost(1, 3, 0, 3, 3, 0);
-    public static BuildingCost ResearchInstituteCost = new BuildingCost(1, 4, 0, 4, 4, 0);
-    public static BuildingCost MultiBrainCost = new BuildingCost(1, 5, 0, 5, 5, 0);
+    public static BuildingCost ResearchLabCost = new BuildingCost(2, 0, 2, 2, 0);
+    public static BuildingCost ResearchCollegeCost = new BuildingCost(3, 0, 3, 3, 0);
+    public static BuildingCost ResearchInstituteCost = new BuildingCost(4, 0, 4, 4, 0);
+    public static BuildingCost MultiBrainCost = new BuildingCost(5, 0, 5, 5, 0);
     #endregion
     #region Isolium
-    public static BuildingCost ExtractorMKICost = new BuildingCost(1, 1, 0, 0, 1, 0);
-    public static BuildingCost ExtractorMKIICost = new BuildingCost(1, 2, 0, 0, 2, 1);
-    public static BuildingCost ExtractorMKIIICost = new BuildingCost(1, 3, 0, 0, 3, 2);
-    public static BuildingCost ExtractorMKIVCost = new BuildingCost(1, 4, 0, 0, 4, 3);
+    public static BuildingCost ExtractorMKICost = new BuildingCost(1, 0, 0, 1, 0);
+    public static BuildingCost ExtractorMKIICost = new BuildingCost(2, 0, 0, 2, 1);
+    public static BuildingCost ExtractorMKIIICost = new BuildingCost(3, 0, 0, 3, 2);
+    public static BuildingCost ExtractorMKIVCost = new BuildingCost(4, 0, 0, 4, 3);
     #endregion
     #region Storage
-    public static BuildingCost StockpileCost = new BuildingCost(1, 1, 0, 0, 1, 0);
-    public static BuildingCost StorehouseCost = new BuildingCost(1, 2, 0, 1, 2, 0);
-    public static BuildingCost WarehouseCost = new BuildingCost(1, 3, 0, 2, 3, 0);
-    public static BuildingCost DepotCost = new BuildingCost(1, 0, 0, 3, 4, 0);
+    public static BuildingCost StockpileCost = new BuildingCost(1, 0, 0, 1, 0);
+    public static BuildingCost StorehouseCost = new BuildingCost(2, 0, 1, 2, 0);
+    public static BuildingCost WarehouseCost = new BuildingCost(3, 0, 2, 3, 0);
+    public static BuildingCost DepotCost = new BuildingCost(0, 0, 3, 4, 0);
     #endregion
     #region Power
-    public static BuildingCost WaterwheelCost = new BuildingCost(1, 1, 0, 0, 2, 0);
-    public static BuildingCost CoalfiredCost = new BuildingCost(1, 2, 0, 0, 3, 0);
-    public static BuildingCost HydroelectricCost = new BuildingCost(1, 3, 0, 0, 3, 0);
-    public static BuildingCost NuclearPlantCost = new BuildingCost(1, 4, 0, 0, 4, 0);
-    public static BuildingCost QuantumPlantCost = new BuildingCost(1, 5, 0, 0, 5, 0);
+    public static BuildingCost WaterwheelCost = new BuildingCost(1, 0, 0, 2, 0);
+    public static BuildingCost CoalfiredCost = new BuildingCost(2, 0, 0, 3, 0);
+    public static BuildingCost HydroelectricCost = new BuildingCost(3, 0, 0, 3, 0);
+    public static BuildingCost NuclearPlantCost = new BuildingCost(4, 0, 0, 4, 0);
+    public static BuildingCost QuantumPlantCost = new BuildingCost(5, 0, 0, 5, 0);
     #endregion
     #endregion
 
@@ -401,15 +401,19 @@ public static class Constants
     public static string GUARDIAN_NAME = "Guardian";
     #endregion
 
+    #region ActionArgs
+    //public static DistributePowerToHex DISTRIBUTE_POWER_TO_HEX = new DistributePowerToHex();
+    #endregion
+
 }
 
 //new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost
 {
-    public int RequiredHexes
-    {
-        get;
-    }
+    //public int RequiredHexes
+    //{
+    //    get;
+    //}
 
     public int RequiredFood
     {
@@ -436,9 +440,9 @@ public struct BuildingCost
         get;
     }
 
-    public BuildingCost(int hexes, int population, int food, int isolium, int industry, int military)
+    public BuildingCost(/*int hexes,*/ int population, int food, int isolium, int industry, int military)
     {
-        RequiredHexes = hexes;
+        //RequiredHexes = hexes;
         RequiredFood = food;
         RequiredPopulation = population;
         RequiredIndustry = industry;

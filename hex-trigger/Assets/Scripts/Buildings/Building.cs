@@ -26,7 +26,10 @@ public class Building : MonoBehaviour
 
     public virtual void Initalize()
     {
-        //instantiate overivew canvas object
+        EventParam eventParam = new EventParam();
+        eventParam.hex = connectedHex;
+
+        Event_Manager.TriggerEvent(Events.UPDATE_POWER_DISTRIBUTION, eventParam);
     }
 
     public virtual void DetermineBuildingTier()
