@@ -27,6 +27,11 @@ public class Camera_Control : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(Event_Manager.IsGamePaused)
+        {
+            return;
+        }
+
         PanHorizontal();
 
         PanVertical();

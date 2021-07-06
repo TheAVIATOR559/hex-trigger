@@ -133,4 +133,27 @@ public class Hex : MonoBehaviour
         return (Mathf.Abs(y) % 2 == 1);
     }
 
+    private static Vector3Int OddRowToCube(Vector2Int point)
+    {
+        Vector3Int returnValue = new Vector3Int();
+        returnValue.x = point.x - (point.y - (point.y & 1)) / 2;
+        returnValue.z = point.y;
+        returnValue.y = -returnValue.x - returnValue.z;
+
+        return returnValue;
+    }
+
+    private static int CubeDistance(Vector3Int a, Vector3Int b)
+    {
+        return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
+    }
+
+    public static int GetDistance(Vector2Int a, Vector2Int b)
+    {
+        Vector3Int ac = OddRowToCube(a);
+        Vector3Int bc = OddRowToCube(b);
+
+        return CubeDistance(ac, bc);
+    }
+
 }

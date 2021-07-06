@@ -13,6 +13,8 @@ public class City_Manager : Singleton<City_Manager>
     public Hex_Blueprint hexBlueprint;
     public Hex_Highlighter hexHighlight;
 
+    private Hex GodSeat;
+
     private void Awake()
     {
         CreateHexGrid();
@@ -128,7 +130,10 @@ public class City_Manager : Singleton<City_Manager>
                         if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
-                            availbleHexPositions.Add(vector + kvp.Value.Position);
+                            if(Hex.GetDistance(GodSeat.Position, vector + kvp.Value.Position) <= Resource_Manager.Instance.MaximumHexRange)
+                            {
+                                availbleHexPositions.Add(vector + kvp.Value.Position);
+                            }
                         }
                     }
                 }
@@ -139,7 +144,10 @@ public class City_Manager : Singleton<City_Manager>
                         if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
-                            availbleHexPositions.Add(vector + kvp.Value.Position);
+                            if (Hex.GetDistance(GodSeat.Position, vector + kvp.Value.Position) <= Resource_Manager.Instance.MaximumHexRange)
+                            {
+                                availbleHexPositions.Add(vector + kvp.Value.Position);
+                            }
                         }
                     }
                 }
@@ -176,5 +184,10 @@ public class City_Manager : Singleton<City_Manager>
     public void UnhighlightHex()
     {
         hexHighlight.gameObject.SetActive(false);
+    }
+
+    public static void SetGodSeat(Hex godSeat)
+    {
+        Instance.GodSeat = godSeat;
     }
 }

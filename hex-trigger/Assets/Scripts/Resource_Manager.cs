@@ -851,7 +851,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
     {
         while (true)
         {
-            if (!ResourcesTickPaused)
+            if (!ResourcesTickPaused || !Event_Manager.IsGamePaused)
             {
                 //Debug.Log("Ticking Resources");
                 AddProductionResources();

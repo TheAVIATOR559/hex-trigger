@@ -16,12 +16,17 @@ public class Guardians_Last_Stand : Building_Military
 
     public override void Initalize()
     {
+        base.Initalize();
         AddToResourceProduction();
     }
 
     protected override void AddToResourceProduction()
     {
-        Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.GUARDIAN, Constants.GUARDIANS_PER_HEX);
+        if(IsPowered)
+        {
+            Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.GUARDIAN, Constants.GUARDIANS_PER_HEX);
+        }
+        
     }
 
     protected override void RemoveFromResourceProduction()

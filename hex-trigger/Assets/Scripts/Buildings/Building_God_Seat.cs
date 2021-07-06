@@ -7,6 +7,7 @@ public class Building_God_Seat : Building
     public override void Initalize()
     {
         IsPowered = true;
+        City_Manager.SetGodSeat(connectedHex);
         base.Initalize();
     }
     public override void DetermineBuildingTier()

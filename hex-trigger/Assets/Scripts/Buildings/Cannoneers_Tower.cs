@@ -16,12 +16,17 @@ public class Cannoneers_Tower : Building_Military
 
     public override void Initalize()
     {
+        base.Initalize();
         AddToResourceProduction();
     }
 
     protected override void AddToResourceProduction()
     {
-        Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.CANNONEER, Constants.CANNONEERS_PER_HEX);
+        if(IsPowered)
+        {
+            Resource_Manager.IncreaseHeroUnitCap(Enums.Unit_Type.CANNONEER, Constants.CANNONEERS_PER_HEX);
+        }
+        
     }
 
     protected override void RemoveFromResourceProduction()

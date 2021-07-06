@@ -9,6 +9,8 @@ public class Building_Power : Building
 
     [SerializeField] List<Vector2Int> PoweredHexPositions = new List<Vector2Int>();
 
+    [SerializeField] int PowerRadius;
+
     private Action<EventParam> PowerUpdateListener;
 
     public override void Initalize()
@@ -16,10 +18,10 @@ public class Building_Power : Building
         base.Initalize();
 
         PowerUpdateListener = new Action<EventParam>(GivePowerToHex);
-
+        Event_Manager.AddListener(Events.ADD_POWER_DISTRIBUTION, PowerUpdateListener);
         IsPowered = true;
         RangeHighlighter.SetActive(false);
-
+        PowerRadius = GetProductionValue(BuildingTier, HexType);
         GetPoweredHexPositions();
     }
 
@@ -61,8 +63,13 @@ public class Building_Power : Building
 
     private void GivePowerToHex(EventParam eventParam)
     {
-        //todo wrap this in a distance check
-        GivePowerToHex(eventParam.hex);
+        Debug.Log("method called");
+        if(Hex.GetDistance(connectedHex.Position, eventParam.hex.Position) <= PowerRadius)
+        {
+            Debug.Log("giving power");
+            GivePowerToHex(eventParam.hex);
+        }
+        
     }
 
     public void RemovePower()

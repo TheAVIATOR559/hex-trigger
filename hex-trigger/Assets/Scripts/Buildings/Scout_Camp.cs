@@ -16,12 +16,17 @@ public class Scout_Camp : Building_Military
 
     public override void Initalize()
     {
+        base.Initalize();
         AddToResourceProduction();
     }
 
     protected override void AddToResourceProduction()
     {
-        Resource_Manager.AddUnitCostReduction(Enums.Unit_Type.SCOUT, Constants.TRAINING_COST_REDUCTION_PER_HEX);
+        if(IsPowered)
+        {
+            Resource_Manager.AddUnitCostReduction(Enums.Unit_Type.SCOUT, Constants.TRAINING_COST_REDUCTION_PER_HEX);
+        }
+        
     }
 
     protected override void RemoveFromResourceProduction()

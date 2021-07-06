@@ -29,7 +29,7 @@ public class Building : MonoBehaviour
         EventParam eventParam = new EventParam();
         eventParam.hex = connectedHex;
 
-        Event_Manager.TriggerEvent(Events.UPDATE_POWER_DISTRIBUTION, eventParam);
+        Event_Manager.TriggerEvent(Events.ADD_POWER_DISTRIBUTION, eventParam);
     }
 
     public virtual void DetermineBuildingTier()
@@ -244,6 +244,15 @@ public class Building : MonoBehaviour
                     _ => Constants.STORAGE_I_PROD,
                 };
             case Enums.Hex_Types.POWER:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.POWER_I_PROD,
+                    Enums.Building_Tier.II => Constants.POWER_II_PROD,
+                    Enums.Building_Tier.III => Constants.POWER_III_PROD,
+                    Enums.Building_Tier.IV => Constants.POWER_IV_PROD,
+                    Enums.Building_Tier.V => Constants.POWER_V_PROD,
+                    _ => Constants.STORAGE_I_PROD,
+                };
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum Events
 {
-    UPDATE_POWER_DISTRIBUTION//todo rejig to work with add and remove power
+    ADD_POWER_DISTRIBUTION,
+    REMOVE_POWER_DISTRIBUTION
 }
 
 public struct EventParam
@@ -17,7 +18,7 @@ public static class Event_Manager
 {
     private static Dictionary<Events, Action<EventParam>> eventsDict;
 
-    public static bool IsGamePaused//TODO integrate this in others
+    public static bool IsGamePaused
     {
         get;
         private set;
@@ -50,7 +51,7 @@ public static class Event_Manager
     {
         Action<EventParam> thisEvent;
 
-        if(eventsDict.TryGetValue(eventName, out thisEvent))
+        if (eventsDict.TryGetValue(eventName, out thisEvent))
         {
             thisEvent -= listener;
 
@@ -62,7 +63,7 @@ public static class Event_Manager
     {
         Action<EventParam> thisEvent = null;
 
-        if(eventsDict.TryGetValue(eventName, out thisEvent))
+        if (eventsDict.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.Invoke(eventParam);
         }
