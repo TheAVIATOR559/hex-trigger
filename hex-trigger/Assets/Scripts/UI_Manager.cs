@@ -81,6 +81,7 @@ public class UI_Manager : Singleton<UI_Manager>
     private TMP_Text MaxAceCountText;
     private TMP_Text MaxCannoneerCountText;
     private TMP_Text MaxGuardianCountText;
+    private TMP_Text MaxHexRangeText;
 
     private GameObject currTierPanel;
 
@@ -169,6 +170,7 @@ public class UI_Manager : Singleton<UI_Manager>
         MaxAceCountText = CityOverviewPanel.transform.GetChild(10).GetChild(1).GetComponent<TMP_Text>();
         MaxCannoneerCountText = CityOverviewPanel.transform.GetChild(11).GetChild(1).GetComponent<TMP_Text>();
         MaxGuardianCountText = CityOverviewPanel.transform.GetChild(12).GetChild(1).GetComponent<TMP_Text>();
+        MaxHexRangeText = CityOverviewPanel.transform.GetChild(13).GetChild(1).GetComponent<TMP_Text>();
 
         ResetCityUIState();
     }
@@ -999,6 +1001,7 @@ public class UI_Manager : Singleton<UI_Manager>
         MaxAceCountText.text = Resource_Manager.Instance.MaximumAces.ToString();
         MaxCannoneerCountText.text = Resource_Manager.Instance.MaximumCannoneers.ToString();
         MaxGuardianCountText.text = Resource_Manager.Instance.MaximumGuardians.ToString();
+        MaxHexRangeText.text = Resource_Manager.Instance.MaximumHexRange.ToString();
     }
 
     public static void UpdateResourcesText()
