@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Intersection : MonoBehaviour
+public class Intersection : Point
 {
-    // Start is called before the first frame update
-    void Start()
+    public Intersection(Vector3 worldPosition, Vector2Int mapPosition, Battle_Map map)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        WorldPosition = worldPosition;
+        MapPosition = mapPosition;
+        IsOccupied = false;
+        neighbors = new Point[3];
+        Map = map;
     }
 }

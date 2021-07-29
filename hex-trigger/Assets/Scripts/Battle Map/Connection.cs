@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Connection : MonoBehaviour
+public class Connection : Point
 {
-    // Start is called before the first frame update
-    void Start()
+    public Connection(Vector3 worldPosition, Vector2Int mapPosition, Battle_Map map)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        WorldPosition = worldPosition;
+        MapPosition = mapPosition;
+        IsOccupied = false;
+        neighbors = new Point[2];
+        Map = map;
     }
 }

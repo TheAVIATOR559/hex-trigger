@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Point : MonoBehaviour
+public class Point
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Point[] neighbors;
+    public Vector3 WorldPosition;
+    public Vector2Int MapPosition;
+    public bool IsOccupied;
 
-    // Update is called once per frame
-    void Update()
+    protected Battle_Map Map;
+
+    public virtual void SetUpNeighbors()
     {
-        
+
     }
 }

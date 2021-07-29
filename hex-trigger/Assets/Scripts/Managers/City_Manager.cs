@@ -15,6 +15,8 @@ public class City_Manager : Singleton<City_Manager>
 
     private Hex GodSeat;
 
+    private Battle_Map BattleMap;
+
     private void Awake()
     {
         CreateHexGrid();
