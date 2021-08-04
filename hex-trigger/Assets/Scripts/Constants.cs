@@ -39,36 +39,36 @@ public static class Constants
 
     #region Buidling Costs
     #region Food
-    public static BuildingCost GardenCost =  new BuildingCost(1, 0, 0, 0, 0);
-    public static BuildingCost FarmCost =    new BuildingCost(2, 0, 1, 2, 0);
+    public static BuildingCost GardenCost = new BuildingCost(1, 0, 0, 0, 0);
+    public static BuildingCost FarmCost = new BuildingCost(2, 0, 1, 2, 0);
     public static BuildingCost OrchardCost = new BuildingCost(3, 0, 2, 3, 0);
-    public static BuildingCost RanchCost =   new BuildingCost(4, 0, 3, 4, 0);
+    public static BuildingCost RanchCost = new BuildingCost(4, 0, 3, 4, 0);
     #endregion
     #region Housing
-    public static BuildingCost HovelCost =     new BuildingCost(0, 1, 0, 0, 0);
-    public static BuildingCost CottageCost =   new BuildingCost(0, 2, 1, 1, 0);
+    public static BuildingCost HovelCost = new BuildingCost(0, 1, 0, 0, 0);
+    public static BuildingCost CottageCost = new BuildingCost(0, 2, 1, 1, 0);
     public static BuildingCost ApartmentCost = new BuildingCost(0, 3, 2, 2, 0);
-    public static BuildingCost CondoCost =     new BuildingCost(0, 4, 3, 3, 0);
+    public static BuildingCost CondoCost = new BuildingCost(0, 4, 3, 3, 0);
     #endregion
     #region Industry
     public static BuildingCost WorkshopCost = new BuildingCost(1, 0, 0, 0, 0);
-    public static BuildingCost ForgeCost =    new BuildingCost(2, 0, 1, 0, 0);
-    public static BuildingCost MillCost =     new BuildingCost(3, 0, 2, 0, 0);
-    public static BuildingCost FoundryCost =  new BuildingCost(4, 0, 3, 0, 0);
+    public static BuildingCost ForgeCost = new BuildingCost(2, 0, 1, 0, 0);
+    public static BuildingCost MillCost = new BuildingCost(3, 0, 2, 0, 0);
+    public static BuildingCost FoundryCost = new BuildingCost(4, 0, 3, 0, 0);
     #endregion
     #region Military
-    public static BuildingCost BarracksCost =  new BuildingCost(2, 1, 1, 1, 0);
+    public static BuildingCost BarracksCost = new BuildingCost(2, 1, 1, 1, 0);
     public static BuildingCost DormitoryCost = new BuildingCost(3, 2, 2, 2, 0);
-    public static BuildingCost GarrisonCost =  new BuildingCost(4, 3, 3, 3, 0);
-    public static BuildingCost QuartersCost =  new BuildingCost(5, 4, 4, 4, 0);
+    public static BuildingCost GarrisonCost = new BuildingCost(4, 3, 3, 3, 0);
+    public static BuildingCost QuartersCost = new BuildingCost(5, 4, 4, 4, 0);
 
-    public static BuildingCost ShootingRangeCost =      new BuildingCost(0, 3, 3, 3, 3);
-    public static BuildingCost DefendersWallCost =      new BuildingCost(0, 4, 4, 4, 4);
-    public static BuildingCost GunnersAlleyCost =       new BuildingCost(0, 4, 4, 4, 4);
-    public static BuildingCost SnipersNestCost =        new BuildingCost(0, 5, 5, 5, 5);
-    public static BuildingCost ScoutCampCost =          new BuildingCost(0, 5, 5, 5, 5);
-    public static BuildingCost AcesArenaCost =          new BuildingCost(0, 6, 6, 6, 6);
-    public static BuildingCost CannoneersTowerCost =    new BuildingCost(0, 6, 6, 6, 6);
+    public static BuildingCost ShootingRangeCost = new BuildingCost(0, 3, 3, 3, 3);
+    public static BuildingCost DefendersWallCost = new BuildingCost(0, 4, 4, 4, 4);
+    public static BuildingCost GunnersAlleyCost = new BuildingCost(0, 4, 4, 4, 4);
+    public static BuildingCost SnipersNestCost = new BuildingCost(0, 5, 5, 5, 5);
+    public static BuildingCost ScoutCampCost = new BuildingCost(0, 5, 5, 5, 5);
+    public static BuildingCost AcesArenaCost = new BuildingCost(0, 6, 6, 6, 6);
+    public static BuildingCost CannoneersTowerCost = new BuildingCost(0, 6, 6, 6, 6);
     public static BuildingCost GuardiansLastStandCost = new BuildingCost(0, 6, 6, 6, 6);
     #endregion
     #region Defense
@@ -103,6 +103,30 @@ public static class Constants
     public static BuildingCost NuclearPlantCost = new BuildingCost(4, 0, 0, 4, 0);
     public static BuildingCost QuantumPlantCost = new BuildingCost(5, 0, 0, 5, 0);
     #endregion
+    #region Entertainment
+    public static BuildingCost PublicParkCost = new BuildingCost(1, 0, 0, 1, 0);
+    public static BuildingCost CircusCost = new BuildingCost(2, 2, 0, 1, 0);
+    public static BuildingCost TheaterCost = new BuildingCost(1, 3, 1, 3, 0);
+    public static BuildingCost VirtualRealityCafeCost = new BuildingCost(1, 2, 4, 3, 0);
+    #endregion
+    #region Monuments
+    public static BuildingCost DiploMonumentCost = new BuildingCost(0, 0, 10, 10, 0);
+    public static BuildingCost SciMonumentCost = new BuildingCost(0, 0, 20, 10, 0);
+    public static BuildingCost HappMonumentCost = new BuildingCost(0, 15, 10, 15, 0);
+    public static BuildingCost IndMonumentCost = new BuildingCost(0, 0, 10, 20, 0);
+    public static BuildingCost IsoMonumentCost = new BuildingCost(0, 0, 20, 10, 0);
+    public static BuildingCost MilMonumentCost = new BuildingCost(0, 0, 10, 10, 20);
+    public static BuildingCost FoodMonumentCost = new BuildingCost(0, 20, 10, 10, 0);
+    #endregion
+    #region Special
+    public static BuildingCost VoidPortalCost = new BuildingCost(0, 0, 100, 25, 0);
+    public static BuildingCost VoidCommunicatorCost = new BuildingCost(5, 0, 50, 25, 0);
+    public static BuildingCost VoidRadarArrayCost = new BuildingCost(5, 0, 50, 50, 0);
+    public static BuildingCost FactionEmbassyCost = new BuildingCost(10, 10, 5, 5, 5);
+    public static BuildingCost AbyssalPathfinderCost = new BuildingCost(0, 0, 100, 100, 0);
+    public static BuildingCost VoidRudderCost = new BuildingCost(0, 0, 50, 50, 0);
+    public static BuildingCost WeatherManipulatorCost = new BuildingCost(0, 0, 50, 50, 0);
+    #endregion
     #endregion
 
     #region Production Values
@@ -122,7 +146,6 @@ public static class Constants
     #endregion
     //these values will need to be rebalanced
     #region Housing Production
-    public static int POP_GROWTH_RATE = 2;
     public static int HOUSING_I_PROD = 1;
     public static int HOUSING_II_PROD = 2;
     public static int HOUSING_III_PROD = 3;
@@ -199,6 +222,13 @@ public static class Constants
     public static int POWER_III_PROD = 3;
     public static int POWER_IV_PROD = 4;
     public static int POWER_V_PROD = 5;
+    #endregion
+    #region Entertainment Values
+    public static int ENTERTAINMENT_I_PROD = 10;
+    public static int ENTERTAINMENT_II_PROD = 20;
+    public static int ENTERTAINMENT_III_PROD = 30;
+    public static int ENTERTAINMENT_IV_PROD = 40;
+    public static int ENTERTAINMENT_V_PROD = 50;
     #endregion
     #endregion
 
@@ -330,6 +360,25 @@ public static class Constants
     public static string HYDROELECTRIC_DAM_NAME = "Hydroelectric Dam";
     public static string NUCLEAR_POWER_PLANT_NAME = "Nuclear Power Plant";
     public static string QUANTUM_POWER_PLANT_NAME = "Quantum Power Plant";
+    public static string PUBLIC_PARK_NAME = "Public Park";
+    public static string CIRCUS_NAME = "Circus";
+    public static string THEATER_NAME = "Theater Complex";
+    public static string VIRTUAL_REALITY_CAFE_NAME = "Virtual Reality Cafe";
+    public static string QUANTUM_THEATER_NAME = "Quantum Hologram Theater";
+    public static string VOID_PORTAL_NAME = "Void Portal";
+    public static string VOID_COMMUNICATOR_NAME = "Void Communicator";
+    public static string VOID_RADAR_ARRAY_NAME = "Void Radar Array";
+    public static string FACTION_EMBASSY_NAME = "FACTION Embassy";
+    public static string ABYSSAL_PATHFINDER_NAME = "Abyssal Pathfinder";
+    public static string VOID_RUDDER_NAME = "Void Rudder";
+    public static string WEATHER_MANIPULATOR_NAME = "Weather Manipulator";
+    public static string DIPLO_MONUMENT_NAME = "DIPLOMATIC Monument";
+    public static string SCI_MONUMENT_NAME = "SCIENTIFIC Monument";
+    public static string HAPP_MONUMENT_NAME = "HAPPINESS Monument";
+    public static string IND_MONUMENT_NAME = "INDUSTRIAL Monument";
+    public static string ISO_MONUMENT_NAME = "ISOLIUM Monument";
+    public static string MIL_MONUMENT_NAME = "MILITARY Monument";
+    public static string FOOD_MONUMENT_NAME = "FOOD Monument";
     #endregion
 
     #region Building Descs
@@ -387,6 +436,25 @@ public static class Constants
     public static string HYDROELECTRIC_DAM_DESC = "A large dam at the mouth of an artificial lake using the same basic technologies as a waterwheel to generate energy. Significantly more efficient than a waterwheel while doubling as a decent tourist destination.";
     public static string NUCLEAR_POWER_PLANT_DESC = "A large complex that uses the heat generated from the decay of radioactive material to heat and turn steam generators. While it is very efficient and safe during normal operation, a meltdown of a single reactor can spell doom.";
     public static string QUANTUM_POWER_PLANT_DESC = "A power plant perfected by harvesting power from alternate dimensions where power flows freely or not. No one is really sure how or even why it works, though it is best not to question it.";
+    public static string PUBLIC_PARK_DESC = "A simple grassy field open for anyone to use for various outdoor activities.";
+    public static string CIRCUS_DESC = "A traveling circus that entertains guests with fantastical performances without travelling.";
+    public static string THEATER_DESC = "A group of theaters that show everything from student performances to blockbuster superhero movies. Fans of both believe their perference is better than the other.";
+    public static string VIRTUAL_REALITY_CAFE_DESC = "A gathering spot that rents VR headsets to customers for entertainment or simply to forget how lonely they are.";
+    public static string QUANTUM_THEATER_DESC = "A theater that uses holograms and quantum technology to insert the viewer directly into the experience. Barf bags are not included.";
+    public static string VOID_PORTAL_DESC = "A large circular structure that utilizes the inherently volatile energies of the void to create a semi-stable wormhole between two points. Due to the massive amount of energy channeled by the device, its destruction is not recommended and its operation tends to send shockwaves across the Sanctuary.";
+    public static string VOID_COMMUNICATOR_DESC = "A communications array that utilizes quantum technologies to send messages to the where the recipient was and will be simaltainously. No one is truly sure how or even why it works except that asking would probably break it.";
+    public static string VOID_RADAR_ARRAY_DESC = "A large array of radar dishes that scans for disturbances in the Void to find anomalies. Once an anomaly is found however, the radar array's job is done and the anomaly must be scouted.";
+    public static string FACTION_EMBASSY_DESC = "An embassy to [FACTION] for both sides to maintain friendly relations. Prevents reputation degredation but will cause significant damage if destroyed.";
+    public static string ABYSSAL_PATHFINDER_DESC = "A large supercomputer capable of calculating a safe path through the Abyss. However due to the complexity of the Abyss, it takes a long time to find a viable path.";
+    public static string VOID_RUDDER_DESC = "While the initial idea of strapping massive engines to the Sanctuary to move sounded ludicrous, the final version is very reasonable and somewhat practical. Building more Void Rudders will increase the speed the Sanctuary is moved at.";
+    public static string WEATHER_MANIPULATOR_DESC = "A large device capable of changing the weather manipulating the Void at the edges of the Sanctuary. Providing the requested weather will provide a large happiness bonus to the entire Sanctuary.";
+    public static string DIPLO_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string SCI_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string HAPP_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string IND_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string ISO_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string MIL_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
+    public static string FOOD_MONUMENT_DESC = "THIS BIT AINT DONE YET. LOOK ELSEWHERE";
     #endregion
 
     #region Unit Names
@@ -401,48 +469,44 @@ public static class Constants
     public static string GUARDIAN_NAME = "Guardian";
     #endregion
 
-    #region ActionArgs
-    //public static DistributePowerToHex DISTRIBUTE_POWER_TO_HEX = new DistributePowerToHex();
-    #endregion
-
 }
 
-//new BuildingCost(HEX, POP, FOOD, ISO, IND, MIL)
+//new BuildingCost(POP, FOOD, ISO, IND, MIL)
 public struct BuildingCost
 {
-    //public int RequiredHexes
-    //{
-    //    get;
-    //}
 
     public int RequiredFood
     {
         get;
+        set;
     }
 
     public int RequiredPopulation
     {
         get;
+        set;
     }
 
     public int RequiredIndustry
     {
         get;
+        set;
     }
 
     public int RequiredIsolium
     {
         get;
+        set;
     }
 
     public int RequiredMilitary
     {
         get;
+        set;
     }
 
-    public BuildingCost(/*int hexes,*/ int population, int food, int isolium, int industry, int military)
+    public BuildingCost(int population, int food, int isolium, int industry, int military)
     {
-        //RequiredHexes = hexes;
         RequiredFood = food;
         RequiredPopulation = population;
         RequiredIndustry = industry;

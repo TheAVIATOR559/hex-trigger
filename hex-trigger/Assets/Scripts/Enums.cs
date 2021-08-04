@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public static class Enums
 {
-    public enum Prefabs
+    public enum Hex_Prefabs
     {
         HEX_GHOST,
         HEX_GOD_SEAT,
@@ -61,6 +61,29 @@ public static class Enums
         HEX_HYDROELECTRIC_DAM,
         HEX_NUCLEAR_POWER_PLANT,
         HEX_QUANTUM_POWER_PLANT,
+        HEX_PUBLIC_PARK,
+        HEX_CIRCUS,
+        HEX_THEATER_COMPLEX,
+        HEX_VIRTUAL_REALITY_CAFE,
+        HEX_QUANTUM_HOLOGRAM_THEATER,
+        HEX_VOID_PORTAL,//TODO IMPLEMENT ME
+        HEX_VOID_COMMUNICATOR,//TODO IMPLEMENT ME
+        HEX_VOID_RADAR_ARRAY,//TODO IMPLEMENT ME
+        HEX_FACTION_EMBASSY,//TODO IMPLEMENT ME
+        HEX_ABYSSAL_PATHFINDER,//TODO IMPLEMENT ME
+        HEX_VOID_RUDDER,//TODO IMPLEMENT ME
+        HEX_WEATHER_MANIPULATOR,//TODO IMPLEMENT ME
+        HEX_DIPLO_MONUMENT,//TODO IMPLEMENT ME
+        HEX_SCI_MONUMENT,//TODO IMPLEMENT ME
+        HEX_HAPP_MONUMENT,//TODO IMPLEMENT ME
+        HEX_IND_MONUMENT,//TODO IMPLEMENT ME
+        HEX_ISO_MONUMENT,//TODO IMPLEMENT ME
+        HEX_MIL_MONUMENT,//TODO IMPLEMENT ME
+        HEX_FOOD_MONUMENT//TODO IMPLEMENT ME
+    }
+
+    public enum Model_Prefabs
+    {
         MODEL_GARDEN,
         MODEL_FARM,
         MODEL_ORCHARD,
@@ -95,7 +118,19 @@ public static class Enums
         MODEL_STOREHOUSE,
         MODEL_WAREHOUSE,
         MODEL_DEPOT,
-        MODEL_DISTRIBUTION_CENTER
+        MODEL_DISTRIBUTION_CENTER,
+        MODEL_PUBLIC_PARK,
+        MODEL_CIRCUS,
+        MODEL_THEATER_COMPLEX,
+        MODEL_VIRTUAL_REALITY_CAFE,
+        MODEL_QUANTUM_HOLOGRAM_THEATER,
+        MODEL_DIPLO_MONUMENT,//TODO IMPLEMENT ME THIS MAY BE MORE COMPLICATED THAN I WANT
+        MODEL_SCI_MONUMENT,//TODO IMPLEMENT ME
+        MODEL_HAPP_MONUMENT,//TODO IMPLEMENT ME
+        MODEL_IND_MONUMENT,//TODO IMPLEMENT ME
+        MODEL_ISO_MONUMENT,//TODO IMPLEMENT ME
+        MODEL_MIL_MONUMENT,//TODO IMPLEMENT ME
+        MODEL_FOOD_MONUMENT//TODO IMPLEMENT ME
     }
 
     public enum Images
@@ -118,7 +153,10 @@ public static class Enums
         ICON_SCOUT,
         ICON_ACE,
         ICON_CANNONEER,
-        ICON_GUARDIAN
+        ICON_GUARDIAN,
+        ICON_ENTERTAINMENT,
+        ICON_MONUMENT,//TODO IMPLEMENT ME
+        ICON_SPECIAL//TODO IMPLEMENT ME
     }
 
     public enum Hex_Types
@@ -132,7 +170,10 @@ public static class Enums
         DEFENSE,
         STORAGE,
         GOD_SEAT,
-        POWER
+        POWER,
+        ENTERTAINMENT,
+        SPECIAL,//TODO IMPLEMENT ME
+        MONUMENT//TODO IMPLEMENT ME
     }
 
     public enum Building_Tier
@@ -199,7 +240,26 @@ public static class Enums
         COAL_FIRED_POWER_PLANT,
         HYDROELECTRIC_DAM,
         NUCLEAR_POWER_PLANT,
-        QUANTUM_POWER_PLANT
+        QUANTUM_POWER_PLANT,
+        PUBLIC_PARK,
+        CIRCUS,
+        THEATER_COMPLEX,
+        VIRTUAL_REALITY_CAFE,
+        QUANTUM_HOLOGRAM_THEATER,
+        VOID_PORTAL,//TODO IMPLEMENT ME
+        VOID_COMMUNICATOR,//TODO IMPLEMENT ME
+        VOID_RADAR_ARRAY,//TODO IMPLEMENT ME
+        FACTION_EMBASSY,//TODO IMPLEMENT ME
+        ABYSSAL_PATHFINDER,//TODO IMPLEMENT ME
+        VOID_RUDDER,//TODO IMPLEMENT ME
+        WEATHER_MANIPULATOR,//TODO IMPLEMENT ME
+        DIPLO_MONUMENT,//TODO IMPLEMENT ME
+        SCI_MONUMENT,//TODO IMPLEMENT ME
+        HAPP_MONUMENT,//TODO IMPLEMENT ME
+        IND_MONUMENT,//TODO IMPLEMENT ME
+        ISO_MONUMENT,//TODO IMPLEMENT ME
+        MIL_MONUMENT,//TODO IMPLEMENT ME
+        FOOD_MONUMENT//TODO IMPLEMENT ME
     }
 
     public enum Unit_Type
@@ -215,7 +275,7 @@ public static class Enums
         GUARDIAN
     }
 
-    public static Building_Type HexTypeAndTierToBuildingType(Hex_Types hex, Building_Tier tier)
+    public static Building_Type HexTypeAndTierToBuildingType(Hex_Types hex, Building_Tier tier)//todo MAY NEED AN OVERRIDE FOR MONUMENTS AND SPECIAL
     {
         return hex switch
         {
@@ -301,202 +361,205 @@ public static class Enums
                 Building_Tier.V => Building_Type.QUANTUM_POWER_PLANT,
                 _ => Building_Type.WATERWHEEL_GENERATOR,
             },
+            Hex_Types.ENTERTAINMENT => tier switch
+            {
+                Building_Tier.I => Building_Type.PUBLIC_PARK,
+                Building_Tier.II => Building_Type.CIRCUS,
+                Building_Tier.III => Building_Type.THEATER_COMPLEX,
+                Building_Tier.IV => Building_Type.VIRTUAL_REALITY_CAFE,
+                Building_Tier.V => Building_Type.QUANTUM_HOLOGRAM_THEATER,
+                _ => Building_Type.PUBLIC_PARK,
+            },
             _ => Building_Type.HOVEL,
         };
     }
 
-    public static Prefabs BuildingTypeToHexPrefab(Building_Type type)
+    public static Hex_Prefabs BuildingTypeToHexPrefab(Building_Type type)
     {
-        switch (type)
+        return type switch
         {
-            case Building_Type.GOD_SEAT:
-                return Prefabs.HEX_GOD_SEAT;
-            case Building_Type.GARDEN:
-                return Prefabs.HEX_GARDEN;
-            case Building_Type.FARM:
-                return Prefabs.HEX_FARM;
-            case Building_Type.ORCHARD:
-                return Prefabs.HEX_ORCHARD;
-            case Building_Type.RANCH:
-                return Prefabs.HEX_RANCH;
-            case Building_Type.HYDROPONICS_TOWER:
-                return Prefabs.HEX_HYDROPONICS_TOWER;
-            case Building_Type.HOVEL:
-                return Prefabs.HEX_HOVEL;
-            case Building_Type.COTTAGE:
-                return Prefabs.HEX_COTTAGE;
-            case Building_Type.APARTMENT:
-                return Prefabs.HEX_APARTMENT;
-            case Building_Type.CONDOMINIUM:
-                return Prefabs.HEX_CONDOMINIUM;
-            case Building_Type.VILLA:
-                return Prefabs.HEX_VILLA;
-            case Building_Type.WORKSHOP:
-                return Prefabs.HEX_WORKSHOP;
-            case Building_Type.FORGE:
-                return Prefabs.HEX_FORGE;
-            case Building_Type.MILL:
-                return Prefabs.HEX_MILL;
-            case Building_Type.FOUNDRY:
-                return Prefabs.HEX_FOUNDRY;
-            case Building_Type.FACTORY:
-                return Prefabs.HEX_FACTORY;
-            case Building_Type.BARRACKS:
-                return Prefabs.HEX_BARRACKS;
-            case Building_Type.DORMITORY:
-                return Prefabs.HEX_DORMITORY;
-            case Building_Type.GARRISON:
-                return Prefabs.HEX_GARRISON;
-            case Building_Type.QUARTERS:
-                return Prefabs.HEX_QUARTERS;
-            case Building_Type.HEADQUARTERS:
-                return Prefabs.HEX_HEADQUARTERS;
-            case Building_Type.WATCHTOWER:
-                return Prefabs.HEX_WATCHTOWER;
-            case Building_Type.MISSILE_COMPLEX:
-                return Prefabs.HEX_MISSILE_COMPLEX;
-            case Building_Type.LASER_TOWER:
-                return Prefabs.HEX_LASER_TOWER;
-            case Building_Type.AUTO_MISSILE_COMPLEX:
-                return Prefabs.HEX_AUTO_MISSILE_COMPLEX;
-            case Building_Type.AUTO_LASER_TOWER:
-                return Prefabs.HEX_AUTO_LASER_TOWER;
-            case Building_Type.RESEARCH_LAB:
-                return Prefabs.HEX_RESEARCH_LAB;
-            case Building_Type.RESEARCH_COLLEGE:
-                return Prefabs.HEX_RESEARCH_COLLEGE;
-            case Building_Type.RESEARCH_INSTITUTE:
-                return Prefabs.HEX_RESEARCH_INSTITUTE;
-            case Building_Type.MULTIBRAIN_COMPLEX:
-                return Prefabs.HEX_MULTIBRAIN_COMPLEX;
-            case Building_Type.QUANTUM_BRAIN:
-                return Prefabs.HEX_QUANTUM_BRAIN;
-            case Building_Type.EXTRACTOR_MK_I:
-                return Prefabs.HEX_STOCKPILE;
-            case Building_Type.EXTRACTOR_MK_II:
-                return Prefabs.HEX_STOREHOUSE;
-            case Building_Type.EXTRACTOR_MK_III:
-                return Prefabs.HEX_WAREHOUSE;
-            case Building_Type.EXTRACTOR_MK_IV:
-                return Prefabs.HEX_DEPOT;
-            case Building_Type.EXTRACTOR_MK_V:
-                return Prefabs.HEX_DISTRIBUTION_CENTER;
-            case Building_Type.SHOOTING_RANGE:
-                return Prefabs.HEX_SHOOTING_RANGE;
-            case Building_Type.DEFENDERS_WALL:
-                return Prefabs.HEX_DEFENDERS_WALL;
-            case Building_Type.GUNNERS_ALLEY:
-                return Prefabs.HEX_GUNNERS_ALLEY;
-            case Building_Type.SNIPERS_NEST:
-                return Prefabs.HEX_SNIPER_NEST;
-            case Building_Type.SCOUT_CAMP:
-                return Prefabs.HEX_SCOUT_CAMP;
-            case Building_Type.ACES_ARENA:
-                return Prefabs.HEX_ACES_ARENA;
-            case Building_Type.CANNONEERS_TOWER:
-                return Prefabs.HEX_CANNONEERS_TOWER;
-            case Building_Type.GUARDIANS_LAST_STAND:
-                return Prefabs.HEX_GUARDIANS_LAST_STAND;
-            case Building_Type.STOCKPILE:
-                return Prefabs.HEX_STOCKPILE;
-            case Building_Type.STOREHOUSE:
-                return Prefabs.HEX_STOREHOUSE;
-            case Building_Type.WAREHOUSE:
-                return Prefabs.HEX_WAREHOUSE;
-            case Building_Type.DEPOT:
-                return Prefabs.HEX_DEPOT;
-            case Building_Type.DISTRIBUTION_CENTER:
-                return Prefabs.HEX_DISTRIBUTION_CENTER;
-            case Building_Type.WATERWHEEL_GENERATOR:
-                return Prefabs.HEX_WATERWHEEL;
-            case Building_Type.COAL_FIRED_POWER_PLANT:
-                return Prefabs.HEX_COAL_FIRED_POWER_PLANT;
-            case Building_Type.HYDROELECTRIC_DAM:
-                return Prefabs.HEX_HYDROELECTRIC_DAM;
-            case Building_Type.NUCLEAR_POWER_PLANT:
-                return Prefabs.HEX_NUCLEAR_POWER_PLANT;
-            case Building_Type.QUANTUM_POWER_PLANT:
-                return Prefabs.HEX_QUANTUM_POWER_PLANT;
-            default:
-                return Prefabs.HEX_HOVEL;
-        }
-
+            Building_Type.GOD_SEAT => Hex_Prefabs.HEX_GOD_SEAT,
+            Building_Type.GARDEN => Hex_Prefabs.HEX_GARDEN,
+            Building_Type.FARM => Hex_Prefabs.HEX_FARM,
+            Building_Type.ORCHARD => Hex_Prefabs.HEX_ORCHARD,
+            Building_Type.RANCH => Hex_Prefabs.HEX_RANCH,
+            Building_Type.HYDROPONICS_TOWER => Hex_Prefabs.HEX_HYDROPONICS_TOWER,
+            Building_Type.HOVEL => Hex_Prefabs.HEX_HOVEL,
+            Building_Type.COTTAGE => Hex_Prefabs.HEX_COTTAGE,
+            Building_Type.APARTMENT => Hex_Prefabs.HEX_APARTMENT,
+            Building_Type.CONDOMINIUM => Hex_Prefabs.HEX_CONDOMINIUM,
+            Building_Type.VILLA => Hex_Prefabs.HEX_VILLA,
+            Building_Type.WORKSHOP => Hex_Prefabs.HEX_WORKSHOP,
+            Building_Type.FORGE => Hex_Prefabs.HEX_FORGE,
+            Building_Type.MILL => Hex_Prefabs.HEX_MILL,
+            Building_Type.FOUNDRY => Hex_Prefabs.HEX_FOUNDRY,
+            Building_Type.FACTORY => Hex_Prefabs.HEX_FACTORY,
+            Building_Type.BARRACKS => Hex_Prefabs.HEX_BARRACKS,
+            Building_Type.DORMITORY => Hex_Prefabs.HEX_DORMITORY,
+            Building_Type.GARRISON => Hex_Prefabs.HEX_GARRISON,
+            Building_Type.QUARTERS => Hex_Prefabs.HEX_QUARTERS,
+            Building_Type.HEADQUARTERS => Hex_Prefabs.HEX_HEADQUARTERS,
+            Building_Type.WATCHTOWER => Hex_Prefabs.HEX_WATCHTOWER,
+            Building_Type.MISSILE_COMPLEX => Hex_Prefabs.HEX_MISSILE_COMPLEX,
+            Building_Type.LASER_TOWER => Hex_Prefabs.HEX_LASER_TOWER,
+            Building_Type.AUTO_MISSILE_COMPLEX => Hex_Prefabs.HEX_AUTO_MISSILE_COMPLEX,
+            Building_Type.AUTO_LASER_TOWER => Hex_Prefabs.HEX_AUTO_LASER_TOWER,
+            Building_Type.RESEARCH_LAB => Hex_Prefabs.HEX_RESEARCH_LAB,
+            Building_Type.RESEARCH_COLLEGE => Hex_Prefabs.HEX_RESEARCH_COLLEGE,
+            Building_Type.RESEARCH_INSTITUTE => Hex_Prefabs.HEX_RESEARCH_INSTITUTE,
+            Building_Type.MULTIBRAIN_COMPLEX => Hex_Prefabs.HEX_MULTIBRAIN_COMPLEX,
+            Building_Type.QUANTUM_BRAIN => Hex_Prefabs.HEX_QUANTUM_BRAIN,
+            Building_Type.EXTRACTOR_MK_I => Hex_Prefabs.HEX_STOCKPILE,
+            Building_Type.EXTRACTOR_MK_II => Hex_Prefabs.HEX_STOREHOUSE,
+            Building_Type.EXTRACTOR_MK_III => Hex_Prefabs.HEX_WAREHOUSE,
+            Building_Type.EXTRACTOR_MK_IV => Hex_Prefabs.HEX_DEPOT,
+            Building_Type.EXTRACTOR_MK_V => Hex_Prefabs.HEX_DISTRIBUTION_CENTER,
+            Building_Type.SHOOTING_RANGE => Hex_Prefabs.HEX_SHOOTING_RANGE,
+            Building_Type.DEFENDERS_WALL => Hex_Prefabs.HEX_DEFENDERS_WALL,
+            Building_Type.GUNNERS_ALLEY => Hex_Prefabs.HEX_GUNNERS_ALLEY,
+            Building_Type.SNIPERS_NEST => Hex_Prefabs.HEX_SNIPER_NEST,
+            Building_Type.SCOUT_CAMP => Hex_Prefabs.HEX_SCOUT_CAMP,
+            Building_Type.ACES_ARENA => Hex_Prefabs.HEX_ACES_ARENA,
+            Building_Type.CANNONEERS_TOWER => Hex_Prefabs.HEX_CANNONEERS_TOWER,
+            Building_Type.GUARDIANS_LAST_STAND => Hex_Prefabs.HEX_GUARDIANS_LAST_STAND,
+            Building_Type.STOCKPILE => Hex_Prefabs.HEX_STOCKPILE,
+            Building_Type.STOREHOUSE => Hex_Prefabs.HEX_STOREHOUSE,
+            Building_Type.WAREHOUSE => Hex_Prefabs.HEX_WAREHOUSE,
+            Building_Type.DEPOT => Hex_Prefabs.HEX_DEPOT,
+            Building_Type.DISTRIBUTION_CENTER => Hex_Prefabs.HEX_DISTRIBUTION_CENTER,
+            Building_Type.WATERWHEEL_GENERATOR => Hex_Prefabs.HEX_WATERWHEEL,
+            Building_Type.COAL_FIRED_POWER_PLANT => Hex_Prefabs.HEX_COAL_FIRED_POWER_PLANT,
+            Building_Type.HYDROELECTRIC_DAM => Hex_Prefabs.HEX_HYDROELECTRIC_DAM,
+            Building_Type.NUCLEAR_POWER_PLANT => Hex_Prefabs.HEX_NUCLEAR_POWER_PLANT,
+            Building_Type.QUANTUM_POWER_PLANT => Hex_Prefabs.HEX_QUANTUM_POWER_PLANT,
+            Building_Type.PUBLIC_PARK => Hex_Prefabs.HEX_PUBLIC_PARK,
+            Building_Type.CIRCUS => Hex_Prefabs.HEX_CIRCUS,
+            Building_Type.THEATER_COMPLEX => Hex_Prefabs.HEX_THEATER_COMPLEX,
+            Building_Type.VIRTUAL_REALITY_CAFE => Hex_Prefabs.HEX_VIRTUAL_REALITY_CAFE,
+            Building_Type.QUANTUM_HOLOGRAM_THEATER => Hex_Prefabs.HEX_QUANTUM_HOLOGRAM_THEATER,
+            Building_Type.VOID_PORTAL => Hex_Prefabs.HEX_VOID_PORTAL,
+            Building_Type.VOID_COMMUNICATOR => Hex_Prefabs.HEX_VOID_COMMUNICATOR,
+            Building_Type.VOID_RADAR_ARRAY => Hex_Prefabs.HEX_VOID_RADAR_ARRAY,
+            Building_Type.FACTION_EMBASSY => Hex_Prefabs.HEX_FACTION_EMBASSY,
+            Building_Type.ABYSSAL_PATHFINDER => Hex_Prefabs.HEX_ABYSSAL_PATHFINDER,
+            Building_Type.VOID_RUDDER => Hex_Prefabs.HEX_VOID_RUDDER,
+            Building_Type.WEATHER_MANIPULATOR => Hex_Prefabs.HEX_WEATHER_MANIPULATOR,
+            Building_Type.DIPLO_MONUMENT => Hex_Prefabs.HEX_DIPLO_MONUMENT,
+            Building_Type.SCI_MONUMENT => Hex_Prefabs.HEX_SCI_MONUMENT,
+            Building_Type.HAPP_MONUMENT => Hex_Prefabs.HEX_HAPP_MONUMENT,
+            Building_Type.IND_MONUMENT => Hex_Prefabs.HEX_IND_MONUMENT,
+            Building_Type.ISO_MONUMENT => Hex_Prefabs.HEX_ISO_MONUMENT,
+            Building_Type.MIL_MONUMENT => Hex_Prefabs.HEX_MIL_MONUMENT,
+            Building_Type.FOOD_MONUMENT => Hex_Prefabs.HEX_FOOD_MONUMENT,
+            _ => Hex_Prefabs.HEX_HOVEL,
+        };
     }
 
-    public static Prefabs BuildingTypeToModelPrefab(Building_Type type)
+    public static Model_Prefabs BuildingTypeToModelPrefab(Building_Type type)
     {
         switch (type)
         {
             case Building_Type.GARDEN:
-                return Prefabs.MODEL_GARDEN;
+                return Model_Prefabs.MODEL_GARDEN;
             case Building_Type.FARM:
-                return Prefabs.MODEL_FARM;
+                return Model_Prefabs.MODEL_FARM;
             case Building_Type.ORCHARD:
-                return Prefabs.MODEL_ORCHARD;
+                return Model_Prefabs.MODEL_ORCHARD;
             case Building_Type.RANCH:
-                return Prefabs.MODEL_RANCH;
+                return Model_Prefabs.MODEL_RANCH;
             case Building_Type.HYDROPONICS_TOWER:
-                return Prefabs.MODEL_HYDROPONICS_TOWER;
+                return Model_Prefabs.MODEL_HYDROPONICS_TOWER;
             case Building_Type.HOVEL:
-                return Prefabs.MODEL_HOVEL;
+                return Model_Prefabs.MODEL_HOVEL;
             case Building_Type.COTTAGE:
-                return Prefabs.MODEL_COTTAGE;
+                return Model_Prefabs.MODEL_COTTAGE;
             case Building_Type.APARTMENT:
-                return Prefabs.MODEL_APARTMENT;
+                return Model_Prefabs.MODEL_APARTMENT;
             case Building_Type.CONDOMINIUM:
-                return Prefabs.MODEL_CONDOMINIUM;
+                return Model_Prefabs.MODEL_CONDOMINIUM;
             case Building_Type.VILLA:
-                return Prefabs.MODEL_VILLA;
+                return Model_Prefabs.MODEL_VILLA;
             case Building_Type.WORKSHOP:
-                return Prefabs.MODEL_WORKSHOP;
+                return Model_Prefabs.MODEL_WORKSHOP;
             case Building_Type.FORGE:
-                return Prefabs.MODEL_FORGE;
+                return Model_Prefabs.MODEL_FORGE;
             case Building_Type.MILL:
-                return Prefabs.MODEL_MILL;
+                return Model_Prefabs.MODEL_MILL;
             case Building_Type.FOUNDRY:
-                return Prefabs.MODEL_FOUNDRY;
+                return Model_Prefabs.MODEL_FOUNDRY;
             case Building_Type.FACTORY:
-                return Prefabs.MODEL_FACTORY;
+                return Model_Prefabs.MODEL_FACTORY;
             case Building_Type.BARRACKS:
-                return Prefabs.MODEL_BARRACKS;
+                return Model_Prefabs.MODEL_BARRACKS;
             case Building_Type.DORMITORY:
-                return Prefabs.MODEL_DORMITORY;
+                return Model_Prefabs.MODEL_DORMITORY;
             case Building_Type.GARRISON:
-                return Prefabs.MODEL_GARRISON;
+                return Model_Prefabs.MODEL_GARRISON;
             case Building_Type.QUARTERS:
-                return Prefabs.MODEL_QUARTERS;
+                return Model_Prefabs.MODEL_QUARTERS;
             case Building_Type.HEADQUARTERS:
-                return Prefabs.MODEL_HEADQUARTERS;
+                return Model_Prefabs.MODEL_HEADQUARTERS;
             case Building_Type.RESEARCH_LAB:
-                return Prefabs.MODEL_RESEARCH_LAB;
+                return Model_Prefabs.MODEL_RESEARCH_LAB;
             case Building_Type.RESEARCH_COLLEGE:
-                return Prefabs.MODEL_RESEARCH_COLLEGE;
+                return Model_Prefabs.MODEL_RESEARCH_COLLEGE;
             case Building_Type.RESEARCH_INSTITUTE:
-                return Prefabs.MODEL_RESEARCH_INSTITUTE;
+                return Model_Prefabs.MODEL_RESEARCH_INSTITUTE;
             case Building_Type.MULTIBRAIN_COMPLEX:
-                return Prefabs.MODEL_MULTIBRAIN_COMPLEX;
+                return Model_Prefabs.MODEL_MULTIBRAIN_COMPLEX;
             case Building_Type.QUANTUM_BRAIN:
-                return Prefabs.MODEL_QUANTUM_BRAIN;
+                return Model_Prefabs.MODEL_QUANTUM_BRAIN;
             case Building_Type.EXTRACTOR_MK_I:
-                return Prefabs.MODEL_EXTRACTOR_MK_I;
+                return Model_Prefabs.MODEL_EXTRACTOR_MK_I;
             case Building_Type.EXTRACTOR_MK_II:
-                return Prefabs.MODEL_EXTRACTOR_MK_II;
+                return Model_Prefabs.MODEL_EXTRACTOR_MK_II;
             case Building_Type.EXTRACTOR_MK_III:
-                return Prefabs.MODEL_EXTRACTOR_MK_III;
+                return Model_Prefabs.MODEL_EXTRACTOR_MK_III;
             case Building_Type.EXTRACTOR_MK_IV:
-                return Prefabs.MODEL_EXTRACTOR_MK_IV;
+                return Model_Prefabs.MODEL_EXTRACTOR_MK_IV;
             case Building_Type.EXTRACTOR_MK_V:
-                return Prefabs.MODEL_EXTRACTOR_MK_V;
+                return Model_Prefabs.MODEL_EXTRACTOR_MK_V;
             case Building_Type.STOCKPILE:
-                return Prefabs.MODEL_STOCKPILE;
+                return Model_Prefabs.MODEL_STOCKPILE;
             case Building_Type.STOREHOUSE:
-                return Prefabs.MODEL_STOREHOUSE;
+                return Model_Prefabs.MODEL_STOREHOUSE;
             case Building_Type.WAREHOUSE:
-                return Prefabs.MODEL_WAREHOUSE;
+                return Model_Prefabs.MODEL_WAREHOUSE;
             case Building_Type.DEPOT:
-                return Prefabs.MODEL_DEPOT;
+                return Model_Prefabs.MODEL_DEPOT;
             case Building_Type.DISTRIBUTION_CENTER:
-                return Prefabs.MODEL_DISTRIBUTION_CENTER;
+                return Model_Prefabs.MODEL_DISTRIBUTION_CENTER;
+            case Building_Type.PUBLIC_PARK:
+                return Model_Prefabs.MODEL_PUBLIC_PARK;
+            case Building_Type.CIRCUS:
+                return Model_Prefabs.MODEL_CIRCUS;
+            case Building_Type.THEATER_COMPLEX:
+                return Model_Prefabs.MODEL_THEATER_COMPLEX;
+            case Building_Type.VIRTUAL_REALITY_CAFE:
+                return Model_Prefabs.MODEL_VIRTUAL_REALITY_CAFE;
+            case Building_Type.QUANTUM_HOLOGRAM_THEATER:
+                return Model_Prefabs.MODEL_QUANTUM_HOLOGRAM_THEATER;
+            case Building_Type.DIPLO_MONUMENT://TODO monument stuff
+                throw new System.NotImplementedException();
+            case Building_Type.SCI_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.HAPP_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.IND_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.ISO_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.MIL_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.FOOD_MONUMENT:
+                throw new System.NotImplementedException();
+            case Building_Type.VOID_PORTAL:
+            case Building_Type.VOID_COMMUNICATOR:
+            case Building_Type.VOID_RADAR_ARRAY:
+            case Building_Type.FACTION_EMBASSY:
+            case Building_Type.ABYSSAL_PATHFINDER:
+            case Building_Type.VOID_RUDDER:
+            case Building_Type.WEATHER_MANIPULATOR:
             case Building_Type.WATCHTOWER:
             case Building_Type.MISSILE_COMPLEX:
             case Building_Type.LASER_TOWER:
@@ -517,7 +580,7 @@ public static class Enums
             case Building_Type.GUARDIANS_LAST_STAND:
             case Building_Type.GOD_SEAT:
             default:
-                return Prefabs.MODEL_GARDEN;
+                return Model_Prefabs.MODEL_GARDEN;
         }
     }
 }

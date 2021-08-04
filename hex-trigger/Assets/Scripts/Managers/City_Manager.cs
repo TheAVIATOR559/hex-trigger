@@ -46,11 +46,11 @@ public class City_Manager : Singleton<City_Manager>
 
                 if (i == 0 && j == 0)
                 {
-                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
                 }
                 else
                 {
-                    newHex = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
                 }
 
                 newHex.Initialize(i, j);
@@ -161,7 +161,7 @@ public class City_Manager : Singleton<City_Manager>
     {
         foreach(Vector2Int position in Instance.availbleHexPositions)
         {
-            Ghost_Hex newGhost = Instantiate(Prefab_Manager.GetPrefab(Enums.Prefabs.HEX_GHOST), Hex.GetWorldCoordFromHexCoord(position), Quaternion.Euler(-90, 0, 0)).GetComponent<Ghost_Hex>();
+            Ghost_Hex newGhost = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_GHOST), Hex.GetWorldCoordFromHexCoord(position), Quaternion.Euler(-90, 0, 0)).GetComponent<Ghost_Hex>();
             newGhost.hexCoord = position;
             Instance.ghostHexes.Add(newGhost);
         }

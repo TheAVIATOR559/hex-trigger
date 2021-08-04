@@ -88,7 +88,7 @@ public class Building : MonoBehaviour
         //destroy this hex/building
         GameObject prevModel = model;
 
-        model = Instantiate(Prefab_Manager.GetPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.identity, transform);
+        model = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.identity, transform);
 
         Destroy(prevModel);
     }
@@ -251,8 +251,21 @@ public class Building : MonoBehaviour
                     Enums.Building_Tier.III => Constants.POWER_III_PROD,
                     Enums.Building_Tier.IV => Constants.POWER_IV_PROD,
                     Enums.Building_Tier.V => Constants.POWER_V_PROD,
-                    _ => Constants.STORAGE_I_PROD,
+                    _ => Constants.POWER_I_PROD,
                 };
+            case Enums.Hex_Types.ENTERTAINMENT:
+                return tier switch
+                {
+                    Enums.Building_Tier.I => Constants.ENTERTAINMENT_I_PROD,
+                    Enums.Building_Tier.II => Constants.ENTERTAINMENT_II_PROD,
+                    Enums.Building_Tier.III => Constants.ENTERTAINMENT_III_PROD,
+                    Enums.Building_Tier.IV => Constants.ENTERTAINMENT_IV_PROD,
+                    Enums.Building_Tier.V => Constants.ENTERTAINMENT_V_PROD,
+                    _ => Constants.ENTERTAINMENT_I_PROD,
+                };
+            case Enums.Hex_Types.MONUMENT:
+                return Resource_Manager.GetMonumentProduction();
+            case Enums.Hex_Types.SPECIAL:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
             default:

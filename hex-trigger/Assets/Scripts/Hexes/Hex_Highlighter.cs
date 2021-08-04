@@ -14,6 +14,10 @@ public class Hex_Highlighter : MonoBehaviour
     [SerializeField] Color MilitaryColor;
     [SerializeField] Color DefenseColor;
     [SerializeField] Color StorageColor;
+    [SerializeField] Color PowerColor;
+    [SerializeField] Color EntertainmentColor;
+    [SerializeField] Color MonumentColor;
+    [SerializeField] Color SpecialColor;
 
     private Renderer rend;
 
@@ -61,6 +65,18 @@ public class Hex_Highlighter : MonoBehaviour
                 break;
             case Enums.Hex_Types.STORAGE:
                 rend.material.color = StorageColor;
+                break;
+            case Enums.Hex_Types.POWER:
+                rend.material.color = PowerColor;
+                break;
+            case Enums.Hex_Types.ENTERTAINMENT:
+                rend.material.color = EntertainmentColor;
+                break;
+            case Enums.Hex_Types.SPECIAL:
+                rend.material.color = SpecialColor;
+                break;
+            case Enums.Hex_Types.MONUMENT:
+                rend.material.color = MonumentColor;
                 break;
             default:
                 rend.material.color = Color.white;

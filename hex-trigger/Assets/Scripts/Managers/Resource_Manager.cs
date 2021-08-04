@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource_Manager : Singleton<Resource_Manager>
+public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate new buildings
 {
     public int MaximumHexRange = Constants.DEFAULT_HEX_RADIUS;
 
@@ -52,7 +52,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public int IndustryProduction = 0;
     public int IsoliumProduction = 0;
     public int ResearchProduction = 0;
-    public int PopulationGrowthRate = Constants.POP_GROWTH_RATE;//TODO should be modified by how 'happy' city is
+    public int PopulationGrowthRate = 0;//TODO should be modified by how 'happy' city is :: ENTERTAINMENT RELATED
     public float ShooterTrainingCostReduction = 1;
     public float DefenderTrainingCostReduction = 1;
     public float GunnerTrainingCostReduction = 1;
@@ -90,7 +90,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static void DEV_MaxOutResources()
     {
-        //Instance.MaximumHexRange = 1000;
+        Instance.CurrentFood = 1000;
         Instance.MaximumFood = 1000;
         Instance.MaximumPopulation = 1000;
         Instance.CurrentPopulation = 1000;
@@ -226,6 +226,42 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 return Constants.NuclearPlantCost;
             case Enums.Building_Type.QUANTUM_POWER_PLANT:
                 return Constants.QuantumPlantCost;
+            case Enums.Building_Type.PUBLIC_PARK:
+                return Constants.PublicParkCost;
+            case Enums.Building_Type.CIRCUS:
+                return Constants.CircusCost;
+            case Enums.Building_Type.THEATER_COMPLEX:
+                return Constants.TheaterCost;
+            case Enums.Building_Type.VIRTUAL_REALITY_CAFE:
+                return Constants.VirtualRealityCafeCost;
+            case Enums.Building_Type.VOID_PORTAL:
+                return Constants.VoidPortalCost;
+            case Enums.Building_Type.VOID_COMMUNICATOR:
+                return Constants.VoidCommunicatorCost;
+            case Enums.Building_Type.VOID_RADAR_ARRAY:
+                return Constants.VoidRadarArrayCost;
+            case Enums.Building_Type.FACTION_EMBASSY:
+                return Constants.FactionEmbassyCost;
+            case Enums.Building_Type.ABYSSAL_PATHFINDER:
+                return Constants.AbyssalPathfinderCost;
+            case Enums.Building_Type.VOID_RUDDER:
+                return Constants.VoidRudderCost;
+            case Enums.Building_Type.WEATHER_MANIPULATOR:
+                return Constants.WeatherManipulatorCost;
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                return Constants.DiploMonumentCost;
+            case Enums.Building_Type.SCI_MONUMENT:
+                return Constants.SciMonumentCost;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                return Constants.HappMonumentCost;
+            case Enums.Building_Type.IND_MONUMENT:
+                return Constants.IndMonumentCost;
+            case Enums.Building_Type.ISO_MONUMENT:
+                return Constants.IsoMonumentCost;
+            case Enums.Building_Type.MIL_MONUMENT:
+                return Constants.MilMonumentCost;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                return Constants.FoodMonumentCost;
             case Enums.Building_Type.HYDROPONICS_TOWER:
             case Enums.Building_Type.VILLA:
             case Enums.Building_Type.FACTORY:
@@ -233,6 +269,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.QUANTUM_BRAIN:
             case Enums.Building_Type.EXTRACTOR_MK_V:
             case Enums.Building_Type.DISTRIBUTION_CENTER:
+            case Enums.Building_Type.QUANTUM_HOLOGRAM_THEATER:
             case Enums.Building_Type.GOD_SEAT:
             default:
                 return new BuildingCost(0, 0, 0, 0, 0);
@@ -289,6 +326,9 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.MaximumIndustry += value;
                 Instance.MaximumIsolium += value;
                 break;
+            case Enums.Hex_Types.ENTERTAINMENT:
+            case Enums.Hex_Types.SPECIAL:
+            case Enums.Hex_Types.MONUMENT:
             case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
@@ -388,6 +428,12 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 {
                     Instance.MaximumIsolium -= value;
                 }
+                break;
+            case Enums.Hex_Types.ENTERTAINMENT:
+                break;
+            case Enums.Hex_Types.SPECIAL:
+                break;
+            case Enums.Hex_Types.MONUMENT:
                 break;
             case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
@@ -910,5 +956,10 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.GodSeatUpgradePopCost = Instance.PrevGodSeatPopCost + (Random.Range(Instance.PrevGodSeatPopCost, 5 * Instance.PrevGodSeatPopCost) / Instance.GodSeatLevel);
 
         UI_Manager.UpdateInfoPanel(Enums.Building_Type.GOD_SEAT);
+    }
+
+    public static int GetMonumentProduction()//todo fill me in
+    {
+        return 999;
     }
 }
