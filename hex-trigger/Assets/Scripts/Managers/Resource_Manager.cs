@@ -52,7 +52,7 @@ public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate ne
     public int IndustryProduction = 0;
     public int IsoliumProduction = 0;
     public int ResearchProduction = 0;
-    public int PopulationGrowthRate = 0;//TODO should be modified by how 'happy' city is :: ENTERTAINMENT RELATED
+    public int PopulationGrowthRate = 0;
     public float ShooterTrainingCostReduction = 1;
     public float DefenderTrainingCostReduction = 1;
     public float GunnerTrainingCostReduction = 1;
@@ -71,6 +71,8 @@ public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate ne
     private int PrevGodSeatIndustryCost;
     private int PrevGodSeatFoodCost;
     private int PrevGodSeatPopCost;
+
+    [SerializeField] private int PopGrowthDecimal = 0;
 
     private void Awake()
     {
@@ -889,6 +891,32 @@ public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate ne
         if (CurrentPopulation < MaximumPopulation)
         {
             CurrentPopulation += PopulationGrowthRate;
+        }
+    }
+
+    public static void AddPopGrowth(int amount)
+    {
+        if(Instance.PopGrowthDecimal + amount >= 100)
+        {
+            Instance.PopulationGrowthRate++;
+            Instance.PopGrowthDecimal = (Instance.PopGrowthDecimal + amount) - 100;
+        }
+        else
+        {
+            Instance.PopGrowthDecimal += amount;
+        }
+    }
+
+    public static void RemovePopGrowth(int amount)
+    {
+        if(Instance.PopGrowthDecimal - amount <= -100)
+        {
+            Instance.PopulationGrowthRate--;
+            Instance.PopGrowthDecimal = (Instance.PopGrowthDecimal - amount) + 100;
+        }
+        else
+        {
+            Instance.PopGrowthDecimal -= amount;
         }
     }
 

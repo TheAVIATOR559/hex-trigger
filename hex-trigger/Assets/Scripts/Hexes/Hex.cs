@@ -58,7 +58,15 @@ public class Hex : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             ///enable and populate hex info panel
-            UI_Manager.UpdateInfoPanel(ConnectedBuilding.BuildingType, ConnectedBuilding.AdjustedProduction, ConnectedBuilding.BonusFromNeighbors);
+            if(ConnectedBuilding.HexType == Enums.Hex_Types.HOUSING)
+            {
+                Building_Housing housing = (Building_Housing)ConnectedBuilding;
+                UI_Manager.UpdateInfoPanel(housing.BuildingType, housing.AdjustedProduction, housing.BonusFromNeighbors, housing.Happiness);
+            }
+            else
+            {
+                UI_Manager.UpdateInfoPanel(ConnectedBuilding.BuildingType, ConnectedBuilding.AdjustedProduction, ConnectedBuilding.BonusFromNeighbors);
+            }
         
             ///highlight hex
             City_Manager.Instance.MoveHighlighterToHex(this);

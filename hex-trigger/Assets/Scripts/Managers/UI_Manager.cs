@@ -33,12 +33,19 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
     private TMP_Text InfoPanelAdjProd;
     private TMP_Text InfoPanelBonusToOthers;
     private TMP_Text InfoPanelBonusFromOthers;
+
     private TMP_Text InfoPanelGodSeatLevel;
     private TMP_Text InfoPanelGodSeatHexRange;
     private TMP_Text InfoPanelGodSeatIsoliumCost;
     private TMP_Text InfoPanelGodSeatIndustryCost;
     private TMP_Text InfoPanelGodSeatFoodCost;
     private TMP_Text InfoPanelGodSeatPopCost;
+
+    private TMP_Text InfoPanelHousingBaseProd;
+    private TMP_Text InfoPanelHousingAdjProd;
+    private TMP_Text InfoPanelHousingBonusToOthers;
+    private TMP_Text InfoPanelHousingBonusFromOthers;
+    private TMP_Text InfoPanelHousingHappiness;
 
     private GameObject ResourcePanel;
     private GameObject MilitaryPanel;
@@ -151,12 +158,19 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         InfoPanelAdjProd = InfoPanel.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusToOthers = InfoPanel.transform.GetChild(3).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelBonusFromOthers = InfoPanel.transform.GetChild(3).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+
         InfoPanelGodSeatLevel = InfoPanel.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelGodSeatHexRange = InfoPanel.transform.GetChild(4).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelGodSeatIsoliumCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
         InfoPanelGodSeatIndustryCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(1).GetChild(0).GetComponent<TMP_Text>();
         InfoPanelGodSeatFoodCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(2).GetChild(0).GetComponent<TMP_Text>();
         InfoPanelGodSeatPopCost = InfoPanel.transform.GetChild(4).GetChild(2).GetChild(3).GetChild(0).GetComponent<TMP_Text>();
+
+        InfoPanelHousingBaseProd = InfoPanel.transform.GetChild(5).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelHousingAdjProd = InfoPanel.transform.GetChild(5).GetChild(1).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelHousingBonusToOthers = InfoPanel.transform.GetChild(5).GetChild(2).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelHousingBonusFromOthers = InfoPanel.transform.GetChild(5).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
+        InfoPanelHousingHappiness = InfoPanel.transform.GetChild(5).GetChild(4).GetChild(1).GetComponent<TMP_Text>();
 
         CityOverviewPanel = CityCanvas.transform.GetChild(16).gameObject;
         FoodProdText = CityOverviewPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
@@ -675,6 +689,7 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         Instance.InfoPanel.SetActive(true);
         Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(true);
         Instance.InfoPanel.transform.GetChild(4).gameObject.SetActive(false);
+        Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(false);
     }
 
     public static void DisableInfoPanel()
@@ -682,7 +697,7 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         Instance.InfoPanel.SetActive(false);
     }
 
-    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction = 0, float bonusFromNeighbors = 0)
+    public static void UpdateInfoPanel(Enums.Building_Type type, float adjustedProduction = 0, float bonusFromNeighbors = 0, float happiness = 0)
     {
         EnableInfoPanel();
 
@@ -730,31 +745,41 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.HOVEL_NAME;
                 Instance.InfoPanelDesc.text = Constants.HOVEL_DESC;
-                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(true);
+                Instance.UpdateHousingProdPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors, happiness);
                 break;
             case Enums.Building_Type.COTTAGE:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.COTTAGE_NAME;
                 Instance.InfoPanelDesc.text = Constants.COTTAGE_DESC;
-                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(true);
+                Instance.UpdateHousingProdPanels(Constants.HOUSING_II_PROD, adjustedProduction, Constants.TIER_II_BONUS, bonusFromNeighbors, happiness);
                 break;
             case Enums.Building_Type.APARTMENT:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.APARTMENT_NAME;
                 Instance.InfoPanelDesc.text = Constants.APARTMENT_DESC;
-                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(true);
+                Instance.UpdateHousingProdPanels(Constants.HOUSING_III_PROD, adjustedProduction, Constants.TIER_III_BONUS, bonusFromNeighbors, happiness);
                 break;
             case Enums.Building_Type.CONDOMINIUM:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.CONDO_NAME;
                 Instance.InfoPanelDesc.text = Constants.CONDO_DESC;
-                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(true);
+                Instance.UpdateHousingProdPanels(Constants.HOUSING_IV_PROD, adjustedProduction, Constants.TIER_IV_BONUS, bonusFromNeighbors, happiness);
                 break;
             case Enums.Building_Type.VILLA:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_POP);
                 Instance.InfoPanelName.text = Constants.VILLA_NAME;
                 Instance.InfoPanelDesc.text = Constants.VILLA_DESC;
-                Instance.UpdateProductionPanels(Constants.HOUSING_I_PROD, adjustedProduction, Constants.TIER_I_BONUS, bonusFromNeighbors);
+                Instance.InfoPanel.transform.GetChild(3).gameObject.SetActive(false);
+                Instance.InfoPanel.transform.GetChild(5).gameObject.SetActive(true);
+                Instance.UpdateHousingProdPanels(Constants.HOUSING_V_PROD, adjustedProduction, Constants.TIER_V_BONUS, bonusFromNeighbors, happiness);
                 break;
             case Enums.Building_Type.WORKSHOP:
                 Instance.InfoPanelImage.sprite = Prefab_Manager.GetImage(Enums.Images.ICON_INDUSTRY);
@@ -1141,6 +1166,15 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         InfoPanelGodSeatIndustryCost.text = Resource_Manager.Instance.GodSeatUpgradeIndustryCost.ToString();
         InfoPanelGodSeatFoodCost.text = Resource_Manager.Instance.GodSeatUpgradeFoodCost.ToString();
         InfoPanelGodSeatPopCost.text = Resource_Manager.Instance.GodSeatUpgradePopCost.ToString();
+    }
+
+    private void UpdateHousingProdPanels(float baseProd, float adjProd, float bonusToNeighbors, float bonusFromNeighbors, float happiness)
+    {
+        InfoPanelHousingBaseProd.text = baseProd.ToString();
+        InfoPanelHousingAdjProd.text = adjProd.ToString();
+        InfoPanelHousingBonusToOthers.text = "+" + (bonusToNeighbors * 100) + "%";
+        InfoPanelHousingBonusFromOthers.text = "+" + (bonusFromNeighbors * 100) + "%";
+        InfoPanelHousingHappiness.text = happiness.ToString();
     }
 
     private void UpdateProductionPanels(float baseProd, float adjProd, float bonusToNeighbors, float bonusFromNeighbors)
