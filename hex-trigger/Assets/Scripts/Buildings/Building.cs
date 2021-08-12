@@ -264,7 +264,7 @@ public class Building : MonoBehaviour
                     _ => Constants.ENTERTAINMENT_I_PROD,
                 };
             case Enums.Hex_Types.MONUMENT:
-                return Resource_Manager.GetMonumentProduction();
+                return Resource_Manager.GetMonumentProduction(Enums.HexTypeAndTierToBuildingType(type, tier));
             case Enums.Hex_Types.SPECIAL:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:

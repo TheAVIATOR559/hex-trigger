@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate new buildings
+public class Resource_Manager : Singleton<Resource_Manager>
 {
     public int MaximumHexRange = Constants.DEFAULT_HEX_RADIUS;
 
@@ -986,8 +986,49 @@ public class Resource_Manager : Singleton<Resource_Manager>//todo incorporate ne
         UI_Manager.UpdateInfoPanel(Enums.Building_Type.GOD_SEAT);
     }
 
-    public static int GetMonumentProduction()//todo fill me in
+    public static int GetMonumentProduction(Enums.Building_Type type)//todo fill me in
     {
-        return 999;
+        switch (type)
+        {
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                return 999;
+            case Enums.Building_Type.SCI_MONUMENT:
+                return 999;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                return 999;
+            case Enums.Building_Type.IND_MONUMENT:
+                return 999;
+            case Enums.Building_Type.ISO_MONUMENT:
+                return 999;
+            case Enums.Building_Type.MIL_MONUMENT:
+                return 999;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                return 999;
+            default:
+                return 999;
+        }
+    }
+
+    public static void UpdateMonumentCost(Enums.Building_Type type)//todo fill me in 
+    {
+        switch (type)
+        {
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                break;
+            case Enums.Building_Type.SCI_MONUMENT:
+                break;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                break;
+            case Enums.Building_Type.IND_MONUMENT:
+                break;
+            case Enums.Building_Type.ISO_MONUMENT:
+                break;
+            case Enums.Building_Type.MIL_MONUMENT:
+                break;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
+public class UI_Manager : Singleton<UI_Manager>
 {
     private Canvas CityCanvas;
     private GameObject MainPanel;
@@ -19,6 +19,8 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
     private GameObject StorageTierPanel;
     private GameObject PowerTierPanel;
     private GameObject EntertainmentTierPanel;
+    private GameObject MonumentTierPanel;
+    private GameObject SpecialTierPanel;
 
     [SerializeField] private GameObject BuildInfoPanel;
     private Image BuildInfoPanelImage;
@@ -117,10 +119,12 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         StorageTierPanel = CityCanvas.transform.GetChild(9).gameObject;
         PowerTierPanel = CityCanvas.transform.GetChild(10).gameObject;
         EntertainmentTierPanel = CityCanvas.transform.GetChild(11).gameObject;
-        ResourcePanel = CityCanvas.transform.GetChild(12).gameObject;
-        MilitaryPanel = CityCanvas.transform.GetChild(13).gameObject;
+        MonumentTierPanel = CityCanvas.transform.GetChild(12).gameObject;
+        SpecialTierPanel = CityCanvas.transform.GetChild(13).gameObject;
+        ResourcePanel = CityCanvas.transform.GetChild(14).gameObject;
+        MilitaryPanel = CityCanvas.transform.GetChild(15).gameObject;
 
-        BuildInfoPanel = CityCanvas.transform.GetChild(14).gameObject;
+        BuildInfoPanel = CityCanvas.transform.GetChild(16).gameObject;
         BuildInfoPanelImage = BuildInfoPanel.transform.GetChild(0).GetComponent<Image>();
         BuildInfoPanelName = BuildInfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         BuilldInfoPanelCost = BuildInfoPanel.transform.GetChild(2).gameObject;
@@ -150,7 +154,7 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         GuardianCountText = MilitaryPanel.transform.GetChild(8).GetChild(1).GetComponent<TMP_Text>();
         GuardianButtonImage = MilitaryPanel.transform.GetChild(8).GetComponent<Image>();
 
-        InfoPanel = CityCanvas.transform.GetChild(15).gameObject;
+        InfoPanel = CityCanvas.transform.GetChild(17).gameObject;
         InfoPanelImage = InfoPanel.transform.GetChild(0).GetComponent<Image>();
         InfoPanelName = InfoPanel.transform.GetChild(1).GetComponent<TMP_Text>();
         InfoPanelDesc = InfoPanel.transform.GetChild(2).GetComponent<TMP_Text>();
@@ -172,7 +176,7 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         InfoPanelHousingBonusFromOthers = InfoPanel.transform.GetChild(5).GetChild(3).GetChild(1).GetComponent<TMP_Text>();
         InfoPanelHousingHappiness = InfoPanel.transform.GetChild(5).GetChild(4).GetChild(1).GetComponent<TMP_Text>();
 
-        CityOverviewPanel = CityCanvas.transform.GetChild(16).gameObject;
+        CityOverviewPanel = CityCanvas.transform.GetChild(18).gameObject;
         FoodProdText = CityOverviewPanel.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         PopGrowthText = CityOverviewPanel.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>();
         IndustryProdText = CityOverviewPanel.transform.GetChild(2).GetChild(1).GetComponent<TMP_Text>();
@@ -205,6 +209,8 @@ public class UI_Manager : Singleton<UI_Manager>//todo add new buildings
         Instance.StorageTierPanel.SetActive(false);
         Instance.PowerTierPanel.SetActive(false);
         Instance.EntertainmentTierPanel.SetActive(false);
+        Instance.MonumentTierPanel.SetActive(false);
+        Instance.SpecialTierPanel.SetActive(false);
         Instance.ResourcePanel.SetActive(true);
         Instance.MilitaryPanel.SetActive(false);
         Instance.BuildInfoPanel.SetActive(false);

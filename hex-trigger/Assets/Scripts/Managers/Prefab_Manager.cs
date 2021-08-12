@@ -16,7 +16,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     }
 
     //todo remove unbuildable hexes?
-    private void LoadHexPrefabs()//TODO add new hexes
+    private void LoadHexPrefabs()
     {
         hexes.Add(Enums.Hex_Prefabs.HEX_GHOST, Resources.Load<GameObject>("Prefabs/Hexes/Ghost Hex"));
         hexes.Add(Enums.Hex_Prefabs.HEX_GOD_SEAT, Resources.Load<GameObject>("Prefabs/Hexes/Hex - God Seat"));
@@ -89,6 +89,22 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         hexes.Add(Enums.Hex_Prefabs.HEX_THEATER_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Theater Complex"));
         hexes.Add(Enums.Hex_Prefabs.HEX_VIRTUAL_REALITY_CAFE, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - VR Cafe"));
         hexes.Add(Enums.Hex_Prefabs.HEX_QUANTUM_HOLOGRAM_THEATER, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Quantum Hologram Theater"));
+
+        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_PORTAL, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Portal"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_COMMUNICATOR, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Communicator"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_RADAR_ARRAY, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Radar Array"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_ABYSSAL_PATHFINDER, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Abyssal Pathfinder"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_RUDDER, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Rudder"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_FACTION_EMBASSY, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Faction Embassy"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_WEATHER_MANIPULATOR, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Weather Manipulator"));
+
+        hexes.Add(Enums.Hex_Prefabs.HEX_DIPLO_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Diplo Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_SCI_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Sci Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_HAPP_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Happ Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_IND_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Ind Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_ISO_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Iso Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_MIL_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Mil Monument"));
+        hexes.Add(Enums.Hex_Prefabs.HEX_FOOD_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Food Monument"));
     }
 
     private void LoadModelPrefabs()//TODO add new models
@@ -142,7 +158,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         models.Add(Enums.Model_Prefabs.MODEL_QUANTUM_HOLOGRAM_THEATER, Resources.Load<GameObject>("Prefabs/Models/Entertainment/V"));
     }
 
-    private void LoadImages()//todo load new images
+    private void LoadImages()
     {
         images.Add(Enums.Images.ICON_GOD_SEAT, Resources.Load<Sprite>("Sprites/God Seat"));
         images.Add(Enums.Images.ICON_FOOD, Resources.Load<Sprite>("Sprites/Food"));
@@ -164,6 +180,8 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         images.Add(Enums.Images.ICON_GUARDIAN, Resources.Load<Sprite>("Sprites/Guardian"));
         images.Add(Enums.Images.ICON_ISOLIUM, Resources.Load<Sprite>("Sprites/Isolium"));
         images.Add(Enums.Images.ICON_ENTERTAINMENT, Resources.Load<Sprite>("Sprites/Entertainment"));
+        images.Add(Enums.Images.ICON_SPECIAL, Resources.Load<Sprite>("Sprites/Special"));
+        images.Add(Enums.Images.ICON_MONUMENT, Resources.Load<Sprite>("Sprites/Monument"));
     }
 
     public static GameObject GetHexPrefab(Enums.Hex_Prefabs hex)
