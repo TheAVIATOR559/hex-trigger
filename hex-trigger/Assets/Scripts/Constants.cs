@@ -36,6 +36,13 @@ public static class Constants
     public static int DEFAULT_GOD_SEAT_IND_COST = 5;
     public static int DEFAULT_GOD_SEAT_FOOD_COST = 3;
     public static int DEFAULT_GOD_SEAT_POP_COST = 1;
+    public static int DEFAULT_DIPLO_MON_BONUS = 100;
+    public static int DEFAULT_SCI_MON_BONUS = 100;
+    public static int DEFAULT_HAPP_MON_BONUS = 100;
+    public static int DEFAULT_IND_MON_BONUS = 100;
+    public static int DEFAULT_ISO_MON_BONUS = 100;
+    public static int DEFAULT_MIL_MON_BONUS = 100;
+    public static int DEFAULT_FOOD_MON_BONUS = 100;
 
     #region Buidling Costs
     #region Food
@@ -229,6 +236,10 @@ public static class Constants
     public static int ENTERTAINMENT_III_PROD = 30;
     public static int ENTERTAINMENT_IV_PROD = 40;
     public static int ENTERTAINMENT_V_PROD = 50;
+    #endregion
+    #region Monument Values
+    public static float MONUMENT_PRODUCTION_LOWER_BOUND = 0.8f;
+    public static float MONUMENT_PRODUCTION_UPPER_BOUND = 0.9f;
     #endregion
     #endregion
 
