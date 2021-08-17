@@ -82,13 +82,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
     private int MilMonumentPrevBonus = Constants.DEFAULT_MIL_MON_BONUS;
     private int FoodMonumentPrevBonus = Constants.DEFAULT_FOOD_MON_BONUS;
 
-    private int DiploMonumentCount = 0;
-    private int SciMonumentCount = 0;
-    private int HappMonumentCount = 0;
-    private int IndMonumentCount = 0;
-    private int IsoMonumentCount = 0;
-    private int MilMonumentCount = 0;
-    private int FoodMonumentCount = 0;
+    private int DiploMonumentCount = 1;
+    private int SciMonumentCount = 1;
+    private int HappMonumentCount = 1;
+    private int IndMonumentCount = 1;
+    private int IsoMonumentCount = 1;
+    private int MilMonumentCount = 1;
+    private int FoodMonumentCount = 1;
 
     private void Awake()
     {
@@ -1004,6 +1004,29 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
     public static int GetMonumentProduction(Enums.Building_Type type)
     {
+        switch (type)
+        {
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                return Instance.DiploMonumentPrevBonus;
+            case Enums.Building_Type.SCI_MONUMENT:
+                return Instance.SciMonumentPrevBonus;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                return Instance.HappMonumentPrevBonus;
+            case Enums.Building_Type.IND_MONUMENT:
+                return Instance.IndMonumentPrevBonus;
+            case Enums.Building_Type.ISO_MONUMENT:
+                return Instance.IsoMonumentPrevBonus;
+            case Enums.Building_Type.MIL_MONUMENT:
+                return Instance.MilMonumentPrevBonus;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                return Instance.FoodMonumentPrevBonus;
+            default:
+                return -1;//this is dangerous
+        }
+    }
+
+    public static int UpdateMonumentProduction(Enums.Building_Type type)
+    {
         switch (type)//Rand(PrevBonus * LowerBound, PrevBonus * UpperBound)
         {
             case Enums.Building_Type.DIPLO_MONUMENT://add to diplo cost modifier
@@ -1032,40 +1055,113 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.DIPLO_MONUMENT:
                 Constants.DiploMonumentCost.RequiredIndustry = Constants.DiploMonumentCost.RequiredIndustry + (Random.Range(Constants.DiploMonumentCost.RequiredIndustry, Constants.DiploMonumentCost.RequiredIndustry * 2) / Instance.DiploMonumentCount);
                 Constants.DiploMonumentCost.RequiredIsolium = Constants.DiploMonumentCost.RequiredIsolium + (Random.Range(Constants.DiploMonumentCost.RequiredIsolium, Constants.DiploMonumentCost.RequiredIsolium * 2) / Instance.DiploMonumentCount);
-                Instance.DiploMonumentCount++;
                 break;
             case Enums.Building_Type.SCI_MONUMENT:
                 Constants.SciMonumentCost.RequiredIndustry = Constants.SciMonumentCost.RequiredIndustry + (Random.Range(Constants.SciMonumentCost.RequiredIndustry, Constants.SciMonumentCost.RequiredIndustry * 2) / Instance.SciMonumentCount);
                 Constants.SciMonumentCost.RequiredIsolium = Constants.SciMonumentCost.RequiredIsolium + (Random.Range(Constants.SciMonumentCost.RequiredIsolium, Constants.SciMonumentCost.RequiredIsolium * 2) / Instance.SciMonumentCount);
-                Instance.SciMonumentCount++;
                 break;
             case Enums.Building_Type.HAPP_MONUMENT:
                 Constants.HappMonumentCost.RequiredFood = Constants.HappMonumentCost.RequiredFood + (Random.Range(Constants.HappMonumentCost.RequiredFood, Constants.HappMonumentCost.RequiredFood * 2) / Instance.HappMonumentCount);
                 Constants.HappMonumentCost.RequiredIndustry = Constants.HappMonumentCost.RequiredIndustry + (Random.Range(Constants.HappMonumentCost.RequiredIndustry, Constants.HappMonumentCost.RequiredIndustry * 2) / Instance.HappMonumentCount);
                 Constants.HappMonumentCost.RequiredIsolium = Constants.HappMonumentCost.RequiredIsolium + (Random.Range(Constants.HappMonumentCost.RequiredIsolium, Constants.HappMonumentCost.RequiredIsolium * 2) / Instance.HappMonumentCount);
-                Instance.HappMonumentCount++;
                 break;
             case Enums.Building_Type.IND_MONUMENT:
                 Constants.IndMonumentCost.RequiredIndustry = Constants.IndMonumentCost.RequiredIndustry + (Random.Range(Constants.IndMonumentCost.RequiredIndustry, Constants.IndMonumentCost.RequiredIndustry * 2) / Instance.IndMonumentCount);
                 Constants.IndMonumentCost.RequiredIsolium = Constants.IndMonumentCost.RequiredIsolium + (Random.Range(Constants.IndMonumentCost.RequiredIsolium, Constants.IndMonumentCost.RequiredIsolium * 2) / Instance.IndMonumentCount);
-                Instance.IndMonumentCount++;
                 break;
             case Enums.Building_Type.ISO_MONUMENT:
                 Constants.IsoMonumentCost.RequiredIndustry = Constants.IsoMonumentCost.RequiredIndustry + (Random.Range(Constants.IsoMonumentCost.RequiredIndustry, Constants.IsoMonumentCost.RequiredIndustry * 2) / Instance.IsoMonumentCount);
                 Constants.IsoMonumentCost.RequiredIsolium = Constants.IsoMonumentCost.RequiredIsolium + (Random.Range(Constants.IsoMonumentCost.RequiredIsolium, Constants.IsoMonumentCost.RequiredIsolium * 2) / Instance.IsoMonumentCount);
-                Instance.IsoMonumentCount++;
                 break;
             case Enums.Building_Type.MIL_MONUMENT:
                 Constants.MilMonumentCost.RequiredIndustry = Constants.MilMonumentCost.RequiredIndustry + (Random.Range(Constants.MilMonumentCost.RequiredIndustry, Constants.MilMonumentCost.RequiredIndustry * 2) / Instance.MilMonumentCount);
                 Constants.MilMonumentCost.RequiredIsolium = Constants.MilMonumentCost.RequiredIsolium + (Random.Range(Constants.MilMonumentCost.RequiredIsolium, Constants.MilMonumentCost.RequiredIsolium * 2) / Instance.MilMonumentCount);
                 Constants.MilMonumentCost.RequiredMilitary = Constants.MilMonumentCost.RequiredMilitary + (Random.Range(Constants.MilMonumentCost.RequiredMilitary, Constants.MilMonumentCost.RequiredMilitary * 2) / Instance.MilMonumentCount);
-                Instance.MilMonumentCount++;
                 break;
             case Enums.Building_Type.FOOD_MONUMENT:
                 Constants.FoodMonumentCost.RequiredFood = Constants.FoodMonumentCost.RequiredFood + (Random.Range(Constants.FoodMonumentCost.RequiredFood, Constants.FoodMonumentCost.RequiredFood * 2) / Instance.FoodMonumentCount);
                 Constants.FoodMonumentCost.RequiredIndustry = Constants.FoodMonumentCost.RequiredIndustry + (Random.Range(Constants.FoodMonumentCost.RequiredIndustry, Constants.FoodMonumentCost.RequiredIndustry * 2) / Instance.FoodMonumentCount);
                 Constants.FoodMonumentCost.RequiredIsolium = Constants.FoodMonumentCost.RequiredIsolium + (Random.Range(Constants.FoodMonumentCost.RequiredIsolium, Constants.FoodMonumentCost.RequiredIsolium * 2) / Instance.FoodMonumentCount);
-                Instance.FoodMonumentCount++;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void UpdateMonumentCount(Enums.Building_Type type, bool increase)
+    {
+        switch (type)
+        {
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                if(increase)
+                {
+                    Instance.DiploMonumentCount++;
+                }
+                else
+                {
+                    Instance.DiploMonumentCount--;
+                }
+                break;
+            case Enums.Building_Type.SCI_MONUMENT:
+                if (increase)
+                {
+                    Instance.SciMonumentCount++;
+                }
+                else
+                {
+                    Instance.SciMonumentCount--;
+                }
+                break;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                if (increase)
+                {
+                    Instance.HappMonumentCount++;
+                }
+                else
+                {
+                    Instance.HappMonumentCount--;
+                }
+                break;
+            case Enums.Building_Type.IND_MONUMENT:
+                if (increase)
+                {
+                    Instance.IndMonumentCount++;
+                }
+                else
+                {
+                    Instance.IndMonumentCount--;
+                }
+                break;
+            case Enums.Building_Type.ISO_MONUMENT:
+                if (increase)
+                {
+                    Instance.IsoMonumentCount++;
+                }
+                else
+                {
+                    Instance.IsoMonumentCount--;
+                }
+                break;
+            case Enums.Building_Type.MIL_MONUMENT:
+                if (increase)
+                {
+                    Instance.MilMonumentCount++;
+                }
+                else
+                {
+                    Instance.MilMonumentCount--;
+                }
+                
+                break;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                if (increase)
+                {
+                    Instance.FoodMonumentCount++;
+                }
+                else
+                {
+                    Instance.FoodMonumentCount--;
+                }
                 break;
             default:
                 break;

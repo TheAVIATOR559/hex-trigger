@@ -264,10 +264,143 @@ public class Building : MonoBehaviour
                     _ => Constants.ENTERTAINMENT_I_PROD,
                 };
             case Enums.Hex_Types.MONUMENT:
-                return Resource_Manager.GetMonumentProduction(Enums.HexTypeAndTierToBuildingType(type, tier));
             case Enums.Hex_Types.SPECIAL:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
+            default:
+                return 1;
+        }
+    }
+
+    public static int GetProductionValue(Enums.Building_Type type)
+    {
+        switch (type)
+        {
+            case Enums.Building_Type.GARDEN:
+                return Constants.FOOD_I_PROD;
+            case Enums.Building_Type.FARM:
+                return Constants.FOOD_II_PROD;
+            case Enums.Building_Type.ORCHARD:
+                return Constants.FOOD_III_PROD;
+            case Enums.Building_Type.RANCH:
+                return Constants.FOOD_IV_PROD;
+            case Enums.Building_Type.HYDROPONICS_TOWER:
+                return Constants.FOOD_V_PROD;
+            case Enums.Building_Type.HOVEL:
+                return Constants.HOUSING_I_PROD;
+            case Enums.Building_Type.COTTAGE:
+                return Constants.HOUSING_II_PROD;
+            case Enums.Building_Type.APARTMENT:
+                return Constants.HOUSING_III_PROD;
+            case Enums.Building_Type.CONDOMINIUM:
+                return Constants.HOUSING_IV_PROD;
+            case Enums.Building_Type.VILLA:
+                return Constants.HOUSING_V_PROD;
+            case Enums.Building_Type.WORKSHOP:
+                return Constants.INDUSTRY_I_PROD;
+            case Enums.Building_Type.FORGE:
+                return Constants.INDUSTRY_II_PROD;
+            case Enums.Building_Type.MILL:
+                return Constants.INDUSTRY_III_PROD;
+            case Enums.Building_Type.FOUNDRY:
+                return Constants.INDUSTRY_IV_PROD;
+            case Enums.Building_Type.FACTORY:
+                return Constants.INDUSTRY_V_PROD;
+            case Enums.Building_Type.BARRACKS:
+                return Constants.MILITARY_I_PROD;
+            case Enums.Building_Type.DORMITORY:
+                return Constants.MILITARY_II_PROD;
+            case Enums.Building_Type.GARRISON:
+                return Constants.MILITARY_III_PROD;
+            case Enums.Building_Type.QUARTERS:
+                return Constants.MILITARY_IV_PROD;
+            case Enums.Building_Type.HEADQUARTERS:
+                return Constants.MILITARY_V_PROD;
+            case Enums.Building_Type.RESEARCH_LAB:
+                return Constants.RESEARCH_I_PROD;
+            case Enums.Building_Type.RESEARCH_COLLEGE:
+                return Constants.RESEARCH_II_PROD;
+            case Enums.Building_Type.RESEARCH_INSTITUTE:
+                return Constants.RESEARCH_III_PROD;
+            case Enums.Building_Type.MULTIBRAIN_COMPLEX:
+                return Constants.RESEARCH_IV_PROD;
+            case Enums.Building_Type.QUANTUM_BRAIN:
+                return Constants.RESEARCH_V_PROD;
+            case Enums.Building_Type.EXTRACTOR_MK_I:
+                return Constants.ISOLIUM_I_PROD;
+            case Enums.Building_Type.EXTRACTOR_MK_II:
+                return Constants.ISOLIUM_II_PROD;
+            case Enums.Building_Type.EXTRACTOR_MK_III:
+                return Constants.ISOLIUM_III_PROD;
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
+                return Constants.ISOLIUM_IV_PROD;
+            case Enums.Building_Type.EXTRACTOR_MK_V:
+                return Constants.ISOLIUM_V_PROD;
+            case Enums.Building_Type.STOCKPILE:
+                return Constants.STORAGE_I_PROD;
+            case Enums.Building_Type.STOREHOUSE:
+                return Constants.STORAGE_II_PROD;
+            case Enums.Building_Type.WAREHOUSE:
+                return Constants.STORAGE_III_PROD;
+            case Enums.Building_Type.DEPOT:
+                return Constants.STORAGE_IV_PROD;
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
+                return Constants.STORAGE_V_PROD;
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+                return Constants.POWER_I_PROD;
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+                return Constants.POWER_II_PROD;
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+                return Constants.POWER_III_PROD;
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+                return Constants.POWER_IV_PROD;
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+                return Constants.POWER_V_PROD;
+            case Enums.Building_Type.PUBLIC_PARK:
+                return Constants.ENTERTAINMENT_I_PROD;
+            case Enums.Building_Type.CIRCUS:
+                return Constants.ENTERTAINMENT_II_PROD;
+            case Enums.Building_Type.THEATER_COMPLEX:
+                return Constants.ENTERTAINMENT_III_PROD;
+            case Enums.Building_Type.VIRTUAL_REALITY_CAFE:
+                return Constants.ENTERTAINMENT_IV_PROD;
+            case Enums.Building_Type.QUANTUM_HOLOGRAM_THEATER:
+                return Constants.ENTERTAINMENT_V_PROD;
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.DIPLO_MONUMENT);
+            case Enums.Building_Type.SCI_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.SCI_MONUMENT);
+            case Enums.Building_Type.HAPP_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.HAPP_MONUMENT);
+            case Enums.Building_Type.IND_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.IND_MONUMENT);
+            case Enums.Building_Type.ISO_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.ISO_MONUMENT);
+            case Enums.Building_Type.MIL_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.MIL_MONUMENT);
+            case Enums.Building_Type.FOOD_MONUMENT:
+                return Resource_Manager.GetMonumentProduction(Enums.Building_Type.FOOD_MONUMENT);
+            case Enums.Building_Type.GOD_SEAT:
+            case Enums.Building_Type.WATCHTOWER:
+            case Enums.Building_Type.MISSILE_COMPLEX:
+            case Enums.Building_Type.LASER_TOWER:
+            case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
+            case Enums.Building_Type.AUTO_LASER_TOWER:
+            case Enums.Building_Type.SHOOTING_RANGE:
+            case Enums.Building_Type.DEFENDERS_WALL:
+            case Enums.Building_Type.GUNNERS_ALLEY:
+            case Enums.Building_Type.SNIPERS_NEST:
+            case Enums.Building_Type.SCOUT_CAMP:
+            case Enums.Building_Type.ACES_ARENA:
+            case Enums.Building_Type.CANNONEERS_TOWER:
+            case Enums.Building_Type.GUARDIANS_LAST_STAND:
+            case Enums.Building_Type.VOID_PORTAL:
+            case Enums.Building_Type.VOID_COMMUNICATOR:
+            case Enums.Building_Type.VOID_RADAR_ARRAY:
+            case Enums.Building_Type.FACTION_EMBASSY:
+            case Enums.Building_Type.ABYSSAL_PATHFINDER:
+            case Enums.Building_Type.VOID_RUDDER:
+            case Enums.Building_Type.WEATHER_MANIPULATOR:
             default:
                 return 1;
         }
