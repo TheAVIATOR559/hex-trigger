@@ -98,7 +98,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
     }
 
-    private void Update()
+    private void Update()//DEV_TOOLS
     {
         if (Input.GetKeyDown(KeyCode.P))
         {

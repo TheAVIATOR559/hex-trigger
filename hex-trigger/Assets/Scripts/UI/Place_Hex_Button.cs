@@ -16,9 +16,17 @@ public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnClick()
     {
+        if(City_Manager.Instance.availbleHexPositions.Count < 1)
+        {
+            //flash god seat to show user that they need to upgrade the godseat
+            City_Manager.FlashGodSeat();
+            return;
+        }
+
         //highlight available hex locations
         City_Manager.ActivateAvailableHexHighlights();
 
+        //todo breaks on no empty hexes
         //instantiate hex blueprint based on hex type
         City_Manager.Instance.hexBlueprint = Instantiate(Prefab_Manager.GetHexPrefab(Enums.BuildingTypeToHexPrefab(buildingType)), Hex.GetWorldCoordFromHexCoord(City_Manager.Instance.availbleHexPositions[0]), Quaternion.Euler(-90, 0, 0)).AddComponent<Hex_Blueprint>();
 

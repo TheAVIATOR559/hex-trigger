@@ -14,6 +14,7 @@ public class City_Manager : Singleton<City_Manager>
     public Hex_Highlighter hexHighlight;
 
     private Hex GodSeat;
+    private Renderer GodSeatRend;
 
     private Battle_Map BattleMap;
 
@@ -47,14 +48,20 @@ public class City_Manager : Singleton<City_Manager>
                 if (i == 0 && j == 0)
                 {
                     newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex.Initialize(i, j);
+                    newHex.SetStandardMaterial();
+                }
+                else if(i == 1 && (j == 1 || j == -1))
+                {
+                    continue;
                 }
                 else
                 {
                     newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex.gameObject.name += " " + i + "::" + j;
+                    newHex.Initialize(i, j);
+                    newHex.SetStandardMaterial();
                 }
-
-                newHex.Initialize(i, j);
-                newHex.SetStandardMaterial();
             }
         }
     }
@@ -191,5 +198,37 @@ public class City_Manager : Singleton<City_Manager>
     public static void SetGodSeat(Hex godSeat)
     {
         Instance.GodSeat = godSeat;
+        Instance.GodSeatRend = godSeat.GetComponent<Renderer>();
+    }
+
+    private bool isGodSeatFlashing = false;
+
+    public static void FlashGodSeat()
+    {
+        //Debug.Log("firing");
+        if(!Instance.isGodSeatFlashing)
+        {
+            Instance.StartCoroutine(Instance.FlashYellow(Instance.GodSeatRend.material));
+        }
+    }
+
+    private IEnumerator FlashYellow(Material mat)
+    {
+        float endTime = Time.time + 1f;
+
+        isGodSeatFlashing = true;
+
+        while (Time.time < endTime)
+        {
+            //Debug.Log("Coroutine running");
+            mat.SetColor("_EmissionColor", Color.yellow);
+            yield return new WaitForSeconds(0.1f);
+            mat.SetColor("_EmissionColor", Color.black);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        mat.SetColor("_EmissionColor", Color.black);
+
+        isGodSeatFlashing = false;
     }
 }
