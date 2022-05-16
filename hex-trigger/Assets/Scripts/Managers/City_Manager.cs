@@ -58,7 +58,7 @@ public class City_Manager : Singleton<City_Manager>
                 else
                 {
                     newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
-                    newHex.gameObject.name += " " + i + "::" + j;
+                    //newHex.gameObject.name += " " + i + "::" + j;
                     newHex.Initialize(i, j);
                     newHex.SetStandardMaterial();
                 }

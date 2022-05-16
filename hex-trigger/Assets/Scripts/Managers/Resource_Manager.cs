@@ -317,7 +317,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         UI_Manager.UpdateUnitCountText();
     }
 
-    public static void AddProduction(Enums.Hex_Types type, int value)
+    public static void AddProduction(Enums.Hex_Types type, int value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
     {
         switch (type)
         {
@@ -344,9 +344,31 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.MaximumIndustry += value;
                 Instance.MaximumIsolium += value;
                 break;
+            case Enums.Hex_Types.MONUMENT://TODO THIS IS BREAKING SHIT
+                switch(monuType)
+                {
+                    case Enums.MonumentType.DIPLO:
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.SCI:
+                        Instance.ResearchProduction += value;
+                        break;
+                    case Enums.MonumentType.HAPP://todo this will be tricky
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.IND:
+                        Instance.IndustryProduction += value;
+                        break;
+                    case Enums.MonumentType.ISO:
+                        Instance.IsoliumProduction += value;
+                        break;
+                    case Enums.MonumentType.MIL://todo this will be tricky
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.FOOD:
+                        Instance.FoodProduction += value;
+                        break;
+                }
+                break;
             case Enums.Hex_Types.ENTERTAINMENT:
             case Enums.Hex_Types.SPECIAL:
-            case Enums.Hex_Types.MONUMENT:
             case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
@@ -355,7 +377,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
-    public static void RemoveProduction(Enums.Hex_Types type, int value)
+    public static void RemoveProduction(Enums.Hex_Types type, int value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
     {
         switch (type)
         {
@@ -452,6 +474,55 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Hex_Types.SPECIAL:
                 break;
             case Enums.Hex_Types.MONUMENT:
+                switch (monuType)
+                {
+                    case Enums.MonumentType.DIPLO:
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.SCI:
+                        if (Instance.ResearchProduction - value <= 0)
+                        {
+                            Instance.ResearchProduction = 0;
+                        }
+                        else
+                        {
+                            Instance.ResearchProduction -= value;
+                        }
+                        break;
+                    case Enums.MonumentType.HAPP://todo this will be tricky
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.IND:
+                        if (Instance.IndustryProduction - value <= 0)
+                        {
+                            Instance.IndustryProduction = 0;
+                        }
+                        else
+                        {
+                            Instance.IndustryProduction -= value;
+                        }
+                        break;
+                    case Enums.MonumentType.ISO:
+                        if (Instance.IsoliumProduction - value <= 0)
+                        {
+                            Instance.IsoliumProduction = 0;
+                        }
+                        else
+                        {
+                            Instance.IsoliumProduction -= value;
+                        }
+                        break;
+                    case Enums.MonumentType.MIL://todo this will be tricky
+                        throw new System.NotImplementedException();
+                    case Enums.MonumentType.FOOD:
+                        if (Instance.FoodProduction - value <= 0)
+                        {
+                            Instance.FoodProduction = 0;
+                        }
+                        else
+                        {
+                            Instance.FoodProduction -= value;
+                        }
+                        break;
+                }
                 break;
             case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
@@ -1044,7 +1115,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
             case Enums.Building_Type.FOOD_MONUMENT://add to food prod
                 return Instance.FoodMonumentPrevBonus = (int)Random.Range(Instance.FoodMonumentPrevBonus * Constants.MONUMENT_PRODUCTION_LOWER_BOUND, Instance.FoodMonumentPrevBonus * Constants.MONUMENT_PRODUCTION_UPPER_BOUND);
             default:
-                return 999;//this is dangerous
+                Debug.LogError("Monument Production Fallthrough Error");
+                return 0;
         }
     }
 

@@ -94,6 +94,7 @@ public class UI_Manager : Singleton<UI_Manager>
     private TMP_Text MaxHexRangeText;
 
     private GameObject currTierPanel;
+    private List<Button> hexTypeButtons = new List<Button>();
 
     private bool PopTextFlashing = false;
     private bool FoodTextFlashing = false;
@@ -192,6 +193,11 @@ public class UI_Manager : Singleton<UI_Manager>
         MaxGuardianCountText = CityOverviewPanel.transform.GetChild(12).GetChild(1).GetComponent<TMP_Text>();
         MaxHexRangeText = CityOverviewPanel.transform.GetChild(13).GetChild(1).GetComponent<TMP_Text>();
 
+        foreach(Transform child in HexTypePanel.transform)
+        {
+            hexTypeButtons.Add(child.GetComponent<Button>());
+        }
+
         ResetCityUIState();
     }
 
@@ -233,6 +239,14 @@ public class UI_Manager : Singleton<UI_Manager>
     public static void DisableHexTierPanel()
     {
         Instance.currTierPanel.SetActive(false);
+    }
+
+    public static void ReEnableHexTypeButtons()
+    {
+        foreach(Button buttton in Instance.hexTypeButtons)
+        {
+            buttton.interactable = true;
+        }
     }
 
     public static void EnableBuildInfoPanel()

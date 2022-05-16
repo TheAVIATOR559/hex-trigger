@@ -85,6 +85,7 @@ public class Hex_Blueprint : MonoBehaviour
         City_Manager.Instance.hexBlueprint = null;
 
         UI_Manager.DisableHexTierPanel();
+        UI_Manager.ReEnableHexTypeButtons();
 
         //reenable the collider
         collider.enabled = true;

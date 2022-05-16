@@ -275,6 +275,17 @@ public static class Enums
         GUARDIAN
     }
 
+    public enum MonumentType
+    {
+        DIPLO,
+        SCI,
+        HAPP,
+        IND,
+        ISO,
+        MIL,
+        FOOD
+    }
+
     public static Building_Type HexTypeAndTierToBuildingType(Hex_Types hex, Building_Tier tier)//todo WILL NEED AN OVERRIDE FOR MONUMENTS AND SPECIAL
     {
         return hex switch

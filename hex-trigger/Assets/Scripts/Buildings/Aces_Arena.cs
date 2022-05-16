@@ -16,6 +16,7 @@ public class Aces_Arena : Building_Military
 
     public override void Initalize()
     {
+        base.Initalize();
         AddToResourceProduction();
     }
 

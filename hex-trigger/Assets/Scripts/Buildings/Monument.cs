@@ -6,11 +6,21 @@ public class Monument : Building
 {
     //todo test
 
+    [SerializeField] private Enums.MonumentType monumentType;
+
+    private bool adjProdCreated = false;
+
     public override void Initalize()
     {
-        AdjustedProduction = Resource_Manager.UpdateMonumentProduction(BuildingType);
-        Resource_Manager.UpdateMonumentCost(BuildingType);
-        Resource_Manager.UpdateMonumentCount(BuildingType, true);
+        base.Initalize();
+
+        if(!adjProdCreated)
+        {
+            AdjustedProduction = Resource_Manager.UpdateMonumentProduction(BuildingType);
+            Resource_Manager.UpdateMonumentCost(BuildingType);
+            Resource_Manager.UpdateMonumentCount(BuildingType, true);
+            adjProdCreated = true;
+        }
     }
 
     public override void DetermineBuildingTier()
@@ -25,11 +35,22 @@ public class Monument : Building
 
     protected override void AddToResourceProduction()
     {
-        Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
+        if(adjProdCreated)
+        {
+            Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction), monumentType);
+        }
+        else
+        {
+            AdjustedProduction = Resource_Manager.UpdateMonumentProduction(BuildingType);
+            Resource_Manager.UpdateMonumentCost(BuildingType);
+            Resource_Manager.UpdateMonumentCount(BuildingType, true);
+            Resource_Manager.AddProduction(HexType, Mathf.RoundToInt(AdjustedProduction), monumentType);
+            adjProdCreated = true;
+        }
     }
 
     protected override void RemoveFromResourceProduction()
     {
-        Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(AdjustedProduction));
+        Resource_Manager.RemoveProduction(HexType, Mathf.RoundToInt(AdjustedProduction), monumentType);
     }
 }
