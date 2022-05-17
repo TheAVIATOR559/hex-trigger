@@ -19,6 +19,8 @@ public class Building : MonoBehaviour
 
     private Enums.Building_Tier prevTier;
 
+    private BuildingUpkeep upkeep;
+
     private void Awake()
     {
         connectedHex = GetComponent<Hex>();
@@ -31,6 +33,8 @@ public class Building : MonoBehaviour
 
         Event_Manager.TriggerEvent(Events.ADD_POWER_DISTRIBUTION, eventParam);
     }
+
+
 
     public virtual void DetermineBuildingTier()
     {
@@ -403,6 +407,126 @@ public class Building : MonoBehaviour
             case Enums.Building_Type.WEATHER_MANIPULATOR:
             default:
                 return 1;
+        }
+    }
+
+    public static BuildingUpkeep GetUpkeepCosts(Enums.Building_Type type)
+    {
+        switch (type)
+        {
+            case Enums.Building_Type.GARDEN:
+                return Constants.GardenUpkeep;
+            case Enums.Building_Type.FARM:
+                return Constants.FarmUpkeep;
+            case Enums.Building_Type.ORCHARD:
+                return Constants.OrchardUpkeep;
+            case Enums.Building_Type.RANCH:
+                return Constants.RanchUpkeep;
+            case Enums.Building_Type.HOVEL:
+                return Constants.HovelUpkeep;
+            case Enums.Building_Type.COTTAGE:
+                return Constants.CottageUpkeep;
+            case Enums.Building_Type.APARTMENT:
+                return Constants.ApartmentUpkeep;
+            case Enums.Building_Type.CONDOMINIUM:
+                return Constants.CondoUpkeep;
+            case Enums.Building_Type.WORKSHOP:
+                return Constants.WorkshopUpkeep;
+            case Enums.Building_Type.FORGE:
+                return Constants.ForgeUpkeep;
+            case Enums.Building_Type.MILL:
+                return Constants.MillUpkeep;
+            case Enums.Building_Type.FOUNDRY:
+                return Constants.FoundryUpkeep;
+            case Enums.Building_Type.BARRACKS:
+                return Constants.BarracksUpkeep;
+            case Enums.Building_Type.DORMITORY:
+                return Constants.DormitoryUpkeep;
+            case Enums.Building_Type.GARRISON:
+                return Constants.GardenUpkeep;
+            case Enums.Building_Type.QUARTERS:
+                return Constants.QuartersUpkeep;
+            case Enums.Building_Type.SHOOTING_RANGE:
+                return Constants.ShootingRangeUpkeep;
+            case Enums.Building_Type.DEFENDERS_WALL:
+                return Constants.DefendersWallUpkeep;
+            case Enums.Building_Type.GUNNERS_ALLEY:
+                return Constants.GunnersAlleyUpkeep;
+            case Enums.Building_Type.SNIPERS_NEST:
+                return Constants.SnipersNestUpkeep;
+            case Enums.Building_Type.SCOUT_CAMP:
+                return Constants.ScoutCampUpkeep;
+            case Enums.Building_Type.ACES_ARENA:
+                return Constants.AcesArenaUpkeep;
+            case Enums.Building_Type.CANNONEERS_TOWER:
+                return Constants.CannoneersTowerUpkeep;
+            case Enums.Building_Type.GUARDIANS_LAST_STAND:
+                return Constants.GuardiansLastStandUpkeep;
+            case Enums.Building_Type.WATCHTOWER:
+                return Constants.WatchTowerUpkeep;
+            case Enums.Building_Type.MISSILE_COMPLEX:
+                return Constants.MissileComplexUpkeep;
+            case Enums.Building_Type.LASER_TOWER:
+                return Constants.LaserTowerUpkeep;
+            case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
+                return Constants.AutoMissileComplexUpkeep;
+            case Enums.Building_Type.AUTO_LASER_TOWER:
+                return Constants.AutoLaserTowerUpkeep;
+            case Enums.Building_Type.RESEARCH_LAB:
+                return Constants.ResearchLabUpkeep;
+            case Enums.Building_Type.RESEARCH_COLLEGE:
+                return Constants.ResearchCollegeUpkeep;
+            case Enums.Building_Type.RESEARCH_INSTITUTE:
+                return Constants.ResearchInstituteUpkeep;
+            case Enums.Building_Type.MULTIBRAIN_COMPLEX:
+                return Constants.MultiBrainUpkeep;
+            case Enums.Building_Type.PUBLIC_PARK:
+                return Constants.PublicParkUpkeep;
+            case Enums.Building_Type.CIRCUS:
+                return Constants.CircusUpkeep;
+            case Enums.Building_Type.THEATER_COMPLEX:
+                return Constants.TheaterUpkeep;
+            case Enums.Building_Type.VIRTUAL_REALITY_CAFE:
+                return Constants.VirtualRealityCafeUpkeep;
+
+            case Enums.Building_Type.HYDROPONICS_TOWER:
+            case Enums.Building_Type.VILLA:
+            case Enums.Building_Type.FACTORY:
+            case Enums.Building_Type.HEADQUARTERS:
+            case Enums.Building_Type.QUANTUM_BRAIN:
+            case Enums.Building_Type.EXTRACTOR_MK_I:
+            case Enums.Building_Type.EXTRACTOR_MK_II:
+            case Enums.Building_Type.EXTRACTOR_MK_III:
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
+            case Enums.Building_Type.EXTRACTOR_MK_V:
+            case Enums.Building_Type.STOCKPILE:
+            case Enums.Building_Type.STOREHOUSE:
+            case Enums.Building_Type.WAREHOUSE:
+            case Enums.Building_Type.DEPOT:
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+            case Enums.Building_Type.QUANTUM_HOLOGRAM_THEATER:
+            case Enums.Building_Type.DIPLO_MONUMENT:
+            case Enums.Building_Type.SCI_MONUMENT:
+            case Enums.Building_Type.HAPP_MONUMENT:
+            case Enums.Building_Type.IND_MONUMENT:
+            case Enums.Building_Type.ISO_MONUMENT:
+            case Enums.Building_Type.MIL_MONUMENT:
+            case Enums.Building_Type.FOOD_MONUMENT:
+            case Enums.Building_Type.GOD_SEAT:
+            case Enums.Building_Type.VOID_PORTAL:
+            case Enums.Building_Type.VOID_COMMUNICATOR:
+            case Enums.Building_Type.VOID_RADAR_ARRAY:
+            case Enums.Building_Type.FACTION_EMBASSY:
+            case Enums.Building_Type.ABYSSAL_PATHFINDER:
+            case Enums.Building_Type.VOID_RUDDER:
+            case Enums.Building_Type.WEATHER_MANIPULATOR:
+            default:
+                return new BuildingUpkeep(0,0,0);
         }
     }
 }

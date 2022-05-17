@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Faction_Embassy : Building
 {
-    //todo implementation
 
     public override void DetermineBuildingTier()
     {

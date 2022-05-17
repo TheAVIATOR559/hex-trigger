@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Abyssal_Pathfinder : Building
-{
-    //todo implementation
+{ 
 
     public override void DetermineBuildingTier()
     {

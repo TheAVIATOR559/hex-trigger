@@ -59,7 +59,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public float SniperTrainingCostReduction = 1;
     public float ScoutTrainingCostReduction = 1;
 
-    public bool ResourcesTickPaused = false;
+    public bool ResourcesTickPaused = true;
 
     public int GodSeatLevel = 1;
     public int GodSeatUpgradeIsoliumCost = Constants.DEFAULT_GOD_SEAT_ISO_COST;
@@ -90,6 +90,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
     private int MilMonumentCount = 1;
     private int FoodMonumentCount = 1;
 
+    [SerializeField] private float TimeSinceLastTick;
+
     private void Awake()
     {
         PrevGodSeatIsoliumCost = Instance.GodSeatUpgradeIsoliumCost;
@@ -98,15 +100,38 @@ public class Resource_Manager : Singleton<Resource_Manager>
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
     }
 
-    private void Update()//DEV_TOOLS
+    private void Update()
     {
+        if(Event_Manager.IsGamePaused)
+        {
+            return;
+        }    
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             DEV_MaxOutResources();
         }
+
+        if (!ResourcesTickPaused)
+        {
+            if(TimeSinceLastTick >= 1f)
+            {
+                //Debug.Log("Ticking Resources");
+                AddProductionResources();
+                AddPopulation();
+                AddResearchProgress();
+                UI_Manager.UpdateResourcesText();
+                TimeSinceLastTick = 0f;
+            }
+            else
+            {
+                TimeSinceLastTick += Time.deltaTime;
+            }
+            
+        }
     }
 
-    public static void DEV_MaxOutResources()
+    public static void DEV_MaxOutResources()//DEV TOOLS
     {
         Instance.CurrentFood = 1000;
         Instance.MaximumFood = 1000;
@@ -344,7 +369,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.MaximumIndustry += value;
                 Instance.MaximumIsolium += value;
                 break;
-            case Enums.Hex_Types.MONUMENT://TODO THIS IS BREAKING SHIT
+            case Enums.Hex_Types.MONUMENT:
                 switch(monuType)
                 {
                     case Enums.MonumentType.DIPLO:
@@ -1007,26 +1032,9 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
-    private IEnumerator TickResources()
-    {
-        while (true)
-        {
-            if (!ResourcesTickPaused || !Event_Manager.IsGamePaused)
-            {
-                //Debug.Log("Ticking Resources");
-                AddProductionResources();
-                AddPopulation();
-                AddResearchProgress();
-                UI_Manager.UpdateResourcesText();
-            }
-
-            yield return new WaitForSeconds(Constants.TICK_SPEED);
-        }
-    }
-
     public static void StartResourcesTick()
     {
-        Instance.StartCoroutine(Instance.TickResources());
+        Instance.ResourcesTickPaused = false;
     }
 
     public static void PauseResourcesTick()
@@ -1037,11 +1045,6 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public static void UnpauseResourcesTick()
     {
         Instance.ResourcesTickPaused = false;
-    }
-
-    public static void StopResourcesTick()
-    {
-        Instance.StopCoroutine(Instance.TickResources());
     }
 
     public static void UpgradeGodSeat()

@@ -27,7 +27,7 @@ public static class Constants
     public static float HEX_X_OFFSET = 0.866f;
     public static float HEX_Y_OFFSET = 0.75f;
 
-    public static float TICK_SPEED = 1f;
+    public static int TICK_SPEED = 1;
 
     public static int HEX_RANGE_UPGRADE = 2;
     public static int DEFAULT_HEX_RADIUS = 3;
@@ -133,6 +133,61 @@ public static class Constants
     public static BuildingCost AbyssalPathfinderCost = new BuildingCost(0, 0, 100, 100, 0);
     public static BuildingCost VoidRudderCost = new BuildingCost(0, 0, 50, 50, 0);
     public static BuildingCost WeatherManipulatorCost = new BuildingCost(0, 0, 50, 50, 0);
+    #endregion
+    #endregion
+
+    #region Building Upkeep Values  
+    #region Food
+    public static BuildingUpkeep GardenUpkeep = new BuildingUpkeep(0, 0.5f, 0.5f);//TODO IMPLEMENT THESE
+    public static BuildingUpkeep FarmUpkeep = new BuildingUpkeep(0, 1f, 1f);
+    public static BuildingUpkeep OrchardUpkeep = new BuildingUpkeep(0, 1.5f, 1.5f);
+    public static BuildingUpkeep RanchUpkeep = new BuildingUpkeep(0, 2f, 2f);
+    #endregion
+    #region Housing
+    public static BuildingUpkeep HovelUpkeep = new BuildingUpkeep(0.75f, 0, 0);
+    public static BuildingUpkeep CottageUpkeep = new BuildingUpkeep(1.5f, 0, 0);
+    public static BuildingUpkeep ApartmentUpkeep = new BuildingUpkeep(2.25f, 0, 0);
+    public static BuildingUpkeep CondoUpkeep = new BuildingUpkeep(3f, 0, 0);
+    #endregion
+    #region Industry
+    public static BuildingUpkeep WorkshopUpkeep = new BuildingUpkeep(0, 0, 0.75f);
+    public static BuildingUpkeep ForgeUpkeep = new BuildingUpkeep(0, 0, 1.5f);
+    public static BuildingUpkeep MillUpkeep = new BuildingUpkeep(0, 0, 2.25f);
+    public static BuildingUpkeep FoundryUpkeep = new BuildingUpkeep(0, 0, 3);
+    #endregion
+    #region Military
+    public static BuildingUpkeep BarracksUpkeep = new BuildingUpkeep(0.5f, 0.75f, 0.75f);
+    public static BuildingUpkeep DormitoryUpkeep = new BuildingUpkeep(1, 1.5f, 1.5f);
+    public static BuildingUpkeep GarrisonUpkeep = new BuildingUpkeep(1.5f, 2.25f, 2.25f);
+    public static BuildingUpkeep QuartersUpkeep = new BuildingUpkeep(2, 3, 3);
+
+    public static BuildingUpkeep ShootingRangeUpkeep = new BuildingUpkeep(0.75f, 1, 1);
+    public static BuildingUpkeep DefendersWallUpkeep = new BuildingUpkeep(1, 1.5f, 1.5f);
+    public static BuildingUpkeep GunnersAlleyUpkeep = new BuildingUpkeep(1, 1.5f, 1.5f);
+    public static BuildingUpkeep SnipersNestUpkeep = new BuildingUpkeep(1.5f, 2, 2);
+    public static BuildingUpkeep ScoutCampUpkeep = new BuildingUpkeep(1.5f, 2, 2);
+    public static BuildingUpkeep AcesArenaUpkeep = new BuildingUpkeep(2, 3, 3);
+    public static BuildingUpkeep CannoneersTowerUpkeep = new BuildingUpkeep(2, 3, 3);
+    public static BuildingUpkeep GuardiansLastStandUpkeep = new BuildingUpkeep(2, 3, 3);
+    #endregion
+    #region Defense
+    public static BuildingUpkeep WatchTowerUpkeep = new BuildingUpkeep(0.5f, 0.5f, 0.5f);
+    public static BuildingUpkeep MissileComplexUpkeep = new BuildingUpkeep(1, 1, 1);
+    public static BuildingUpkeep LaserTowerUpkeep = new BuildingUpkeep(1.5f, 1.5f, 1.5f);
+    public static BuildingUpkeep AutoMissileComplexUpkeep = new BuildingUpkeep(0, 2, 2);
+    public static BuildingUpkeep AutoLaserTowerUpkeep = new BuildingUpkeep(0, 2.5f, 2.5f);
+    #endregion
+    #region Research
+    public static BuildingUpkeep ResearchLabUpkeep = new BuildingUpkeep(0, 0, 0.5f);
+    public static BuildingUpkeep ResearchCollegeUpkeep = new BuildingUpkeep(0, 0, 1);
+    public static BuildingUpkeep ResearchInstituteUpkeep = new BuildingUpkeep(0, 0, 1.5f);
+    public static BuildingUpkeep MultiBrainUpkeep = new BuildingUpkeep(0, 0, 2);
+    #endregion
+    #region Entertainment
+    public static BuildingUpkeep PublicParkUpkeep = new BuildingUpkeep(0.5f, 0, 0.5f);
+    public static BuildingUpkeep CircusUpkeep = new BuildingUpkeep(1, 0, 0.5f);
+    public static BuildingUpkeep TheaterUpkeep = new BuildingUpkeep(0.5f, 0, 1.5f);
+    public static BuildingUpkeep VirtualRealityCafeUpkeep = new BuildingUpkeep(0.5f, 0, 2);
     #endregion
     #endregion
 
@@ -482,7 +537,7 @@ public static class Constants
 
 }
 
-//new BuildingCost(POP, FOOD, ISO, IND, MIL)
+//new BuildingCost(FOOD, ISO, IND)
 public struct BuildingCost
 {
 
@@ -523,6 +578,31 @@ public struct BuildingCost
         RequiredIndustry = industry;
         RequiredIsolium = isolium;
         RequiredMilitary = military;
+    }
+}
+
+public struct BuildingUpkeep
+{
+    public float RequiredFood
+    {
+        get;
+    }
+
+    public float RequiredIndustry
+    {
+        get;
+    }
+
+    public float RequiredIsolium
+    {
+        get;
+    }
+
+    public BuildingUpkeep(float food, float industry, float isolium)
+    {
+        RequiredFood = food;
+        RequiredIndustry = industry;
+        RequiredIsolium = isolium;
     }
 }
 

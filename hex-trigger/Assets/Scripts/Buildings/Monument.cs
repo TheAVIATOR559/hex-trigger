@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Monument : Building
 {
-    //todo test
 
     [SerializeField] private Enums.MonumentType monumentType;
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Void_Rudder : Building
 {
-    //todo implementation
 
     public override void DetermineBuildingTier()
     {

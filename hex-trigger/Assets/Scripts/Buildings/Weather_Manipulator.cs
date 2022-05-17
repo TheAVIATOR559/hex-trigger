@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weather_Manipulator : Building
 {
-    //todo implementation
 
     public override void DetermineBuildingTier()
     {

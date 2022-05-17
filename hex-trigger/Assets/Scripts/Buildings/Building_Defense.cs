@@ -18,5 +18,5 @@ public class Building_Defense : Building
         //short circuiting parent method
     }
 
-    //todo defense implementation
+
 }

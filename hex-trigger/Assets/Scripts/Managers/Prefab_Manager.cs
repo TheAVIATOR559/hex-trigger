@@ -15,7 +15,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         LoadImages();
     }
 
-    //todo remove unbuildable hexes?
+    // remove unbuildable hexes?
     private void LoadHexPrefabs()
     {
         hexes.Add(Enums.Hex_Prefabs.HEX_GHOST, Resources.Load<GameObject>("Prefabs/Hexes/Ghost Hex"));

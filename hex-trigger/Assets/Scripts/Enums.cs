@@ -125,12 +125,12 @@ public static class Enums
         MODEL_VIRTUAL_REALITY_CAFE,
         MODEL_QUANTUM_HOLOGRAM_THEATER,
         MODEL_DIPLO_MONUMENT,//TODO IMPLEMENT ME THIS MAY BE MORE COMPLICATED THAN I WANT
-        MODEL_SCI_MONUMENT,//TODO IMPLEMENT ME
-        MODEL_HAPP_MONUMENT,//TODO IMPLEMENT ME
-        MODEL_IND_MONUMENT,//TODO IMPLEMENT ME
-        MODEL_ISO_MONUMENT,//TODO IMPLEMENT ME
-        MODEL_MIL_MONUMENT,//TODO IMPLEMENT ME
-        MODEL_FOOD_MONUMENT//TODO IMPLEMENT ME
+        MODEL_SCI_MONUMENT,
+        MODEL_HAPP_MONUMENT,
+        MODEL_IND_MONUMENT,
+        MODEL_ISO_MONUMENT,
+        MODEL_MIL_MONUMENT,
+        MODEL_FOOD_MONUMENT
     }
 
     public enum Images
@@ -550,7 +550,7 @@ public static class Enums
                 return Model_Prefabs.MODEL_VIRTUAL_REALITY_CAFE;
             case Building_Type.QUANTUM_HOLOGRAM_THEATER:
                 return Model_Prefabs.MODEL_QUANTUM_HOLOGRAM_THEATER;
-            case Building_Type.DIPLO_MONUMENT://TODO monument stuff
+            case Building_Type.DIPLO_MONUMENT:
                 throw new System.NotImplementedException();
             case Building_Type.SCI_MONUMENT:
                 throw new System.NotImplementedException();

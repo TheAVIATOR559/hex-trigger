@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Void_Radar_Array : Building
 {
-    //todo implementation
+
 
     public override void DetermineBuildingTier()
     {

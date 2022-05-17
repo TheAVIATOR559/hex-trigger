@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Void_Portal : Building
 {
-    //todo implementation
 
     public override void DetermineBuildingTier()
     {
