@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Building : MonoBehaviour
 {
@@ -15,14 +16,18 @@ public class Building : MonoBehaviour
     [SerializeField] protected GameObject model;
 
     public float AdjustedProduction = 0;
+    protected float ReducedProduction = 0;
+    protected float FullProduction = 0;
     public float BonusFromNeighbors = 1;
 
     private Enums.Building_Tier prevTier;
 
     private BuildingUpkeep upkeep;
+    private Action<EventParam> UpkeepTickListener;
 
     private void Awake()
     {
+
         connectedHex = GetComponent<Hex>();
     }
 
@@ -32,9 +37,11 @@ public class Building : MonoBehaviour
         eventParam.hex = connectedHex;
 
         Event_Manager.TriggerEvent(Events.ADD_POWER_DISTRIBUTION, eventParam);
+
+        upkeep = GetUpkeepCosts(BuildingType);
+        UpkeepTickListener = new Action<EventParam>(TickUpkeep);
+        Event_Manager.AddListener(Events.TICK_UPKEEP, UpkeepTickListener);
     }
-
-
 
     public virtual void DetermineBuildingTier()
     {
@@ -103,6 +110,8 @@ public class Building : MonoBehaviour
 
         RemoveFromResourceProduction();
         AdjustedProduction = GetProductionValue(BuildingTier, HexType);
+        ReducedProduction = AdjustedProduction * Constants.REDUCED_PRODUCTION_PERCENT;
+        FullProduction = AdjustedProduction;
 
         foreach(Hex neighbor in connectedHex.Neighbors)
         {
@@ -153,6 +162,25 @@ public class Building : MonoBehaviour
             RemoveFromResourceProduction();
         }
     }    
+
+    protected void TickUpkeep(EventParam eventParam)
+    {
+        RemoveFromResourceProduction();
+
+        if (Resource_Manager.HaveUpkeepCosts(upkeep))
+        {
+            Resource_Manager.DeductResources(upkeep);
+            AdjustedProduction = FullProduction;
+            
+        }
+        else
+        {
+            Debug.Log("lowering production");
+            AdjustedProduction = ReducedProduction;
+        }
+
+        AddToResourceProduction();
+    }
 
     public static float GetProductionBonus(Enums.Building_Tier tier)
     {

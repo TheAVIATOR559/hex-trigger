@@ -48,10 +48,10 @@ public class Resource_Manager : Singleton<Resource_Manager>
     public int CannoneerCount;
     public int GuardianCount;
 
-    public int FoodProduction = 0;
-    public int IndustryProduction = 0;
-    public int IsoliumProduction = 0;
-    public int ResearchProduction = 0;
+    public float FoodProduction = 0;
+    public float IndustryProduction = 0;
+    public float IsoliumProduction = 0;
+    public float ResearchProduction = 0;
     public int PopulationGrowthRate = 0;
     public float ShooterTrainingCostReduction = 1;
     public float DefenderTrainingCostReduction = 1;
@@ -90,7 +90,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
     private int MilMonumentCount = 1;
     private int FoodMonumentCount = 1;
 
-    [SerializeField] private float TimeSinceLastTick;
+    private float AddResourcesTick;
+    [SerializeField]private float UpkeepTick;
 
     private void Awake()
     {
@@ -100,7 +101,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
     }
 
-    private void Update()
+    private void Update()//TODO DETERMINE TICK RATE FOR UPKEEP
     {
         if(Event_Manager.IsGamePaused)
         {
@@ -114,20 +115,30 @@ public class Resource_Manager : Singleton<Resource_Manager>
 
         if (!ResourcesTickPaused)
         {
-            if(TimeSinceLastTick >= 1f)
+            if(AddResourcesTick >= 1f / Constants.TICK_SPEED)
             {
                 //Debug.Log("Ticking Resources");
                 AddProductionResources();
                 AddPopulation();
                 AddResearchProgress();
                 UI_Manager.UpdateResourcesText();
-                TimeSinceLastTick = 0f;
+                AddResourcesTick = 0f;
             }
             else
             {
-                TimeSinceLastTick += Time.deltaTime;
+                AddResourcesTick += Time.deltaTime;
             }
             
+            if(UpkeepTick >= 60f / Constants.TICK_SPEED)
+            {
+                Event_Manager.TriggerEvent(Events.TICK_UPKEEP);
+                UpkeepTick = 0f;
+            }
+            else
+            {
+                UpkeepTick += Time.deltaTime;
+            }
+
         }
     }
 
@@ -141,6 +152,26 @@ public class Resource_Manager : Singleton<Resource_Manager>
         Instance.CurrentIsolium = 1000;
         //Instance.CurrentMilitary = 1000;
         Instance.MaximumMilitary = 1000;
+    }
+
+    public static bool HaveUpkeepCosts(BuildingUpkeep upkeep)
+    {
+        if(upkeep.RequiredFood > Instance.CurrentFood)
+        {
+            return false;
+        }
+
+        if(upkeep.RequiredIndustry > Instance.CurrentIndustry)
+        {
+            return false;
+        }
+
+        if(upkeep.RequiredIsolium > Instance.CurrentIsolium)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public static bool HaveRequiredBuildingCosts(BuildingCost cost)
@@ -342,7 +373,46 @@ public class Resource_Manager : Singleton<Resource_Manager>
         UI_Manager.UpdateUnitCountText();
     }
 
-    public static void AddProduction(Enums.Hex_Types type, int value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
+    private int FoodUpkeepDecimal;
+    private int IndustryUpkeepDecimal;
+    private int IsoliumUpkeepDecimal;
+
+    public static void DeductResources(BuildingUpkeep upkeep)
+    {
+        Instance.FoodUpkeepDecimal += (int)(upkeep.RequiredFood * 100);
+        Instance.IndustryUpkeepDecimal += (int)(upkeep.RequiredIndustry * 100);
+        Instance.IsoliumUpkeepDecimal += (int)(upkeep.RequiredIsolium * 100);
+
+        Debug.Log("----TICKING UPKEEP----");
+
+        Debug.Log("FOOD DECIMAL " + Instance.FoodUpkeepDecimal + " :: " + (int)(upkeep.RequiredFood * 100));
+        if (Instance.FoodUpkeepDecimal >= 100)
+        {
+            Instance.FoodUpkeepDecimal -= 100;
+            Instance.CurrentFood--;
+            Debug.Log("FOOD DECIMAL " + Instance.FoodUpkeepDecimal + " :: CURRENT FOOD " + Instance.CurrentFood);
+        }
+
+        Debug.Log("INDUSTRY DECIMAL " + Instance.IndustryUpkeepDecimal + " :: " + (int)(upkeep.RequiredIndustry * 100));
+        if (Instance.IndustryUpkeepDecimal >= 100)
+        {
+            Instance.IndustryUpkeepDecimal -= 100;
+            Instance.CurrentIndustry--;
+            Debug.Log("INDUSTRY DECIMAL " + Instance.IndustryUpkeepDecimal + " :: CURRENT INDUSTRY " + Instance.CurrentIndustry);
+        }
+
+        Debug.Log("ISOLIUM DECIMAL " + Instance.IsoliumUpkeepDecimal + " :: " + (int)(upkeep.RequiredIsolium * 100));
+        if (Instance.IsoliumUpkeepDecimal >= 100)
+        {
+            Instance.IsoliumUpkeepDecimal -= 100;
+            Instance.CurrentIsolium--;
+            Debug.Log("ISOLIUM DECIMAL " + Instance.IsoliumUpkeepDecimal + " :: CURRENT ISOLIUM " + Instance.CurrentIsolium);
+        }
+
+        UI_Manager.UpdateResourcesText();
+    }
+
+    public static void AddProduction(Enums.Hex_Types type, float value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
     {
         switch (type)
         {
@@ -350,13 +420,13 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.FoodProduction += value;
                 break;
             case Enums.Hex_Types.HOUSING:
-                Instance.MaximumPopulation += value;
+                Instance.MaximumPopulation += (int)value;
                 break;
             case Enums.Hex_Types.INDUSTRY:
                 Instance.IndustryProduction += value;
                 break;
             case Enums.Hex_Types.MILITARY:
-                Instance.MaximumMilitary += value;
+                Instance.MaximumMilitary += (int)value;
                 break;
             case Enums.Hex_Types.RESEARCH:
                 Instance.ResearchProduction += value;
@@ -365,9 +435,9 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 Instance.IsoliumProduction += value;
                 break;
             case Enums.Hex_Types.STORAGE:
-                Instance.MaximumFood += value;
-                Instance.MaximumIndustry += value;
-                Instance.MaximumIsolium += value;
+                Instance.MaximumFood += (int)value;
+                Instance.MaximumIndustry += (int)value;
+                Instance.MaximumIsolium += (int)value;
                 break;
             case Enums.Hex_Types.MONUMENT:
                 switch(monuType)
@@ -402,7 +472,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
-    public static void RemoveProduction(Enums.Hex_Types type, int value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
+    public static void RemoveProduction(Enums.Hex_Types type, float value, Enums.MonumentType monuType = Enums.MonumentType.DIPLO)
     {
         switch (type)
         {
@@ -423,7 +493,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.MaximumPopulation -= value;
+                    Instance.MaximumPopulation -= (int)value;
                 }
                 break;
             case Enums.Hex_Types.INDUSTRY:
@@ -433,7 +503,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.IndustryProduction -= value;
+                    Instance.IndustryProduction -= (int)value;
                 }
                 break;
             case Enums.Hex_Types.MILITARY:
@@ -443,7 +513,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.MaximumMilitary -= value;
+                    Instance.MaximumMilitary -= (int)value;
                 }
                 break;
             case Enums.Hex_Types.RESEARCH:
@@ -473,7 +543,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.MaximumFood -= value;
+                    Instance.MaximumFood -= (int)value;
                 }
 
                 if (Instance.MaximumIndustry - value <= 0)
@@ -482,7 +552,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.MaximumIndustry -= value;
+                    Instance.MaximumIndustry -= (int)value;
                 }
 
                 if (Instance.MaximumIsolium - value <= 0)
@@ -491,12 +561,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
                 }
                 else
                 {
-                    Instance.MaximumIsolium -= value;
+                    Instance.MaximumIsolium -= (int)value;
                 }
-                break;
-            case Enums.Hex_Types.ENTERTAINMENT:
-                break;
-            case Enums.Hex_Types.SPECIAL:
                 break;
             case Enums.Hex_Types.MONUMENT:
                 switch (monuType)
@@ -549,6 +615,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
                         break;
                 }
                 break;
+            case Enums.Hex_Types.ENTERTAINMENT:
+            case Enums.Hex_Types.SPECIAL:
             case Enums.Hex_Types.POWER:
             case Enums.Hex_Types.DEFENSE:
             case Enums.Hex_Types.GOD_SEAT:
@@ -963,31 +1031,62 @@ public class Resource_Manager : Singleton<Resource_Manager>
         }
     }
 
-    private void AddProductionResources()
+    private int FoodProdDecimal;
+    private int IndustryProdDecimal;
+    private int IsoliumProdDecimal;
+
+    private void AddProductionResources()//TODO TEST ME
     {
         if (CurrentFood + FoodProduction < MaximumFood)
         {
-            CurrentFood += FoodProduction;
+            FoodProdDecimal += (int)(FoodProduction * 100);
+
+            if(FoodProdDecimal >= 100)
+            {
+                CurrentFood += (FoodProdDecimal / 100);
+            }
+
+            FoodProdDecimal = FoodProdDecimal % 100;
+
+            //CurrentFood += FoodProduction;
         }
-        else if (CurrentFood < MaximumFood)
+        else
         {
             CurrentFood = MaximumFood;
         }
 
         if (CurrentIndustry + IndustryProduction < MaximumIndustry)
         {
-            CurrentIndustry += IndustryProduction;
+            IndustryProdDecimal += (int)(IndustryProduction * 100);
+
+            if(IndustryProdDecimal >= 100)
+            {
+                CurrentIndustry += (IndustryProdDecimal / 100);
+            }
+
+            IndustryProdDecimal = IndustryProdDecimal % 100;
+
+            //CurrentIndustry += IndustryProduction;
         }
-        else if (CurrentIndustry < MaximumIndustry)
+        else
         {
             CurrentIndustry = MaximumIndustry;
         }
 
         if (CurrentIsolium + IsoliumProduction < MaximumIsolium)
         {
-            CurrentIsolium += IsoliumProduction;
+            IsoliumProdDecimal += (int)(IsoliumProduction * 100);
+
+            if(IsoliumProdDecimal >= 100)
+            {
+                CurrentIsolium += (IsoliumProdDecimal / 100);
+            }
+
+            IsoliumProdDecimal = IsoliumProdDecimal % 100;
+
+            //CurrentIsolium += IsoliumProduction;
         }
-        else if (CurrentIsolium < MaximumIsolium)
+        else
         {
             CurrentIsolium = MaximumIsolium;
         }

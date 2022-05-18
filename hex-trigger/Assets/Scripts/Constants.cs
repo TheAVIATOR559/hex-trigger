@@ -192,6 +192,7 @@ public static class Constants
     #endregion
 
     #region Production Values
+    public static float REDUCED_PRODUCTION_PERCENT = 0.25f;
     #region Tier Bonuses
     public static float TIER_I_BONUS = 0.0f;
     public static float TIER_II_BONUS = 0.25f;

@@ -6,7 +6,8 @@ using UnityEngine;
 public enum Events
 {
     ADD_POWER_DISTRIBUTION,
-    REMOVE_POWER_DISTRIBUTION
+    REMOVE_POWER_DISTRIBUTION,
+    TICK_UPKEEP
 }
 
 public struct EventParam
@@ -67,6 +68,11 @@ public static class Event_Manager
         {
             thisEvent.Invoke(eventParam);
         }
+    }
+
+    public static void TriggerEvent(Events eventName)
+    {
+        TriggerEvent(eventName, new EventParam());
     }
 
     public static void PauseGame()
