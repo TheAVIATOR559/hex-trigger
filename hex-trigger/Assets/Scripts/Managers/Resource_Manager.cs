@@ -101,7 +101,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
     }
 
-    private void Update()//TODO DETERMINE TICK RATE FOR UPKEEP
+    private void Update()
     {
         if(Event_Manager.IsGamePaused)
         {
@@ -1035,7 +1035,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
     private int IndustryProdDecimal;
     private int IsoliumProdDecimal;
 
-    private void AddProductionResources()//TODO TEST ME
+    private void AddProductionResources()
     {
         if (CurrentFood + FoodProduction < MaximumFood)
         {

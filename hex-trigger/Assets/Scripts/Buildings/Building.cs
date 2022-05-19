@@ -167,6 +167,7 @@ public class Building : MonoBehaviour
     {
         RemoveFromResourceProduction();
 
+        Debug.Log("TICKING UPKEEP");
         if (Resource_Manager.HaveUpkeepCosts(upkeep))
         {
             Resource_Manager.DeductResources(upkeep);

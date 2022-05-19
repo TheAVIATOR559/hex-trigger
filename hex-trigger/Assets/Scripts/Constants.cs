@@ -138,7 +138,7 @@ public static class Constants
 
     #region Building Upkeep Values  
     #region Food
-    public static BuildingUpkeep GardenUpkeep = new BuildingUpkeep(0, 0.5f, 0.5f);//TODO IMPLEMENT THESE
+    public static BuildingUpkeep GardenUpkeep = new BuildingUpkeep(0, 0.5f, 0.5f);
     public static BuildingUpkeep FarmUpkeep = new BuildingUpkeep(0, 1f, 1f);
     public static BuildingUpkeep OrchardUpkeep = new BuildingUpkeep(0, 1.5f, 1.5f);
     public static BuildingUpkeep RanchUpkeep = new BuildingUpkeep(0, 2f, 2f);
