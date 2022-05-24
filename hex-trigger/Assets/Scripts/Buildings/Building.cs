@@ -99,7 +99,7 @@ public class Building : MonoBehaviour
         //destroy this hex/building
         GameObject prevModel = model;
 
-        model = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.identity, transform);
+        model = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.Euler(-90, 0, 0), transform);
 
         Destroy(prevModel);
     }

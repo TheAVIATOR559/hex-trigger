@@ -109,11 +109,11 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
 
     private void LoadModelPrefabs()//TODO add new models
     {
-        models.Add(Enums.Model_Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_ORCHARD, Resources.Load<GameObject>("Prefabs/Models/Food/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_RANCH, Resources.Load<GameObject>("Prefabs/Models/Food/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_HYDROPONICS_TOWER, Resources.Load<GameObject>("Prefabs/Models/Food/V"));
+        models.Add(Enums.Model_Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/Garden"));
+        models.Add(Enums.Model_Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/Farm"));
+        models.Add(Enums.Model_Prefabs.MODEL_ORCHARD, Resources.Load<GameObject>("Prefabs/Models/Food/Orchard"));
+        models.Add(Enums.Model_Prefabs.MODEL_RANCH, Resources.Load<GameObject>("Prefabs/Models/Food/Ranch"));
+        models.Add(Enums.Model_Prefabs.MODEL_HYDROPONICS_TOWER, Resources.Load<GameObject>("Prefabs/Models/Food/Hydroponics Tower"));
 
         models.Add(Enums.Model_Prefabs.MODEL_HOVEL, Resources.Load<GameObject>("Prefabs/Models/Housing/I"));
         models.Add(Enums.Model_Prefabs.MODEL_COTTAGE, Resources.Load<GameObject>("Prefabs/Models/Housing/II"));
