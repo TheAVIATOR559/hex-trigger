@@ -35,6 +35,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Alpha_Mask:
+        m_Texture: {fileID: 2800000, guid: fbc946ed25eca69498f0ab4b8bd87aaf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Texture:
+        m_Texture: {fileID: 2800000, guid: 0dc437fa34a01de468d7d27a0eb02056, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_529889d8640a44f6b095e1337fd45c60_Texture_1:
+        m_Texture: {fileID: 2800000, guid: fbc946ed25eca69498f0ab4b8bd87aaf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_9bf2a7601dc94a28b9dd26ad35685e9e_Texture_1:
         m_Texture: {fileID: 2800000, guid: f8576844ca68be246a0d5fefaa84dd1e, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -57,10 +69,12 @@ Material:
     - _Blend: 0
     - _CastShadows: 0
     - _Cull: 2
+    - _Darken_Pulse_Speed: 0.5
     - _Distortion_Amount: 0.304
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Rotation_Speed: 0.25
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
