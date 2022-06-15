@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class Prefab_Manager : Singleton<Prefab_Manager>
+public class Prefab_Manager : Singleton<Prefab_Manager> //TODO REPLACE ME WITH ADDRESSABLES
 {
     private Dictionary<Enums.Hex_Prefabs, GameObject> hexes = new Dictionary<Enums.Hex_Prefabs, GameObject>();
     private Dictionary<Enums.Model_Prefabs, GameObject> models = new Dictionary<Enums.Model_Prefabs, GameObject>();
@@ -10,178 +12,398 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
 
     private void Awake()
     {
-        LoadHexPrefabs();
-        LoadModelPrefabs();
-        LoadImages();
+        StartCoroutine(LoadHexPrefabs());
+        StartCoroutine(LoadModelPrefabs());
+        StartCoroutine(LoadImages());
     }
 
     // remove unbuildable hexes?
-    private void LoadHexPrefabs()
+    private IEnumerator LoadHexPrefabs()
     {
-        hexes.Add(Enums.Hex_Prefabs.HEX_GHOST, Resources.Load<GameObject>("Prefabs/Hexes/Ghost Hex"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_GOD_SEAT, Resources.Load<GameObject>("Prefabs/Hexes/Hex - God Seat"));
+        //Debug.Log("Starting Load Hexes");
 
-        hexes.Add(Enums.Hex_Prefabs.HEX_GARDEN, Resources.Load<GameObject>("Prefabs/Hexes/Food/Hex - Garden"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FARM, Resources.Load<GameObject>("Prefabs/Hexes/Food/Hex - Farm"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_ORCHARD, Resources.Load<GameObject>("Prefabs/Hexes/Food/Hex - Orchard"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_RANCH, Resources.Load<GameObject>("Prefabs/Hexes/Food/Hex - Ranch"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_HYDROPONICS_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Food/Hex - Hydroponics Tower"));
+        foreach (Enums.Hex_Prefabs hex in System.Enum.GetValues(typeof(Enums.Hex_Prefabs)))
+        {
+            AsyncOperationHandle<GameObject> opHandle;
 
-        hexes.Add(Enums.Hex_Prefabs.HEX_HOVEL, Resources.Load<GameObject>("Prefabs/Hexes/Housing/Hex - Hovel"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_COTTAGE, Resources.Load<GameObject>("Prefabs/Hexes/Housing/Hex - Cottage"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_APARTMENT, Resources.Load<GameObject>("Prefabs/Hexes/Housing/Hex - Apartment"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_CONDOMINIUM, Resources.Load<GameObject>("Prefabs/Hexes/Housing/Hex - Condo"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_VILLA, Resources.Load<GameObject>("Prefabs/Hexes/Housing/Hex - Villa"));
+            opHandle = Addressables.LoadAssetAsync<GameObject>(HexPrefabToAddress(hex));
+            yield return opHandle;
 
-        hexes.Add(Enums.Hex_Prefabs.HEX_WORKSHOP, Resources.Load<GameObject>("Prefabs/Hexes/Industry/Hex - Workshop"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FORGE, Resources.Load<GameObject>("Prefabs/Hexes/Industry/Hex - Forge"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_MILL, Resources.Load<GameObject>("Prefabs/Hexes/Industry/Hex - Mill"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FOUNDRY, Resources.Load<GameObject>("Prefabs/Hexes/Industry/Hex - Foundry"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FACTORY, Resources.Load<GameObject>("Prefabs/Hexes/Industry/Hex - Factory"));
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //Debug.Log("Successfully loaded " + opHandle.Result.name);
+                hexes.Add(hex, opHandle.Result);
+            }
+            else if (opHandle.Status == AsyncOperationStatus.Failed)
+            {
+                //Debug.LogError("Failed to load " + hex.ToString());
+            }
+        }
 
-        hexes.Add(Enums.Hex_Prefabs.HEX_BARRACKS, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Barracks"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_DORMITORY, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Dormitory"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_GARRISON, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Garrison"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_QUARTERS, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Quarters"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_HEADQUARTERS, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Headquarters"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_SHOOTING_RANGE, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Shooting Range"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_DEFENDERS_WALL, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Defender's Wall"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_GUNNERS_ALLEY, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Gunner's Alley"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_SNIPER_NEST, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Sniper's Nest"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_SCOUT_CAMP, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Scout Camp"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_ACES_ARENA, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Ace's Arena"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_CANNONEERS_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Cannoneer's Tower"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_GUARDIANS_LAST_STAND, Resources.Load<GameObject>("Prefabs/Hexes/Military/Hex - Guardian's Last Stand"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_WATCHTOWER, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Watchtower"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_MISSILE_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Missile Complex"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_LASER_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Laser Tower"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_AUTO_MISSILE_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Auto Missile Complex"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_AUTO_LASER_TOWER, Resources.Load<GameObject>("Prefabs/Hexes/Defense/Hex - Auto Laser Tower"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_RESEARCH_LAB, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - Research Lab"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_RESEARCH_COLLEGE, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - Research College"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_RESEARCH_INSTITUTE, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - Research Institute"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_MULTIBRAIN_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - MultiBrain Complex"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_QUANTUM_BRAIN, Resources.Load<GameObject>("Prefabs/Hexes/Research/Hex - Quantum Brain"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_I, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK I"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_II, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK II"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_III, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK III"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_IV, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK IV"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_V, Resources.Load<GameObject>("Prefabs/Hexes/Isolium/Hex - Extractor MK V"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_STOCKPILE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Stockpile"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Storehouse"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Warehouse"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_DEPOT, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Depot"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Hexes/Storage/Hex - Distribution Center"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_WATERWHEEL, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Waterwheel Generator"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_COAL_FIRED_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Coal-fired Power Plant"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_HYDROELECTRIC_DAM, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Hydroelectric Dam"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_NUCLEAR_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Nuclear Power Plant"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_QUANTUM_POWER_PLANT, Resources.Load<GameObject>("Prefabs/Hexes/Power/Hex - Quantum Power Plant"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_PUBLIC_PARK, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Public Park"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_CIRCUS, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Circus"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_THEATER_COMPLEX, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Theater Complex"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_VIRTUAL_REALITY_CAFE, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - VR Cafe"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_QUANTUM_HOLOGRAM_THEATER, Resources.Load<GameObject>("Prefabs/Hexes/Entertainment/Hex - Quantum Hologram Theater"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_PORTAL, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Portal"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_COMMUNICATOR, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Communicator"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_RADAR_ARRAY, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Radar Array"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_ABYSSAL_PATHFINDER, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Abyssal Pathfinder"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_VOID_RUDDER, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Void Rudder"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FACTION_EMBASSY, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Faction Embassy"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_WEATHER_MANIPULATOR, Resources.Load<GameObject>("Prefabs/Hexes/Special/Hex - Weather Manipulator"));
-
-        hexes.Add(Enums.Hex_Prefabs.HEX_DIPLO_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Diplo Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_SCI_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Sci Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_HAPP_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Happ Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_IND_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Ind Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_ISO_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Iso Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_MIL_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Mil Monument"));
-        hexes.Add(Enums.Hex_Prefabs.HEX_FOOD_MONUMENT, Resources.Load<GameObject>("Prefabs/Hexes/Monument/Hex - Food Monument"));
+        Debug.Log("Finished Load Hexes");
     }
 
-    private void LoadModelPrefabs()//TODO add new models
+    private string HexPrefabToAddress(Enums.Hex_Prefabs hex)
     {
-        models.Add(Enums.Model_Prefabs.MODEL_GARDEN, Resources.Load<GameObject>("Prefabs/Models/Food/Garden"));
-        models.Add(Enums.Model_Prefabs.MODEL_FARM, Resources.Load<GameObject>("Prefabs/Models/Food/Farm"));
-        models.Add(Enums.Model_Prefabs.MODEL_ORCHARD, Resources.Load<GameObject>("Prefabs/Models/Food/Orchard"));
-        models.Add(Enums.Model_Prefabs.MODEL_RANCH, Resources.Load<GameObject>("Prefabs/Models/Food/Ranch"));
-        models.Add(Enums.Model_Prefabs.MODEL_HYDROPONICS_TOWER, Resources.Load<GameObject>("Prefabs/Models/Food/Hydroponics Tower"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_HOVEL, Resources.Load<GameObject>("Prefabs/Models/Housing/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_COTTAGE, Resources.Load<GameObject>("Prefabs/Models/Housing/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_APARTMENT, Resources.Load<GameObject>("Prefabs/Models/Housing/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_CONDOMINIUM, Resources.Load<GameObject>("Prefabs/Models/Housing/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_VILLA, Resources.Load<GameObject>("Prefabs/Models/Housing/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_WORKSHOP, Resources.Load<GameObject>("Prefabs/Models/Industry/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_FORGE, Resources.Load<GameObject>("Prefabs/Models/Industry/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_MILL, Resources.Load<GameObject>("Prefabs/Models/Industry/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_FOUNDRY, Resources.Load<GameObject>("Prefabs/Models/Industry/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_FACTORY, Resources.Load<GameObject>("Prefabs/Models/Industry/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_BARRACKS, Resources.Load<GameObject>("Prefabs/Models/Miliary/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_DORMITORY, Resources.Load<GameObject>("Prefabs/Models/Military/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_GARRISON, Resources.Load<GameObject>("Prefabs/Models/Military/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_QUARTERS, Resources.Load<GameObject>("Prefabs/Models/Military/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_HEADQUARTERS, Resources.Load<GameObject>("Prefabs/Models/Military/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_RESEARCH_LAB, Resources.Load<GameObject>("Prefabs/Models/Research/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_RESEARCH_COLLEGE, Resources.Load<GameObject>("Prefabs/Models/Research/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_RESEARCH_INSTITUTE, Resources.Load<GameObject>("Prefabs/Models/Research/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_MULTIBRAIN_COMPLEX, Resources.Load<GameObject>("Prefabs/Models/Research/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_QUANTUM_BRAIN, Resources.Load<GameObject>("Prefabs/Models/Research/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_I, Resources.Load<GameObject>("Prefabs/Models/Isolium/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_II, Resources.Load<GameObject>("Prefabs/Models/Isolium/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_III, Resources.Load<GameObject>("Prefabs/Models/Isolium/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_IV, Resources.Load<GameObject>("Prefabs/Models/Isolium/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_V, Resources.Load<GameObject>("Prefabs/Models/Isolium/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_STOCKPILE, Resources.Load<GameObject>("Prefabs/Models/Storage/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_STOREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_WAREHOUSE, Resources.Load<GameObject>("Prefabs/Models/Storage/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_DEPOT, Resources.Load<GameObject>("Prefabs/Models/Storage/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_DISTRIBUTION_CENTER, Resources.Load<GameObject>("Prefabs/Models/Storage/V"));
-
-        models.Add(Enums.Model_Prefabs.MODEL_PUBLIC_PARK, Resources.Load<GameObject>("Prefabs/Models/Entertainment/I"));
-        models.Add(Enums.Model_Prefabs.MODEL_CIRCUS, Resources.Load<GameObject>("Prefabs/Models/Entertainment/II"));
-        models.Add(Enums.Model_Prefabs.MODEL_THEATER_COMPLEX, Resources.Load<GameObject>("Prefabs/Models/Entertainment/III"));
-        models.Add(Enums.Model_Prefabs.MODEL_VIRTUAL_REALITY_CAFE, Resources.Load<GameObject>("Prefabs/Models/Entertainment/IV"));
-        models.Add(Enums.Model_Prefabs.MODEL_QUANTUM_HOLOGRAM_THEATER, Resources.Load<GameObject>("Prefabs/Models/Entertainment/V"));
+        switch (hex)
+        {
+            case Enums.Hex_Prefabs.HEX_GHOST:
+                return "Prefabs/Hexes/Ghost Hex";
+            case Enums.Hex_Prefabs.HEX_GOD_SEAT:
+                return "Prefabs/Hexes/Hex - God Seat";
+            case Enums.Hex_Prefabs.HEX_GARDEN:
+                return "Prefabs/Hexes/Food/Hex - Garden";
+            case Enums.Hex_Prefabs.HEX_FARM:
+                return "Prefabs/Hexes/Food/Hex - Farm";
+            case Enums.Hex_Prefabs.HEX_ORCHARD:
+                return "Prefabs/Hexes/Food/Hex - Orchard";
+            case Enums.Hex_Prefabs.HEX_RANCH:
+                return "Prefabs/Hexes/Food/Hex - Ranch";
+            case Enums.Hex_Prefabs.HEX_HYDROPONICS_TOWER:
+                return "Prefabs/Hexes/Food/Hex - Hydroponics Tower";
+            case Enums.Hex_Prefabs.HEX_HOVEL:
+                return "Prefabs/Hexes/Housing/Hex - Hovel";
+            case Enums.Hex_Prefabs.HEX_COTTAGE:
+                return "Prefabs/Hexes/Housing/Hex - Cottage";
+            case Enums.Hex_Prefabs.HEX_APARTMENT:
+                return "Prefabs/Hexes/Housing/Hex - Apartment";
+            case Enums.Hex_Prefabs.HEX_CONDOMINIUM:
+                return "Prefabs/Hexes/Housing/Hex - Condo";
+            case Enums.Hex_Prefabs.HEX_VILLA:
+                return "Prefabs/Hexes/Housing/Hex - Villa";
+            case Enums.Hex_Prefabs.HEX_WORKSHOP:
+                return "Prefabs/Hexes/Industry/Hex - Workshop";
+            case Enums.Hex_Prefabs.HEX_FORGE:
+                return "Prefabs/Hexes/Industry/Hex - Forge";
+            case Enums.Hex_Prefabs.HEX_MILL:
+                return "Prefabs/Hexes/Industry/Hex - Mill";
+            case Enums.Hex_Prefabs.HEX_FOUNDRY:
+                return "Prefabs/Hexes/Industry/Hex - Foundry";
+            case Enums.Hex_Prefabs.HEX_FACTORY:
+                return "Prefabs/Hexes/Industry/Hex - Factory";
+            case Enums.Hex_Prefabs.HEX_BARRACKS:
+                return "Prefabs/Hexes/Military/Hex - Barracks";
+            case Enums.Hex_Prefabs.HEX_DORMITORY:
+                return "Prefabs/Hexes/Military/Hex - Dormitory";
+            case Enums.Hex_Prefabs.HEX_GARRISON:
+                return "Prefabs/Hexes/Military/Hex - Garrison";
+            case Enums.Hex_Prefabs.HEX_QUARTERS:
+                return "Prefabs/Hexes/Military/Hex - Quarters";
+            case Enums.Hex_Prefabs.HEX_HEADQUARTERS:
+                return "Prefabs/Hexes/Military/Hex - Headquarters";
+            case Enums.Hex_Prefabs.HEX_WATCHTOWER:
+                return "Prefabs/Hexes/Defense/Hex - Watchtower";
+            case Enums.Hex_Prefabs.HEX_MISSILE_COMPLEX:
+                return "Prefabs/Hexes/Defense/Hex - Missile Complex";
+            case Enums.Hex_Prefabs.HEX_LASER_TOWER:
+                return "Prefabs/Hexes/Defense/Hex - Laser Tower";
+            case Enums.Hex_Prefabs.HEX_AUTO_MISSILE_COMPLEX:
+                return "Prefabs/Hexes/Defense/Hex - Auto Missile Complex";
+            case Enums.Hex_Prefabs.HEX_AUTO_LASER_TOWER:
+                return "Prefabs/Hexes/Defense/Hex - Auto Laser Tower";
+            case Enums.Hex_Prefabs.HEX_RESEARCH_LAB:
+                return "Prefabs/Hexes/Research/Hex - Research Lab";
+            case Enums.Hex_Prefabs.HEX_RESEARCH_COLLEGE:
+                return "Prefabs/Hexes/Research/Hex - Research College";
+            case Enums.Hex_Prefabs.HEX_RESEARCH_INSTITUTE:
+                return "Prefabs/Hexes/Research/Hex - Research Institute";
+            case Enums.Hex_Prefabs.HEX_MULTIBRAIN_COMPLEX:
+                return "Prefabs/Hexes/Research/Hex - MultiBrain Complex";
+            case Enums.Hex_Prefabs.HEX_QUANTUM_BRAIN:
+                return "Prefabs/Hexes/Research/Hex - Quantum Brain";
+            case Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_I:
+                return "Prefabs/Hexes/Isolium/Hex - Extractor MK I";
+            case Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_II:
+                return "Prefabs/Hexes/Isolium/Hex - Extractor MK II";
+            case Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_III:
+                return "Prefabs/Hexes/Isolium/Hex - Extractor MK III";
+            case Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_IV:
+                return "Prefabs/Hexes/Isolium/Hex - Extractor MK IV";
+            case Enums.Hex_Prefabs.HEX_EXTRACTOR_MK_V:
+                return "Prefabs/Hexes/Isolium/Hex - Extractor MK V";
+            case Enums.Hex_Prefabs.HEX_STOCKPILE:
+                return "Prefabs/Hexes/Storage/Hex - Stockpile";
+            case Enums.Hex_Prefabs.HEX_STOREHOUSE:
+                return "Prefabs/Hexes/Storage/Hex - Storehouse";
+            case Enums.Hex_Prefabs.HEX_WAREHOUSE:
+                return "Prefabs/Hexes/Storage/Hex - Warehouse";
+            case Enums.Hex_Prefabs.HEX_DEPOT:
+                return "Prefabs/Hexes/Storage/Hex - Depot";
+            case Enums.Hex_Prefabs.HEX_DISTRIBUTION_CENTER:
+                return "Prefabs/Hexes/Storage/Hex - Distribution Center";
+            case Enums.Hex_Prefabs.HEX_SHOOTING_RANGE:
+                return "Prefabs/Hexes/Military/Hex - Shooting Range";
+            case Enums.Hex_Prefabs.HEX_DEFENDERS_WALL:
+                return "Prefabs/Hexes/Military/Hex - Defender's Wall";
+            case Enums.Hex_Prefabs.HEX_GUNNERS_ALLEY:
+                return "Prefabs/Hexes/Military/Hex - Gunner's Alley";
+            case Enums.Hex_Prefabs.HEX_SNIPER_NEST:
+                return "Prefabs/Hexes/Military/Hex - Sniper's Nest";
+            case Enums.Hex_Prefabs.HEX_SCOUT_CAMP:
+                return "Prefabs/Hexes/Military/Hex - Scout Camp";
+            case Enums.Hex_Prefabs.HEX_ACES_ARENA:
+                return "Prefabs/Hexes/Military/Hex - Ace's Arena";
+            case Enums.Hex_Prefabs.HEX_CANNONEERS_TOWER:
+                return "Prefabs/Hexes/Military/Hex - Cannoneer's Tower";
+            case Enums.Hex_Prefabs.HEX_GUARDIANS_LAST_STAND:
+                return "Prefabs/Hexes/Military/Hex - Guardian's Last Stand";
+            case Enums.Hex_Prefabs.HEX_WATERWHEEL:
+                return "Prefabs/Hexes/Power/Hex - Waterwheel Generator";
+            case Enums.Hex_Prefabs.HEX_COAL_FIRED_POWER_PLANT:
+                return "Prefabs/Hexes/Power/Hex - Coal-fired Power Plant";
+            case Enums.Hex_Prefabs.HEX_HYDROELECTRIC_DAM:
+                return "Prefabs/Hexes/Power/Hex - Hydroelectric Dam";
+            case Enums.Hex_Prefabs.HEX_NUCLEAR_POWER_PLANT:
+                return "Prefabs/Hexes/Power/Hex - Nuclear Power Plant";
+            case Enums.Hex_Prefabs.HEX_QUANTUM_POWER_PLANT:
+                return "Prefabs/Hexes/Power/Hex - Quantum Power Plant";
+            case Enums.Hex_Prefabs.HEX_PUBLIC_PARK:
+                return "Prefabs/Hexes/Entertainment/Hex - Public Park";
+            case Enums.Hex_Prefabs.HEX_CIRCUS:
+                return "Prefabs/Hexes/Entertainment/Hex - Circus";
+            case Enums.Hex_Prefabs.HEX_THEATER_COMPLEX:
+                return "Prefabs/Hexes/Entertainment/Hex - Theater Complex";
+            case Enums.Hex_Prefabs.HEX_VIRTUAL_REALITY_CAFE:
+                return "Prefabs/Hexes/Entertainment/Hex - VR Cafe";
+            case Enums.Hex_Prefabs.HEX_QUANTUM_HOLOGRAM_THEATER:
+                return "Prefabs/Hexes/Entertainment/Hex - Quantum Hologram Theater";
+            case Enums.Hex_Prefabs.HEX_VOID_PORTAL:
+                return "Prefabs/Hexes/Special/Hex - Void Portal";
+            case Enums.Hex_Prefabs.HEX_VOID_COMMUNICATOR:
+                return "Prefabs/Hexes/Special/Hex - Void Communicator";
+            case Enums.Hex_Prefabs.HEX_VOID_RADAR_ARRAY:
+                return "Prefabs/Hexes/Special/Hex - Void Radar Array";
+            case Enums.Hex_Prefabs.HEX_FACTION_EMBASSY:
+                return "Prefabs/Hexes/Special/Hex - Faction Embassy";
+            case Enums.Hex_Prefabs.HEX_ABYSSAL_PATHFINDER:
+                return "Prefabs/Hexes/Special/Hex - Abyssal Pathfinder";
+            case Enums.Hex_Prefabs.HEX_VOID_RUDDER:
+                return "Prefabs/Hexes/Special/Hex - Void Rudder";
+            case Enums.Hex_Prefabs.HEX_WEATHER_MANIPULATOR:
+                return "Prefabs/Hexes/Special/Hex - Weather Manipulator";
+            case Enums.Hex_Prefabs.HEX_DIPLO_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Diplo Monument";
+            case Enums.Hex_Prefabs.HEX_SCI_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Sci Monument";
+            case Enums.Hex_Prefabs.HEX_HAPP_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Happ Monument";
+            case Enums.Hex_Prefabs.HEX_IND_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Ind Monument";
+            case Enums.Hex_Prefabs.HEX_ISO_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Iso Monument";
+            case Enums.Hex_Prefabs.HEX_MIL_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Mil Monument";
+            case Enums.Hex_Prefabs.HEX_FOOD_MONUMENT:
+                return "Prefabs/Hexes/Monument/Hex - Food Monument";
+            default:
+                return "PROBLEMS";
+        }
     }
 
-    private void LoadImages()
+    private IEnumerator LoadModelPrefabs()
     {
-        images.Add(Enums.Images.ICON_GOD_SEAT, Resources.Load<Sprite>("Sprites/God Seat"));
-        images.Add(Enums.Images.ICON_FOOD, Resources.Load<Sprite>("Sprites/Food"));
-        images.Add(Enums.Images.ICON_POP, Resources.Load<Sprite>("Sprites/Population"));
-        images.Add(Enums.Images.ICON_INDUSTRY, Resources.Load<Sprite>("Sprites/Industry"));
-        images.Add(Enums.Images.ICON_MILITARY, Resources.Load<Sprite>("Sprites/Military"));
-        images.Add(Enums.Images.ICON_RESEARCH, Resources.Load<Sprite>("Sprites/Research"));
-        images.Add(Enums.Images.ICON_STORAGE, Resources.Load<Sprite>("Sprites/Storage"));
-        images.Add(Enums.Images.ICON_DEFENSE, Resources.Load<Sprite>("Sprites/Defense"));
-        images.Add(Enums.Images.ICON_POWER, Resources.Load<Sprite>("Sprites/Power"));
-        images.Add(Enums.Images.ICON_GRUNT, Resources.Load<Sprite>("Sprites/Grunt"));
-        images.Add(Enums.Images.ICON_SHOOTER, Resources.Load<Sprite>("Sprites/Shooter"));
-        images.Add(Enums.Images.ICON_DEFENDER, Resources.Load<Sprite>("Sprites/Defender"));
-        images.Add(Enums.Images.ICON_GUNNER, Resources.Load<Sprite>("Sprites/Gunner"));
-        images.Add(Enums.Images.ICON_SNIPER, Resources.Load<Sprite>("Sprites/Sniper"));
-        images.Add(Enums.Images.ICON_SCOUT, Resources.Load<Sprite>("Sprites/Scout"));
-        images.Add(Enums.Images.ICON_ACE, Resources.Load<Sprite>("Sprites/Ace"));
-        images.Add(Enums.Images.ICON_CANNONEER, Resources.Load<Sprite>("Sprites/Cannoneer"));
-        images.Add(Enums.Images.ICON_GUARDIAN, Resources.Load<Sprite>("Sprites/Guardian"));
-        images.Add(Enums.Images.ICON_ISOLIUM, Resources.Load<Sprite>("Sprites/Isolium"));
-        images.Add(Enums.Images.ICON_ENTERTAINMENT, Resources.Load<Sprite>("Sprites/Entertainment"));
-        images.Add(Enums.Images.ICON_SPECIAL, Resources.Load<Sprite>("Sprites/Special"));
-        images.Add(Enums.Images.ICON_MONUMENT, Resources.Load<Sprite>("Sprites/Monument"));
+        //Debug.Log("Starting Load Models");
+
+        foreach (Enums.Model_Prefabs model in System.Enum.GetValues(typeof(Enums.Model_Prefabs)))
+        {
+            AsyncOperationHandle<GameObject> opHandle;
+
+            opHandle = Addressables.LoadAssetAsync<GameObject>(ModelPrefabToAddress(model));
+            yield return opHandle;
+
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //Debug.Log("Successfully loaded " + opHandle.Result.name);
+                models.Add(model, opHandle.Result);
+            }
+            else if (opHandle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError("Failed to load " + model.ToString());
+            }
+        }
+
+        Debug.Log("Finished Load Model");
+    }
+
+    private string ModelPrefabToAddress(Enums.Model_Prefabs model)
+    {
+        switch (model)
+        {
+            case Enums.Model_Prefabs.MODEL_GARDEN:
+                return "Prefabs/Models/Food/Garden";
+            case Enums.Model_Prefabs.MODEL_FARM:
+                return "Prefabs/Models/Food/Farm";
+            case Enums.Model_Prefabs.MODEL_ORCHARD:
+                return "Prefabs/Models/Food/Orchard";
+            case Enums.Model_Prefabs.MODEL_RANCH:
+                return "Prefabs/Models/Food/Ranch";
+            case Enums.Model_Prefabs.MODEL_HYDROPONICS_TOWER:
+                return "Prefabs/Models/Food/Hydroponics Tower";
+            case Enums.Model_Prefabs.MODEL_HOVEL:
+                return "Prefabs/Models/Housing/Hovel";
+            case Enums.Model_Prefabs.MODEL_COTTAGE:
+                return "Prefabs/Models/Housing/Cottage";
+            case Enums.Model_Prefabs.MODEL_APARTMENT:
+                return "Prefabs/Models/Housing/Apartment";
+            case Enums.Model_Prefabs.MODEL_CONDOMINIUM:
+                return "Prefabs/Models/Housing/Condo";
+            case Enums.Model_Prefabs.MODEL_VILLA:
+                return "Prefabs/Models/Housing/Villa";
+            case Enums.Model_Prefabs.MODEL_WORKSHOP:
+                return "Prefabs/Models/Industry/Workshop";
+            case Enums.Model_Prefabs.MODEL_FORGE:
+                return "Prefabs/Models/Industry/Forge";
+            case Enums.Model_Prefabs.MODEL_MILL:
+                return "Prefabs/Models/Industry/Mill";
+            case Enums.Model_Prefabs.MODEL_FOUNDRY:
+                return "Prefabs/Models/Industry/Foundry";
+            case Enums.Model_Prefabs.MODEL_FACTORY:
+                return "Prefabs/Models/Industry/Factory";
+            case Enums.Model_Prefabs.MODEL_BARRACKS:
+                return "Prefabs/Models/Military/Barracks";
+            case Enums.Model_Prefabs.MODEL_DORMITORY:
+                return "Prefabs/Models/Military/Dormitory";
+            case Enums.Model_Prefabs.MODEL_GARRISON:
+                return "Prefabs/Models/Military/Garrison";
+            case Enums.Model_Prefabs.MODEL_QUARTERS:
+                return "Prefabs/Models/Military/Quarters";
+            case Enums.Model_Prefabs.MODEL_HEADQUARTERS:
+                return "Prefabs/Models/Military/Headquarters";
+            case Enums.Model_Prefabs.MODEL_RESEARCH_LAB:
+                return "Prefabs/Models/Research/Research Lab";
+            case Enums.Model_Prefabs.MODEL_RESEARCH_COLLEGE:
+                return "Prefabs/Models/Research/Research College";
+            case Enums.Model_Prefabs.MODEL_RESEARCH_INSTITUTE:
+                return "Prefabs/Models/Research/Research Institute";
+            case Enums.Model_Prefabs.MODEL_MULTIBRAIN_COMPLEX:
+                return "Prefabs/Models/Research/MultiBrain Complex";
+            case Enums.Model_Prefabs.MODEL_QUANTUM_BRAIN:
+                return "Prefabs/Models/Research/Quantum Brain";
+            case Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_I:
+                return "Prefabs/Models/Isolium/Extractor MK I";
+            case Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_II:
+                return "Prefabs/Models/Isolium/Extractor MK II";
+            case Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_III:
+                return "Prefabs/Models/Isolium/Extractor MK III";
+            case Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_IV:
+                return "Prefabs/Models/Isolium/Extractor MK IV";
+            case Enums.Model_Prefabs.MODEL_EXTRACTOR_MK_V:
+                return "Prefabs/Models/Isolium/Extractor MK V";
+            case Enums.Model_Prefabs.MODEL_STOCKPILE:
+                return "Prefabs/Models/Storage/Stockpile";
+            case Enums.Model_Prefabs.MODEL_STOREHOUSE:
+                return "Prefabs/Models/Storage/Storehouse";
+            case Enums.Model_Prefabs.MODEL_WAREHOUSE:
+                return "Prefabs/Models/Storage/Stockpile";
+            case Enums.Model_Prefabs.MODEL_DEPOT:
+                return "Prefabs/Models/Storage/Depot";
+            case Enums.Model_Prefabs.MODEL_DISTRIBUTION_CENTER:
+                return "Prefabs/Models/Storage/Distribution Center";
+            case Enums.Model_Prefabs.MODEL_PUBLIC_PARK:
+                return "Prefabs/Models/Entertainment/Public Park";
+            case Enums.Model_Prefabs.MODEL_CIRCUS:
+                return "Prefabs/Models/Entertainment/Circus";
+            case Enums.Model_Prefabs.MODEL_THEATER_COMPLEX:
+                return "Prefabs/Models/Entertainment/Theater Complex";
+            case Enums.Model_Prefabs.MODEL_VIRTUAL_REALITY_CAFE:
+                return "Prefabs/Models/Entertainment/VR Cafe";
+            case Enums.Model_Prefabs.MODEL_QUANTUM_HOLOGRAM_THEATER:
+                return "Prefabs/Models/Entertainment/Quantum Hologram Theater";
+            case Enums.Model_Prefabs.MODEL_DIPLO_MONUMENT:
+                return "Prefabs/Models/Monument/Diplo Monument";
+            case Enums.Model_Prefabs.MODEL_SCI_MONUMENT:
+                return "Prefabs/Models/Monument/Sci Monument";
+            case Enums.Model_Prefabs.MODEL_HAPP_MONUMENT:
+                return "Prefabs/Models/Monument/Happ Monument";
+            case Enums.Model_Prefabs.MODEL_IND_MONUMENT:
+                return "Prefabs/Models/Monument/Ind Monument";
+            case Enums.Model_Prefabs.MODEL_ISO_MONUMENT:
+                return "Prefabs/Models/Monument/Iso Monument";
+            case Enums.Model_Prefabs.MODEL_MIL_MONUMENT:
+                return "Prefabs/Models/Monument/Mil Monument";
+            case Enums.Model_Prefabs.MODEL_FOOD_MONUMENT:
+                return "Prefabs/Models/Monument/Food Monument";
+            default:
+                return "PROBLEMS";
+        }
+    }
+
+    private IEnumerator LoadImages()
+    {
+        //Debug.Log("Starting Load Images");
+
+        foreach (Enums.Images image in System.Enum.GetValues(typeof(Enums.Images)))
+        {
+            AsyncOperationHandle<Sprite> opHandle;
+
+            opHandle = Addressables.LoadAssetAsync<Sprite>(ImageToAddress(image));
+            yield return opHandle;
+
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //Debug.Log("Successfully loaded " + opHandle.Result.name);
+                images.Add(image, opHandle.Result);
+            }
+            else if (opHandle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError("Failed to load " + image.ToString());
+            }
+        }
+
+        Debug.Log("Finished Load Image");
+    }
+
+    private string ImageToAddress(Enums.Images image)
+    {
+        switch (image)
+        {
+            case Enums.Images.ICON_GOD_SEAT:
+                return "Sprites/God Seat";
+            case Enums.Images.ICON_FOOD:
+                return "Sprites/Food";
+            case Enums.Images.ICON_POP:
+                return "Sprites/Population";
+            case Enums.Images.ICON_INDUSTRY:
+                return "Sprites/Industry";
+            case Enums.Images.ICON_MILITARY:
+                return "Sprites/Military";
+            case Enums.Images.ICON_RESEARCH:
+                return "Sprites/Research";
+            case Enums.Images.ICON_ISOLIUM:
+                return "Sprites/Isolium";
+            case Enums.Images.ICON_STORAGE:
+                return "Sprites/Storage";
+            case Enums.Images.ICON_DEFENSE:
+                return "Sprites/Defense";
+            case Enums.Images.ICON_POWER:
+                return "Sprites/Power";
+            case Enums.Images.ICON_GRUNT:
+                return "Sprites/Grunt";
+            case Enums.Images.ICON_SHOOTER:
+                return "Sprites/Shooter";
+            case Enums.Images.ICON_DEFENDER:
+                return "Sprites/Defender";
+            case Enums.Images.ICON_GUNNER:
+                return "Sprites/Gunner";
+            case Enums.Images.ICON_SNIPER:
+                return "Sprites/Sniper";
+            case Enums.Images.ICON_SCOUT:
+                return "Sprites/Scout";
+            case Enums.Images.ICON_ACE:
+                return "Sprites/Ace";
+            case Enums.Images.ICON_CANNONEER:
+                return "Sprites/Cannoneer";
+            case Enums.Images.ICON_GUARDIAN:
+                return "Sprites/Guardian";
+            case Enums.Images.ICON_ENTERTAINMENT:
+                return "Sprites/entertainment";
+            case Enums.Images.ICON_MONUMENT:
+                return "Sprites/monument";
+            case Enums.Images.ICON_SPECIAL:
+                return "Sprites/special";
+            default:
+                return "PROBLEMS";
+        }
     }
 
     public static GameObject GetHexPrefab(Enums.Hex_Prefabs hex)

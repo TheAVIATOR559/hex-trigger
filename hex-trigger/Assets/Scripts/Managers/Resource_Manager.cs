@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource_Manager : Singleton<Resource_Manager> //TODO REPLACE ME WITH ADDRESSABLES
+public class Resource_Manager : Singleton<Resource_Manager> 
 {
     public int MaximumHexRange = Constants.DEFAULT_HEX_RADIUS;
 
