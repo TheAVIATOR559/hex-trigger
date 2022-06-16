@@ -20,6 +20,7 @@ public class City_Manager : Singleton<City_Manager>
 
     private void Awake()
     {
+        
         CreateHexGrid();
 
         foreach(KeyValuePair<Vector2Int, Hex> kvp in Hexes)
@@ -28,6 +29,23 @@ public class City_Manager : Singleton<City_Manager>
         }
 
         UpdateAvialableHexPositions();
+
+        Event_Manager.PauseGame();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            if(Event_Manager.IsGamePaused)
+            {
+                Event_Manager.UnpauseGame();
+            }
+            else
+            {
+                Event_Manager.PauseGame();
+            }
+        }
     }
 
     private void CreateHexGrid()

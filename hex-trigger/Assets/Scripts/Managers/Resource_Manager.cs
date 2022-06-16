@@ -99,6 +99,8 @@ public class Resource_Manager : Singleton<Resource_Manager>
         PrevGodSeatIndustryCost = Instance.GodSeatUpgradeIndustryCost;
         PrevGodSeatFoodCost = Instance.GodSeatUpgradeFoodCost;
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
+
+        StartResourcesTick();
     }
 
     private void Update()
@@ -117,7 +119,7 @@ public class Resource_Manager : Singleton<Resource_Manager>
         {
             if(AddResourcesTick >= 1f / Constants.TICK_SPEED)
             {
-                //Debug.Log("Ticking Resources");
+                Debug.Log("Ticking Resources");
                 AddProductionResources();
                 AddPopulation();
                 AddResearchProgress();

@@ -4,29 +4,33 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class Prefab_Manager : Singleton<Prefab_Manager> //TODO REPLACE ME WITH ADDRESSABLES
+public class Prefab_Manager : Singleton<Prefab_Manager> 
 {
     private Dictionary<Enums.Hex_Prefabs, GameObject> hexes = new Dictionary<Enums.Hex_Prefabs, GameObject>();
     private Dictionary<Enums.Model_Prefabs, GameObject> models = new Dictionary<Enums.Model_Prefabs, GameObject>();
     private Dictionary<Enums.Images, Sprite> images = new Dictionary<Enums.Images, Sprite>();
 
-    private void Awake()
+    private bool AllAssetsLoaded = false;
+
+    public static void LoadAssets(System.Action callback, TMPro.TMP_Text loadingText = null)
     {
-        StartCoroutine(LoadHexPrefabs());
-        StartCoroutine(LoadModelPrefabs());
-        StartCoroutine(LoadImages());
+        if(!Instance.AllAssetsLoaded)
+        {
+            Instance.StartCoroutine(Instance.BeginAssetLoad(callback, loadingText));
+        }
     }
 
     // remove unbuildable hexes?
-    private IEnumerator LoadHexPrefabs()
+    private IEnumerator BeginAssetLoad(System.Action callback, TMPro.TMP_Text loadingText)
     {
-        //Debug.Log("Starting Load Hexes");
+        Debug.Log("Starting Load Hexes");
 
         foreach (Enums.Hex_Prefabs hex in System.Enum.GetValues(typeof(Enums.Hex_Prefabs)))
         {
             AsyncOperationHandle<GameObject> opHandle;
 
             opHandle = Addressables.LoadAssetAsync<GameObject>(HexPrefabToAddress(hex));
+            loadingText.text = HexPrefabToAddress(hex).ToString();
             yield return opHandle;
 
             if (opHandle.Status == AsyncOperationStatus.Succeeded)
@@ -36,12 +40,64 @@ public class Prefab_Manager : Singleton<Prefab_Manager> //TODO REPLACE ME WITH A
             }
             else if (opHandle.Status == AsyncOperationStatus.Failed)
             {
-                //Debug.LogError("Failed to load " + hex.ToString());
+                Debug.LogError("Failed to load " + hex.ToString());
             }
         }
 
         Debug.Log("Finished Load Hexes");
+
+        Debug.Log("Starting Load Models");
+
+        foreach (Enums.Model_Prefabs model in System.Enum.GetValues(typeof(Enums.Model_Prefabs)))
+        {
+            AsyncOperationHandle<GameObject> opHandle;
+
+            opHandle = Addressables.LoadAssetAsync<GameObject>(ModelPrefabToAddress(model));
+            loadingText.text = ModelPrefabToAddress(model).ToString();
+            yield return opHandle;
+
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //Debug.Log("Successfully loaded " + opHandle.Result.name);
+                models.Add(model, opHandle.Result);
+            }
+            else if (opHandle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError("Failed to load " + model.ToString());
+            }
+        }
+
+        Debug.Log("Finished Load Model");
+
+        Debug.Log("Starting Load Images");
+
+        foreach (Enums.Images image in System.Enum.GetValues(typeof(Enums.Images)))
+        {
+            AsyncOperationHandle<Sprite> opHandle;
+
+            opHandle = Addressables.LoadAssetAsync<Sprite>(ImageToAddress(image));
+            loadingText.text = ImageToAddress(image).ToString();
+            yield return opHandle;
+
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //Debug.Log("Successfully loaded " + opHandle.Result.name);
+                images.Add(image, opHandle.Result);
+            }
+            else if (opHandle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError("Failed to load " + image.ToString());
+            }
+        }
+
+        Debug.Log("Finished Load Image");
+
+        Debug.Log("All Assets Successfully Loaded");
+        AllAssetsLoaded = true;
+
+        callback();
     }
+
 
     private string HexPrefabToAddress(Enums.Hex_Prefabs hex)
     {
@@ -200,31 +256,6 @@ public class Prefab_Manager : Singleton<Prefab_Manager> //TODO REPLACE ME WITH A
         }
     }
 
-    private IEnumerator LoadModelPrefabs()
-    {
-        //Debug.Log("Starting Load Models");
-
-        foreach (Enums.Model_Prefabs model in System.Enum.GetValues(typeof(Enums.Model_Prefabs)))
-        {
-            AsyncOperationHandle<GameObject> opHandle;
-
-            opHandle = Addressables.LoadAssetAsync<GameObject>(ModelPrefabToAddress(model));
-            yield return opHandle;
-
-            if (opHandle.Status == AsyncOperationStatus.Succeeded)
-            {
-                //Debug.Log("Successfully loaded " + opHandle.Result.name);
-                models.Add(model, opHandle.Result);
-            }
-            else if (opHandle.Status == AsyncOperationStatus.Failed)
-            {
-                Debug.LogError("Failed to load " + model.ToString());
-            }
-        }
-
-        Debug.Log("Finished Load Model");
-    }
-
     private string ModelPrefabToAddress(Enums.Model_Prefabs model)
     {
         switch (model)
@@ -326,31 +357,6 @@ public class Prefab_Manager : Singleton<Prefab_Manager> //TODO REPLACE ME WITH A
             default:
                 return "PROBLEMS";
         }
-    }
-
-    private IEnumerator LoadImages()
-    {
-        //Debug.Log("Starting Load Images");
-
-        foreach (Enums.Images image in System.Enum.GetValues(typeof(Enums.Images)))
-        {
-            AsyncOperationHandle<Sprite> opHandle;
-
-            opHandle = Addressables.LoadAssetAsync<Sprite>(ImageToAddress(image));
-            yield return opHandle;
-
-            if (opHandle.Status == AsyncOperationStatus.Succeeded)
-            {
-                //Debug.Log("Successfully loaded " + opHandle.Result.name);
-                images.Add(image, opHandle.Result);
-            }
-            else if (opHandle.Status == AsyncOperationStatus.Failed)
-            {
-                Debug.LogError("Failed to load " + image.ToString());
-            }
-        }
-
-        Debug.Log("Finished Load Image");
     }
 
     private string ImageToAddress(Enums.Images image)

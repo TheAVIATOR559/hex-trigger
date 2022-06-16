@@ -6,7 +6,7 @@ using TMPro;
 
 public class UI_Manager : Singleton<UI_Manager>
 {
-    private Canvas CityCanvas;
+    [SerializeField] private Canvas CityCanvas;
     private GameObject MainPanel;
     private GameObject HexTypePanel;
     private GameObject FoodTierPanel;
@@ -22,7 +22,7 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject MonumentTierPanel;
     private GameObject SpecialTierPanel;
 
-    [SerializeField] private GameObject BuildInfoPanel;
+    private GameObject BuildInfoPanel;
     private Image BuildInfoPanelImage;
     private TMP_Text BuildInfoPanelName;
     private GameObject BuilldInfoPanelCost;
@@ -96,6 +96,8 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject currTierPanel;
     private List<Button> hexTypeButtons = new List<Button>();
 
+    [SerializeField] private GameObject PausedPanel;
+
     private bool PopTextFlashing = false;
     private bool FoodTextFlashing = false;
     private bool IndustryTextFlashing = false;
@@ -105,9 +107,13 @@ public class UI_Manager : Singleton<UI_Manager>
     private bool CannoneerTextFlashing = false;
     private bool GuardianTextFlashing = false;
 
-    public void SetupReferences(Canvas cityCanvas)
+    private void Awake()
     {
-        CityCanvas = cityCanvas;
+        SetupReferences();
+    }
+
+    public void SetupReferences()
+    {
         MainPanel = CityCanvas.transform.GetChild(0).gameObject;
         HexTypePanel = CityCanvas.transform.GetChild(1).gameObject;
         FoodTierPanel = CityCanvas.transform.GetChild(2).gameObject;
@@ -193,6 +199,8 @@ public class UI_Manager : Singleton<UI_Manager>
         MaxGuardianCountText = CityOverviewPanel.transform.GetChild(12).GetChild(1).GetComponent<TMP_Text>();
         MaxHexRangeText = CityOverviewPanel.transform.GetChild(13).GetChild(1).GetComponent<TMP_Text>();
 
+        PausedPanel = CityCanvas.transform.GetChild(19).gameObject;
+
         foreach(Transform child in HexTypePanel.transform)
         {
             hexTypeButtons.Add(child.GetComponent<Button>());
@@ -222,6 +230,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.BuildInfoPanel.SetActive(false);
         Instance.InfoPanel.SetActive(false);
         Instance.CityOverviewPanel.SetActive(false);
+        Instance.PausedPanel.SetActive(false);
 
         UpdateResourcesText();
     }
@@ -1501,5 +1510,15 @@ public class UI_Manager : Singleton<UI_Manager>
     private void EndGuardianFlashing()
     {
         GuardianTextFlashing = false;
+    }
+
+    public static void ShowPausePanel()
+    {
+        Instance.PausedPanel.SetActive(true);
+    }
+
+    public static void HidePausePanel()
+    {
+        Instance.PausedPanel.SetActive(false);
     }
 }

@@ -78,10 +78,12 @@ public static class Event_Manager
     public static void PauseGame()
     {
         IsGamePaused = true;
+        UI_Manager.ShowPausePanel();
     }
 
     public static void UnpauseGame()
     {
         IsGamePaused = false;
+        UI_Manager.HidePausePanel();
     }
 }

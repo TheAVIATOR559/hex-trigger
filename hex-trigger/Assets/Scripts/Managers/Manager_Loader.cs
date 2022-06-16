@@ -5,14 +5,9 @@ using UnityEngine.UI;
 
 public class Manager_Loader : MonoBehaviour
 {
-    [SerializeField] Canvas mainCanvas;
-
     private void Awake()
     {
+        Event_Manager.PauseGame();
         Event_Manager.UnpauseGame();
-        Prefab_Manager prefabs = Prefab_Manager.Instance;
-        City_Manager city = City_Manager.Instance;
-        UI_Manager.Instance.SetupReferences(mainCanvas);
-        Resource_Manager.StartResourcesTick();
     }
 }
