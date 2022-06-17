@@ -98,6 +98,50 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         callback();
     }
 
+    public static void UnLoadAssets(System.Action callback, TMPro.TMP_Text loadingText = null)
+    {
+        if (Instance.AllAssetsLoaded)
+        {
+            Instance.StartCoroutine(Instance.BeginAssetUnLoad(callback, loadingText));
+        }
+    }
+
+    private IEnumerator BeginAssetUnLoad(System.Action callback, TMPro.TMP_Text loadingText)
+    {
+        foreach(KeyValuePair<Enums.Hex_Prefabs, GameObject> hex in hexes)
+        {
+            loadingText.text = "Unloading " + hex.Key;
+            Addressables.Release(hex.Value);
+            
+            yield return new WaitForEndOfFrame();
+        }
+
+        hexes.Clear();
+
+        foreach (KeyValuePair<Enums.Model_Prefabs, GameObject> model in models)
+        {
+            loadingText.text = "Unloading " + model.Key;
+            Addressables.Release(model.Value);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        models.Clear();
+
+        foreach (KeyValuePair<Enums.Images, Sprite> image in images)
+        {
+            loadingText.text = "Unloading " + image.Key;
+            Addressables.Release(image.Value);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        images.Clear();
+
+        AllAssetsLoaded = false;
+
+        callback();
+    }
 
     private string HexPrefabToAddress(Enums.Hex_Prefabs hex)
     {
@@ -425,5 +469,10 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     public static Sprite GetImage(Enums.Images image)
     {
         return Instance.images[image];
+    }
+
+    private void OnDestroy()
+    {
+        UnLoadAssets(null);
     }
 }

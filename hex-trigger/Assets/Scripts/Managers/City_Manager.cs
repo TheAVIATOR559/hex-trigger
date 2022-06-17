@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class City_Manager : Singleton<City_Manager>
+public class City_Manager : MonoBehaviour
 {
     public Dictionary<Vector2Int, Hex> Hexes = new Dictionary<Vector2Int, Hex>();
     public List<Vector2Int> availbleHexPositions = new List<Vector2Int>();
@@ -18,9 +18,12 @@ public class City_Manager : Singleton<City_Manager>
 
     private Battle_Map BattleMap;
 
+    public static City_Manager Instance;
+
     private void Awake()
     {
-        
+        Instance = this;
+
         CreateHexGrid();
 
         foreach(KeyValuePair<Vector2Int, Hex> kvp in Hexes)

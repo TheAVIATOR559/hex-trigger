@@ -10,6 +10,7 @@ using TMPro;
 public class Load_Scene : MonoBehaviour
 {
     public bool LoadAssets;
+    public bool UnLoadAssets;
     public AssetReference scene;
     public TMP_Text loadingText;
 
@@ -18,6 +19,11 @@ public class Load_Scene : MonoBehaviour
         if(LoadAssets)
         {
             Prefab_Manager.LoadAssets(LoadScene, loadingText);
+        }
+
+        if(UnLoadAssets)
+        {
+            Prefab_Manager.UnLoadAssets(LoadScene, loadingText);
         }
     }
 

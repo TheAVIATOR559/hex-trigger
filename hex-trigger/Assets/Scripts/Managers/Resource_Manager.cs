@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource_Manager : Singleton<Resource_Manager> 
+public class Resource_Manager : MonoBehaviour
 {
     public int MaximumHexRange = Constants.DEFAULT_HEX_RADIUS;
 
@@ -93,8 +93,12 @@ public class Resource_Manager : Singleton<Resource_Manager>
     private float AddResourcesTick;
     [SerializeField]private float UpkeepTick;
 
+    public static Resource_Manager Instance;
+
     private void Awake()
     {
+        Instance = this;
+
         PrevGodSeatIsoliumCost = Instance.GodSeatUpgradeIsoliumCost;
         PrevGodSeatIndustryCost = Instance.GodSeatUpgradeIndustryCost;
         PrevGodSeatFoodCost = Instance.GodSeatUpgradeFoodCost;

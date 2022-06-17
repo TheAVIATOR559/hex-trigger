@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UI_Manager : Singleton<UI_Manager>
+public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private Canvas CityCanvas;
     private GameObject MainPanel;
@@ -96,7 +96,9 @@ public class UI_Manager : Singleton<UI_Manager>
     private GameObject currTierPanel;
     private List<Button> hexTypeButtons = new List<Button>();
 
-    [SerializeField] private GameObject PausedPanel;
+    private GameObject PausedPanel;
+
+    private GameObject OptionsPanel;
 
     private bool PopTextFlashing = false;
     private bool FoodTextFlashing = false;
@@ -107,8 +109,12 @@ public class UI_Manager : Singleton<UI_Manager>
     private bool CannoneerTextFlashing = false;
     private bool GuardianTextFlashing = false;
 
+    public static UI_Manager Instance;
+
     private void Awake()
     {
+        Instance = this;
+
         SetupReferences();
     }
 
@@ -200,8 +206,9 @@ public class UI_Manager : Singleton<UI_Manager>
         MaxHexRangeText = CityOverviewPanel.transform.GetChild(13).GetChild(1).GetComponent<TMP_Text>();
 
         PausedPanel = CityCanvas.transform.GetChild(19).gameObject;
+        OptionsPanel = CityCanvas.transform.GetChild(20).gameObject;
 
-        foreach(Transform child in HexTypePanel.transform)
+        foreach (Transform child in HexTypePanel.transform)
         {
             hexTypeButtons.Add(child.GetComponent<Button>());
         }
@@ -231,6 +238,7 @@ public class UI_Manager : Singleton<UI_Manager>
         Instance.InfoPanel.SetActive(false);
         Instance.CityOverviewPanel.SetActive(false);
         Instance.PausedPanel.SetActive(false);
+        Instance.OptionsPanel.SetActive(false);
 
         UpdateResourcesText();
     }
