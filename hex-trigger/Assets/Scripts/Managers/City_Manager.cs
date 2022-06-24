@@ -68,7 +68,7 @@ public class City_Manager : MonoBehaviour
 
                 if (i == 0 && j == 0)
                 {
-                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_GOD_SEAT), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.identity).GetComponent<Hex>();
                     newHex.Initialize(i, j);
                     newHex.SetStandardMaterial();
                 }
@@ -78,7 +78,7 @@ public class City_Manager : MonoBehaviour
                 }
                 else
                 {
-                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.Euler(-90, 0, 0)).GetComponent<Hex>();
+                    newHex = Instantiate(Prefab_Manager.GetHexPrefab(Enums.Hex_Prefabs.HEX_WATCHTOWER), new Vector3(xPos, 0, j * Constants.HEX_Y_OFFSET), Quaternion.identity).GetComponent<Hex>();
                     //newHex.gameObject.name += " " + i + "::" + j;
                     newHex.Initialize(i, j);
                     newHex.SetStandardMaterial();

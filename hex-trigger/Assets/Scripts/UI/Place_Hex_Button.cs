@@ -27,7 +27,7 @@ public class Place_Hex_Button : MonoBehaviour, IPointerEnterHandler, IPointerExi
         City_Manager.ActivateAvailableHexHighlights();
 
         //instantiate hex blueprint based on hex type
-        City_Manager.Instance.hexBlueprint = Instantiate(Prefab_Manager.GetHexPrefab(Enums.BuildingTypeToHexPrefab(buildingType)), Hex.GetWorldCoordFromHexCoord(City_Manager.Instance.availbleHexPositions[0]), Quaternion.Euler(-90, 0, 0)).AddComponent<Hex_Blueprint>();
+        City_Manager.Instance.hexBlueprint = Instantiate(Prefab_Manager.GetHexPrefab(Enums.BuildingTypeToHexPrefab(buildingType)), Hex.GetWorldCoordFromHexCoord(City_Manager.Instance.availbleHexPositions[0]), Quaternion.identity).AddComponent<Hex_Blueprint>();
 
         //disable place hex panel
         UI_Manager.SetTierPanel(parentPanel);
