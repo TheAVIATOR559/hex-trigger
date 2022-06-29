@@ -157,7 +157,7 @@ public class City_Manager : MonoBehaviour
                 {
                     foreach(Vector2Int vector in Constants.ODD_ROW_OFFSETS)
                     {
-                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
+                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)) & !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
                             if(Hex.GetDistance(GodSeat.Position, vector + kvp.Value.Position) <= Resource_Manager.Instance.MaximumHexRange)
@@ -171,7 +171,7 @@ public class City_Manager : MonoBehaviour
                 {
                     foreach (Vector2Int vector in Constants.EVEN_ROW_OFFSETS)
                     {
-                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)))// && !availbleHexPositions.Contains(vector + kvp.Value.Position))
+                        if (!kvp.Value.Neighbors.Contains(GetHex(vector + kvp.Value.Position)) & !availbleHexPositions.Contains(vector + kvp.Value.Position))
                         {
                             //Debug.Log("Valid new hex location");
                             if (Hex.GetDistance(GodSeat.Position, vector + kvp.Value.Position) <= Resource_Manager.Instance.MaximumHexRange)
