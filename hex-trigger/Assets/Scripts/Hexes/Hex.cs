@@ -12,12 +12,16 @@ public class Hex : MonoBehaviour
     [SerializeField] TMP_Text OverviewTierText;
 
     [SerializeField] Material standardMaterial;
+    [SerializeField] GameObject ParticleSystem;
 
-    private Renderer renderer;
+    private Material mat;
+
+    [SerializeField] private bool isBuilt = false;
+    private float currFillValue = 0;
 
     private void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        mat = GetComponent<Renderer>().material;
         ConnectedBuilding = GetComponent<Building>();
     }
 
@@ -25,6 +29,80 @@ public class Hex : MonoBehaviour
     {
         Position = new Vector2Int(x, y);
         City_Manager.Instance.Hexes.Add(Position, this);
+        //ConnectedBuilding.Initalize();
+
+        //set shader useHologram to false
+        //set shader min fill level to just slightly visible
+        mat.SetFloat("_Use_Hologram", 0);//WHY THE FUCK ISNT THIS FIRING?????
+        mat.SetFloat("_Fill_Rate", -0.51f);
+        currFillValue = -0.51f;
+        StartCoroutine(BuildHex());
+    }
+
+    //private void Update()
+    //{
+    //    if(Event_Manager.IsGamePaused)
+    //    {
+    //        return;
+    //    }
+
+    //    if(!isBuilt)
+    //    {
+    //        if(currFillValue >= 0.51f)
+    //        {
+    //            isBuilt = true;
+    //            ParticleSystem.SetActive(true);
+    //            ConnectedBuilding.Initalize();
+    //        }
+    //        else
+    //        {
+    //            currFillValue += 0.01f;
+    //            mat.SetFloat("_Fill_Rate", currFillValue);
+    //        }
+    //    }
+    //}
+
+    private IEnumerator BuildHex()
+    {
+        float currFillTime = 0;
+        float timeBtwnFillTicks = Constants.DEFAULT_BUILD_TIME / 100f;
+
+        while(!isBuilt)
+        {
+            //Debug.Log("coroutine running");
+            Debug.Log(currFillTime + " :: " + timeBtwnFillTicks);
+            if (currFillTime >= timeBtwnFillTicks)
+            {
+                if(currFillValue < 0.51f)
+                {
+                    currFillValue += 0.01f;
+                    mat.SetFloat("_Fill_Rate", currFillValue);
+                    currFillTime = 0;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                currFillTime += Time.deltaTime;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        isBuilt = true;
+        ParticleSystem.SetActive(true);
+        ConnectedBuilding.Initalize();
+    }
+
+    public void ForceBuild()
+    {
+        StopCoroutine(BuildHex());
+        isBuilt = true;
+        mat.SetFloat("_Fill_Rate", 0.51f);
+        ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
 
@@ -50,7 +128,8 @@ public class Hex : MonoBehaviour
 
     public void SetStandardMaterial()
     {
-        renderer.material = standardMaterial;
+        //renderer.material = standardMaterial;
+        Debug.Log("GET RID OF ME");
     }
 
     public void OnMouseOver()

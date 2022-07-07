@@ -136,6 +136,10 @@ public static class Constants
     #endregion
     #endregion
 
+    #region Build Times
+    public static int DEFAULT_BUILD_TIME = 5;
+    #endregion
+
     #region Building Upkeep Values  
     #region Food
     public static BuildingUpkeep GardenUpkeep = new BuildingUpkeep(0, 0.5f, 0.5f);

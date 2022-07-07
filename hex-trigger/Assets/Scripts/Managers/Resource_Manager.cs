@@ -109,15 +109,15 @@ public class Resource_Manager : MonoBehaviour
 
     private void Update()
     {
-        if(Event_Manager.IsGamePaused)
-        {
-            return;
-        }    
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             DEV_MaxOutResources();
         }
+
+        if (Event_Manager.IsGamePaused)
+        {
+            return;
+        }    
 
         if (!ResourcesTickPaused)
         {
