@@ -16,16 +16,13 @@ public class Hex : MonoBehaviour
 
     private Material mat;
 
-    [SerializeField] private bool isBuilt = false;
-    private float currFillValue = 0;
-
     private void Awake()
     {
         mat = GetComponent<Renderer>().material;
         ConnectedBuilding = GetComponent<Building>();
     }
 
-    public void Initialize(int x, int y)
+    public void Initialize(int x, int y, bool forceBuild = false)
     {
         Position = new Vector2Int(x, y);
         City_Manager.Instance.Hexes.Add(Position, this);
@@ -33,75 +30,45 @@ public class Hex : MonoBehaviour
 
         //set shader useHologram to false
         //set shader min fill level to just slightly visible
-        mat.SetFloat("_Use_Hologram", 0);//WHY THE FUCK ISNT THIS FIRING?????
-        mat.SetFloat("_Fill_Rate", -0.51f);
-        currFillValue = -0.51f;
-        StartCoroutine(BuildHex());
+        mat.SetFloat("_Use_Hologram", 0);
+        mat.SetFloat("_Fill_Rate", 0);
+        
+        if(forceBuild)
+        {
+            ForceBuild();
+        }
+        else
+        {
+            StartCoroutine(BuildHex());
+        }
     }
-
-    //private void Update()
-    //{
-    //    if(Event_Manager.IsGamePaused)
-    //    {
-    //        return;
-    //    }
-
-    //    if(!isBuilt)
-    //    {
-    //        if(currFillValue >= 0.51f)
-    //        {
-    //            isBuilt = true;
-    //            ParticleSystem.SetActive(true);
-    //            ConnectedBuilding.Initalize();
-    //        }
-    //        else
-    //        {
-    //            currFillValue += 0.01f;
-    //            mat.SetFloat("_Fill_Rate", currFillValue);
-    //        }
-    //    }
-    //}
 
     private IEnumerator BuildHex()
     {
-        float currFillTime = 0;
-        float timeBtwnFillTicks = Constants.DEFAULT_BUILD_TIME / 100f;
+        float currTime = 0;
+        float totalTime = Constants.DEFAULT_BUILD_TIME;
 
-        while(!isBuilt)
+        while(currTime < totalTime)
         {
-            //Debug.Log("coroutine running");
-            Debug.Log(currFillTime + " :: " + timeBtwnFillTicks);
-            if (currFillTime >= timeBtwnFillTicks)
+            if (Event_Manager.IsGamePaused)
             {
-                if(currFillValue < 0.51f)
-                {
-                    currFillValue += 0.01f;
-                    mat.SetFloat("_Fill_Rate", currFillValue);
-                    currFillTime = 0;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            else
-            {
-                currFillTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+                continue;
             }
 
+            mat.SetFloat("_Fill_Rate", (currTime / Mathf.Max(totalTime, 0.0001f)));
+            currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
-        isBuilt = true;
+        
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
 
-    public void ForceBuild()
+    private void ForceBuild()
     {
         StopCoroutine(BuildHex());
-        isBuilt = true;
-        mat.SetFloat("_Fill_Rate", 0.51f);
+        mat.SetFloat("_Fill_Rate", 1);
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }

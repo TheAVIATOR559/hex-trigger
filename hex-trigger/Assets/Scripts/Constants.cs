@@ -137,7 +137,57 @@ public static class Constants
     #endregion
 
     #region Build Times
-    public static int DEFAULT_BUILD_TIME = 5;
+    //public static int DEFAULT_BUILD_TIME = 5;
+    public static int GARDEN_BUILD_TIME = 10;
+    public static int FARM_BUILD_TIME = 20;
+    public static int ORCHARD_BUILD_TIME = 30;
+    public static int RANCH_BUILD_TIME = 40;
+    public static int HYDROPONICS_TOWER_BUILD_TIME = 50;
+
+    public static int HOVEL_BUILD_TIME = 10;
+    public static int COTTAGE_BUILD_TIME = 20;
+    public static int APARTMENT_BUILD_TIME = 30;
+    public static int CONDO_BUILD_TIME = 40;
+    public static int VILLA_BUILD_TIME = 50;
+
+    public static int WORKSHOP_BUILD_TIME = 10;
+    public static int MILL_BUILD_TIME = 20;
+    public static int FORGE_BUILD_TIME = 30;
+    public static int FOUNDRY_BUILD_TIME = 40;
+    public static int FACTORY_BUILD_TIME = 50;
+
+    public static int BARRACKS_BUILD_TIME = 10;
+    public static int DORMITORY_BUILD_TIME = 20;
+    public static int GARRISON_BUILD_TIME = 30;
+    public static int QUARTERS_BUILD_TIME = 40;
+    public static int HEADQUARTERS_BUILD_TIME = 50;
+
+    public static int SHOOTING_RANGE_BUILD_TIME = 20;
+    public static int DEFENDERS_WALL_BUILD_TIME = 30;
+    public static int GUNNERS_ALLEY_BUILD_TIME = 30;
+    public static int SNIPERS_NEST_BUILD_TIME = 45;
+    public static int SCOUT_CAMP_BUILD_TIME = 45;
+    public static int ACES_ARENA_BUILD_TIME = 60;
+    public static int CANNONEERS_TOWER_BUILD_TIME = 60;
+    public static int GUARDIANS_LAST_STAND_BUILD_TIME = 60;
+
+    public static int WATCHTOWER_BUILD_TIME = 15;
+    public static int MISSILE_COMPLEX_BUILD_TIME = 25;
+    public static int LASER_TOWER_BUILD_TIME = 35;
+    public static int AUTO_MISSILE_COMPLEX_BUILD_TIME = 45;
+    public static int AUTO_LASER_TOWER_BUILD_TIME = 50;
+
+    public static int RESEARCH_LAB_BUILD_TIME = 10;
+    public static int RESEARCH_COLLEGE_BUILD_TIME = 20;
+    public static int RESEARCH_INSTITUTE_BUILD_TIME = 30;
+    public static int MULTIBRAIN_COMPLEX_BUILD_TIME = 40;
+    public static int QUANTUM_BRAIN_BUILD_TIME = 50;
+
+    public static int EXTRACTOR_MKI_BUILD_TIME = 10;
+    public static int EXTRACTOR_MKII_BUILD_TIME = 20;
+    public static int EXTRACTOR_MKIII_BUILD_TIME = 30;
+    public static int EXTRACTOR_MKIV_BUILD_TIME = 40;
+    public static int EXTRACTOR_MKV_BUILD_TIME = 50;
     #endregion
 
     #region Building Upkeep Values  
