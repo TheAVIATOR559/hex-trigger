@@ -188,6 +188,33 @@ public static class Constants
     public static int EXTRACTOR_MKIII_BUILD_TIME = 30;
     public static int EXTRACTOR_MKIV_BUILD_TIME = 40;
     public static int EXTRACTOR_MKV_BUILD_TIME = 50;
+
+    public static int STOCKPILE_BUILD_TIME = 10;
+    public static int STOREHOUSE_BUILD_TIME = 20;
+    public static int WAREHOUSE_BUILD_TIME = 30;
+    public static int DEPOT_BUILD_TIME = 40;
+    public static int DISTRIBUTION_CENTER_BUILD_TIME = 50;
+
+    public static int WATERWHEEL_GENERATOR_BUILD_TIME = 10;
+    public static int COAL_FIRED_POWER_PLANT_BUILD_TIME = 20;
+    public static int HYDROELECTRIC_DAM_BUILD_TIME = 30;
+    public static int NUCLEAR_POWER_PLANT_BUILD_TIME = 40;
+    public static int QUANTUM_POWER_PLANT_BUILD_TIME = 50;
+
+    public static int PUBLIC_PARK_BUILD_TIME = 10;
+    public static int CIRCUS_BUILD_TIME = 20;
+    public static int THEATER_COMPLEX_BUILD_TIME = 30;
+    public static int VR_CAFE_BUILD_TIME = 40;
+    public static int QUANTUM_HOLOGRAM_THEATER_BUILD_TIME = 50;
+
+    public static int VOID_PORTAL_BUILD_TIME = 60;
+    public static int VOID_COMMUNICATOR_BUILD_TIME = 45;
+    public static int VOID_RADAR_ARRAY_BUILD_TIME = 50;
+    public static int ABYSSAL_PATHFINDER_BUILD_TIME = 120;
+    public static int VOID_RUDDER_BUILD_TIME = 45;
+    public static int FACTION_EMBASSY_BUILD_TIME = 30;
+    public static int WEATHER_MANIPULATOR_BUILD_TIME = 30;
+    public static int MONUMENT_BUILD_TIME = 30;
     #endregion
 
     #region Building Upkeep Values  

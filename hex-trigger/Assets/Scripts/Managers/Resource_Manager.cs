@@ -356,6 +356,160 @@ public class Resource_Manager : MonoBehaviour
         }
     }
 
+    public static int GetBuildTime(Enums.Building_Type type, bool isUpgrade = false)
+    {
+        switch (type)//todo need to invert these
+        {
+            case Enums.Building_Type.GARDEN:
+                return (isUpgrade ? Constants.GARDEN_BUILD_TIME : Mathf.RoundToInt(Constants.GARDEN_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.FARM:
+                return (isUpgrade ? Constants.FARM_BUILD_TIME : Mathf.RoundToInt(Constants.FARM_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.ORCHARD:
+                return (isUpgrade ? Constants.ORCHARD_BUILD_TIME : Mathf.RoundToInt(Constants.ORCHARD_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.RANCH:
+                return (isUpgrade ? Constants.RANCH_BUILD_TIME : Mathf.RoundToInt(Constants.RANCH_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.HYDROPONICS_TOWER:
+                return (isUpgrade ? Constants.HYDROPONICS_TOWER_BUILD_TIME : Mathf.RoundToInt(Constants.HYDROPONICS_TOWER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.HOVEL:
+                return (isUpgrade ? Constants.HOVEL_BUILD_TIME : Mathf.RoundToInt(Constants.HOVEL_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.COTTAGE:
+                return (isUpgrade ? Constants.COTTAGE_BUILD_TIME : Mathf.RoundToInt(Constants.COTTAGE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.APARTMENT:
+                return (isUpgrade ? Constants.APARTMENT_BUILD_TIME : Mathf.RoundToInt(Constants.APARTMENT_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.CONDOMINIUM:
+                return (isUpgrade ? Constants.CONDO_BUILD_TIME : Mathf.RoundToInt(Constants.CONDO_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.VILLA:
+                return (isUpgrade ? Constants.VILLA_BUILD_TIME : Mathf.RoundToInt(Constants.VILLA_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.WORKSHOP:
+                return (isUpgrade ? Constants.WORKSHOP_BUILD_TIME : Mathf.RoundToInt(Constants.WORKSHOP_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.FORGE:
+                return (isUpgrade ? Constants.FORGE_BUILD_TIME : Mathf.RoundToInt(Constants.FORGE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.MILL:
+                return (isUpgrade ? Constants.MILL_BUILD_TIME : Mathf.RoundToInt(Constants.MILL_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.FOUNDRY:
+                return (isUpgrade ? Constants.FOUNDRY_BUILD_TIME : Mathf.RoundToInt(Constants.FOUNDRY_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.FACTORY:
+                return (isUpgrade ? Constants.FACTORY_BUILD_TIME : Mathf.RoundToInt(Constants.FACTORY_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.BARRACKS:
+                return (isUpgrade ? Constants.BARRACKS_BUILD_TIME : Mathf.RoundToInt(Constants.BARRACKS_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.DORMITORY:
+                return (isUpgrade ? Constants.DORMITORY_BUILD_TIME : Mathf.RoundToInt(Constants.DORMITORY_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.GARRISON:
+                return (isUpgrade ? Constants.GARRISON_BUILD_TIME : Mathf.RoundToInt(Constants.GARRISON_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.QUARTERS:
+                return (isUpgrade ? Constants.QUARTERS_BUILD_TIME : Mathf.RoundToInt(Constants.QUARTERS_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.HEADQUARTERS:
+                return (isUpgrade ? Constants.HEADQUARTERS_BUILD_TIME : Mathf.RoundToInt(Constants.HEADQUARTERS_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.WATCHTOWER:
+                return (isUpgrade ? Constants.WATCHTOWER_BUILD_TIME : Mathf.RoundToInt(Constants.WATCHTOWER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.MISSILE_COMPLEX:
+                return (isUpgrade ? Constants.MISSILE_COMPLEX_BUILD_TIME : Mathf.RoundToInt(Constants.MISSILE_COMPLEX_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.LASER_TOWER:
+                return (isUpgrade ? Constants.LASER_TOWER_BUILD_TIME : Mathf.RoundToInt(Constants.LASER_TOWER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.AUTO_MISSILE_COMPLEX:
+                return (isUpgrade ? Constants.AUTO_MISSILE_COMPLEX_BUILD_TIME : Mathf.RoundToInt(Constants.AUTO_MISSILE_COMPLEX_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.AUTO_LASER_TOWER:
+                return (isUpgrade ? Constants.AUTO_LASER_TOWER_BUILD_TIME : Mathf.RoundToInt(Constants.AUTO_LASER_TOWER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.RESEARCH_LAB:
+                return (isUpgrade ? Constants.RESEARCH_LAB_BUILD_TIME : Mathf.RoundToInt(Constants.RESEARCH_LAB_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.RESEARCH_COLLEGE:
+                return (isUpgrade ? Constants.RESEARCH_COLLEGE_BUILD_TIME : Mathf.RoundToInt(Constants.RESEARCH_COLLEGE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.RESEARCH_INSTITUTE:
+                return (isUpgrade ? Constants.RESEARCH_INSTITUTE_BUILD_TIME : Mathf.RoundToInt(Constants.RESEARCH_INSTITUTE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.MULTIBRAIN_COMPLEX:
+                return (isUpgrade ? Constants.MULTIBRAIN_COMPLEX_BUILD_TIME : Mathf.RoundToInt(Constants.MULTIBRAIN_COMPLEX_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.QUANTUM_BRAIN:
+                return (isUpgrade ? Constants.QUANTUM_BRAIN_BUILD_TIME : Mathf.RoundToInt(Constants.QUANTUM_BRAIN_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.EXTRACTOR_MK_I:
+                return (isUpgrade ? Constants.EXTRACTOR_MKI_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKI_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.EXTRACTOR_MK_II:
+                return (isUpgrade ? Constants.EXTRACTOR_MKII_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKII_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.EXTRACTOR_MK_III:
+                return (isUpgrade ? Constants.EXTRACTOR_MKIII_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKIII_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.EXTRACTOR_MK_IV:
+                return (isUpgrade ? Constants.EXTRACTOR_MKIV_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKIV_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.EXTRACTOR_MK_V:
+                return (isUpgrade ? Constants.EXTRACTOR_MKV_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKV_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.STOCKPILE:
+                return (isUpgrade ? Constants.STOCKPILE_BUILD_TIME : Mathf.RoundToInt(Constants.STOCKPILE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.STOREHOUSE:
+                return (isUpgrade ? Constants.STOREHOUSE_BUILD_TIME : Mathf.RoundToInt(Constants.STOREHOUSE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.WAREHOUSE:
+                return (isUpgrade ? Constants.WAREHOUSE_BUILD_TIME : Mathf.RoundToInt(Constants.WAREHOUSE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.DEPOT:
+                return (isUpgrade ? Constants.DEPOT_BUILD_TIME : Mathf.RoundToInt(Constants.DEPOT_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.DISTRIBUTION_CENTER:
+                return (isUpgrade ? Constants.DISTRIBUTION_CENTER_BUILD_TIME : Mathf.RoundToInt(Constants.DISTRIBUTION_CENTER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.SHOOTING_RANGE:
+                return (isUpgrade ? Constants.SHOOTING_RANGE_BUILD_TIME : Mathf.RoundToInt(Constants.SHOOTING_RANGE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.DEFENDERS_WALL:
+                return (isUpgrade ? Constants.DEFENDERS_WALL_BUILD_TIME : Mathf.RoundToInt(Constants.DEFENDERS_WALL_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.GUNNERS_ALLEY:
+                return (isUpgrade ? Constants.GUNNERS_ALLEY_BUILD_TIME : Mathf.RoundToInt(Constants.GUNNERS_ALLEY_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.SNIPERS_NEST:
+                return (isUpgrade ? Constants.SNIPERS_NEST_BUILD_TIME : Mathf.RoundToInt(Constants.SNIPERS_NEST_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.SCOUT_CAMP:
+                return (isUpgrade ? Constants.EXTRACTOR_MKI_BUILD_TIME : Mathf.RoundToInt(Constants.EXTRACTOR_MKI_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.ACES_ARENA:
+                return (isUpgrade ? Constants.ACES_ARENA_BUILD_TIME : Mathf.RoundToInt(Constants.ACES_ARENA_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.CANNONEERS_TOWER:
+                return (isUpgrade ? Constants.CANNONEERS_TOWER_BUILD_TIME : Mathf.RoundToInt(Constants.CANNONEERS_TOWER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.GUARDIANS_LAST_STAND:
+                return (isUpgrade ? Constants.GUARDIANS_LAST_STAND_BUILD_TIME : Mathf.RoundToInt(Constants.GUARDIANS_LAST_STAND_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.WATERWHEEL_GENERATOR:
+                return (isUpgrade ? Constants.WATERWHEEL_GENERATOR_BUILD_TIME : Mathf.RoundToInt(Constants.WATERWHEEL_GENERATOR_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.COAL_FIRED_POWER_PLANT:
+                return (isUpgrade ? Constants.COAL_FIRED_POWER_PLANT_BUILD_TIME : Mathf.RoundToInt(Constants.COAL_FIRED_POWER_PLANT_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.HYDROELECTRIC_DAM:
+                return (isUpgrade ? Constants.HYDROELECTRIC_DAM_BUILD_TIME : Mathf.RoundToInt(Constants.HYDROELECTRIC_DAM_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.NUCLEAR_POWER_PLANT:
+                return (isUpgrade ? Constants.NUCLEAR_POWER_PLANT_BUILD_TIME : Mathf.RoundToInt(Constants.NUCLEAR_POWER_PLANT_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.QUANTUM_POWER_PLANT:
+                return (isUpgrade ? Constants.QUANTUM_POWER_PLANT_BUILD_TIME : Mathf.RoundToInt(Constants.QUANTUM_POWER_PLANT_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.PUBLIC_PARK:
+                return (isUpgrade ? Constants.PUBLIC_PARK_BUILD_TIME : Mathf.RoundToInt(Constants.PUBLIC_PARK_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.CIRCUS:
+                return (isUpgrade ? Constants.CIRCUS_BUILD_TIME : Mathf.RoundToInt(Constants.CIRCUS_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.THEATER_COMPLEX:
+                return (isUpgrade ? Constants.THEATER_COMPLEX_BUILD_TIME : Mathf.RoundToInt(Constants.THEATER_COMPLEX_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.VIRTUAL_REALITY_CAFE:
+                return (isUpgrade ? Constants.VR_CAFE_BUILD_TIME : Mathf.RoundToInt(Constants.VR_CAFE_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.QUANTUM_HOLOGRAM_THEATER:
+                return (isUpgrade ? Constants.QUANTUM_HOLOGRAM_THEATER_BUILD_TIME : Mathf.RoundToInt(Constants.QUANTUM_HOLOGRAM_THEATER_BUILD_TIME * 0.5f));
+            case Enums.Building_Type.VOID_PORTAL:
+                return Constants.VOID_PORTAL_BUILD_TIME;
+            case Enums.Building_Type.VOID_COMMUNICATOR:
+                return Constants.VOID_COMMUNICATOR_BUILD_TIME;
+            case Enums.Building_Type.VOID_RADAR_ARRAY:
+                return Constants.VOID_RADAR_ARRAY_BUILD_TIME;
+            case Enums.Building_Type.FACTION_EMBASSY:
+                return Constants.FACTION_EMBASSY_BUILD_TIME;
+            case Enums.Building_Type.ABYSSAL_PATHFINDER:
+                return Constants.ABYSSAL_PATHFINDER_BUILD_TIME;
+            case Enums.Building_Type.VOID_RUDDER:
+                return Constants.VOID_RUDDER_BUILD_TIME;
+            case Enums.Building_Type.WEATHER_MANIPULATOR:
+                return Constants.WEATHER_MANIPULATOR_BUILD_TIME;
+            case Enums.Building_Type.DIPLO_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.SCI_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.HAPP_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.IND_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.ISO_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.MIL_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.FOOD_MONUMENT:
+                return Constants.MONUMENT_BUILD_TIME;
+            case Enums.Building_Type.GOD_SEAT:
+            default:
+                return 999;
+        }
+    }
+
     public static void DeductResources(BuildingCost cost)
     {
         Instance.CurrentPopulation -= cost.RequiredPopulation;

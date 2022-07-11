@@ -46,7 +46,9 @@ public class Hex : MonoBehaviour
     private IEnumerator BuildHex()
     {
         float currTime = 0;
-        float totalTime = Constants.DEFAULT_BUILD_TIME;
+        float totalTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType);
+
+        float startTime = Time.time;
 
         while(currTime < totalTime)
         {
@@ -60,7 +62,9 @@ public class Hex : MonoBehaviour
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
+
+        Debug.Log(totalTime + " :: " + (Time.time - startTime));
+
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
