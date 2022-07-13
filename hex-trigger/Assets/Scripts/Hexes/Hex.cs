@@ -13,12 +13,15 @@ public class Hex : MonoBehaviour
 
     [SerializeField] Material standardMaterial;
     [SerializeField] GameObject ParticleSystem;
+    [SerializeField] GameObject TransparentMask;
 
     private Material mat;
+    private Material transparentMaskMat;
 
     private void Awake()
     {
         mat = GetComponent<Renderer>().material;
+        transparentMaskMat = TransparentMask.GetComponent<Renderer>().material;
         ConnectedBuilding = GetComponent<Building>();
     }
 
@@ -46,11 +49,12 @@ public class Hex : MonoBehaviour
     private IEnumerator BuildHex()
     {
         float currTime = 0;
-        float totalTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType);
+        float hexTotalTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType) / 2f;
+        float buildingTotalTime = hexTotalTime;
 
         float startTime = Time.time;
 
-        while(currTime < totalTime)
+        while(currTime < hexTotalTime)
         {
             if (Event_Manager.IsGamePaused)
             {
@@ -58,12 +62,27 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            mat.SetFloat("_Fill_Rate", (currTime / Mathf.Max(totalTime, 0.0001f)));
+            mat.SetFloat("_Fill_Rate", (currTime / Mathf.Max(hexTotalTime, 0.0001f)));
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log(totalTime + " :: " + (Time.time - startTime));
+        currTime = 0;
+
+        while(currTime < buildingTotalTime)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            transparentMaskMat.SetFloat("_Fill_Rate", 1 - (currTime / Mathf.Max(buildingTotalTime, 0.0001f)));
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        Debug.Log(hexTotalTime + "+" + buildingTotalTime + " :: " + (Time.time - startTime));
 
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
@@ -73,6 +92,7 @@ public class Hex : MonoBehaviour
     {
         StopCoroutine(BuildHex());
         mat.SetFloat("_Fill_Rate", 1);
+        transparentMaskMat.SetFloat("_Fill_Rate", 0);
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
