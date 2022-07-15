@@ -93,6 +93,21 @@ public class Building : MonoBehaviour
         }
     }
 
+    public virtual void EnableModel()
+    {
+        model.SetActive(true);
+    }
+
+    public virtual void DisableModel()
+    {
+        model.SetActive(false);
+    }
+
+    public virtual void ScaleModel(float x, float y, float z)
+    {
+        model.transform.localScale = new Vector3(x, y, z);
+    }
+
     protected virtual void UpdateModel()
     {
         //replace building model with tier accurate one

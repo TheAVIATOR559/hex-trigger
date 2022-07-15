@@ -35,7 +35,10 @@ public class Hex : MonoBehaviour
         //set shader min fill level to just slightly visible
         mat.SetFloat("_Use_Hologram", 0);
         mat.SetFloat("_Fill_Rate", 0);
-        
+
+        TransparentMask.transform.localScale = new Vector3(0, 0, TransparentMask.transform.localScale.z);
+        ConnectedBuilding.ScaleModel(0, 0, 1);
+
         if(forceBuild)
         {
             ForceBuild();
@@ -69,7 +72,7 @@ public class Hex : MonoBehaviour
 
         currTime = 0;
 
-        while(currTime < buildingTotalTime)
+        while (currTime < buildingTotalTime)
         {
             if (Event_Manager.IsGamePaused)
             {
@@ -77,12 +80,28 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            transparentMaskMat.SetFloat("_Fill_Rate", 1 - (currTime / Mathf.Max(buildingTotalTime, 0.0001f)));
+            TransparentMask.transform.localScale = new Vector3((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), TransparentMask.transform.localScale.z);
+            ConnectedBuilding.ScaleModel((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), 1);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log(hexTotalTime + "+" + buildingTotalTime + " :: " + (Time.time - startTime));
+        currTime = 0;
+
+        while(currTime < 2f)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            transparentMaskMat.SetFloat("_Fill_Rate", 1 - (currTime / Mathf.Max(2f, 0.0001f)));
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        Debug.Log(hexTotalTime + "+" + buildingTotalTime + "+" + 2 + " :: " + (Time.time - startTime + 2));
 
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
@@ -93,6 +112,8 @@ public class Hex : MonoBehaviour
         StopCoroutine(BuildHex());
         mat.SetFloat("_Fill_Rate", 1);
         transparentMaskMat.SetFloat("_Fill_Rate", 0);
+        TransparentMask.transform.localScale = new Vector3(1, 1, TransparentMask.transform.localScale.z);
+        ConnectedBuilding.ScaleModel(1, 1, 1);
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
