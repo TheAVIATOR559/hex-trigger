@@ -5082,7 +5082,7 @@ RectTransform:
   m_Children:
   - {fileID: 3308899344593041426}
   m_Father: {fileID: 4307817469283756231}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5184,10 +5184,10 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3240641748104580734}
-  - {fileID: 4197370541513787172}
   - {fileID: 6062828812788547732}
-  - {fileID: 5435067103089093803}
   - {fileID: 2453719208372935460}
+  - {fileID: 4197370541513787172}
+  - {fileID: 5435067103089093803}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5271,9 +5271,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 6852696966313720062}
-  standardMaterial: {fileID: 2100000, guid: d0394b8fe0653a64d806214b2e44f280, type: 2}
   ParticleSystem: {fileID: 4404234185465483580}
   TransparentMask: {fileID: 2974218751293997470}
+  BuildingModel: {fileID: 8517373254187898324}
 --- !u!114 &640084939167743918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5290,7 +5290,6 @@ MonoBehaviour:
   HexType: 9
   BuildingTier: 4
   BuildingType: 53
-  model: {fileID: 8517373254187898324}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
   RangeHighlighter: {fileID: 8790846066266797476}
@@ -12937,7 +12936,7 @@ Transform:
   - {fileID: 8537546821138673488}
   - {fileID: 8537546821633752932}
   m_Father: {fileID: 4307817469283756231}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6203798213592183622
 PrefabInstance:
@@ -12948,7 +12947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13071,7 +13070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2716953869668343269, guid: ef6ce8243cc88764cb36e5a9b7c5ca14, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2716953869668343269, guid: ef6ce8243cc88764cb36e5a9b7c5ca14, type: 3}
       propertyPath: m_LocalPosition.x

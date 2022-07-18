@@ -155,7 +155,9 @@ public class Resource_Manager : MonoBehaviour
         Instance.MaximumPopulation = 1000;
         Instance.CurrentPopulation = 1000;
         Instance.CurrentIndustry = 1000;
+        Instance.MaximumIndustry = 1000;
         Instance.CurrentIsolium = 1000;
+        Instance.MaximumIsolium = 1000;
         //Instance.CurrentMilitary = 1000;
         Instance.MaximumMilitary = 1000;
     }
@@ -358,7 +360,7 @@ public class Resource_Manager : MonoBehaviour
 
     public static int GetBuildTime(Enums.Building_Type type, bool isUpgrade = false)
     {
-        switch (type)//todo need to invert these
+        switch (type)
         {
             case Enums.Building_Type.GARDEN:
                 return (isUpgrade ? Mathf.RoundToInt(Constants.GARDEN_BUILD_TIME * 0.5f) : Constants.GARDEN_BUILD_TIME);

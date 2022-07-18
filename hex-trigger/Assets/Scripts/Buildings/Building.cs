@@ -13,7 +13,7 @@ public class Building : MonoBehaviour
 
     protected Hex connectedHex;
 
-    [SerializeField] protected GameObject model;
+    //[SerializeField] protected GameObject model;
 
     public float AdjustedProduction = 0;
     protected float ReducedProduction = 0;
@@ -87,36 +87,10 @@ public class Building : MonoBehaviour
         if(BuildingTier != prevTier)
         {
             connectedHex.UpdateOverviewTier(BuildingTier);
-            UpdateModel();
+            connectedHex.UpdateModel(BuildingType);
             UpdateProductionValue();
             UpdateNeighborProductionValues();
         }
-    }
-
-    public virtual void EnableModel()
-    {
-        model.SetActive(true);
-    }
-
-    public virtual void DisableModel()
-    {
-        model.SetActive(false);
-    }
-
-    public virtual void ScaleModel(float x, float y, float z)
-    {
-        model.transform.localScale = new Vector3(x, y, z);
-    }
-
-    protected virtual void UpdateModel()
-    {
-        //replace building model with tier accurate one
-        //destroy this hex/building
-        GameObject prevModel = model;
-
-        model = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(BuildingType)), model.transform.position, Quaternion.Euler(-90, 0, 0), transform);
-
-        Destroy(prevModel);
     }
 
     public virtual void UpdateProductionValue()

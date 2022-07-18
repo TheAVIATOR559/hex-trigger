@@ -64,9 +64,6 @@ public class Hex_Blueprint : MonoBehaviour
         //disable the ghost hexes
         City_Manager.DisableAvailableHexHighlights();
 
-        //change mat to regular mat
-        connectedHex.SetStandardMaterial();
-
         //init connected hex
         connectedHex.Initialize(occupiedHex.hexCoord.x, occupiedHex.hexCoord.y);
 

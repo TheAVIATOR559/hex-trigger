@@ -35,8 +35,8 @@ Transform:
   m_Children:
   - {fileID: 8080403090276819201}
   - {fileID: 6012322644620825280}
-  - {fileID: 6114781513309306170}
   - {fileID: 8395175917829048383}
+  - {fileID: 6114781513309306170}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,9 +120,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 1545255005466165292}
-  standardMaterial: {fileID: 2100000, guid: 442ddf6691d6f41469a5af618249820c, type: 2}
   ParticleSystem: {fileID: 5254715431750660540}
   TransparentMask: {fileID: 9208305051392348805}
+  BuildingModel: {fileID: 5886143446928365657}
 --- !u!114 &6107633525174460904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
   HexType: 0
   BuildingTier: 2
   BuildingType: 3
-  model: {fileID: 5886143446928365657}
   AdjustedProduction: 0
   BonusFromNeighbors: 0
 --- !u!1 &4558687104520272578
@@ -5353,7 +5352,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z
@@ -5488,7 +5487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617621914118166391, guid: ff5ab4b8b03613a4b804a017df7cfd1a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6617621914118166391, guid: ff5ab4b8b03613a4b804a017df7cfd1a, type: 3}
       propertyPath: m_LocalPosition.x

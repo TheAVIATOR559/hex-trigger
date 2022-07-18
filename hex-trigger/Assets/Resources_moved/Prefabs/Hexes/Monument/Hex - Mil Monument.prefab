@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 8971463341632415540}
   m_Father: {fileID: 130322795838987193}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -135,9 +135,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3555425144617160517}
-  - {fileID: 4863461894755587547}
   - {fileID: 8370588727725982081}
   - {fileID: 1227341953796730634}
+  - {fileID: 4863461894755587547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,9 +221,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 7317853894407272877}
-  standardMaterial: {fileID: 2100000, guid: 4b4d38055b77c3546a51f0428d7359a2, type: 2}
   ParticleSystem: {fileID: 7866615016748184890}
   TransparentMask: {fileID: 1892556025463879088}
+  BuildingModel: {fileID: 5634833452477568691}
 --- !u!114 &3068123424680482939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +240,6 @@ MonoBehaviour:
   HexType: 12
   BuildingTier: 4
   BuildingType: 71
-  model: {fileID: 5634833452477568691}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
   monumentType: 5
@@ -5354,7 +5353,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z
@@ -5429,7 +5428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3348113844588517562, guid: 53565e26728317948947b8f40ed36fbc, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3348113844588517562, guid: 53565e26728317948947b8f40ed36fbc, type: 3}
       propertyPath: m_LocalPosition.x

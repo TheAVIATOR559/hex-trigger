@@ -112,10 +112,10 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6689959040093904534}
-  - {fileID: 1308272698476663907}
   - {fileID: 8954453467831112659}
-  - {fileID: 3187930077196114341}
   - {fileID: 5371957276664078529}
+  - {fileID: 1308272698476663907}
+  - {fileID: 3187930077196114341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -199,9 +199,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 8610406157625060281}
-  standardMaterial: {fileID: 2100000, guid: f90c5747ad1e8e1499c546b4e63ff545, type: 2}
   ParticleSystem: {fileID: 5568179939115009533}
   TransparentMask: {fileID: 4739710966002055803}
+  BuildingModel: {fileID: 8208414415797902887}
 --- !u!114 &5234324522608880506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,6 @@ MonoBehaviour:
   HexType: 6
   BuildingTier: 4
   BuildingType: 25
-  model: {fileID: 8208414415797902887}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
   RangeHighlighter: {fileID: 5879659017414747875}
@@ -5153,7 +5152,7 @@ Transform:
   - {fileID: 6781454341349391383}
   - {fileID: 6781454340854639651}
   m_Father: {fileID: 1232767626458002099}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6662817750513165811
 GameObject:
@@ -12710,7 +12709,7 @@ RectTransform:
   m_Children:
   - {fileID: 399825577456495445}
   m_Father: {fileID: 1232767626458002099}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12946,7 +12945,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z
@@ -13021,7 +13020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6354727320871441809, guid: dc860249e77b29f439d3b74bfcd9c22d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6354727320871441809, guid: dc860249e77b29f439d3b74bfcd9c22d, type: 3}
       propertyPath: m_LocalPosition.x

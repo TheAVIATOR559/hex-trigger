@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965957933964914861}
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.436, z: -0}
+  m_LocalPosition: {x: 0, y: -0.436, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1129565563481076724}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!198 &315792538801800221
 ParticleSystem:
@@ -4845,10 +4845,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 8260900643986628489}
-  - {fileID: 3113374444670580496}
   - {fileID: 5215855499762310117}
+  - {fileID: 8260900643986628489}
   - {fileID: 3497842824442178883}
+  - {fileID: 3113374444670580496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4932,9 +4932,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 7781873185463614356}
-  standardMaterial: {fileID: 2100000, guid: 8c58ce49cee9e24418c28d188f747129, type: 2}
   ParticleSystem: {fileID: 965957933964914861}
   TransparentMask: {fileID: 4305728391014135801}
+  BuildingModel: {fileID: 7925342757250599503}
 --- !u!114 &5282741240490034798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4951,7 +4951,6 @@ MonoBehaviour:
   HexType: 2
   BuildingTier: 3
   BuildingType: 14
-  model: {fileID: 7925342757250599503}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
 --- !u!1 &3642514471253763728
@@ -4987,7 +4986,7 @@ RectTransform:
   m_Children:
   - {fileID: 1281690118325789121}
   m_Father: {fileID: 1129565563481076724}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5353,7 +5352,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3392113290147274431, guid: 6fbdbc0cab4c87b4c852db1dfecbebd6, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3392113290147274431, guid: 6fbdbc0cab4c87b4c852db1dfecbebd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5420,7 +5419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z

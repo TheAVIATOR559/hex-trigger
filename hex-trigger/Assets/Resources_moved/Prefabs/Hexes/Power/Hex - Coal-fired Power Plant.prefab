@@ -34,10 +34,10 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6556759370744098830}
-  - {fileID: 4185381134606853895}
   - {fileID: 5901798131380900902}
-  - {fileID: 9143829883859875347}
   - {fileID: 7871633008503699614}
+  - {fileID: 4185381134606853895}
+  - {fileID: 9143829883859875347}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -121,9 +121,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 8279912750948971638}
-  standardMaterial: {fileID: 2100000, guid: d0394b8fe0653a64d806214b2e44f280, type: 2}
   ParticleSystem: {fileID: 4650613257128085656}
   TransparentMask: {fileID: 7383220784001081892}
+  BuildingModel: {fileID: 1961178841281578975}
 --- !u!114 &6769368818334189255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +140,6 @@ MonoBehaviour:
   HexType: 9
   BuildingTier: 1
   BuildingType: 50
-  model: {fileID: 1961178841281578975}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
   RangeHighlighter: {fileID: 6778969875662706927}
@@ -6039,7 +6038,7 @@ RectTransform:
   m_Children:
   - {fileID: 6155931801678412574}
   m_Father: {fileID: 7943930331778927353}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6320,7 +6319,7 @@ Transform:
   - {fileID: 8945012243361525646}
   - {fileID: 5611822383165411124}
   m_Father: {fileID: 7943930331778927353}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6965673567696463103
 GameObject:
@@ -6900,7 +6899,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z
@@ -6971,7 +6970,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1492309338508567496, guid: ff405b30705a1304b8c1f724bbe809d0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1492309338508567496, guid: ff405b30705a1304b8c1f724bbe809d0, type: 3}
       propertyPath: m_LocalPosition.x

@@ -11,9 +11,10 @@ public class Hex : MonoBehaviour
 
     [SerializeField] TMP_Text OverviewTierText;
 
-    [SerializeField] Material standardMaterial;
     [SerializeField] GameObject ParticleSystem;
     [SerializeField] GameObject TransparentMask;
+
+    [SerializeField] GameObject BuildingModel;
 
     private Material mat;
     private Material transparentMaskMat;
@@ -37,7 +38,7 @@ public class Hex : MonoBehaviour
         mat.SetFloat("_Fill_Rate", 0);
 
         TransparentMask.transform.localScale = new Vector3(0, 0, TransparentMask.transform.localScale.z);
-        ConnectedBuilding.ScaleModel(0, 0, 1);
+        ScaleModel(0, 0, 1);
 
         if(forceBuild)
         {
@@ -49,8 +50,15 @@ public class Hex : MonoBehaviour
         }
     }
 
+    private bool IsBuilding = false;
     private IEnumerator BuildHex()
     {
+        if(IsBuilding)
+        {
+            yield return null;
+        }
+        IsBuilding = true;
+
         float currTime = 0;
         float hexTotalTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType) / 2f;
         float buildingTotalTime = hexTotalTime;
@@ -81,7 +89,7 @@ public class Hex : MonoBehaviour
             }
 
             TransparentMask.transform.localScale = new Vector3((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), TransparentMask.transform.localScale.z);
-            ConnectedBuilding.ScaleModel((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), 1);
+            ScaleModel((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), 1);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -105,6 +113,7 @@ public class Hex : MonoBehaviour
 
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
+        IsBuilding = false;
     }
 
     private void ForceBuild()
@@ -113,7 +122,7 @@ public class Hex : MonoBehaviour
         mat.SetFloat("_Fill_Rate", 1);
         transparentMaskMat.SetFloat("_Fill_Rate", 0);
         TransparentMask.transform.localScale = new Vector3(1, 1, TransparentMask.transform.localScale.z);
-        ConnectedBuilding.ScaleModel(1, 1, 1);
+        ScaleModel(1, 1, 1);
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
     }
@@ -136,12 +145,6 @@ public class Hex : MonoBehaviour
         {
             neighbor.AddNeighbor(this);
         }
-    }
-
-    public void SetStandardMaterial()
-    {
-        //renderer.material = standardMaterial;
-        Debug.Log("GET RID OF ME");
     }
 
     public void OnMouseOver()
@@ -195,6 +198,127 @@ public class Hex : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void EnableModel()
+    {
+        BuildingModel.SetActive(true);
+    }
+
+    private void DisableModel()
+    {
+        BuildingModel.SetActive(false);
+    }
+
+    private void ScaleModel(float x, float y, float z)
+    {
+        BuildingModel.transform.localScale = new Vector3(x, y, z);
+    }
+
+    private bool IsUpgrading = false;
+    public void UpdateModel(Enums.Building_Type buildingType)
+    {
+        if(IsUpgrading)
+        {
+            return;
+        }
+
+        IsUpgrading = true;
+
+        StartCoroutine(UpgradeBuilding(buildingType));
+
+        //GameObject prevModel = BuildingModel;
+
+        //BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(buildingType)), BuildingModel.transform.position, Quaternion.Euler(-90, 0, 0), transform);
+
+        //Destroy(prevModel);
+    }
+
+    private IEnumerator UpgradeBuilding(Enums.Building_Type type)
+    {
+        GameObject prevModel = BuildingModel;
+
+        float currTime = 0;
+        float buildingTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType, true) / 4f;
+        float elapsedTime;
+        Vector4 targetScale = Prefab_Manager.GetMaskTargetScale(type);
+        //float startTime = Time.time;
+
+        while (currTime < buildingTime)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+
+            transparentMaskMat.SetFloat("_Fill_Rate", elapsedTime);
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        currTime = 0;
+
+        while (currTime < buildingTime)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+
+            ScaleModel(1 - elapsedTime, 1 - elapsedTime, 1);
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(type)), BuildingModel.transform.position, Quaternion.Euler(-90, 0, 0), transform);
+        ScaleModel(0, 0, 1);
+
+        Destroy(prevModel);
+
+        currTime = 0;
+        
+
+        while (currTime < buildingTime)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+
+            TransparentMask.transform.localScale = new Vector3(1, 1, targetScale.w * elapsedTime);//doesnt quite work
+            TransparentMask.transform.localPosition = targetScale * elapsedTime;//looks a little funky
+            ScaleModel(elapsedTime, elapsedTime, elapsedTime);
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        currTime = 0;
+
+        while (currTime < buildingTime)
+        {
+            if (Event_Manager.IsGamePaused)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
+            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+
+            transparentMaskMat.SetFloat("_Fill_Rate", 1 - elapsedTime);
+            currTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        IsUpgrading = false;
     }
 
     public static Vector3 GetWorldCoordFromHexCoord(Vector2Int vector)

@@ -5058,8 +5058,8 @@ Transform:
   m_Children:
   - {fileID: 6040926183709255578}
   - {fileID: 2766422919019296702}
-  - {fileID: 5942677390193097213}
   - {fileID: 3120117626751268822}
+  - {fileID: 5942677390193097213}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5143,9 +5143,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 4258920651331995963}
-  standardMaterial: {fileID: 2100000, guid: 8c58ce49cee9e24418c28d188f747129, type: 2}
   ParticleSystem: {fileID: 5405230828699856421}
   TransparentMask: {fileID: 2307869270987631980}
+  BuildingModel: {fileID: 6387268455048223048}
 --- !u!114 &3545032222733992952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5162,7 +5162,6 @@ MonoBehaviour:
   HexType: 2
   BuildingTier: 4
   BuildingType: 15
-  model: {fileID: 0}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
 --- !u!1 &8012867765831896535
@@ -5357,7 +5356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1730805933810481554, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1730805933810481554, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5406,6 +5405,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1730805933810481554, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
   m_PrefabInstance: {fileID: 5367639064648155247}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6387268455048223048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1358272462825462055, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
+  m_PrefabInstance: {fileID: 5367639064648155247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6870785999924092852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5415,7 +5419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z

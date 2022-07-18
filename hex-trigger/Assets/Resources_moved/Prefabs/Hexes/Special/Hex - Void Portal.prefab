@@ -192,7 +192,7 @@ RectTransform:
   m_Children:
   - {fileID: 4497772735540594774}
   m_Father: {fileID: 279365614931773312}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -368,7 +368,7 @@ Transform:
   m_Children:
   - {fileID: 4869243116070608386}
   m_Father: {fileID: 279365614931773312}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7640695977573163104
 GameObject:
@@ -539,9 +539,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2117650389406698211}
-  - {fileID: 4290421300407524693}
   - {fileID: 6956408794408007001}
   - {fileID: 8700724312966421311}
+  - {fileID: 4290421300407524693}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,9 +625,9 @@ MonoBehaviour:
   Neighbors: []
   ConnectedBuilding: {fileID: 0}
   OverviewTierText: {fileID: 7308979771039624595}
-  standardMaterial: {fileID: 2100000, guid: 297f1a8af4ffca747b10bddbccc5c8cd, type: 2}
   ParticleSystem: {fileID: 8738178475545109632}
   TransparentMask: {fileID: 8355582512822976901}
+  BuildingModel: {fileID: 7460026632585225382}
 --- !u!114 &7454866633785581166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +644,6 @@ MonoBehaviour:
   HexType: 11
   BuildingTier: 4
   BuildingType: 59
-  model: {fileID: 7460026632585225382}
   AdjustedProduction: 0
   BonusFromNeighbors: 1
 --- !u!1 &8738178475545109632
@@ -5468,7 +5467,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8364606200364558434, guid: 4c6cec4ec14a42d4f8f3bce5db5edbd7, type: 3}
       propertyPath: m_LocalScale.z
