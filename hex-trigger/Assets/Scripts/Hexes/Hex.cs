@@ -12,17 +12,15 @@ public class Hex : MonoBehaviour
     [SerializeField] TMP_Text OverviewTierText;
 
     [SerializeField] GameObject ParticleSystem;
-    [SerializeField] GameObject TransparentMask;
+    [SerializeField] Transparent_Mask TransparentMask;
 
     [SerializeField] GameObject BuildingModel;
 
     private Material mat;
-    private Material transparentMaskMat;
 
     private void Awake()
     {
         mat = GetComponent<Renderer>().material;
-        transparentMaskMat = TransparentMask.GetComponent<Renderer>().material;
         ConnectedBuilding = GetComponent<Building>();
     }
 
@@ -37,7 +35,7 @@ public class Hex : MonoBehaviour
         mat.SetFloat("_Use_Hologram", 0);
         mat.SetFloat("_Fill_Rate", 0);
 
-        TransparentMask.transform.localScale = new Vector3(0, 0, TransparentMask.transform.localScale.z);
+        TransparentMask.transform.localScale = new Vector3(0, TransparentMask.transform.localScale.y, 0);
         ScaleModel(0, 0, 1);
 
         if(forceBuild)
@@ -62,8 +60,9 @@ public class Hex : MonoBehaviour
         float currTime = 0;
         float hexTotalTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType) / 2f;
         float buildingTotalTime = hexTotalTime;
+        float elapsedTime;
 
-        float startTime = Time.time;
+        //float startTime = Time.time;
 
         while(currTime < hexTotalTime)
         {
@@ -73,7 +72,9 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            mat.SetFloat("_Fill_Rate", (currTime / Mathf.Max(hexTotalTime, 0.0001f)));
+            elapsedTime = (currTime / Mathf.Max(hexTotalTime, 0.0001f));
+
+            mat.SetFloat("_Fill_Rate", elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -88,8 +89,10 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            TransparentMask.transform.localScale = new Vector3((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), TransparentMask.transform.localScale.z);
-            ScaleModel((currTime / Mathf.Max(hexTotalTime, 0.0001f)), (currTime / Mathf.Max(hexTotalTime, 0.0001f)), 1);
+            elapsedTime = currTime / Mathf.Max(hexTotalTime, 0.0001f);
+
+            TransparentMask.SetScale(elapsedTime, TransparentMask.transform.localScale.y, elapsedTime);
+            ScaleModel(elapsedTime, elapsedTime, 1);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -104,12 +107,14 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            transparentMaskMat.SetFloat("_Fill_Rate", 1 - (currTime / Mathf.Max(2f, 0.0001f)));
+            elapsedTime = 1 - (currTime / Mathf.Max(2f, 0.0001f));
+
+            TransparentMask.SetFillValue(elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log(hexTotalTime + "+" + buildingTotalTime + "+" + 2 + " :: " + (Time.time - startTime + 2));
+        //Debug.Log(hexTotalTime + "+" + buildingTotalTime + "+" + 2 + " :: " + (Time.time - startTime + 2));
 
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
@@ -120,8 +125,8 @@ public class Hex : MonoBehaviour
     {
         StopCoroutine(BuildHex());
         mat.SetFloat("_Fill_Rate", 1);
-        transparentMaskMat.SetFloat("_Fill_Rate", 0);
-        TransparentMask.transform.localScale = new Vector3(1, 1, TransparentMask.transform.localScale.z);
+        TransparentMask.SetFillValue(0);
+        TransparentMask.SetScale(1, TransparentMask.transform.localScale.y, 1);
         ScaleModel(1, 1, 1);
         ParticleSystem.SetActive(true);
         ConnectedBuilding.Initalize();
@@ -241,7 +246,7 @@ public class Hex : MonoBehaviour
         float currTime = 0;
         float buildingTime = Resource_Manager.GetBuildTime(ConnectedBuilding.BuildingType, true) / 4f;
         float elapsedTime;
-        Vector4 targetScale = Prefab_Manager.GetMaskTargetScale(type);
+        float targetScale = Prefab_Manager.GetMaskTargetScale(type);
         //float startTime = Time.time;
 
         while (currTime < buildingTime)
@@ -254,7 +259,7 @@ public class Hex : MonoBehaviour
 
             elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
 
-            transparentMaskMat.SetFloat("_Fill_Rate", elapsedTime);
+            TransparentMask.SetFillValue(elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -269,9 +274,9 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+            elapsedTime = 1 - (currTime / Mathf.Max(buildingTime, 0.0001f));
 
-            ScaleModel(1 - elapsedTime, 1 - elapsedTime, 1);
+            ScaleModel(elapsedTime, elapsedTime, 1);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -282,7 +287,8 @@ public class Hex : MonoBehaviour
         Destroy(prevModel);
 
         currTime = 0;
-        
+
+        float currMaskYScale = TransparentMask.transform.localScale.y;
 
         while (currTime < buildingTime)
         {
@@ -294,8 +300,11 @@ public class Hex : MonoBehaviour
 
             elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
 
-            TransparentMask.transform.localScale = new Vector3(1, 1, targetScale.w * elapsedTime);//doesnt quite work
-            TransparentMask.transform.localPosition = targetScale * elapsedTime;//looks a little funky
+            if(currMaskYScale < targetScale * elapsedTime)
+            {
+                TransparentMask.SetScale(1, targetScale * elapsedTime, 1);//could be wonky
+            }
+
             ScaleModel(elapsedTime, elapsedTime, elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -311,9 +320,9 @@ public class Hex : MonoBehaviour
                 continue;
             }
 
-            elapsedTime = (currTime / Mathf.Max(buildingTime, 0.0001f));
+            elapsedTime = 1 - (currTime / Mathf.Max(buildingTime, 0.0001f));
 
-            transparentMaskMat.SetFloat("_Fill_Rate", 1 - elapsedTime);
+            TransparentMask.SetFillValue(elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

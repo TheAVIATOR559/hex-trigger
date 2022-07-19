@@ -9,7 +9,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     private Dictionary<Enums.Hex_Prefabs, GameObject> hexes = new Dictionary<Enums.Hex_Prefabs, GameObject>();
     private Dictionary<Enums.Model_Prefabs, GameObject> models = new Dictionary<Enums.Model_Prefabs, GameObject>();
     private Dictionary<Enums.Images, Sprite> images = new Dictionary<Enums.Images, Sprite>();
-    private Dictionary<Enums.Hex_Prefabs, Vector4> maskScales = new Dictionary<Enums.Hex_Prefabs, Vector4>();
+    private Dictionary<Enums.Hex_Prefabs, float> maskScales = new Dictionary<Enums.Hex_Prefabs, float>();
 
     private bool AllAssetsLoaded = false;
 
@@ -41,7 +41,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
                 
                 if(hex != Enums.Hex_Prefabs.HEX_GHOST)
                 {
-                    maskScales.Add(hex, new Vector4(opHandle.Result.transform.GetChild(2).localPosition.x, opHandle.Result.transform.GetChild(2).localPosition.y, opHandle.Result.transform.GetChild(2).localPosition.z, opHandle.Result.transform.GetChild(2).localScale.z));
+                    maskScales.Add(hex, opHandle.Result.transform.GetChild(2).localScale.y);
                 }
 
             }
@@ -478,7 +478,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         return Instance.images[image];
     }
 
-    public static Vector4 GetMaskTargetScale(Enums.Building_Type type)
+    public static float GetMaskTargetScale(Enums.Building_Type type)
     {
         return Instance.maskScales[Enums.BuildingTypeToHexPrefab(type)];
     }
