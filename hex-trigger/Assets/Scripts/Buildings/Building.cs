@@ -25,6 +25,8 @@ public class Building : MonoBehaviour
     private BuildingUpkeep upkeep;
     private Action<EventParam> UpkeepTickListener;
 
+    private bool CanUpgrade = false;
+
     private void Awake()
     {
 
@@ -84,14 +86,23 @@ public class Building : MonoBehaviour
 
         BuildingType = Enums.HexTypeAndTierToBuildingType(HexType, BuildingTier);
 
-        if(BuildingTier != prevTier)
+        if(BuildingTier != prevTier)//shift this to a manual system
         {
-            connectedHex.UpdateOverviewTier(BuildingTier);
-            connectedHex.UpdateModel(BuildingType);
-            UpdateProductionValue();
-            UpdateNeighborProductionValues();
+            CanUpgrade = true;
+            //Instantiate(upgrade arrows)
         }
     }
+
+    /* IF CAN UPGRADE
+     * instantiate upgrade arrows
+     * enable upgrade button on hex info panel
+     */
+
+    /* ON UPGRADE BUTTON CLICK
+     * run the following methods :: connectedHex.UpdateOverviewTier(BuildingTier); connectedHex.UpdateModel(BuildingType); UpdateProductionValue(); UpdateNeighborProductionValues();
+     * destroy upgrade arrows
+     * disable upgrade button on hex info panel
+     */
 
     public virtual void UpdateProductionValue()
     {
