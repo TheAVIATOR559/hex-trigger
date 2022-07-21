@@ -7,6 +7,7 @@ public enum Events
 {
     ADD_POWER_DISTRIBUTION,
     REMOVE_POWER_DISTRIBUTION,
+    TICK,
     TICK_UPKEEP
 }
 
@@ -67,6 +68,7 @@ public static class Event_Manager
         if (eventsDict.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.Invoke(eventParam);
+            //Debug.Log("TRIGGERING EVENT " + eventName);
         }
     }
 

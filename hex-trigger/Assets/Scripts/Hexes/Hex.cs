@@ -18,6 +18,9 @@ public class Hex : MonoBehaviour
 
     private Material mat;
 
+    public bool IsBuilding = false;
+    public bool IsUpgrading = false;
+
     private void Awake()
     {
         mat = GetComponent<Renderer>().material;
@@ -48,7 +51,6 @@ public class Hex : MonoBehaviour
         }
     }
 
-    private bool IsBuilding = false;
     private IEnumerator BuildHex()
     {
         if(IsBuilding)
@@ -220,7 +222,6 @@ public class Hex : MonoBehaviour
         BuildingModel.transform.localScale = new Vector3(x, y, z);
     }
 
-    private bool IsUpgrading = false;
     public void UpdateModel(Enums.Building_Type buildingType)
     {
         if(IsUpgrading)

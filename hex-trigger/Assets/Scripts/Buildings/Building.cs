@@ -24,8 +24,9 @@ public class Building : MonoBehaviour
 
     private BuildingUpkeep upkeep;
     private Action<EventParam> UpkeepTickListener;
+    private Action<EventParam> UpgradeTickListener;
 
-    private bool CanUpgrade = false;
+    [SerializeField]private bool CanUpgrade = false;
 
     private void Awake()
     {
@@ -43,6 +44,8 @@ public class Building : MonoBehaviour
         upkeep = GetUpkeepCosts(BuildingType);
         UpkeepTickListener = new Action<EventParam>(TickUpkeep);
         Event_Manager.AddListener(Events.TICK_UPKEEP, UpkeepTickListener);
+
+        UpgradeTickListener = new Action<EventParam>(TryUpgrade);
     }
 
     public virtual void DetermineBuildingTier()
@@ -86,23 +89,41 @@ public class Building : MonoBehaviour
 
         BuildingType = Enums.HexTypeAndTierToBuildingType(HexType, BuildingTier);
 
-        if(BuildingTier != prevTier)//shift this to a manual system
+        if(BuildingTier != prevTier && !CanUpgrade)
         {
             CanUpgrade = true;
-            //Instantiate(upgrade arrows)
+            TryUpgrade(new EventParam());
         }
     }
 
-    /* IF CAN UPGRADE
-     * instantiate upgrade arrows
-     * enable upgrade button on hex info panel
-     */
+    private void TryUpgrade(EventParam eventParam)
+    {
+        if(!CanUpgrade)
+        {
+            return;
+        }
 
-    /* ON UPGRADE BUTTON CLICK
-     * run the following methods :: connectedHex.UpdateOverviewTier(BuildingTier); connectedHex.UpdateModel(BuildingType); UpdateProductionValue(); UpdateNeighborProductionValues();
-     * destroy upgrade arrows
-     * disable upgrade button on hex info panel
-     */
+        Debug.Log("ATTEMPTING UPGRADE");
+
+        DetermineBuildingTier();
+
+        if (connectedHex.IsBuilding || connectedHex.IsUpgrading)
+        {
+            //wait for next tick and try again
+            Event_Manager.AddListener(Events.TICK, UpgradeTickListener);
+            Debug.Log("ATTEMPTING UPGRADE :: WAITING FOR NEXT TICK");
+        }
+        else
+        {
+            Debug.Log("ATTEMPTING UPGRADE :: SUCCESS");
+            Event_Manager.RemoveListener(Events.TICK, UpgradeTickListener);
+            connectedHex.UpdateOverviewTier(BuildingTier);
+            connectedHex.UpdateModel(BuildingType);
+            UpdateProductionValue();
+            UpdateNeighborProductionValues();
+            CanUpgrade = false;
+        }
+    }
 
     public virtual void UpdateProductionValue()
     {

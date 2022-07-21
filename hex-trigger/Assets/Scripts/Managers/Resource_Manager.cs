@@ -59,8 +59,6 @@ public class Resource_Manager : MonoBehaviour
     public float SniperTrainingCostReduction = 1;
     public float ScoutTrainingCostReduction = 1;
 
-    public bool ResourcesTickPaused = true;
-
     public int GodSeatLevel = 1;
     public int GodSeatUpgradeIsoliumCost = Constants.DEFAULT_GOD_SEAT_ISO_COST;
     public int GodSeatUpgradeIndustryCost = Constants.DEFAULT_GOD_SEAT_IND_COST;
@@ -90,10 +88,11 @@ public class Resource_Manager : MonoBehaviour
     private int MilMonumentCount = 1;
     private int FoodMonumentCount = 1;
 
-    private float AddResourcesTick;
     [SerializeField]private float UpkeepTick;
 
     public static Resource_Manager Instance;
+
+    private System.Action<EventParam> TickListener;
 
     private void Awake()
     {
@@ -104,7 +103,8 @@ public class Resource_Manager : MonoBehaviour
         PrevGodSeatFoodCost = Instance.GodSeatUpgradeFoodCost;
         PrevGodSeatPopCost = Instance.GodSeatUpgradePopCost;
 
-        StartResourcesTick();
+        TickListener = new System.Action<EventParam>(Tick);
+        Event_Manager.AddListener(Events.TICK, TickListener);
     }
 
     private void Update()
@@ -117,35 +117,26 @@ public class Resource_Manager : MonoBehaviour
         if (Event_Manager.IsGamePaused)
         {
             return;
-        }    
-
-        if (!ResourcesTickPaused)
-        {
-            if(AddResourcesTick >= 1f / Constants.TICK_SPEED)
-            {
-                Debug.Log("Ticking Resources");
-                AddProductionResources();
-                AddPopulation();
-                AddResearchProgress();
-                UI_Manager.UpdateResourcesText();
-                AddResourcesTick = 0f;
-            }
-            else
-            {
-                AddResourcesTick += Time.deltaTime;
-            }
-            
-            if(UpkeepTick >= 60f / Constants.TICK_SPEED)
-            {
-                Event_Manager.TriggerEvent(Events.TICK_UPKEEP);
-                UpkeepTick = 0f;
-            }
-            else
-            {
-                UpkeepTick += Time.deltaTime;
-            }
-
         }
+
+        if (UpkeepTick >= 60f / Constants.TICK_SPEED)
+        {
+            Event_Manager.TriggerEvent(Events.TICK_UPKEEP);
+            UpkeepTick = 0f;
+        }
+        else
+        {
+            UpkeepTick += Time.deltaTime;
+        }
+    }
+
+    private void Tick(EventParam eventParam)
+    {
+        //Debug.Log("Ticking Resources");
+        AddProductionResources();
+        AddPopulation();
+        AddResearchProgress();
+        UI_Manager.UpdateResourcesText();
     }
 
     public static void DEV_MaxOutResources()//DEV TOOLS
@@ -1291,21 +1282,6 @@ public class Resource_Manager : MonoBehaviour
         {
             Instance.PopGrowthDecimal -= amount;
         }
-    }
-
-    public static void StartResourcesTick()
-    {
-        Instance.ResourcesTickPaused = false;
-    }
-
-    public static void PauseResourcesTick()
-    {
-        Instance.ResourcesTickPaused = true;
-    }
-
-    public static void UnpauseResourcesTick()
-    {
-        Instance.ResourcesTickPaused = false;
     }
 
     public static void UpgradeGodSeat()
