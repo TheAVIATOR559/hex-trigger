@@ -142,8 +142,10 @@ public class Hex : MonoBehaviour
         }
 
         Neighbors.Add(neighbor);
+
+        //if building has been initialized, call determine building tier
+
         ConnectedBuilding.DetermineBuildingTier();
-        //ConnectedBuilding.UpdateProductionValue();
     }
 
     public void AddToNeighbors()

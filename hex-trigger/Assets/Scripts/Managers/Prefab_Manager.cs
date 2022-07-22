@@ -117,6 +117,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     {
         foreach(KeyValuePair<Enums.Hex_Prefabs, GameObject> hex in hexes)
         {
+            //Debug.Log("Unloading " + hex.Key);
             loadingText.text = "Unloading " + hex.Key;
             Addressables.Release(hex.Value);
             
@@ -124,6 +125,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
         }
 
         hexes.Clear();
+        maskScales.Clear();
 
         foreach (KeyValuePair<Enums.Model_Prefabs, GameObject> model in models)
         {

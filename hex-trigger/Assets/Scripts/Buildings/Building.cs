@@ -5,6 +5,7 @@ using System;
 
 public class Building : MonoBehaviour
 {
+    private bool IsInitialized = false;
     [SerializeField] protected bool IsPowered = false;
 
     public Enums.Hex_Types HexType;
@@ -36,6 +37,8 @@ public class Building : MonoBehaviour
 
     public virtual void Initalize()
     {
+        IsInitialized = true;
+
         EventParam eventParam = new EventParam();
         eventParam.hex = connectedHex;
 
@@ -46,10 +49,17 @@ public class Building : MonoBehaviour
         Event_Manager.AddListener(Events.TICK_UPKEEP, UpkeepTickListener);
 
         UpgradeTickListener = new Action<EventParam>(TryUpgrade);
+
+        DetermineBuildingTier();
     }
 
     public virtual void DetermineBuildingTier()
     {
+        if(!IsInitialized)
+        {
+            return;
+        }
+
         int similarHexes = 0;
 
         prevTier = BuildingTier;
