@@ -123,6 +123,8 @@ MonoBehaviour:
   ParticleSystem: {fileID: 5531953932798697077}
   TransparentMask: {fileID: 3838897245778067260}
   BuildingModel: {fileID: 8542766107480999251}
+  IsBuilding: 0
+  IsUpgrading: 0
 --- !u!114 &242878641199759514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +143,7 @@ MonoBehaviour:
   BuildingType: 41
   AdjustedProduction: 0
   BonusFromNeighbors: 1
+  CanUpgrade: 0
 --- !u!1 &5481296853197990272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,7 +5482,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4350747206979585413, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 4350837958387951651, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 4350626442714279207, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 4351316831346127525, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804416531982, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804416531983, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804416531984, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804416531985, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804994017154, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804994017155, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804994017156, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804994017157, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804599832566, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804599832567, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804599832568, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
+    - {fileID: 2999510804599832569, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 785869694a722f84db19e4c08eb84e50, type: 3}
 --- !u!4 &3571507989398243441 stripped
 Transform:

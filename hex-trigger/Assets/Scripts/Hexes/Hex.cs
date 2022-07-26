@@ -39,7 +39,7 @@ public class Hex : MonoBehaviour
         mat.SetFloat("_Fill_Rate", 0);
 
         TransparentMask.transform.localScale = new Vector3(0, TransparentMask.transform.localScale.y, 0);
-        ScaleModel(0, 0, 1);
+        ScaleModel(0, 1, 0);
 
         if(forceBuild)
         {
@@ -94,7 +94,7 @@ public class Hex : MonoBehaviour
             elapsedTime = currTime / Mathf.Max(hexTotalTime, 0.0001f);
 
             TransparentMask.SetScale(elapsedTime, TransparentMask.transform.localScale.y, elapsedTime);
-            ScaleModel(elapsedTime, elapsedTime, 1);
+            ScaleModel(elapsedTime, 1, elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

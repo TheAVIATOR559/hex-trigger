@@ -28,6 +28,7 @@ public class Building : MonoBehaviour
     private Action<EventParam> UpgradeTickListener;
 
     [SerializeField]private bool CanUpgrade = false;
+    private bool IsListeningForUpgrade = false;
 
     private void Awake()
     {
@@ -117,16 +118,18 @@ public class Building : MonoBehaviour
 
         DetermineBuildingTier();
 
-        if (connectedHex.IsBuilding || connectedHex.IsUpgrading)
+        if ((connectedHex.IsBuilding || connectedHex.IsUpgrading) && !IsListeningForUpgrade)
         {
             //wait for next tick and try again
             Event_Manager.AddListener(Events.TICK, UpgradeTickListener);
+            IsListeningForUpgrade = true;
             Debug.Log("ATTEMPTING UPGRADE :: WAITING FOR NEXT TICK");
         }
         else
         {
             Debug.Log("ATTEMPTING UPGRADE :: SUCCESS");
             Event_Manager.RemoveListener(Events.TICK, UpgradeTickListener);
+            IsListeningForUpgrade = false;
             connectedHex.UpdateOverviewTier(BuildingTier);
             connectedHex.UpdateModel(BuildingType);
             UpdateProductionValue();
