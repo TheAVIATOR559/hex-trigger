@@ -5146,6 +5146,8 @@ MonoBehaviour:
   ParticleSystem: {fileID: 5405230828699856421}
   TransparentMask: {fileID: 8653170859233444701}
   BuildingModel: {fileID: 6387268455048223048}
+  IsBuilding: 0
+  IsUpgrading: 0
 --- !u!114 &3545032222733992952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5164,6 +5166,7 @@ MonoBehaviour:
   BuildingType: 15
   AdjustedProduction: 0
   BonusFromNeighbors: 1
+  CanUpgrade: 0
 --- !u!1 &8012867765831896535
 GameObject:
   m_ObjectHideFlags: 0
@@ -5398,7 +5401,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4702209763192085971, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aff32ca74c89c1944a97970653bda7bb, type: 3}
 --- !u!4 &5942677390193097213 stripped
 Transform:
