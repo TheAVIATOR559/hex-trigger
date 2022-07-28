@@ -279,13 +279,13 @@ public class Hex : MonoBehaviour
 
             elapsedTime = 1 - (currTime / Mathf.Max(buildingTime, 0.0001f));
 
-            ScaleModel(elapsedTime, elapsedTime, 1);
+            ScaleModel(elapsedTime, 1, elapsedTime);
             currTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(type)), BuildingModel.transform.position, Quaternion.Euler(-90, 0, 0), transform);
-        ScaleModel(0, 0, 1);
+        BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(type)), BuildingModel.transform.position, Quaternion.identity, transform);
+        ScaleModel(0, 1, 0);
 
         Destroy(prevModel);
 
@@ -308,8 +308,11 @@ public class Hex : MonoBehaviour
                 TransparentMask.SetScale(1, targetScale * elapsedTime, 1);//could be wonky
             }
 
+            BuildingModel.transform.localPosition = new Vector3(BuildingModel.transform.localPosition.x, Prefab_Manager.GetModelVerticalOffset(type), BuildingModel.transform.localPosition.z);//local doesnt work
             ScaleModel(elapsedTime, elapsedTime, elapsedTime);
+
             currTime += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
         }
 

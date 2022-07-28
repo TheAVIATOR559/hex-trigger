@@ -36,8 +36,8 @@ Transform:
   - {fileID: 6556759370744098830}
   - {fileID: 5901798131380900902}
   - {fileID: 7871633008503699614}
-  - {fileID: 4185381134606853895}
   - {fileID: 9143829883859875347}
+  - {fileID: 4185381134606853895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,6 +124,8 @@ MonoBehaviour:
   ParticleSystem: {fileID: 4650613257128085656}
   TransparentMask: {fileID: 4496694679193291797}
   BuildingModel: {fileID: 1961178841281578975}
+  IsBuilding: 0
+  IsUpgrading: 0
 --- !u!114 &6769368818334189255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +144,7 @@ MonoBehaviour:
   BuildingType: 50
   AdjustedProduction: 0
   BonusFromNeighbors: 1
+  CanUpgrade: 0
   RangeHighlighter: {fileID: 6778969875662706927}
   PoweredHexPositions: []
   PowerRadius: 0
@@ -6319,7 +6322,7 @@ Transform:
   - {fileID: 8945012243361525646}
   - {fileID: 5611822383165411124}
   m_Father: {fileID: 7943930331778927353}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6965673567696463103
 GameObject:
@@ -6980,7 +6983,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1492309338508567496, guid: ff405b30705a1304b8c1f724bbe809d0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1492309338508567496, guid: ff405b30705a1304b8c1f724bbe809d0, type: 3}
       propertyPath: m_LocalPosition.x

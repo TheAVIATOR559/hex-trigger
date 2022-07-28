@@ -10,6 +10,7 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     private Dictionary<Enums.Model_Prefabs, GameObject> models = new Dictionary<Enums.Model_Prefabs, GameObject>();
     private Dictionary<Enums.Images, Sprite> images = new Dictionary<Enums.Images, Sprite>();
     private Dictionary<Enums.Hex_Prefabs, float> maskScales = new Dictionary<Enums.Hex_Prefabs, float>();
+    private Dictionary<Enums.Hex_Prefabs, float> verticalOffsets = new Dictionary<Enums.Hex_Prefabs, float>();
 
     private bool AllAssetsLoaded = false;
 
@@ -42,6 +43,8 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
                 if(hex != Enums.Hex_Prefabs.HEX_GHOST)
                 {
                     maskScales.Add(hex, opHandle.Result.transform.GetChild(2).localScale.y);
+                    verticalOffsets.Add(hex, opHandle.Result.transform.GetChild(3).position.y);
+                    Debug.Log(hex + " :: " + opHandle.Result.transform.GetChild(3).localPosition.y);
                 }
 
             }
@@ -483,6 +486,11 @@ public class Prefab_Manager : Singleton<Prefab_Manager>
     public static float GetMaskTargetScale(Enums.Building_Type type)
     {
         return Instance.maskScales[Enums.BuildingTypeToHexPrefab(type)];
+    }
+
+    public static float GetModelVerticalOffset(Enums.Building_Type type)
+    {
+        return Instance.verticalOffsets[Enums.BuildingTypeToHexPrefab(type)];
     }
 
     private void OnDestroy()
