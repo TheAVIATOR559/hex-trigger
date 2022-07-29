@@ -284,7 +284,7 @@ public class Hex : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(type)), BuildingModel.transform.position, Quaternion.identity, transform);
+        BuildingModel = Instantiate(Prefab_Manager.GetModelPrefab(Enums.BuildingTypeToModelPrefab(type)), new Vector3(BuildingModel.transform.position.x, 0.063f, BuildingModel.transform.position.z), Quaternion.identity, transform);
         ScaleModel(0, 1, 0);
 
         Destroy(prevModel);
@@ -308,8 +308,7 @@ public class Hex : MonoBehaviour
                 TransparentMask.SetScale(1, targetScale * elapsedTime, 1);//could be wonky
             }
 
-            BuildingModel.transform.localPosition = new Vector3(BuildingModel.transform.localPosition.x, Prefab_Manager.GetModelVerticalOffset(type), BuildingModel.transform.localPosition.z);//local doesnt work
-            ScaleModel(elapsedTime, elapsedTime, elapsedTime);
+            ScaleModel(elapsedTime, 1, elapsedTime);
 
             currTime += Time.deltaTime;
 
